@@ -1,0 +1,6 @@
+platform :ios, '0.0'
+use_frameworks!
+
+target 'Hammer' do
+
+end

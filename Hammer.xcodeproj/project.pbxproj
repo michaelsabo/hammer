@@ -1,0 +1,688 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		270293D31BC363B00071A5D0 /* GifsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270293D21BC363B00071A5D0 /* GifsWrapper.swift */; settings = {ASSET_TAGS = (); }; };
+		270293D41BC363B00071A5D0 /* GifsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270293D21BC363B00071A5D0 /* GifsWrapper.swift */; settings = {ASSET_TAGS = (); }; };
+		27197E181BC239DC00525F33 /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 27197E171BC239DC00525F33 /* UIImage+animatedGIF.m */; settings = {ASSET_TAGS = (); }; };
+		276C7FB31BC204EE0028DC0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FB21BC204EE0028DC0D /* AppDelegate.swift */; };
+		276C7FB51BC204EE0028DC0D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FB41BC204EE0028DC0D /* ViewController.swift */; };
+		276C7FB81BC204EE0028DC0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 276C7FB61BC204EE0028DC0D /* Main.storyboard */; };
+		276C7FBD1BC204EE0028DC0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 276C7FBC1BC204EE0028DC0D /* Assets.xcassets */; };
+		276C7FC01BC204EE0028DC0D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 276C7FBE1BC204EE0028DC0D /* LaunchScreen.storyboard */; };
+		276C7FCB1BC204EE0028DC0D /* HammerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FCA1BC204EE0028DC0D /* HammerTests.swift */; };
+		276C7FD61BC204EF0028DC0D /* HammerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FD51BC204EF0028DC0D /* HammerUITests.swift */; };
+		276C7FF91BC2097A0028DC0D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FF81BC2097A0028DC0D /* HomeViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		276C7FFA1BC2097A0028DC0D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FF81BC2097A0028DC0D /* HomeViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		276C7FFE1BC2116F0028DC0D /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FFD1BC2116F0028DC0D /* ImageCell.swift */; settings = {ASSET_TAGS = (); }; };
+		276C7FFF1BC2116F0028DC0D /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FFD1BC2116F0028DC0D /* ImageCell.swift */; settings = {ASSET_TAGS = (); }; };
+		27C75CAE1BC21CC0008AC322 /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C75CAD1BC21CC0008AC322 /* Gif.swift */; settings = {ASSET_TAGS = (); }; };
+		27C75CB01BC22E1B008AC322 /* DisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C75CAF1BC22E1B008AC322 /* DisplayViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		27C75CB31BC23329008AC322 /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C75CB21BC23329008AC322 /* UIImage+Gif.swift */; settings = {ASSET_TAGS = (); }; };
+		C8B8CBB3436E409112AB700A /* Pods_Hammer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F588B3F15172A45489803A8E /* Pods_Hammer.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		276C7FC71BC204EE0028DC0D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 276C7FA71BC204EE0028DC0D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 276C7FAE1BC204EE0028DC0D;
+			remoteInfo = Hammer;
+		};
+		276C7FD21BC204EF0028DC0D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 276C7FA71BC204EE0028DC0D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 276C7FAE1BC204EE0028DC0D;
+			remoteInfo = Hammer;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		270293D21BC363B00071A5D0 /* GifsWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifsWrapper.swift; sourceTree = "<group>"; };
+		27197E151BC239DC00525F33 /* Hammer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hammer-Bridging-Header.h"; sourceTree = "<group>"; };
+		27197E161BC239DC00525F33 /* UIImage+animatedGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+animatedGIF.h"; sourceTree = "<group>"; };
+		27197E171BC239DC00525F33 /* UIImage+animatedGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+animatedGIF.m"; sourceTree = "<group>"; };
+		276C7FAF1BC204EE0028DC0D /* Hammer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hammer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		276C7FB21BC204EE0028DC0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		276C7FB41BC204EE0028DC0D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		276C7FB71BC204EE0028DC0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		276C7FBC1BC204EE0028DC0D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		276C7FBF1BC204EE0028DC0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		276C7FC11BC204EE0028DC0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		276C7FC61BC204EE0028DC0D /* HammerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HammerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		276C7FCA1BC204EE0028DC0D /* HammerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HammerTests.swift; sourceTree = "<group>"; };
+		276C7FCC1BC204EE0028DC0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		276C7FD11BC204EF0028DC0D /* HammerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HammerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		276C7FD51BC204EF0028DC0D /* HammerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HammerUITests.swift; sourceTree = "<group>"; };
+		276C7FD71BC204EF0028DC0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		276C7FF81BC2097A0028DC0D /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		276C7FFD1BC2116F0028DC0D /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		27C75CAD1BC21CC0008AC322 /* Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
+		27C75CAF1BC22E1B008AC322 /* DisplayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayViewController.swift; sourceTree = "<group>"; };
+		27C75CB21BC23329008AC322 /* UIImage+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Gif.swift"; sourceTree = "<group>"; };
+		57E0D0BB6577F1CE7A1D237C /* Pods-Hammer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hammer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hammer/Pods-Hammer.debug.xcconfig"; sourceTree = "<group>"; };
+		59DC8D6AF48616A7006723F2 /* Pods-Hammer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hammer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hammer/Pods-Hammer.release.xcconfig"; sourceTree = "<group>"; };
+		F588B3F15172A45489803A8E /* Pods_Hammer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hammer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		276C7FAC1BC204EE0028DC0D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C8B8CBB3436E409112AB700A /* Pods_Hammer.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		276C7FC31BC204EE0028DC0D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		276C7FCE1BC204EF0028DC0D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		27197E131BC239B500525F33 /* Objective-C */ = {
+			isa = PBXGroup;
+			children = (
+				27197E161BC239DC00525F33 /* UIImage+animatedGIF.h */,
+				27197E171BC239DC00525F33 /* UIImage+animatedGIF.m */,
+				27197E151BC239DC00525F33 /* Hammer-Bridging-Header.h */,
+			);
+			path = "Objective-C";
+			sourceTree = "<group>";
+		};
+		276C7FA61BC204EE0028DC0D = {
+			isa = PBXGroup;
+			children = (
+				276C7FB11BC204EE0028DC0D /* Hammer */,
+				276C7FC91BC204EE0028DC0D /* HammerTests */,
+				276C7FD41BC204EF0028DC0D /* HammerUITests */,
+				276C7FB01BC204EE0028DC0D /* Products */,
+				FC9272D4C02643D90CB707C2 /* Pods */,
+				71F7D88780EDD987612499BA /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		276C7FB01BC204EE0028DC0D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				276C7FAF1BC204EE0028DC0D /* Hammer.app */,
+				276C7FC61BC204EE0028DC0D /* HammerTests.xctest */,
+				276C7FD11BC204EF0028DC0D /* HammerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		276C7FB11BC204EE0028DC0D /* Hammer */ = {
+			isa = PBXGroup;
+			children = (
+				276C7FB21BC204EE0028DC0D /* AppDelegate.swift */,
+				276C7FBC1BC204EE0028DC0D /* Assets.xcassets */,
+				276C7FF11BC2092E0028DC0D /* Classes */,
+				276C7FC11BC204EE0028DC0D /* Info.plist */,
+				276C7FBE1BC204EE0028DC0D /* LaunchScreen.storyboard */,
+				276C7FB61BC204EE0028DC0D /* Main.storyboard */,
+				276C7FB41BC204EE0028DC0D /* ViewController.swift */,
+			);
+			path = Hammer;
+			sourceTree = "<group>";
+		};
+		276C7FC91BC204EE0028DC0D /* HammerTests */ = {
+			isa = PBXGroup;
+			children = (
+				276C7FCA1BC204EE0028DC0D /* HammerTests.swift */,
+				276C7FCC1BC204EE0028DC0D /* Info.plist */,
+			);
+			path = HammerTests;
+			sourceTree = "<group>";
+		};
+		276C7FD41BC204EF0028DC0D /* HammerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				276C7FD51BC204EF0028DC0D /* HammerUITests.swift */,
+				276C7FD71BC204EF0028DC0D /* Info.plist */,
+			);
+			path = HammerUITests;
+			sourceTree = "<group>";
+		};
+		276C7FF11BC2092E0028DC0D /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				27197E131BC239B500525F33 /* Objective-C */,
+				27C75CB11BC23303008AC322 /* Helpers */,
+				276C7FFC1BC211120028DC0D /* Cells */,
+				276C7FF21BC2092E0028DC0D /* Models */,
+				276C7FF31BC2092E0028DC0D /* ViewControllers */,
+				276C7FF51BC2092E0028DC0D /* ViewModels */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		276C7FF21BC2092E0028DC0D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				27C75CAD1BC21CC0008AC322 /* Gif.swift */,
+				270293D21BC363B00071A5D0 /* GifsWrapper.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		276C7FF31BC2092E0028DC0D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				276C7FF81BC2097A0028DC0D /* HomeViewController.swift */,
+				27C75CAF1BC22E1B008AC322 /* DisplayViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		276C7FF51BC2092E0028DC0D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		276C7FFC1BC211120028DC0D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				276C7FFD1BC2116F0028DC0D /* ImageCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		27C75CB11BC23303008AC322 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				27C75CB21BC23329008AC322 /* UIImage+Gif.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		71F7D88780EDD987612499BA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F588B3F15172A45489803A8E /* Pods_Hammer.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FC9272D4C02643D90CB707C2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				57E0D0BB6577F1CE7A1D237C /* Pods-Hammer.debug.xcconfig */,
+				59DC8D6AF48616A7006723F2 /* Pods-Hammer.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		276C7FAE1BC204EE0028DC0D /* Hammer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 276C7FDA1BC204EF0028DC0D /* Build configuration list for PBXNativeTarget "Hammer" */;
+			buildPhases = (
+				9445D263B209735C9330720C /* Check Pods Manifest.lock */,
+				276C7FAB1BC204EE0028DC0D /* Sources */,
+				276C7FAC1BC204EE0028DC0D /* Frameworks */,
+				276C7FAD1BC204EE0028DC0D /* Resources */,
+				A3172D6F50D1659039999632 /* Embed Pods Frameworks */,
+				34DBD584D3C4EE7B37C4DA80 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Hammer;
+			productName = Hammer;
+			productReference = 276C7FAF1BC204EE0028DC0D /* Hammer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		276C7FC51BC204EE0028DC0D /* HammerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 276C7FDD1BC204EF0028DC0D /* Build configuration list for PBXNativeTarget "HammerTests" */;
+			buildPhases = (
+				276C7FC21BC204EE0028DC0D /* Sources */,
+				276C7FC31BC204EE0028DC0D /* Frameworks */,
+				276C7FC41BC204EE0028DC0D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				276C7FC81BC204EE0028DC0D /* PBXTargetDependency */,
+			);
+			name = HammerTests;
+			productName = HammerTests;
+			productReference = 276C7FC61BC204EE0028DC0D /* HammerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		276C7FD01BC204EF0028DC0D /* HammerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 276C7FE01BC204EF0028DC0D /* Build configuration list for PBXNativeTarget "HammerUITests" */;
+			buildPhases = (
+				276C7FCD1BC204EF0028DC0D /* Sources */,
+				276C7FCE1BC204EF0028DC0D /* Frameworks */,
+				276C7FCF1BC204EF0028DC0D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				276C7FD31BC204EF0028DC0D /* PBXTargetDependency */,
+			);
+			name = HammerUITests;
+			productName = HammerUITests;
+			productReference = 276C7FD11BC204EF0028DC0D /* HammerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		276C7FA71BC204EE0028DC0D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = FlyingDinosaurs;
+				TargetAttributes = {
+					276C7FAE1BC204EE0028DC0D = {
+						CreatedOnToolsVersion = 7.0.1;
+					};
+					276C7FC51BC204EE0028DC0D = {
+						CreatedOnToolsVersion = 7.0.1;
+						TestTargetID = 276C7FAE1BC204EE0028DC0D;
+					};
+					276C7FD01BC204EF0028DC0D = {
+						CreatedOnToolsVersion = 7.0.1;
+						TestTargetID = 276C7FAE1BC204EE0028DC0D;
+					};
+				};
+			};
+			buildConfigurationList = 276C7FAA1BC204EE0028DC0D /* Build configuration list for PBXProject "Hammer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 276C7FA61BC204EE0028DC0D;
+			productRefGroup = 276C7FB01BC204EE0028DC0D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				276C7FAE1BC204EE0028DC0D /* Hammer */,
+				276C7FC51BC204EE0028DC0D /* HammerTests */,
+				276C7FD01BC204EF0028DC0D /* HammerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		276C7FAD1BC204EE0028DC0D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				276C7FC01BC204EE0028DC0D /* LaunchScreen.storyboard in Resources */,
+				276C7FBD1BC204EE0028DC0D /* Assets.xcassets in Resources */,
+				276C7FB81BC204EE0028DC0D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		276C7FC41BC204EE0028DC0D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		276C7FCF1BC204EF0028DC0D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		34DBD584D3C4EE7B37C4DA80 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hammer/Pods-Hammer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9445D263B209735C9330720C /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A3172D6F50D1659039999632 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hammer/Pods-Hammer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		276C7FAB1BC204EE0028DC0D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27197E181BC239DC00525F33 /* UIImage+animatedGIF.m in Sources */,
+				276C7FB51BC204EE0028DC0D /* ViewController.swift in Sources */,
+				27C75CB01BC22E1B008AC322 /* DisplayViewController.swift in Sources */,
+				27C75CB31BC23329008AC322 /* UIImage+Gif.swift in Sources */,
+				276C7FFE1BC2116F0028DC0D /* ImageCell.swift in Sources */,
+				270293D31BC363B00071A5D0 /* GifsWrapper.swift in Sources */,
+				276C7FB31BC204EE0028DC0D /* AppDelegate.swift in Sources */,
+				276C7FF91BC2097A0028DC0D /* HomeViewController.swift in Sources */,
+				27C75CAE1BC21CC0008AC322 /* Gif.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		276C7FC21BC204EE0028DC0D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				276C7FCB1BC204EE0028DC0D /* HammerTests.swift in Sources */,
+				276C7FFA1BC2097A0028DC0D /* HomeViewController.swift in Sources */,
+				270293D41BC363B00071A5D0 /* GifsWrapper.swift in Sources */,
+				276C7FFF1BC2116F0028DC0D /* ImageCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		276C7FCD1BC204EF0028DC0D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				276C7FD61BC204EF0028DC0D /* HammerUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		276C7FC81BC204EE0028DC0D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 276C7FAE1BC204EE0028DC0D /* Hammer */;
+			targetProxy = 276C7FC71BC204EE0028DC0D /* PBXContainerItemProxy */;
+		};
+		276C7FD31BC204EF0028DC0D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 276C7FAE1BC204EE0028DC0D /* Hammer */;
+			targetProxy = 276C7FD21BC204EF0028DC0D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		276C7FB61BC204EE0028DC0D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				276C7FB71BC204EE0028DC0D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		276C7FBE1BC204EE0028DC0D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				276C7FBF1BC204EE0028DC0D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		276C7FD81BC204EF0028DC0D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		276C7FD91BC204EF0028DC0D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		276C7FDB1BC204EF0028DC0D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 57E0D0BB6577F1CE7A1D237C /* Pods-Hammer.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = Hammer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.flyingdinos.Hammer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Hammer/Classes/Objective-C/Hammer-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		276C7FDC1BC204EF0028DC0D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 59DC8D6AF48616A7006723F2 /* Pods-Hammer.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = Hammer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.flyingdinos.Hammer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Hammer/Classes/Objective-C/Hammer-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		276C7FDE1BC204EF0028DC0D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = HammerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.flyingdinos.HammerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hammer.app/Hammer";
+			};
+			name = Debug;
+		};
+		276C7FDF1BC204EF0028DC0D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = HammerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.flyingdinos.HammerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hammer.app/Hammer";
+			};
+			name = Release;
+		};
+		276C7FE11BC204EF0028DC0D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = HammerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.flyingdinos.HammerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Hammer;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		276C7FE21BC204EF0028DC0D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = HammerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.flyingdinos.HammerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Hammer;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		276C7FAA1BC204EE0028DC0D /* Build configuration list for PBXProject "Hammer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				276C7FD81BC204EF0028DC0D /* Debug */,
+				276C7FD91BC204EF0028DC0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		276C7FDA1BC204EF0028DC0D /* Build configuration list for PBXNativeTarget "Hammer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				276C7FDB1BC204EF0028DC0D /* Debug */,
+				276C7FDC1BC204EF0028DC0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		276C7FDD1BC204EF0028DC0D /* Build configuration list for PBXNativeTarget "HammerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				276C7FDE1BC204EF0028DC0D /* Debug */,
+				276C7FDF1BC204EF0028DC0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		276C7FE01BC204EF0028DC0D /* Build configuration list for PBXNativeTarget "HammerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				276C7FE11BC204EF0028DC0D /* Debug */,
+				276C7FE21BC204EF0028DC0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 276C7FA71BC204EE0028DC0D /* Project object */;
+}
