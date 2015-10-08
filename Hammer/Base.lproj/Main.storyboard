@@ -93,12 +93,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wyw-bv-fWF">
-                                <rect key="frame" x="53" y="86" width="494" height="397"/>
+                                <rect key="frame" x="0.0" y="35" width="600" height="397"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="wyw-bv-fWF" firstAttribute="top" secondItem="Cqe-wO-FJx" secondAttribute="bottom" constant="66" id="a9X-sN-9i2"/>
+                            <constraint firstItem="wyw-bv-fWF" firstAttribute="leading" secondItem="Zfr-b8-4VC" secondAttribute="leading" id="4MQ-Hl-Jd5"/>
+                            <constraint firstAttribute="trailing" secondItem="wyw-bv-fWF" secondAttribute="trailing" id="AsM-0x-fZc"/>
+                            <constraint firstItem="wyw-bv-fWF" firstAttribute="top" secondItem="Cqe-wO-FJx" secondAttribute="bottom" constant="15" id="efq-lZ-EDG"/>
                             <constraint firstItem="wyw-bv-fWF" firstAttribute="centerX" secondItem="Zfr-b8-4VC" secondAttribute="centerX" id="frh-kW-OAs"/>
                         </constraints>
                     </view>

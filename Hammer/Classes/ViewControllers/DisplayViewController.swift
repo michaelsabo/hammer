@@ -26,10 +26,7 @@ class DisplayViewController: UIViewController {
 				self.imageView.image = image
 				self.imageView.contentMode = UIViewContentMode.ScaleAspectFit
 				self.imageView.translatesAutoresizingMaskIntoConstraints = false
-
-				var frame = self.imageView.frame
-				frame.size = self.imageView.image!.size
-				self.imageView.frame = frame
+				self.imageView.clipsToBounds = true
 			}
 		}
 	

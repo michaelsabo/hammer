@@ -21,7 +21,6 @@
 		276C7FFF1BC2116F0028DC0D /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FFD1BC2116F0028DC0D /* ImageCell.swift */; settings = {ASSET_TAGS = (); }; };
 		27C75CAE1BC21CC0008AC322 /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C75CAD1BC21CC0008AC322 /* Gif.swift */; settings = {ASSET_TAGS = (); }; };
 		27C75CB01BC22E1B008AC322 /* DisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C75CAF1BC22E1B008AC322 /* DisplayViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		27C75CB31BC23329008AC322 /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C75CB21BC23329008AC322 /* UIImage+Gif.swift */; settings = {ASSET_TAGS = (); }; };
 		C8B8CBB3436E409112AB700A /* Pods_Hammer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F588B3F15172A45489803A8E /* Pods_Hammer.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -63,7 +62,6 @@
 		276C7FFD1BC2116F0028DC0D /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		27C75CAD1BC21CC0008AC322 /* Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
 		27C75CAF1BC22E1B008AC322 /* DisplayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayViewController.swift; sourceTree = "<group>"; };
-		27C75CB21BC23329008AC322 /* UIImage+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Gif.swift"; sourceTree = "<group>"; };
 		57E0D0BB6577F1CE7A1D237C /* Pods-Hammer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hammer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hammer/Pods-Hammer.debug.xcconfig"; sourceTree = "<group>"; };
 		59DC8D6AF48616A7006723F2 /* Pods-Hammer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hammer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hammer/Pods-Hammer.release.xcconfig"; sourceTree = "<group>"; };
 		F588B3F15172A45489803A8E /* Pods_Hammer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hammer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -207,7 +205,6 @@
 		27C75CB11BC23303008AC322 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				27C75CB21BC23329008AC322 /* UIImage+Gif.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -414,7 +411,6 @@
 				27197E181BC239DC00525F33 /* UIImage+animatedGIF.m in Sources */,
 				276C7FB51BC204EE0028DC0D /* ViewController.swift in Sources */,
 				27C75CB01BC22E1B008AC322 /* DisplayViewController.swift in Sources */,
-				27C75CB31BC23329008AC322 /* UIImage+Gif.swift in Sources */,
 				276C7FFE1BC2116F0028DC0D /* ImageCell.swift in Sources */,
 				276C7FB31BC204EE0028DC0D /* AppDelegate.swift in Sources */,
 				276C7FF91BC2097A0028DC0D /* HomeViewController.swift in Sources */,
