@@ -36,8 +36,10 @@ class DisplayViewController: UIViewController {
 		func getGifImage() {
 			if let gifData = gif {
 				dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
-					Gif.getAnimatedGifForUrl(gifData.url, completionHandler: { [unowned self] (image, error) in
-						self.displayGif(image!)
+					Gif.getAnimatedGifForUrl(gifData.url, completionHandler: { [unowned self] (image, isSuccess, error) in
+						if (isSuccess) {
+							self.displayGif(image!)
+						}
 					})
 				}
 			}

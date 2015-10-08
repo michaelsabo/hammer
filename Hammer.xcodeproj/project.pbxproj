@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		270293D31BC363B00071A5D0 /* GifsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270293D21BC363B00071A5D0 /* GifsWrapper.swift */; settings = {ASSET_TAGS = (); }; };
-		270293D41BC363B00071A5D0 /* GifsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270293D21BC363B00071A5D0 /* GifsWrapper.swift */; settings = {ASSET_TAGS = (); }; };
 		27197E181BC239DC00525F33 /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 27197E171BC239DC00525F33 /* UIImage+animatedGIF.m */; settings = {ASSET_TAGS = (); }; };
 		276C7FB31BC204EE0028DC0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FB21BC204EE0028DC0D /* AppDelegate.swift */; };
 		276C7FB51BC204EE0028DC0D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FB41BC204EE0028DC0D /* ViewController.swift */; };
@@ -45,7 +43,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		270293D21BC363B00071A5D0 /* GifsWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifsWrapper.swift; sourceTree = "<group>"; };
 		27197E151BC239DC00525F33 /* Hammer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hammer-Bridging-Header.h"; sourceTree = "<group>"; };
 		27197E161BC239DC00525F33 /* UIImage+animatedGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+animatedGIF.h"; sourceTree = "<group>"; };
 		27197E171BC239DC00525F33 /* UIImage+animatedGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+animatedGIF.m"; sourceTree = "<group>"; };
@@ -179,7 +176,6 @@
 			isa = PBXGroup;
 			children = (
 				27C75CAD1BC21CC0008AC322 /* Gif.swift */,
-				270293D21BC363B00071A5D0 /* GifsWrapper.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -420,7 +416,6 @@
 				27C75CB01BC22E1B008AC322 /* DisplayViewController.swift in Sources */,
 				27C75CB31BC23329008AC322 /* UIImage+Gif.swift in Sources */,
 				276C7FFE1BC2116F0028DC0D /* ImageCell.swift in Sources */,
-				270293D31BC363B00071A5D0 /* GifsWrapper.swift in Sources */,
 				276C7FB31BC204EE0028DC0D /* AppDelegate.swift in Sources */,
 				276C7FF91BC2097A0028DC0D /* HomeViewController.swift in Sources */,
 				27C75CAE1BC21CC0008AC322 /* Gif.swift in Sources */,
@@ -433,7 +428,6 @@
 			files = (
 				276C7FCB1BC204EE0028DC0D /* HammerTests.swift in Sources */,
 				276C7FFA1BC2097A0028DC0D /* HomeViewController.swift in Sources */,
-				270293D41BC363B00071A5D0 /* GifsWrapper.swift in Sources */,
 				276C7FFF1BC2116F0028DC0D /* ImageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
