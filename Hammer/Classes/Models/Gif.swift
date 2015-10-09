@@ -36,6 +36,10 @@ class Gif: NSObject {
 		return "http://localhost:9292/api/gifs"
 	}
 	
+	class func endpointForGifsFromTag(query: String) -> String{
+		return "http://localhost:9292/api/gifs?q=" + query
+	}
+	
 	class func getGifs(completionHander: ([Gif]?, Bool, NSError?) -> Void) {
 		getGifsAtPath(endpointForGifs(), completionHandler: completionHander)
 	}
@@ -86,12 +90,26 @@ class Gif: NSObject {
 		}
 	}
 	
-	
-	
-	
-	
-	
-	
+	class func getGifsForTagQuery(tagQuery: String, completionHandler: ([Gif]?, Bool, NSError?) -> Void) {
+		Alamofire.request(.GET, endpointForGifsFromTag(tagQuery))
+			.responseJSON { response in
+				if (response.result.isSuccess) {
+					let json = JSON(response.result.value!)
+					var allGifs:Array = Array<Gif>()
+					let results = json["gifs"] as JSON
+					var count = 0
+					for jsonGif in results.arrayValue {
+						let gif = Gif(json:jsonGif, index: count)
+						allGifs.append(gif)
+						count++
+					}
+					completionHandler(allGifs, response.result.isSuccess, nil)
+					return
+				}
+				completionHandler([Gif](), response.result.isSuccess, response.result.error)
+			}
+				
+		}
 	
 	
 	

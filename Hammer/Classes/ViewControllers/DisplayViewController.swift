@@ -87,7 +87,9 @@ class DisplayViewController: UIViewController {
 		for label in labelArray {
 			labelHorizontalLayout += "-5-[" + label + "]"
 		}
-		view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|\(labelHorizontalLayout)->=50-|", options: [], metrics: nil, views: labelDictionary))
+		if (labelArray.count > 0) {
+			view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|\(labelHorizontalLayout)->=50-|", options: [], metrics: nil, views: labelDictionary))
+		}
 		
 		
 		

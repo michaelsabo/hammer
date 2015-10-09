@@ -10,7 +10,7 @@ import UIKit
 import SwiftyJSON
 
 
-class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate {
+class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
 	
 	@IBOutlet weak var viewCollection: UICollectionView!
 	@IBOutlet weak var tagSearch: UITextField!
@@ -18,13 +18,42 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	let kCustomRows = 8
 	let kImageCell = "ImageCell"
 	var gifs = [Gif]()
+	var allTags = [Tag]()
+	var autocompleteTableView: UITableView = UITableView()
+	var tagResults = [Tag]()
+	var autocompletionEnabled: Bool = false
+	var searchedGifs = [Gif]()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addImage")
 		getInitialImages()
+		getAllTags()
+	}
+	
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
+		setupTableView()
+	}
+	
+	func setupTableView() {
+		let frame = CGRectMake(0, 120, view.frame.width, 200)
+		autocompleteTableView = UITableView.init(frame: frame, style: UITableViewStyle.Plain)
+		autocompleteTableView.translatesAutoresizingMaskIntoConstraints = false
+		autocompleteTableView.delegate = self
+		autocompleteTableView.dataSource = self
+		autocompleteTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "AutocompleteResultCell")
+		tagSearch.delegate = self
+		tagSearch.translatesAutoresizingMaskIntoConstraints = false
+		viewCollection.translatesAutoresizingMaskIntoConstraints = false
+		autocompleteTableView.hidden = true
+		view.addSubview(autocompleteTableView)
+		let viewDictionary: [String:AnyObject] = ["searchField": tagSearch, "tableView":autocompleteTableView, "collectionView": viewCollection]
+		self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-80-[searchField(40)]-5-[collectionView]", options: [], metrics: nil, views: viewDictionary))
 		
 	}
+
+	// MARK: Service Calls
 	
 	func getInitialImages() {
 		dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
@@ -34,6 +63,34 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 					self.viewCollection.reloadData()
 				}
 			})
+		}
+	}
+	
+	func getAllTags() {
+		dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) { [unowned self] in
+			TagWrapper.getAllTags( { (tags, isSuccess, error) in
+					if (isSuccess) {
+						if (tags != nil) {
+							self.allTags = tags!
+						}
+					}
+				})
+		}
+	}
+	
+	func getGifsForTag(tagSearch: String) {
+		searchedGifs = [Gif]()
+		dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
+			Gif.getGifsForTagQuery(tagSearch, completionHandler: { (response, isSuccess, error) in
+				if (isSuccess) {
+					if let gifsResponse = response {
+						self.searchedGifs = gifsResponse
+					}
+					
+				}
+			
+			})
+			
 		}
 	}
 	
@@ -47,7 +104,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		})
 		print(returnedArray.count)
 	}
+
 	
+	// MARK: UICollectionView Data Methods
 	
 	
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -103,7 +162,107 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		cell.layer.addAnimation(transition, forKey: kCATransitionReveal)
 	}
 	
+	// MARK: UITextField Delegate Methods
 	
+	func textFieldDidBeginEditing(textField: UITextField) {
+		if (textField.text?.characters.count > 2) {
+//			autocompleteTableView.hidden = false
+		}
+	}
+	
+
+	
+	
+	// MARK: UITableView Data Methods
+	
+	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return tagResults.count
+	}
+	
+	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+		return 1
+	}
+	
+	func adjustHeightOfTableView() {
+		var tableHeight: Int
+		if (tagResults.count >= 5) {
+			tableHeight = 25 * 5
+		} else {
+			tableHeight = tagResults.count * 25
+		}
+		autocompleteTableView.frame = CGRectMake(autocompleteTableView.frame.origin.x, autocompleteTableView.frame.origin.y, CGFloat(autocompleteTableView.frame.size.width), CGFloat(tableHeight));
+	}
+	
+	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+		let cellIdentifier = "AutocompleteResultCell"
+		var cell = autocompleteTableView.dequeueReusableCellWithIdentifier(cellIdentifier) as UITableViewCell!
+		
+		if (cell == nil) {
+			cell = UITableViewCell.init(style: UITableViewCellStyle.Default, reuseIdentifier: cellIdentifier)
+		}
+		if (tagResults.count-1 >= indexPath.row) {
+			cell.textLabel?.text = tagResults[indexPath.row].text
+		}
+		
+		return cell
+	}
+	
+	func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+		// do something here
+	}
+	
+	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+		return 30.0
+	}
+
+	
+	@IBAction func searchTextChanged(sender: UITextField) {
+		if (sender.text?.characters.count > 1) {
+			autocompleteTableView.hidden = false
+			tagResults = [Tag]()
+			let userText = sender.text!
+			let results = allTags.filter( { (tag: Tag) -> Bool in
+				let stringMatch = tag.text.lowercaseString.rangeOfString(userText.lowercaseString)
+				return stringMatch != nil ? true : false
+			})
+			if (results.count > 0) {
+				tagResults = results
+				adjustHeightOfTableView()
+				autocompleteTableView.reloadData()
+			}
+		}
+	}
+	
+	@IBAction func searchButtonClicked(sender: UITextField) {
+		
+	}
+	
+	func textFieldShouldClear(textField: UITextField) -> Bool {
+		textField.text = ""
+		tagSearch.text = ""
+		tagResults.removeAll()
+		autocompleteTableView.hidden = true
+		autocompleteTableView.reloadData()
+		return true
+	}
+	
+	func textFieldShouldReturn(textField: UITextField) -> Bool {
+		if (textField.text?.characters.count > 0) {
+			getGifsForTag(textField.text!)
+			autocompleteTableView.reloadData()
+			view.endEditing(true)
+		}
+		return true
+	}
+	
+	
+	
+	
+	
+	override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+		view.endEditing(true)
+	}
+
 	// In a storyboard-based application, you will often want to do a little preparation before navigation
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		// Get the new view controller using segue.destinationViewController.

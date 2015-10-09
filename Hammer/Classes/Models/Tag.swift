@@ -33,6 +33,10 @@ class TagWrapper : NSObject {
 		return "http://localhost:9292/api/gifs/\(id)/tags"
 	}
 	
+	class func getEndpointForTags() -> String {
+		return "http://localhost:9292/api/tags"
+	}
+	
 	class func getTagsForImageId(id: String, completionHandler: ([Tag]?, Bool, NSError?) -> Void) {
 		Alamofire.request(.GET, getEndpointForImageTags(id))
 		.responseJSON { response in
@@ -49,6 +53,25 @@ class TagWrapper : NSObject {
 				} else {
 					completionHandler(nil, response.result.isSuccess, response.result.error)
 			}
+		}
+	}
+	
+	class func getAllTags(completionHandler: ([Tag]?, Bool, NSError?) -> Void) {
+		Alamofire.request(.GET, getEndpointForTags())
+			.responseJSON { response in
+				if (response.result.isSuccess) {
+					let json = JSON(response.result.value!)
+					var tagArray = [Tag]()
+					let results = json[TagFields.Tags.rawValue] as JSON
+					for jsonTag in results.arrayValue {
+						let tag = Tag(json: jsonTag)
+						tagArray.append(tag)
+					}
+					completionHandler(tagArray, response.result.isSuccess, nil)
+					return
+				} else {
+					completionHandler(nil, response.result.isSuccess, response.result.error)
+				}
 		}
 	}
 	
