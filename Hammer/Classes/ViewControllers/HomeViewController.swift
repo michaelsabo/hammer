@@ -11,19 +11,20 @@ import SwiftyJSON
 
 
 class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate {
-
+	
 	@IBOutlet weak var viewCollection: UICollectionView!
+	@IBOutlet weak var tagSearch: UITextField!
 	
 	let kCustomRows = 8
 	let kImageCell = "ImageCell"
 	var gifs = [Gif]()
-
-    override func viewDidLoad() {
-      super.viewDidLoad()
-			navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addImage")	
-			getInitialImages()
-			
-    }
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addImage")
+		getInitialImages()
+		
+	}
 	
 	func getInitialImages() {
 		dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
@@ -37,7 +38,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func addImage() {
-		// just using this to debug how many images are currently stored in the gifs array 
+		// just using this to debug how many images are currently stored in the gifs array
 		// at various points of the ui collection view when scrolling
 		let returnedArray = self.gifs.filter( {
 			if let type = $0 as Gif? {
@@ -46,6 +47,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		})
 		print(returnedArray.count)
 	}
+	
+	
 	
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		if (gifs.count == 0) {
@@ -72,7 +75,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 							cell.imageView.image = UIImage(named: "Placeholder.png")
 							cell.userInteractionEnabled = false
 						}
-					})
+						})
 				}
 			}
 		}
@@ -86,7 +89,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 			detailController.gif = gifs[indexPath.item]
 			navigationController?.pushViewController(detailController, animated: true)
 		}
-
+		
 	}
 	
 	func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
@@ -99,13 +102,13 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		transition.duration = 0.3
 		cell.layer.addAnimation(transition, forKey: kCATransitionReveal)
 	}
-
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    
-
+	
+	
+	// In a storyboard-based application, you will often want to do a little preparation before navigation
+	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		// Get the new view controller using segue.destinationViewController.
+		// Pass the selected object to the new view controller.
+	}
+	
+	
 }
