@@ -16,6 +16,10 @@ enum GifFields: String {
 	case ImgurThumbnailUrl = "thumbnail_url"
 }
 
+class GifResponse {
+	var gifs: [Gif]?
+}
+
 class Gif: NSObject {
 	
 	var id: String

@@ -26,22 +26,34 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	var userIsSearching = false
 	var searchedGifs = [Gif]()
 	
-	var viewModel: SearchTagViewModel = {
-		let searchService = TagAutocompleteService()
-		return SearchTagViewModel(searchTagService: searchService)
+	var searchTagViewModel: SearchTagViewModel = {
+		return SearchTagViewModel(searchTagService: TagAutocompleteService(), gifRetrieveService: GifService())
 	}()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addImage")
-		self.viewModel.searchText <~ tagSearch.rac_textSignalProducer()
+		
 		getInitialImages()
 		getAllTags()
+
 	}
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		setupTableView()
+		setupBindings()
+	}
+	
+	func setupBindings() {
+		tagSearch.delegate = self
+		self.searchTagViewModel.searchText <~ tagSearch.rac_textSignalProducer()
+		RAC(autocompleteTableView, "hidden") <~ self.searchTagViewModel.tableWillHide.producer
+		self.searchTagViewModel.searchingTagsSignal.producer.start({ s in
+			self.adjustHeightOfTableView()
+			self.autocompleteTableView.reloadData()
+		})
+
 	}
 	
 	func setupTableView() {
@@ -80,6 +92,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 					if (isSuccess) {
 						if (tags != nil) {
 							self.allTags = tags!
+							self.searchTagViewModel.allTags = MutableProperty<[Tag]>(self.allTags)
 						}
 					}
 				})
@@ -199,21 +212,10 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		cell.layer.addAnimation(transition, forKey: kCATransitionReveal)
 	}
 	
-	// MARK: UITextField Delegate Methods
-	
-	func textFieldDidBeginEditing(textField: UITextField) {
-		if (textField.text?.characters.count > 2) {
-//			autocompleteTableView.hidden = false
-		}
-	}
-	
-
-	
-	
 	// MARK: UITableView Data Methods
 	
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return tagResults.count
+		return self.searchTagViewModel.foundTags.value.count
 	}
 	
 	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -222,10 +224,10 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	func adjustHeightOfTableView() {
 		var tableHeight: Int
-		if (tagResults.count >= 5) {
-			tableHeight = 25 * 5
+		if (self.searchTagViewModel.foundTags.value.count >= 5) {
+			tableHeight = 35 * 5
 		} else {
-			tableHeight = tagResults.count * 25
+			tableHeight = self.searchTagViewModel.foundTags.value.count * 35
 		}
 		autocompleteTableView.frame = CGRectMake(autocompleteTableView.frame.origin.x, autocompleteTableView.frame.origin.y, CGFloat(autocompleteTableView.frame.size.width), CGFloat(tableHeight));
 	}
@@ -237,71 +239,52 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		if (cell == nil) {
 			cell = UITableViewCell.init(style: UITableViewCellStyle.Default, reuseIdentifier: cellIdentifier)
 		}
-		if (tagResults.count-1 >= indexPath.row) {
-			cell.textLabel?.text = tagResults[indexPath.row].text
+		if (self.searchTagViewModel.foundTags.value.count-1 >= indexPath.row) {
+			cell.textLabel?.text = self.searchTagViewModel.foundTags.value[indexPath.row].text
 		}
 		
 		return cell
 	}
 	
+	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+		self.tagSearch.text = self.searchTagViewModel.foundTags.value[indexPath.row].text
+		autocompleteTableView .deselectRowAtIndexPath(indexPath, animated: true)
+		textFieldShouldReturn(self.tagSearch)
+	}
+	
 	func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-		// do something here
+		
 	}
 	
 	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-		return 30.0
+		return 35.0
 	}
-
-	
-//	@IBAction func searchTextChanged(sender: UITextField) {
-//		if (sender.text?.characters.count > 1) {
-//			autocompleteTableView.hidden = false
-//			tagResults = [Tag]()
-//			let userText = sender.text!
-//			let results = allTags.filter( { (tag: Tag) -> Bool in
-//				let stringMatch = tag.text.lowercaseString.rangeOfString(userText.lowercaseString)
-//				return stringMatch != nil ? true : false
-//			})
-//			if (results.count > 0) {
-//				tagResults = results
-//				adjustHeightOfTableView()
-//				autocompleteTableView.reloadData()
-//			}
-//		}
-//	}
-//	
-//	@IBAction func searchButtonClicked(sender: UITextField) {
-//		
-//		
-//	}
-//	
-//	func textFieldShouldClear(textField: UITextField) -> Bool {
-//		textField.text = ""
-//		tagSearch.text = ""
-//		tagResults.removeAll()
-//		autocompleteTableView.hidden = true
-//		autocompleteTableView.reloadData()
-//		userIsSearching = false
-//		viewCollection.reloadData()
-//		return true
-//	}
-//	
-//	func textFieldShouldReturn(textField: UITextField) -> Bool {
-//		if (textField.text?.characters.count > 0) {
-//			getGifsForTag(textField.text!)
-//			autocompleteTableView.hidden = true
-//			view.endEditing(true)
-//		}
-//		return true
-//	}
-//	
-	
-	
-	
 	
 	override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
 		view.endEditing(true)
 	}
+	
+	
+	func textFieldShouldReturn(textField: UITextField) -> Bool {
+		if (tagSearch.text?.characters.count > 0) {
+			getGifsForTag(self.searchTagViewModel.searchText.value)
+			self.searchTagViewModel.isSearching.value = false
+			autocompleteTableView.hidden = true
+			view.endEditing(true)
+		}
+		return true
+	}
+	
+	func textFieldShouldClear(textField: UITextField) -> Bool {
+		tagSearch.text = ""
+		autocompleteTableView.hidden = true
+		userIsSearching = false
+		viewCollection.reloadData()
+		return true
+	}
+
+
+	
 
 	// In a storyboard-based application, you will often want to do a little preparation before navigation
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
