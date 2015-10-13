@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		27197E181BC239DC00525F33 /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 27197E171BC239DC00525F33 /* UIImage+animatedGIF.m */; settings = {ASSET_TAGS = (); }; };
+		2719DA291BCC7B6A00BD02AD /* SearchTagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2719DA281BCC7B6A00BD02AD /* SearchTagViewModel.swift */; settings = {ASSET_TAGS = (); }; };
+		2719DA2A1BCC7B6A00BD02AD /* SearchTagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2719DA281BCC7B6A00BD02AD /* SearchTagViewModel.swift */; settings = {ASSET_TAGS = (); }; };
+		2719DA2C1BCC7F3A00BD02AD /* TagAutocompleteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2719DA2B1BCC7F3A00BD02AD /* TagAutocompleteService.swift */; settings = {ASSET_TAGS = (); }; };
+		2719DA2D1BCC7F3A00BD02AD /* TagAutocompleteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2719DA2B1BCC7F3A00BD02AD /* TagAutocompleteService.swift */; settings = {ASSET_TAGS = (); }; };
+		2719DA301BCC848500BD02AD /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2719DA2F1BCC848500BD02AD /* UIKitExtensions.swift */; settings = {ASSET_TAGS = (); }; };
+		2719DA311BCC848500BD02AD /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2719DA2F1BCC848500BD02AD /* UIKitExtensions.swift */; settings = {ASSET_TAGS = (); }; };
+		2719DA341BCC9D2200BD02AD /* ReactiveCocoa.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2719DA331BCC9D2200BD02AD /* ReactiveCocoa.framework.dSYM */; };
+		2719DA361BCC9D2800BD02AD /* Result.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2719DA351BCC9D2800BD02AD /* Result.framework.dSYM */; };
+		273410FF1BC8515400674FC7 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 272957FD1BC843A500D5BFC6 /* ReactiveCocoa.framework */; };
+		273411011BC8515400674FC7 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273411001BC8515400674FC7 /* Result.framework */; };
 		276C7FB31BC204EE0028DC0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FB21BC204EE0028DC0D /* AppDelegate.swift */; };
 		276C7FB51BC204EE0028DC0D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FB41BC204EE0028DC0D /* ViewController.swift */; };
 		276C7FB81BC204EE0028DC0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 276C7FB61BC204EE0028DC0D /* Main.storyboard */; };
@@ -21,6 +31,10 @@
 		276C7FFF1BC2116F0028DC0D /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FFD1BC2116F0028DC0D /* ImageCell.swift */; settings = {ASSET_TAGS = (); }; };
 		278983BF1BC6234C004C1FAA /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278983BE1BC6234C004C1FAA /* Tag.swift */; settings = {ASSET_TAGS = (); }; };
 		278983C01BC6234C004C1FAA /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278983BE1BC6234C004C1FAA /* Tag.swift */; settings = {ASSET_TAGS = (); }; };
+		27BAA1A91BCCC97900EAE554 /* RAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BAA1A81BCCC97900EAE554 /* RAC.swift */; settings = {ASSET_TAGS = (); }; };
+		27BAA1AA1BCCC97900EAE554 /* RAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BAA1A81BCCC97900EAE554 /* RAC.swift */; settings = {ASSET_TAGS = (); }; };
+		27BAA1AE1BCCCBEE00EAE554 /* AutocompleteTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BAA1AD1BCCCBEE00EAE554 /* AutocompleteTableViewModel.swift */; settings = {ASSET_TAGS = (); }; };
+		27BAA1AF1BCCCBEE00EAE554 /* AutocompleteTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BAA1AD1BCCCBEE00EAE554 /* AutocompleteTableViewModel.swift */; settings = {ASSET_TAGS = (); }; };
 		27C75CAE1BC21CC0008AC322 /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C75CAD1BC21CC0008AC322 /* Gif.swift */; settings = {ASSET_TAGS = (); }; };
 		27C75CB01BC22E1B008AC322 /* DisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C75CAF1BC22E1B008AC322 /* DisplayViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		C8B8CBB3436E409112AB700A /* Pods_Hammer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F588B3F15172A45489803A8E /* Pods_Hammer.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -43,10 +57,32 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		2719DA321BCC9CF100BD02AD /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				2719DA341BCC9D2200BD02AD /* ReactiveCocoa.framework.dSYM in CopyFiles */,
+				2719DA361BCC9D2800BD02AD /* Result.framework.dSYM in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		27197E151BC239DC00525F33 /* Hammer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hammer-Bridging-Header.h"; sourceTree = "<group>"; };
 		27197E161BC239DC00525F33 /* UIImage+animatedGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+animatedGIF.h"; sourceTree = "<group>"; };
 		27197E171BC239DC00525F33 /* UIImage+animatedGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+animatedGIF.m"; sourceTree = "<group>"; };
+		2719DA281BCC7B6A00BD02AD /* SearchTagViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTagViewModel.swift; sourceTree = "<group>"; };
+		2719DA2B1BCC7F3A00BD02AD /* TagAutocompleteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagAutocompleteService.swift; sourceTree = "<group>"; };
+		2719DA2F1BCC848500BD02AD /* UIKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
+		2719DA331BCC9D2200BD02AD /* ReactiveCocoa.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = ReactiveCocoa.framework.dSYM; path = ../Carthage/Build/iOS/ReactiveCocoa.framework.dSYM; sourceTree = "<group>"; };
+		2719DA351BCC9D2800BD02AD /* Result.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Result.framework.dSYM; path = ../Carthage/Build/iOS/Result.framework.dSYM; sourceTree = "<group>"; };
+		272957FD1BC843A500D5BFC6 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
+		272958011BC846C000D5BFC6 /* Box.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Box.framework; path = Carthage/Build/iOS/Box.framework; sourceTree = "<group>"; };
+		273411001BC8515400674FC7 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		276C7FAF1BC204EE0028DC0D /* Hammer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hammer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		276C7FB21BC204EE0028DC0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		276C7FB41BC204EE0028DC0D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +99,8 @@
 		276C7FF81BC2097A0028DC0D /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		276C7FFD1BC2116F0028DC0D /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		278983BE1BC6234C004C1FAA /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		27BAA1A81BCCC97900EAE554 /* RAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAC.swift; sourceTree = "<group>"; };
+		27BAA1AD1BCCCBEE00EAE554 /* AutocompleteTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AutocompleteTableViewModel.swift; path = ../TableViews/AutocompleteTableViewModel.swift; sourceTree = "<group>"; };
 		27C75CAD1BC21CC0008AC322 /* Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
 		27C75CAF1BC22E1B008AC322 /* DisplayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayViewController.swift; sourceTree = "<group>"; };
 		57E0D0BB6577F1CE7A1D237C /* Pods-Hammer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hammer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hammer/Pods-Hammer.debug.xcconfig"; sourceTree = "<group>"; };
@@ -75,6 +113,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				273411011BC8515400674FC7 /* Result.framework in Frameworks */,
+				273410FF1BC8515400674FC7 /* ReactiveCocoa.framework in Frameworks */,
 				C8B8CBB3436E409112AB700A /* Pods_Hammer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -106,6 +146,24 @@
 			path = "Objective-C";
 			sourceTree = "<group>";
 		};
+		2719DA2E1BCC847100BD02AD /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2719DA2F1BCC848500BD02AD /* UIKitExtensions.swift */,
+				27BAA1A81BCCC97900EAE554 /* RAC.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		2719DA371BCC9D3200BD02AD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2719DA351BCC9D2800BD02AD /* Result.framework.dSYM */,
+				2719DA331BCC9D2200BD02AD /* ReactiveCocoa.framework.dSYM */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		276C7FA61BC204EE0028DC0D = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +192,7 @@
 				276C7FB21BC204EE0028DC0D /* AppDelegate.swift */,
 				276C7FBC1BC204EE0028DC0D /* Assets.xcassets */,
 				276C7FF11BC2092E0028DC0D /* Classes */,
+				2719DA371BCC9D3200BD02AD /* Frameworks */,
 				276C7FC11BC204EE0028DC0D /* Info.plist */,
 				276C7FBE1BC204EE0028DC0D /* LaunchScreen.storyboard */,
 				276C7FB61BC204EE0028DC0D /* Main.storyboard */,
@@ -163,6 +222,9 @@
 		276C7FF11BC2092E0028DC0D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				27BAA1AC1BCCCBCC00EAE554 /* TableViews */,
+				2719DA2E1BCC847100BD02AD /* Utils */,
+				27D689AE1BC8596000701F4B /* Service */,
 				27197E131BC239B500525F33 /* Objective-C */,
 				27C75CB11BC23303008AC322 /* Helpers */,
 				276C7FFC1BC211120028DC0D /* Cells */,
@@ -194,6 +256,8 @@
 		276C7FF51BC2092E0028DC0D /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				27BAA1AD1BCCCBEE00EAE554 /* AutocompleteTableViewModel.swift */,
+				2719DA281BCC7B6A00BD02AD /* SearchTagViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -206,6 +270,13 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		27BAA1AC1BCCCBCC00EAE554 /* TableViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TableViews;
+			sourceTree = "<group>";
+		};
 		27C75CB11BC23303008AC322 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,9 +284,20 @@
 			name = Helpers;
 			sourceTree = "<group>";
 		};
+		27D689AE1BC8596000701F4B /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				2719DA2B1BCC7F3A00BD02AD /* TagAutocompleteService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		71F7D88780EDD987612499BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				273411001BC8515400674FC7 /* Result.framework */,
+				272958011BC846C000D5BFC6 /* Box.framework */,
+				272957FD1BC843A500D5BFC6 /* ReactiveCocoa.framework */,
 				F588B3F15172A45489803A8E /* Pods_Hammer.framework */,
 			);
 			name = Frameworks;
@@ -243,6 +325,8 @@
 				276C7FAD1BC204EE0028DC0D /* Resources */,
 				A3172D6F50D1659039999632 /* Embed Pods Frameworks */,
 				34DBD584D3C4EE7B37C4DA80 /* Copy Pods Resources */,
+				272958001BC8458900D5BFC6 /* ShellScript */,
+				2719DA321BCC9CF100BD02AD /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -360,6 +444,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		272958001BC8458900D5BFC6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ReactiveCocoa.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
 		34DBD584D3C4EE7B37C4DA80 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -416,9 +515,14 @@
 				27197E181BC239DC00525F33 /* UIImage+animatedGIF.m in Sources */,
 				276C7FB51BC204EE0028DC0D /* ViewController.swift in Sources */,
 				27C75CB01BC22E1B008AC322 /* DisplayViewController.swift in Sources */,
+				2719DA291BCC7B6A00BD02AD /* SearchTagViewModel.swift in Sources */,
 				276C7FFE1BC2116F0028DC0D /* ImageCell.swift in Sources */,
+				27BAA1AE1BCCCBEE00EAE554 /* AutocompleteTableViewModel.swift in Sources */,
+				27BAA1A91BCCC97900EAE554 /* RAC.swift in Sources */,
+				2719DA2C1BCC7F3A00BD02AD /* TagAutocompleteService.swift in Sources */,
 				276C7FB31BC204EE0028DC0D /* AppDelegate.swift in Sources */,
 				276C7FF91BC2097A0028DC0D /* HomeViewController.swift in Sources */,
+				2719DA301BCC848500BD02AD /* UIKitExtensions.swift in Sources */,
 				27C75CAE1BC21CC0008AC322 /* Gif.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -427,9 +531,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2719DA2A1BCC7B6A00BD02AD /* SearchTagViewModel.swift in Sources */,
 				278983C01BC6234C004C1FAA /* Tag.swift in Sources */,
+				27BAA1AA1BCCC97900EAE554 /* RAC.swift in Sources */,
 				276C7FCB1BC204EE0028DC0D /* HammerTests.swift in Sources */,
 				276C7FFA1BC2097A0028DC0D /* HomeViewController.swift in Sources */,
+				2719DA2D1BCC7F3A00BD02AD /* TagAutocompleteService.swift in Sources */,
+				27BAA1AF1BCCCBEE00EAE554 /* AutocompleteTableViewModel.swift in Sources */,
+				2719DA311BCC848500BD02AD /* UIKitExtensions.swift in Sources */,
 				276C7FFF1BC2116F0028DC0D /* ImageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -566,6 +675,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Hammer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -582,6 +695,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Hammer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

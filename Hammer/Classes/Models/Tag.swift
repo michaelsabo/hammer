@@ -27,6 +27,14 @@ class Tag {
 	}
 }
 
+class TagsResponse {
+	var tags: [Tag]
+	
+	init (json: JSON) {
+		tags = [Tag]()
+	}
+}
+
 class TagWrapper : NSObject {
 	
 	class func getEndpointForImageTags(id : String) -> String {
@@ -68,6 +76,21 @@ class TagWrapper : NSObject {
 						tagArray.append(tag)
 					}
 					completionHandler(tagArray, response.result.isSuccess, nil)
+					return
+				} else {
+					completionHandler(nil, response.result.isSuccess, response.result.error)
+				}
+		}
+	}
+	
+	class func getAllTagsResponse(completionHandler: (TagsResponse?, Bool, NSError?) -> Void) {
+		Alamofire.request(.GET, getEndpointForTags())
+			.responseJSON { response in
+				if (response.result.isSuccess) {
+					let json = JSON(response.result.value!)
+					let results = json[TagFields.Tags.rawValue] as JSON
+					let tagsResponse = TagsResponse(json: results)
+					completionHandler(tagsResponse, response.result.isSuccess, nil)
 					return
 				} else {
 					completionHandler(nil, response.result.isSuccess, response.result.error)

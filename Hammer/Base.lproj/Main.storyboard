@@ -21,11 +21,6 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardAppearance="alert" returnKeyType="go"/>
-                                <connections>
-                                    <action selector="searchButtonClicked:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="eXG-mP-cRs"/>
-                                    <action selector="searchTextChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="WVz-cv-rEt"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="jKs-xq-Qsq"/>
-                                </connections>
                             </textField>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hmC-f0-Rbq">
                                 <rect key="frame" x="0.0" y="176" width="600" height="424"/>

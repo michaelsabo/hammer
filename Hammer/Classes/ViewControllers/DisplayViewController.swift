@@ -71,7 +71,7 @@ class DisplayViewController: UIViewController {
 		var labelArray = [String]()
 		var count = 0
 		for tag in tags!  {
-			var label = UILabel()
+			let label = UILabel()
 			label.text = tag.text
 			label.translatesAutoresizingMaskIntoConstraints = false
 			label.backgroundColor = UIColor.grayColor()
@@ -105,4 +105,10 @@ class DisplayViewController: UIViewController {
 				print("nothing to copy")
 			}
 		}
+	
+	deinit {
+		gifImage = nil
+		gif = nil
+		tags = nil
+	}
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import ReactiveCocoa
 
 
 class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
@@ -22,11 +23,18 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	var autocompleteTableView: UITableView = UITableView()
 	var tagResults = [Tag]()
 	var autocompletionEnabled: Bool = false
+	var userIsSearching = false
 	var searchedGifs = [Gif]()
+	
+	var viewModel: SearchTagViewModel = {
+		let searchService = TagAutocompleteService()
+		return SearchTagViewModel(searchTagService: searchService)
+	}()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addImage")
+		self.viewModel.searchText <~ tagSearch.rac_textSignalProducer()
 		getInitialImages()
 		getAllTags()
 	}
@@ -43,7 +51,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		autocompleteTableView.delegate = self
 		autocompleteTableView.dataSource = self
 		autocompleteTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "AutocompleteResultCell")
-		tagSearch.delegate = self
+//		tagSearch.delegate = self
 		tagSearch.translatesAutoresizingMaskIntoConstraints = false
 		viewCollection.translatesAutoresizingMaskIntoConstraints = false
 		autocompleteTableView.hidden = true
@@ -84,11 +92,13 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 			Gif.getGifsForTagQuery(tagSearch, completionHandler: { (response, isSuccess, error) in
 				if (isSuccess) {
 					if let gifsResponse = response {
-						self.searchedGifs = gifsResponse
+						if (gifsResponse.count > 0) {
+							self.userIsSearching = true
+							self.searchedGifs = gifsResponse
+							self.viewCollection.reloadData()
+						}
 					}
-					
 				}
-			
 			})
 			
 		}
@@ -112,23 +122,46 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		if (gifs.count == 0) {
 			return kCustomRows
+		} else if (userIsSearching) {
+			return searchedGifs.count
+		} else {
+			return gifs.count
 		}
-		return gifs.count
 	}
 	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ImageCell", forIndexPath: indexPath) as! ImageCell
-		if (indexPath.row < gifs.count) {
-			let gif = gifs[indexPath.item]
+		var cell = collectionView.dequeueReusableCellWithReuseIdentifier("ImageCell", forIndexPath: indexPath) as! ImageCell
+		cell.userInteractionEnabled = true
+		if (userIsSearching && indexPath.item < searchedGifs.count) {
+			cell = displayCellForGifs(searchedGifs, indexPath: indexPath, cell: cell)
+			return cell
+		} else if (!userIsSearching && indexPath.item < gifs.count) {
+			cell = displayCellForGifs(gifs, indexPath: indexPath, cell: cell)
+			return cell
+		} else {
+			cell.imageView.image = UIImage(named: "Placeholder.png")
+			cell.userInteractionEnabled = false
+		}
+		return cell
+	}
+	
+	func displayCellForGifs(gifCollection: [Gif], indexPath: NSIndexPath, cell: ImageCell) -> ImageCell {	
+		if (indexPath.item < gifCollection.count) {
+			let gif = gifCollection[indexPath.item]
 			if let image = gif.thumbnailImage {
 				cell.imageView.image = image
 			} else {
 				dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
 					Gif.getThumbnailImageForGif(gif, completionHandler: { [unowned self] (responseGif, isSuccess, error) in
-						if (isSuccess) {
+						if (isSuccess && !self.userIsSearching) {
 							if let index = self.gifs.indexOf(responseGif!) {
-								self.gifs[index].thumbnailImage = responseGif!.thumbnailImage
-								cell.imageView.image = responseGif!.thumbnailImage
+								gifCollection[index].thumbnailImage = responseGif!.thumbnailImage
+								cell.imageView.image = gifCollection[index].thumbnailImage
+							}
+						} else if (isSuccess && self.userIsSearching) {
+							if let index = self.searchedGifs.indexOf(responseGif!) {
+								self.searchedGifs[index].thumbnailImage = responseGif!.thumbnailImage
+								cell.imageView.image = self.searchedGifs[index].thumbnailImage
 							}
 						} else {
 							cell.imageView.image = UIImage(named: "Placeholder.png")
@@ -145,7 +178,11 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		
 		let detailController = storyboard?.instantiateViewControllerWithIdentifier("DisplayViewController") as? DisplayViewController
 		if let detailController = detailController {
-			detailController.gif = gifs[indexPath.item]
+			if (userIsSearching) {
+				detailController.gif = searchedGifs[indexPath.item]
+			} else {
+				detailController.gif = gifs[indexPath.item]
+			}
 			navigationController?.pushViewController(detailController, animated: true)
 		}
 		
@@ -216,45 +253,48 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 
 	
-	@IBAction func searchTextChanged(sender: UITextField) {
-		if (sender.text?.characters.count > 1) {
-			autocompleteTableView.hidden = false
-			tagResults = [Tag]()
-			let userText = sender.text!
-			let results = allTags.filter( { (tag: Tag) -> Bool in
-				let stringMatch = tag.text.lowercaseString.rangeOfString(userText.lowercaseString)
-				return stringMatch != nil ? true : false
-			})
-			if (results.count > 0) {
-				tagResults = results
-				adjustHeightOfTableView()
-				autocompleteTableView.reloadData()
-			}
-		}
-	}
-	
-	@IBAction func searchButtonClicked(sender: UITextField) {
-		
-	}
-	
-	func textFieldShouldClear(textField: UITextField) -> Bool {
-		textField.text = ""
-		tagSearch.text = ""
-		tagResults.removeAll()
-		autocompleteTableView.hidden = true
-		autocompleteTableView.reloadData()
-		return true
-	}
-	
-	func textFieldShouldReturn(textField: UITextField) -> Bool {
-		if (textField.text?.characters.count > 0) {
-			getGifsForTag(textField.text!)
-			autocompleteTableView.reloadData()
-			view.endEditing(true)
-		}
-		return true
-	}
-	
+//	@IBAction func searchTextChanged(sender: UITextField) {
+//		if (sender.text?.characters.count > 1) {
+//			autocompleteTableView.hidden = false
+//			tagResults = [Tag]()
+//			let userText = sender.text!
+//			let results = allTags.filter( { (tag: Tag) -> Bool in
+//				let stringMatch = tag.text.lowercaseString.rangeOfString(userText.lowercaseString)
+//				return stringMatch != nil ? true : false
+//			})
+//			if (results.count > 0) {
+//				tagResults = results
+//				adjustHeightOfTableView()
+//				autocompleteTableView.reloadData()
+//			}
+//		}
+//	}
+//	
+//	@IBAction func searchButtonClicked(sender: UITextField) {
+//		
+//		
+//	}
+//	
+//	func textFieldShouldClear(textField: UITextField) -> Bool {
+//		textField.text = ""
+//		tagSearch.text = ""
+//		tagResults.removeAll()
+//		autocompleteTableView.hidden = true
+//		autocompleteTableView.reloadData()
+//		userIsSearching = false
+//		viewCollection.reloadData()
+//		return true
+//	}
+//	
+//	func textFieldShouldReturn(textField: UITextField) -> Bool {
+//		if (textField.text?.characters.count > 0) {
+//			getGifsForTag(textField.text!)
+//			autocompleteTableView.hidden = true
+//			view.endEditing(true)
+//		}
+//		return true
+//	}
+//	
 	
 	
 	
