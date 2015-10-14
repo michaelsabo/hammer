@@ -75,7 +75,7 @@ class DisplayViewController: UIViewController {
 			
 
 			for tag in self.tags!  {
-				let label = UILabel()
+				let label = PaddedTagLabel()
 				label.text = tag.text
 				label.translatesAutoresizingMaskIntoConstraints = false
 				label.backgroundColor = UIColor.grayColor()
@@ -84,8 +84,8 @@ class DisplayViewController: UIViewController {
 				labelArray.append("label\(count)")
 				let labelName = "label\(count)"
 				labelDictionary[labelName] = label
-				let constraint = NSLayoutConstraint.init(item: label, attribute: .Leading, relatedBy: .Equal, toItem: self.imageView, attribute: .Leading, multiplier: 1, constant: 0)
-				self.view.addConstraint(constraint)
+				let constraintBottom = NSLayoutConstraint.init(item: label, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Bottom, multiplier: 1, constant: 0)
+				self.view.addConstraint(constraintBottom)
 				count++
 			}
 			var labelHorizontalLayout = ""
@@ -93,7 +93,7 @@ class DisplayViewController: UIViewController {
 				labelHorizontalLayout += "-5-[" + label + "]"
 			}
 			if (labelArray.count > 0) {
-				self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|\(labelHorizontalLayout)->=50-|", options: [], metrics: nil, views: labelDictionary))
+				self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|\(labelHorizontalLayout)->=5-|", options: [], metrics: nil, views: labelDictionary))
 			}
 		}
 	}
@@ -114,4 +114,27 @@ class DisplayViewController: UIViewController {
 		gif = nil
 		tags = nil
 	}
+}
+
+class PaddedTagLabel : UILabel {
+	
+	let topInset: CGFloat = 3.0
+	let bottomInset:CGFloat = 3.0
+	let leftInset:CGFloat = 6.0
+	let rightInset:CGFloat = 6.0
+	
+	override func drawTextInRect(rect: CGRect) {
+		let insets = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
+		self.setNeedsLayout()
+		return super.drawTextInRect(UIEdgeInsetsInsetRect(rect, insets))
+	}
+	
+	override func intrinsicContentSize() -> CGSize {
+		var intrinsicSuperViewContentSize = super.intrinsicContentSize()
+		intrinsicSuperViewContentSize.height += bottomInset + topInset
+		intrinsicSuperViewContentSize.width += leftInset + rightInset
+		return intrinsicSuperViewContentSize
+	}
+	
+
 }
