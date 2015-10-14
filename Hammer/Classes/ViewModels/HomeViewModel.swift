@@ -36,7 +36,6 @@ class HomeViewModel {
 					if (response.gifs.count > 0) {
 						self.gifCollection.value = response.gifs
 					} else {
-						print("SHITTTTT")
 						self.gifCollection.value = [Gif]()
 					}
 			}))
@@ -86,7 +85,35 @@ class HomeViewModel {
 		return PropertyOf(property)
 	}()
 	
-	
+	func displayCellForGifs(indexPath indexPath: NSIndexPath, cell: ImageCell) -> ImageCell {
+		if (indexPath.item < self.gifCollection.value.count) {
+			let gif = self.gifCollection.value[indexPath.item]
+			if let image = gif.thumbnailImage {
+				cell.imageView.image = image
+			} else {
+				dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
+					Gif.getThumbnailImageForGif(gif, completionHandler: { [unowned self] (responseGif, isSuccess, error) in
+						if (isSuccess && !self.isSearching.value) {
+							if let index = self.gifCollection.value.indexOf(responseGif!) {
+								self.gifCollection.value[index].thumbnailImage = responseGif!.thumbnailImage
+								cell.imageView.image = self.gifCollection.value[index].thumbnailImage
+							}
+						} else if (isSuccess && self.isSearching.value) {
+							if let index = self.gifCollection.value.indexOf(responseGif!) {
+								self.gifCollection.value[index].thumbnailImage = responseGif!.thumbnailImage
+								cell.imageView.image = self.gifCollection.value[index].thumbnailImage
+							}
+						} else {
+							cell.imageView.image = UIImage(named: "Placeholder.png")
+							cell.userInteractionEnabled = false
+						}
+						})
+				}
+			}
+		}
+		return cell
+	}
+
 	
 
 }
