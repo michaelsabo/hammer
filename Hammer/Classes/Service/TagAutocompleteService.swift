@@ -7,28 +7,29 @@
 //
 
 import ReactiveCocoa
+import Alamofire
+import SwiftyJSON
 
 class TagAutocompleteService {
 
-	var tagResponse: TagsResponse?
 	
-	init() {
-
+	func getEndpointForTags() -> String {
+		return "http://localhost:9292/api/tags"
 	}
 	
 	func tagSignalProducer() -> SignalProducer<TagsResponse, NSError> {
-		return SignalProducer {
-			sink, _ in
-			dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) { [unowned self] in
-				TagWrapper.getAllTagsResponse( { (tags, isSuccess, error) in
-					if (isSuccess) {
-						if (tags != nil) {
-							self.tagResponse = tags!
-							sendCompleted(sink)
-						}
+		return SignalProducer {	sink, _ in
+			Alamofire.request(.GET, getEndpointForTags())
+				.responseJSON { response in
+					if (response.result.isSuccess) {
+						let tags = TagsResponse(json: JSON(response.result.value!))
+						sendNext(sink, tags)
+						sendCompleted(sink)
+					} else {
+
 					}
-				})
 			}
+			
 		}
 	}
 	

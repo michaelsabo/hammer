@@ -17,7 +17,12 @@ enum GifFields: String {
 }
 
 class GifResponse {
-	var gifs: [Gif]?
+	var gifs: [Gif]
+	
+	init(gifsJSON: JSON) {
+		var count = 0
+		gifs = gifsJSON["gifs"].arrayValue.map { Gif(json: $0, index: count++) }
+	}
 }
 
 class Gif: NSObject {

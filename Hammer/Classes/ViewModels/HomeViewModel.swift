@@ -9,10 +9,9 @@
 import UIKit
 import ReactiveCocoa
 
-class SearchTagViewModel {
+class HomeViewModel {
 
 	let searchText = MutableProperty<String>("")
-	let isValidSearch = MutableProperty<Bool>(false)
 	let isSearching = MutableProperty<Bool>(false)
 	
 	let foundTags = MutableProperty<[Tag]>([Tag]())
@@ -34,37 +33,46 @@ class SearchTagViewModel {
 				},
 				next: {
 					response in
-					print(response)
-					if (response.count > 0) {
-						self.gifCollection.value = response
+					if (response.gifs.count > 0) {
+						self.gifCollection.value = response.gifs
 					} else {
 						print("SHITTTTT")
 						self.gifCollection.value = [Gif]()
 					}
 			}))
 		
-
-
-		isValidSearch <~ searchText.producer.map { $0.characters.count > 1 }
-
+		tagService.tagSignalProducer()
+			.observeOn(QueueScheduler.mainQueueScheduler).start(Event.sink(error: {
+				print("Error \($0)")
+				}, next: {
+					response in
+					if (response.tags.count > 0) {
+						self.allTags.value = response.tags
+					}
+				}))
 	}
 
 	
 	lazy var searchingTagsSignal: SignalProducer<[Tag], NoError> = {
 		return self.searchText.producer
+			.filter { $0.characters.count > 1 }
 			.map { (value: String) -> [Tag] in
 				var matches = [Tag]()
 				self.foundTags.value = [Tag]()
-				if (self.isValidSearch.value) {
 					self.isSearching.value = true
 					for tag in self.allTags.value as [Tag] {
 						if ((tag.text.lowercaseString.rangeOfString(value.lowercaseString)) != nil) {
 							self.foundTags.value.append(tag)
 						}
-					}
 				}
 				return matches
 		}
+	}()
+	
+	lazy var collectionUpdated: SignalProducer<[Gif], NoError> = {
+		return self.gifCollection.producer
+				.map { return $0 }
+		
 	}()
 	
 	
@@ -72,6 +80,7 @@ class SearchTagViewModel {
 		let property = MutableProperty(false)
 		property <~ self.searchText.producer
 			.map {
+				print(!(($0.characters.count > 1) && self.isSearching.value))
 				return !(($0.characters.count > 1) && self.isSearching.value)
 		}
 		return PropertyOf(property)

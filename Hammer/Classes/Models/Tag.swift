@@ -31,7 +31,7 @@ class TagsResponse {
 	var tags: [Tag]
 	
 	init (json: JSON) {
-		tags = [Tag]()
+		tags = json["tags"].arrayValue.map { Tag(json: $0) }
 	}
 }
 

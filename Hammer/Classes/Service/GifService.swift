@@ -21,23 +21,14 @@ class GifService {
 		return "http://localhost:9292/api/gifs?q=" + query
 	}
 	
-	func getGifsResponse(path: String) -> SignalProducer<[Gif], NSError> {
-								print("IN THE SERVICE")
-		return SignalProducer{ observer, disposable in
+	func getGifsResponse(path: String) -> SignalProducer<GifResponse, NSError> {
+		return SignalProducer{ sink, _ in
 				Alamofire.request(.GET, path)
 					.responseJSON { response in
-						let json = JSON(response.result.value!)
-						var allGifs:Array = Array<Gif>()
-						let results = json["gifs"] as JSON
-						var count = 0
-						for jsonGif in results.arrayValue {
-							let gif = Gif(json:jsonGif, index: count)
-							allGifs.append(gif)
-							count++
-						}
-						print("MAKES REQUEST AND GETS RESPONSE")
+						let gifs = GifResponse(gifsJSON: JSON(response.result.value!))
 						if (response.result.isSuccess) {
-							sendNext(observer, allGifs)
+							sendNext(sink, gifs)
+							sendCompleted(sink)
 						} else {
 
 						}
