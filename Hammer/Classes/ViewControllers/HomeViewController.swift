@@ -102,7 +102,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		transition.endProgress = 1.0
 		transition.type = kCATransitionMoveIn
 		transition.subtype = kCATransitionFromLeft
-		transition.duration = 0.3
+		transition.duration = 0.15
 		cell.layer.addAnimation(transition, forKey: kCATransitionReveal)
 	}
 	

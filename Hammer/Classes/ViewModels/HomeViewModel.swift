@@ -78,9 +78,8 @@ class HomeViewModel {
 		let property = MutableProperty(false)
 		property <~ self.searchText.producer
 			.map {
-				print(!(($0.characters.count > 1) && self.isSearching.value))
 				return !(($0.characters.count > 1) && self.isSearching.value)
-		}
+			}
 		return PropertyOf(property)
 	}()
 	

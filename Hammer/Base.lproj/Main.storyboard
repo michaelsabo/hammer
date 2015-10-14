@@ -97,23 +97,17 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wyw-bv-fWF">
                                 <rect key="frame" x="0.0" y="35" width="600" height="397"/>
                             </imageView>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i3W-XO-P0K">
-                                <rect key="frame" x="0.0" y="431" width="600" height="30"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wyw-bv-fWF" firstAttribute="leading" secondItem="Zfr-b8-4VC" secondAttribute="leading" id="4MQ-Hl-Jd5"/>
                             <constraint firstAttribute="trailing" secondItem="wyw-bv-fWF" secondAttribute="trailing" id="AsM-0x-fZc"/>
-                            <constraint firstItem="i3W-XO-P0K" firstAttribute="top" secondItem="wyw-bv-fWF" secondAttribute="bottom" constant="-1" id="GLz-rA-Vpd"/>
                             <constraint firstItem="wyw-bv-fWF" firstAttribute="top" secondItem="Cqe-wO-FJx" secondAttribute="bottom" constant="15" id="efq-lZ-EDG"/>
                             <constraint firstItem="wyw-bv-fWF" firstAttribute="centerX" secondItem="Zfr-b8-4VC" secondAttribute="centerX" id="frh-kW-OAs"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="wyw-bv-fWF" id="48S-Va-Zk1"/>
-                        <outlet property="tagsViewContainer" destination="i3W-XO-P0K" id="hPZ-Or-bcn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Q8-G1-UBx" userLabel="First Responder" sceneMemberID="firstResponder"/>
