@@ -52,9 +52,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		tagSearch.translatesAutoresizingMaskIntoConstraints = false
 		viewCollection.translatesAutoresizingMaskIntoConstraints = false
 		view.addSubview(autocompleteTableView)
-		let viewDictionary: [String:AnyObject] = ["searchField": tagSearch, "tableView":autocompleteTableView, "collectionView": viewCollection]
-		self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-80-[searchField(40)]-5-[collectionView]", options: [], metrics: nil, views: viewDictionary))
-		
 	}
 	
 	// MARK: UICollectionView Data Methods
@@ -160,6 +157,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
 		view.endEditing(true)
 	}
+	
+	// MARK: UI Text Field Delegates
 	
 	func textFieldShouldReturn(textField: UITextField) -> Bool {
 		if (tagSearch.text?.characters.count > 0) {

@@ -74,7 +74,6 @@ class HomeViewModel {
 		
 	}()
 	
-	
 	lazy var tableWillHide: PropertyOf<Bool> = {
 		let property = MutableProperty(false)
 		property <~ self.searchText.producer
