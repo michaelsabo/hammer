@@ -9,6 +9,7 @@
 import UIKit
 import SwiftyJSON
 import ReactiveCocoa
+import ChameleonFramework
 
 class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
 	
@@ -25,6 +26,11 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		self.title = "HOWBOWYOUDOEE"
+		self.view.backgroundColor = UIColor.flatWhiteColorDark()
+		self.viewCollection.backgroundColor = UIColor.flatWhiteColorDark()
+//		self.navigationController?.navigationBar.backgroundColor =
+		self.navigationController?.navigationBar.barTintColor = UIColor.flatTealColor()
 		setupTableView()
 		setupBindings()
 	}
@@ -57,22 +63,22 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	// MARK: UICollectionView Data Methods
 	
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		if (self.homeViewModel.gifCollection.value.count == 0) {
+		if (self.homeViewModel.gifsForDisplay.value.count == 0) {
 			return kCustomRows
 		} else if (self.homeViewModel.isSearching.value) {
-			return self.homeViewModel.gifCollection.value.count
+			return self.homeViewModel.gifsForDisplay.value.count
 		} else {
-			return self.homeViewModel.gifCollection.value.count
+			return self.homeViewModel.gifsForDisplay.value.count
 		}
 	}
 	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		var cell = collectionView.dequeueReusableCellWithReuseIdentifier("ImageCell", forIndexPath: indexPath) as! ImageCell
 		cell.userInteractionEnabled = true
-		if (self.homeViewModel.isSearching.value && indexPath.item < self.homeViewModel.gifCollection.value.count) {
+		if (self.homeViewModel.isSearching.value && indexPath.item < self.homeViewModel.gifsForDisplay.value.count) {
 			cell = self.homeViewModel.displayCellForGifs(indexPath: indexPath, cell: cell)
 			return cell
-		} else if (!self.homeViewModel.isSearching.value && indexPath.item < self.homeViewModel.gifCollection.value.count) {
+		} else if (!self.homeViewModel.isSearching.value && indexPath.item < self.homeViewModel.gifsForDisplay.value.count) {
 			cell = self.homeViewModel.displayCellForGifs(indexPath: indexPath, cell: cell)
 			return cell
 		} else {
@@ -87,9 +93,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		let detailController = storyboard?.instantiateViewControllerWithIdentifier("DisplayViewController") as? DisplayViewController
 		if let detailController = detailController {
 			if (self.homeViewModel.isSearching.value) {
-				detailController.gif = self.homeViewModel.gifCollection.value[indexPath.item]
+				detailController.gif = self.homeViewModel.gifsForDisplay.value[indexPath.item]
 			} else {
-				detailController.gif = self.homeViewModel.gifCollection.value[indexPath.item]
+				detailController.gif = self.homeViewModel.gifsForDisplay.value[indexPath.item]
 			}
 			navigationController?.pushViewController(detailController, animated: true)
 		}
@@ -162,9 +168,10 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	func textFieldShouldReturn(textField: UITextField) -> Bool {
 		if (tagSearch.text?.characters.count > 0) {
-			self.homeViewModel.isSearching.value = false
-			autocompleteTableView.hidden = true
+			self.homeViewModel.isSearching.value = true
+			self.homeViewModel.getGifsForTagSearch()
 			view.endEditing(true)
+			autocompleteTableView.hidden = true
 		}
 		return true
 	}

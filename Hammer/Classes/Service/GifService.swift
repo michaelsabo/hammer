@@ -13,27 +13,49 @@ import SwiftyJSON
 
 class GifService {
 
-	class func endpointForGifs() -> String {
-		return "http://localhost:9292/api/gifs"
+	func endpointForGifs() -> String {
+//		return "http://localhost:9292/api/gifs"
+				return "http://ham-flyingdinos.rhcloud.com/api/gifs"
 	}
 	
-	class func endpointForGifsFromTag(query: String) -> String{
-		return "http://localhost:9292/api/gifs?q=" + query
+	func endpointForGifsFromTag(query: String) -> String{
+//		return "http://localhost:9292/api/gifs?q=" + query
+		return "http://ham-flyingdinos.rhcloud.com/api/gifs?q=" + query
 	}
 	
-	func getGifsResponse(path: String) -> SignalProducer<GifResponse, NSError> {
+	func getGifsResponse() -> SignalProducer<GifResponse, NSError> {
 		return SignalProducer{ sink, _ in
-				Alamofire.request(.GET, path)
+				Alamofire.request(.GET, endpointForGifs())
 					.responseJSON { response in
-						let gifs = GifResponse(gifsJSON: JSON(response.result.value!))
-						if (response.result.isSuccess) {
-							sendNext(sink, gifs)
-							sendCompleted(sink)
+						if let json = response.result.value {
+							let gifs = GifResponse(gifsJSON: JSON(json))
+							if (response.result.isSuccess) {
+								sendNext(sink, gifs)
+								sendCompleted(sink)
+							}
 						} else {
 
 						}
 						
 				}
+		}
+	}
+	
+	func getGifsForTagSearchResponse(query: String) -> SignalProducer<GifResponse, NSError> {
+		return SignalProducer{ sink, _ in
+			Alamofire.request(.GET, endpointForGifsFromTag(query))
+				.responseJSON { response in
+					if let json = response.result.value {
+						let gifs = GifResponse(gifsJSON: JSON(json))
+						if (response.result.isSuccess) {
+							sendNext(sink, gifs)
+							sendCompleted(sink)
+						}
+					} else {
+						
+					}
+					
+			}
 		}
 	}
 	

@@ -99,6 +99,17 @@ class Gif: NSObject {
 		}
 	}
 	
+	class func getAnimatedGifDataForUrl(url: String, completionHandler: (NSData?, Bool, NSError?) -> Void) {
+		if let url = NSURL(string: url) {
+			if let imageData = NSData(contentsOfURL: url) {
+				completionHandler(imageData, true, nil)
+			} else {
+				completionHandler(nil, false, nil)
+			}
+			
+		}
+	}
+	
 	class func getGifsForTagQuery(tagQuery: String, completionHandler: ([Gif]?, Bool, NSError?) -> Void) {
 		Alamofire.request(.GET, endpointForGifsFromTag(tagQuery))
 			.responseJSON { response in

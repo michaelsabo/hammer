@@ -14,7 +14,7 @@ class TagAutocompleteService {
 
 	
 	func getEndpointForTags() -> String {
-		return "http://localhost:9292/api/tags"
+		return "http://ham-flyingdinos.rhcloud.com/api/tags"
 	}
 	
 	func tagSignalProducer() -> SignalProducer<TagsResponse, NSError> {

@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import MobileCoreServices
 
 class DisplayViewController: UIViewController {
 
 		@IBOutlet weak var imageView: UIImageView!
 		var gifImage: UIImage?
 	  var gif: Gif?
+		var gifData: NSData?
 		var pasteBoard: UIPasteboard?
 		var tags: [Tag]?
 	
@@ -29,6 +31,7 @@ class DisplayViewController: UIViewController {
 	
 	
 		func displayGif(image: UIImage) {
+			if (gif != nil) {
 			dispatch_async(dispatch_get_main_queue()) { [unowned self] in
 
 				self.gifImage = image
@@ -41,16 +44,19 @@ class DisplayViewController: UIViewController {
 //				let viewsDictionary = ["imageView": self.imageView, "tagView":self.tagsViewContainer]
 				
 //				self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-20-[imageView]-0-[tagView]", options: [], metrics: nil, views: viewsDictionary))
+				}
 			}
 		}
 	
 		func getGifImage() {
 			if let gifData = gif {
 				dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
-					Gif.getAnimatedGifForUrl(gifData.url, completionHandler: { [unowned self] (image, isSuccess, error) in
+					Gif.getAnimatedGifDataForUrl(gifData.url, completionHandler: { [unowned self] (imageData, isSuccess, error) in
 						if (isSuccess) {
-							self.displayGif(image!)
+							self.gifData = imageData!
+							self.displayGif(UIImage.animatedImageWithAnimatedGIFData(imageData!))
 						}
+						
 					})
 				}
 			}
@@ -68,48 +74,57 @@ class DisplayViewController: UIViewController {
 		}
 	
 	func addTagsToLabels() {
-		dispatch_async(dispatch_get_main_queue()) { [unowned self] in
-			var labelDictionary:[String: AnyObject] = ["imageView": self.imageView]
-			var labelArray = [String]()
-			var count = 0
-			
+		if let tagsList = tags {
+			dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+				var labelDictionary:[String: AnyObject] = ["imageView": self.imageView]
+				var labelArray = [String]()
+				var count = 0
 
-			for tag in self.tags!  {
-				let label = PaddedTagLabel()
-				label.text = tag.text
-				label.translatesAutoresizingMaskIntoConstraints = false
-				label.backgroundColor = UIColor.grayColor()
-				label.frame.size = CGSize(width: 40, height: 20)
-				self.view.addSubview(label)
-				labelArray.append("label\(count)")
-				let labelName = "label\(count)"
-				labelDictionary[labelName] = label
-				let constraintBottom = NSLayoutConstraint.init(item: label, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Bottom, multiplier: 1, constant: 0)
-				self.view.addConstraint(constraintBottom)
-				count++
-			}
-			var labelHorizontalLayout = ""
-			for label in labelArray {
-				labelHorizontalLayout += "-5-[" + label + "]"
-			}
-			if (labelArray.count > 0) {
-				self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|\(labelHorizontalLayout)->=5-|", options: [], metrics: nil, views: labelDictionary))
+						for tag in tagsList  {
+							let label = PaddedTagLabel()
+							label.text = tag.text
+							label.translatesAutoresizingMaskIntoConstraints = false
+							label.backgroundColor = UIColor.grayColor()
+							label.frame.size = CGSize(width: 40, height: 20)
+							label.numberOfLines = 0
+							self.view.addSubview(label)
+							labelArray.append("label\(count)")
+							let labelName = "label\(count)"
+							labelDictionary[labelName] = label
+							let constraint = NSLayoutConstraint.init(item: label, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Bottom, multiplier: 1, constant: 0)
+							self.view.addConstraint(constraint)
+							count++
+						}
+						var labelHorizontalLayout = "-5-"
+						for label in labelArray {
+							labelHorizontalLayout += "["  + label +  "]-"
+						}
+						if (labelArray.count > 0) {
+							self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|\(labelHorizontalLayout)>=5-|", options: [], metrics: nil, views: labelDictionary))
+						}
 			}
 		}
 	}
 	
 		func copyImageToClipboard() {
 			var pasteboard: UIPasteboard?
-			if gifImage != nil {
-			 pasteboard = UIPasteboard.init(name: "HammerGid", create: true)
+			if gifData != nil {
+			 pasteboard = UIPasteboard.generalPasteboard()
 				pasteboard!.persistent = true
-				pasteboard!.image = gifImage!;
+				pasteboard!.setData(gifData!, forPasteboardType: kUTTypeGIF as String)
 			} else {
 				print("nothing to copy")
 			}
 		}
-	
+
+	override func viewWillDisappear(animated: Bool) {
+		super.viewWillDisappear(animated)
+		self.gif = nil
+		self.tags = nil
+	}
+
 	deinit {
+		print("deiniting")
 		gifImage = nil
 		gif = nil
 		tags = nil

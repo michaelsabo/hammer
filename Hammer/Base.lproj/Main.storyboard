@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ZSi-Fz-VuA">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Home View Controller-->
@@ -16,37 +18,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search here" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="2cH-5I-T7E">
-                                <rect key="frame" x="200" y="90" width="200" height="70"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search here" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="2cH-5I-T7E">
+                                <rect key="frame" x="50" y="84" width="500" height="21"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardAppearance="alert" returnKeyType="go"/>
                             </textField>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hmC-f0-Rbq">
-                                <rect key="frame" x="0.0" y="176" width="600" height="424"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hmC-f0-Rbq">
+                                <rect key="frame" x="0.0" y="115" width="600" height="485"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2yu-N4-9mk">
-                                    <size key="itemSize" width="140" height="180"/>
+                                    <size key="itemSize" width="130" height="140"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
+                                    <inset key="sectionInset" minX="20" minY="10" maxX="20" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCell" id="6jc-sd-481" customClass="ImageCell" customModule="Hammer" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="10" width="140" height="180"/>
+                                        <rect key="frame" x="20" y="10" width="130" height="140"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="140" height="180"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="130" height="140"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lyu-6I-AcT">
-                                                    <rect key="frame" x="10" y="10" width="120" height="130"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lyu-6I-AcT">
+                                                    <rect key="frame" x="5" y="5" width="120" height="130"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="Lyu-6I-AcT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6jc-sd-481" secondAttribute="leading" constant="10" id="4KQ-py-zG5"/>
+                                            <constraint firstItem="Lyu-6I-AcT" firstAttribute="bottom" secondItem="6jc-sd-481" secondAttribute="bottomMargin" constant="3" id="34v-Ji-S5X"/>
+                                            <constraint firstItem="Lyu-6I-AcT" firstAttribute="leading" secondItem="6jc-sd-481" secondAttribute="leading" constant="5" id="4KQ-py-zG5"/>
                                             <constraint firstItem="Lyu-6I-AcT" firstAttribute="top" secondItem="6jc-sd-481" secondAttribute="top" constant="5" id="g9f-AH-SOX"/>
                                             <constraint firstAttribute="trailing" secondItem="Lyu-6I-AcT" secondAttribute="trailing" constant="5" id="kK2-6c-9nW"/>
                                         </constraints>
@@ -67,7 +70,7 @@
                             <constraint firstItem="hmC-f0-Rbq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="6Q8-C0-15Y"/>
                             <constraint firstItem="2cH-5I-T7E" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="50" id="ODq-r4-z9U"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="hmC-f0-Rbq" secondAttribute="bottom" id="QH1-gW-9CZ"/>
-                            <constraint firstItem="hmC-f0-Rbq" firstAttribute="top" secondItem="2cH-5I-T7E" secondAttribute="bottom" constant="16" id="XAG-qL-gAP"/>
+                            <constraint firstItem="hmC-f0-Rbq" firstAttribute="top" secondItem="2cH-5I-T7E" secondAttribute="bottom" constant="10" id="XAG-qL-gAP"/>
                             <constraint firstAttribute="trailing" secondItem="hmC-f0-Rbq" secondAttribute="trailing" id="i7J-Dc-PHj"/>
                             <constraint firstAttribute="trailing" secondItem="2cH-5I-T7E" secondAttribute="trailing" constant="50" id="jQd-Po-tEG"/>
                         </constraints>
@@ -94,8 +97,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wyw-bv-fWF">
-                                <rect key="frame" x="0.0" y="35" width="600" height="397"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wyw-bv-fWF">
+                                <rect key="frame" x="0.0" y="35" width="600" height="400"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -104,6 +107,7 @@
                             <constraint firstAttribute="trailing" secondItem="wyw-bv-fWF" secondAttribute="trailing" id="AsM-0x-fZc"/>
                             <constraint firstItem="wyw-bv-fWF" firstAttribute="top" secondItem="Cqe-wO-FJx" secondAttribute="bottom" constant="15" id="efq-lZ-EDG"/>
                             <constraint firstItem="wyw-bv-fWF" firstAttribute="centerX" secondItem="Zfr-b8-4VC" secondAttribute="centerX" id="frh-kW-OAs"/>
+                            <constraint firstItem="NNo-EI-Mkw" firstAttribute="top" secondItem="wyw-bv-fWF" secondAttribute="bottom" constant="165" id="zHJ-aJ-Lh1"/>
                         </constraints>
                     </view>
                     <connections>
