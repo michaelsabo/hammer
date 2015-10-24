@@ -17,6 +17,10 @@ class TagService {
 		return Request.forEndpoint("tags")
 	}
 	
+	func getEndpointForImageTags(id : String) -> String {
+		return Request.forEndpoint("gifs/\(id)/tags")
+	}
+	
 	func getAllTags() -> SignalProducer<TagsResponse, NSError> {
 		return SignalProducer {	sink, _ in
 			Alamofire.request(.GET, getEndpointForTags())
@@ -35,7 +39,7 @@ class TagService {
 	
 	func getTagsForGifId(id: String) -> SignalProducer<TagsResponse, NSError> {
 		return SignalProducer { sink, _ in
-			Alamofire.request(.GET, TagWrapper.getEndpointForImageTags(id))
+			Alamofire.request(.GET, getEndpointForImageTags(id))
 				.responseJSON { response in
 					if (response.result.isSuccess) {
 						let tags = TagsResponse(json: JSON(response.result.value!))
