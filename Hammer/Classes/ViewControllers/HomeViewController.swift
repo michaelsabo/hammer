@@ -29,8 +29,10 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		self.title = "HOWBOWYOUDOEE"
 		self.view.backgroundColor = UIColor.flatWhiteColorDark()
 		self.viewCollection.backgroundColor = UIColor.flatWhiteColorDark()
-//		self.navigationController?.navigationBar.backgroundColor =
 		self.navigationController?.navigationBar.barTintColor = UIColor.flatTealColor()
+			self.navigationController?.navigationBar.tintColor = UIColor.flatWhiteColor()
+		let textAttributes = [NSForegroundColorAttributeName:UIColor.flatWhiteColor()]
+		self.navigationController?.navigationBar.titleTextAttributes = textAttributes
 		setupTableView()
 		setupBindings()
 	}
@@ -111,6 +113,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		transition.duration = 0.15
 		cell.layer.addAnimation(transition, forKey: kCATransitionReveal)
 	}
+	
 	
 	// MARK: UITableView Data Methods
 	

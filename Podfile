@@ -7,4 +7,5 @@ target 'Hammer' do
 	pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
 	pod 'ChameleonFramework/Swift'
 	pod 'TLYShyNavBar'
+	pod 'NVActivityIndicatorView'
 end

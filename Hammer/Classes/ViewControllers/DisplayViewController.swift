@@ -8,6 +8,7 @@
 
 import UIKit
 import MobileCoreServices
+import ChameleonFramework
 
 class DisplayViewController: UIViewController {
 
@@ -23,6 +24,9 @@ class DisplayViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 				navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: "copyImageToClipboard")
+			self.view.backgroundColor = UIColor.flatWhiteColorDark()
+			self.navigationController?.navigationBar.barTintColor = UIColor.flatTealColor()
+			self.navigationController?.navigationBar.tintColor = UIColor.flatWhiteColor()
 				if (gif != nil) {
 					getGifImage()
 					getTagsForImage()
@@ -39,11 +43,6 @@ class DisplayViewController: UIViewController {
 				self.imageView.contentMode = UIViewContentMode.ScaleAspectFit
 				self.imageView.translatesAutoresizingMaskIntoConstraints = false
 				self.imageView.clipsToBounds = true
-//				let imageDictionary:[String: AnyObject] = ["imageView": self.imageView]
-//				self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[imageView]|", options: [], metrics: nil, views: imageDictionary))
-//				let viewsDictionary = ["imageView": self.imageView, "tagView":self.tagsViewContainer]
-				
-//				self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-20-[imageView]-0-[tagView]", options: [], metrics: nil, views: viewsDictionary))
 				}
 			}
 		}
@@ -124,7 +123,6 @@ class DisplayViewController: UIViewController {
 	}
 
 	deinit {
-		print("deiniting")
 		gifImage = nil
 		gif = nil
 		tags = nil
