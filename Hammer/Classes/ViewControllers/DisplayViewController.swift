@@ -9,6 +9,7 @@
 import UIKit
 import MobileCoreServices
 import ChameleonFramework
+import NVActivityIndicatorView
 
 class DisplayViewController: UIViewController {
 
@@ -22,12 +23,17 @@ class DisplayViewController: UIViewController {
 		@IBOutlet weak var tagsViewContainer: UIView!
 	
     override func viewDidLoad() {
-        super.viewDidLoad()
-				navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: "copyImageToClipboard")
+      super.viewDidLoad()
+			navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: "copyImageToClipboard")
 			self.view.backgroundColor = UIColor.flatWhiteColorDark()
 			self.navigationController?.navigationBar.barTintColor = UIColor.flatTealColor()
 			self.navigationController?.navigationBar.tintColor = UIColor.flatWhiteColor()
-				if (gif != nil) {
+			let loadingFrame = CGRectMake((self.view.frame.size.width/2.0)-25, (self.imageView.frame.size.height/2)-20, 50.0, 40.0)
+			let loadingView = NVActivityIndicatorView(frame: loadingFrame, type: .LineScalePulseOut, color: UIColor.flatTealColor())
+			loadingView.tag = 100
+			self.view.addSubview(loadingView)
+			loadingView.startAnimation()
+			if (gif != nil) {
 					getGifImage()
 					getTagsForImage()
 			}
@@ -37,7 +43,9 @@ class DisplayViewController: UIViewController {
 		func displayGif(image: UIImage) {
 			if (gif != nil) {
 			dispatch_async(dispatch_get_main_queue()) { [unowned self] in
-
+				let loader = self.view.viewWithTag(100) as? NVActivityIndicatorView
+				loader?.stopAnimation()
+				loader?.removeFromSuperview()
 				self.gifImage = image
 				self.imageView.image = image
 				self.imageView.contentMode = UIViewContentMode.ScaleAspectFit

@@ -38,11 +38,11 @@ class TagsResponse {
 class TagWrapper : NSObject {
 	
 	class func getEndpointForImageTags(id : String) -> String {
-		return "http://ham-flyingdinos.rhcloud.com/api/gifs/\(id)/tags"
+		return Request.forEndpoint("gifs/\(id)/tags")
 	}
 	
 	class func getEndpointForTags() -> String {
-		return "http://ham-flyingdinos.rhcloud.com/api/tags"
+		return Request.forEndpoint("tags")
 	}
 	
 	class func getTagsForImageId(id: String, completionHandler: ([Tag]?, Bool, NSError?) -> Void) {

@@ -10,12 +10,14 @@ import UIKit
 import SwiftyJSON
 import ReactiveCocoa
 import ChameleonFramework
+import NVActivityIndicatorView
 
-class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
+class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UICollectionViewDelegateFlowLayout {
 	
 	@IBOutlet weak var viewCollection: UICollectionView!
 	@IBOutlet weak var tagSearch: UITextField!
 	var autocompleteTableView: UITableView = UITableView()
+
 	
 	let kCustomRows = 8
 	let kImageCell = "ImageCell"
@@ -26,14 +28,14 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		self.title = "HOWBOWYOUDOEE"
+		self.title = "JIFME"
 		self.view.backgroundColor = UIColor.flatWhiteColorDark()
 		self.viewCollection.backgroundColor = UIColor.flatWhiteColorDark()
 		self.navigationController?.navigationBar.barTintColor = UIColor.flatTealColor()
 			self.navigationController?.navigationBar.tintColor = UIColor.flatWhiteColor()
 		let textAttributes = [NSForegroundColorAttributeName:UIColor.flatWhiteColor()]
 		self.navigationController?.navigationBar.titleTextAttributes = textAttributes
-		setupTableView()
+		setupViews()
 		setupBindings()
 	}
 	
@@ -50,12 +52,20 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		})
 	}
 	
-	func setupTableView() {
+	func setupViews() {
 		let frame = CGRectMake(0, 120, view.frame.width, 200)
 		autocompleteTableView = UITableView.init(frame: frame, style: UITableViewStyle.Plain)
 		autocompleteTableView.translatesAutoresizingMaskIntoConstraints = false
 		autocompleteTableView.delegate = self
 		autocompleteTableView.dataSource = self
+		if (UIScreen().applicationFrame.width > 400) {
+			self.viewCollection.collectionViewLayout = LargeCollectionViewLayout.init()
+		} else if (UIScreen().applicationFrame.width > 350) {
+			self.viewCollection.collectionViewLayout = MediumCollectionViewLayout.init()
+		} else {
+			self.viewCollection.collectionViewLayout = SmallCollectionViewLayout.init()
+		}
+		
 		autocompleteTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "AutocompleteResultCell")
 		tagSearch.translatesAutoresizingMaskIntoConstraints = false
 		viewCollection.translatesAutoresizingMaskIntoConstraints = false
@@ -84,7 +94,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 			cell = self.homeViewModel.displayCellForGifs(indexPath: indexPath, cell: cell)
 			return cell
 		} else {
-			cell.imageView.image = UIImage(named: "Placeholder.png")
 			cell.userInteractionEnabled = false
 		}
 		return cell

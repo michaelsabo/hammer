@@ -14,13 +14,11 @@ import SwiftyJSON
 class GifService {
 
 	func endpointForGifs() -> String {
-//		return "http://localhost:9292/api/gifs"
-				return "http://ham-flyingdinos.rhcloud.com/api/gifs"
+			return Request.forEndpoint("gifs")
 	}
 	
 	func endpointForGifsFromTag(query: String) -> String{
-//		return "http://localhost:9292/api/gifs?q=" + query
-		return "http://ham-flyingdinos.rhcloud.com/api/gifs?q=" + query
+		return Request.forEndpoint("gifs?q=\(query)")
 	}
 	
 	func getGifsResponse() -> SignalProducer<GifResponse, NSError> {

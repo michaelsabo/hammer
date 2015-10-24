@@ -113,6 +113,7 @@ class HomeViewModel {
 			} else {
 				dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
 					Gif.getThumbnailImageForGif(gif, completionHandler: { [unowned self] (responseGif, isSuccess, error) in
+						cell.imageView.layer.cornerRadius = 10.0
 						if (isSuccess && !self.isSearching.value) {
 							if let index = self.gifsForDisplay.value.indexOf(responseGif!) {
 								self.gifsForDisplay.value[index].thumbnailImage = responseGif!.thumbnailImage
@@ -126,8 +127,6 @@ class HomeViewModel {
 										cell.imageView.layer.cornerRadius = 10.0
 							}
 						} else {
-							cell.imageView.image = UIImage(named: "Placeholder.png")
-							cell.imageView.layer.cornerRadius = 10.0
 							cell.userInteractionEnabled = false
 						}
 						})

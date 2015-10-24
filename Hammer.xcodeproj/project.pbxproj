@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2711AE3D1BDB2AFB000C47B2 /* CollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711AE3C1BDB2AFB000C47B2 /* CollectionViewLayout.swift */; settings = {ASSET_TAGS = (); }; };
+		2711AE3E1BDB2AFB000C47B2 /* CollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711AE3C1BDB2AFB000C47B2 /* CollectionViewLayout.swift */; settings = {ASSET_TAGS = (); }; };
 		27197E181BC239DC00525F33 /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 27197E171BC239DC00525F33 /* UIImage+animatedGIF.m */; settings = {ASSET_TAGS = (); }; };
 		2719DA291BCC7B6A00BD02AD /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2719DA281BCC7B6A00BD02AD /* HomeViewModel.swift */; settings = {ASSET_TAGS = (); }; };
 		2719DA2A1BCC7B6A00BD02AD /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2719DA281BCC7B6A00BD02AD /* HomeViewModel.swift */; settings = {ASSET_TAGS = (); }; };
@@ -30,8 +32,8 @@
 		278983C01BC6234C004C1FAA /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278983BE1BC6234C004C1FAA /* Tag.swift */; settings = {ASSET_TAGS = (); }; };
 		278CA0171BCDA9CE000904D7 /* GifService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278CA0161BCDA9CE000904D7 /* GifService.swift */; settings = {ASSET_TAGS = (); }; };
 		278CA0181BCDA9CE000904D7 /* GifService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278CA0161BCDA9CE000904D7 /* GifService.swift */; settings = {ASSET_TAGS = (); }; };
-		278CA01E1BCDB09E000904D7 /* ServiceErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278CA01D1BCDB09E000904D7 /* ServiceErrors.swift */; settings = {ASSET_TAGS = (); }; };
-		278CA01F1BCDB09E000904D7 /* ServiceErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278CA01D1BCDB09E000904D7 /* ServiceErrors.swift */; settings = {ASSET_TAGS = (); }; };
+		278CA01E1BCDB09E000904D7 /* ServiceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278CA01D1BCDB09E000904D7 /* ServiceConfig.swift */; settings = {ASSET_TAGS = (); }; };
+		278CA01F1BCDB09E000904D7 /* ServiceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278CA01D1BCDB09E000904D7 /* ServiceConfig.swift */; settings = {ASSET_TAGS = (); }; };
 		27BAA1A91BCCC97900EAE554 /* RAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BAA1A81BCCC97900EAE554 /* RAC.swift */; settings = {ASSET_TAGS = (); }; };
 		27BAA1AA1BCCC97900EAE554 /* RAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BAA1A81BCCC97900EAE554 /* RAC.swift */; settings = {ASSET_TAGS = (); }; };
 		27C75CAE1BC21CC0008AC322 /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C75CAD1BC21CC0008AC322 /* Gif.swift */; settings = {ASSET_TAGS = (); }; };
@@ -69,6 +71,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2711AE3C1BDB2AFB000C47B2 /* CollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewLayout.swift; sourceTree = "<group>"; };
 		27197E151BC239DC00525F33 /* Hammer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hammer-Bridging-Header.h"; sourceTree = "<group>"; };
 		27197E161BC239DC00525F33 /* UIImage+animatedGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+animatedGIF.h"; sourceTree = "<group>"; };
 		27197E171BC239DC00525F33 /* UIImage+animatedGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+animatedGIF.m"; sourceTree = "<group>"; };
@@ -96,7 +99,7 @@
 		276C7FFD1BC2116F0028DC0D /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		278983BE1BC6234C004C1FAA /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		278CA0161BCDA9CE000904D7 /* GifService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifService.swift; sourceTree = "<group>"; };
-		278CA01D1BCDB09E000904D7 /* ServiceErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceErrors.swift; sourceTree = "<group>"; };
+		278CA01D1BCDB09E000904D7 /* ServiceConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceConfig.swift; sourceTree = "<group>"; };
 		27BAA1A81BCCC97900EAE554 /* RAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAC.swift; sourceTree = "<group>"; };
 		27C75CAD1BC21CC0008AC322 /* Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
 		27C75CAF1BC22E1B008AC322 /* DisplayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayViewController.swift; sourceTree = "<group>"; };
@@ -276,6 +279,7 @@
 		27BAA1AC1BCCCBCC00EAE554 /* TableViews */ = {
 			isa = PBXGroup;
 			children = (
+				2711AE3C1BDB2AFB000C47B2 /* CollectionViewLayout.swift */,
 			);
 			path = TableViews;
 			sourceTree = "<group>";
@@ -292,7 +296,7 @@
 			children = (
 				2719DA2B1BCC7F3A00BD02AD /* TagAutocompleteService.swift */,
 				278CA0161BCDA9CE000904D7 /* GifService.swift */,
-				278CA01D1BCDB09E000904D7 /* ServiceErrors.swift */,
+				278CA01D1BCDB09E000904D7 /* ServiceConfig.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -518,7 +522,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				278983BF1BC6234C004C1FAA /* Tag.swift in Sources */,
-				278CA01E1BCDB09E000904D7 /* ServiceErrors.swift in Sources */,
+				278CA01E1BCDB09E000904D7 /* ServiceConfig.swift in Sources */,
 				27197E181BC239DC00525F33 /* UIImage+animatedGIF.m in Sources */,
 				278CA0171BCDA9CE000904D7 /* GifService.swift in Sources */,
 				27C75CB01BC22E1B008AC322 /* DisplayViewController.swift in Sources */,
@@ -527,6 +531,7 @@
 				27BAA1A91BCCC97900EAE554 /* RAC.swift in Sources */,
 				2719DA2C1BCC7F3A00BD02AD /* TagAutocompleteService.swift in Sources */,
 				276C7FB31BC204EE0028DC0D /* AppDelegate.swift in Sources */,
+				2711AE3D1BDB2AFB000C47B2 /* CollectionViewLayout.swift in Sources */,
 				276C7FF91BC2097A0028DC0D /* HomeViewController.swift in Sources */,
 				2719DA301BCC848500BD02AD /* UIKitExtensions.swift in Sources */,
 				27C75CAE1BC21CC0008AC322 /* Gif.swift in Sources */,
@@ -543,8 +548,9 @@
 				276C7FCB1BC204EE0028DC0D /* HammerTests.swift in Sources */,
 				276C7FFA1BC2097A0028DC0D /* HomeViewController.swift in Sources */,
 				2719DA2D1BCC7F3A00BD02AD /* TagAutocompleteService.swift in Sources */,
+				2711AE3E1BDB2AFB000C47B2 /* CollectionViewLayout.swift in Sources */,
 				2719DA311BCC848500BD02AD /* UIKitExtensions.swift in Sources */,
-				278CA01F1BCDB09E000904D7 /* ServiceErrors.swift in Sources */,
+				278CA01F1BCDB09E000904D7 /* ServiceConfig.swift in Sources */,
 				278CA0181BCDA9CE000904D7 /* GifService.swift in Sources */,
 				276C7FFF1BC2116F0028DC0D /* ImageCell.swift in Sources */,
 			);
