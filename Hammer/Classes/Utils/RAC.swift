@@ -139,6 +139,11 @@ public func <~ <E>(rac: RAC, producer: SignalProducer<Bool, E>) -> RACDisposable
 	return rac.assignSignal(signal)
 }
 
+public func <~ <E>(rac: RAC, producer: SignalProducer<UIImage, E>) -> RACDisposable {
+	let signal = toRACSignal(producer.map({ $0 as AnyObject? }))
+	return rac.assignSignal(signal)
+}
+
 public func <~ (rac: RAC, signal: RACSignal) -> RACDisposable {
 	return signal ~> rac
 }
@@ -150,3 +155,5 @@ public func ~> (signal: RACSignal, rac: RAC) -> RACDisposable {
 func RACObserve(target: NSObject!, keyPath: String) -> RACSignal  {
 	return target.rac_valuesForKeyPath(keyPath, observer: target)
 }
+
+

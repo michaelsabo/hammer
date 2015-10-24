@@ -10,14 +10,14 @@ import ReactiveCocoa
 import Alamofire
 import SwiftyJSON
 
-class TagAutocompleteService {
+class TagService {
 
 	
 	func getEndpointForTags() -> String {
 		return Request.forEndpoint("tags")
 	}
 	
-	func tagSignalProducer() -> SignalProducer<TagsResponse, NSError> {
+	func getAllTags() -> SignalProducer<TagsResponse, NSError> {
 		return SignalProducer {	sink, _ in
 			Alamofire.request(.GET, getEndpointForTags())
 				.responseJSON { response in
@@ -33,6 +33,19 @@ class TagAutocompleteService {
 		}
 	}
 	
+	func getTagsForGifId(id: String) -> SignalProducer<TagsResponse, NSError> {
+		return SignalProducer { sink, _ in
+			Alamofire.request(.GET, TagWrapper.getEndpointForImageTags(id))
+				.responseJSON { response in
+					if (response.result.isSuccess) {
+						let tags = TagsResponse(json: JSON(response.result.value!))
+						sendNext(sink, tags)
+						sendCompleted(sink)
+					} else {
 
+					}
+			}
+		}
+	}
 	
 }

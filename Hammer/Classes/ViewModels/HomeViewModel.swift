@@ -10,7 +10,7 @@ import UIKit
 import ReactiveCocoa
 
 class HomeViewModel {
-
+	
 	let searchText = MutableProperty<String>("")
 	let isSearching = MutableProperty<Bool>(false)
 	
@@ -20,10 +20,10 @@ class HomeViewModel {
 	var gifCollection = MutableProperty<[Gif]>([Gif]())
 	var gifsForDisplay = MutableProperty<[Gif]>([Gif]())
 	
-	private let tagService: TagAutocompleteService
+	private let tagService: TagService
 	private let gifService: GifService
 	
-	init(searchTagService: TagAutocompleteService, gifRetrieveService: GifService) {
+	init(searchTagService: TagService, gifRetrieveService: GifService) {
 		self.tagService = searchTagService
 		self.gifService = gifRetrieveService
 		
@@ -39,7 +39,7 @@ class HomeViewModel {
 					} 
 			}))
 		
-		tagService.tagSignalProducer()
+		tagService.getAllTags()
 			.observeOn(QueueScheduler.mainQueueScheduler).start(Event.sink(error: {
 				print("Error \($0)")
 				}, next: {
@@ -47,13 +47,13 @@ class HomeViewModel {
 					if (response.tags.count > 0) {
 						self.allTags.value = response.tags
 					}
-				}))
+			}))
 		
 		isSearching.producer
 			.start( {
-					if ($0.value == false) {
-						self.gifsForDisplay.value = self.gifCollection.value
-					}
+				if ($0.value == false) {
+					self.gifsForDisplay.value = self.gifCollection.value
+				}
 			})
 	}
 	
@@ -63,44 +63,44 @@ class HomeViewModel {
 			.map { (value: String) -> [Tag] in
 				var matches = [Tag]()
 				self.foundTags.value = [Tag]()
-					self.isSearching.value = true
-					for tag in self.allTags.value as [Tag] {
-						if ((tag.text.lowercaseString.rangeOfString(value.lowercaseString)) != nil) {
-							self.foundTags.value.append(tag)
-						}
+				self.isSearching.value = true
+				for tag in self.allTags.value as [Tag] {
+					if ((tag.text.lowercaseString.rangeOfString(value.lowercaseString)) != nil) {
+						self.foundTags.value.append(tag)
+					}
 				}
 				return matches
 		}
-	}()
+		}()
 	
 	lazy var collectionUpdated: SignalProducer<[Gif], NoError> = {
 		return self.gifsForDisplay.producer
-				.map { return $0 }
+			.map { return $0 }
 		
-	}()
+		}()
 	
 	lazy var tableWillHide: PropertyOf<Bool> = {
 		let property = MutableProperty(false)
 		property <~ self.searchText.producer
 			.map {
 				return !(($0.characters.count > 1) && self.isSearching.value)
-			}
+		}
 		return PropertyOf(property)
-	}()
+		}()
 	
 	func getGifsForTagSearch() -> Void {
-			gifService.getGifsForTagSearchResponse(self.searchText.value)
-				.observeOn(QueueScheduler.mainQueueScheduler).start(Event.sink(error: {
-					print("Error \($0)")
-					},
-					next: {
-						response in
-						if (response.gifs.count > 0) {
-							self.gifsForDisplay.value = response.gifs
-						} else {
-							self.gifsForDisplay.value = [Gif]()
-						}
-				}))
+		gifService.getGifsForTagSearchResponse(self.searchText.value)
+			.observeOn(QueueScheduler.mainQueueScheduler).start(Event.sink(error: {
+				print("Error \($0)")
+				},
+				next: {
+					response in
+					if (response.gifs.count > 0) {
+						self.gifsForDisplay.value = response.gifs
+					} else {
+						self.gifsForDisplay.value = [Gif]()
+					}
+			}))
 	}
 	
 	func displayCellForGifs(indexPath indexPath: NSIndexPath, cell: ImageCell) -> ImageCell {
@@ -118,13 +118,13 @@ class HomeViewModel {
 							if let index = self.gifsForDisplay.value.indexOf(responseGif!) {
 								self.gifsForDisplay.value[index].thumbnailImage = responseGif!.thumbnailImage
 								cell.imageView.image = self.gifsForDisplay.value[index].thumbnailImage
-										cell.imageView.layer.cornerRadius = 10.0
+								cell.imageView.layer.cornerRadius = 10.0
 							}
 						} else if (isSuccess && self.isSearching.value) {
 							if let index = self.gifsForDisplay.value.indexOf(responseGif!) {
 								self.gifsForDisplay.value[index].thumbnailImage = responseGif!.thumbnailImage
 								cell.imageView.image = self.gifsForDisplay.value[index].thumbnailImage
-										cell.imageView.layer.cornerRadius = 10.0
+								cell.imageView.layer.cornerRadius = 10.0
 							}
 						} else {
 							cell.userInteractionEnabled = false
@@ -133,11 +133,11 @@ class HomeViewModel {
 				}
 			}
 		}
-
+		
 		return cell
 	}
-
 	
-
+	
+	
 }
 

@@ -18,61 +18,40 @@ enum GifFields: String {
 
 class GifResponse {
 	var gifs: [Gif]
-	
+	var response: ServiceResponse
 	init(gifsJSON: JSON) {
 		var count = 0
+		response = ServiceResponse.Success
 		gifs = gifsJSON["gifs"].arrayValue.map { Gif(json: $0, index: count++) }
 	}
 }
 
-class Gif: NSObject {
+class Gif: Equatable {
 	
 	var id: String
 	var url: String
 	var thumbnailUrl: String
-	var thumbnailImage: UIImage!
-	var gifImage: UIImage!
+	var thumbnailImage: UIImage?
+	var gifImage: UIImage?
 	var index: Int!
+	var gifData: NSData?
+	var thumbnailData: NSData?
 	
-	required init(json: JSON, index: Int) {
+	init() {
+		id = ""
+		url = ""
+		thumbnailUrl = ""
+		index = 0
+	}
+	
+	convenience init(json: JSON, index: Int) {
+		self.init()
 		self.id =  json[GifFields.ImgurId.rawValue].stringValue
 		self.url = json[GifFields.ImgurUrl.rawValue].stringValue
 		self.thumbnailUrl = json[GifFields.ImgurThumbnailUrl.rawValue].stringValue
 		self.index = index
 	}
-	
-	class func endpointForGifs() -> String {
-		return "http://localhost:9292/api/gifs"
-	}
-	
-	class func endpointForGifsFromTag(query: String) -> String{
-		return "http://localhost:9292/api/gifs?q=" + query
-	}
-	
-	class func getGifs(completionHander: ([Gif]?, Bool, NSError?) -> Void) {
-		getGifsAtPath(endpointForGifs(), completionHandler: completionHander)
-	}
-	
-	private class func getGifsAtPath(path: String, completionHandler: ([Gif]?, Bool, NSError?) -> Void) {
-		Alamofire.request(.GET, path)
-			.responseJSON { response in
-				if (response.result.isSuccess) {
-					let json = JSON(response.result.value!)
-					var allGifs:Array = Array<Gif>()
-					let results = json["gifs"] as JSON
-					var count = 0
-					for jsonGif in results.arrayValue {
-						let gif = Gif(json:jsonGif, index: count)
-						allGifs.append(gif)
-						count++
-					}
-					completionHandler(allGifs, response.result.isSuccess, nil)
-					return
-				}
-				completionHandler([Gif](), response.result.isSuccess, response.result.error)
-		}
-	}
-	
+
 	class func getThumbnailImageForGif(gif: Gif, completionHandler: (Gif?, Bool, NSError?) -> Void) {
 		Alamofire.request(.GET, gif.thumbnailUrl)
 			.responseData { response in
@@ -88,59 +67,8 @@ class Gif: NSObject {
 		}
 	}
 	
-	class func getAnimatedGifForUrl(url: String, completionHandler: (UIImage?, Bool, NSError?) -> Void) {
-		if let url = NSURL(string: url) {
-			if let image = UIImage.animatedImageWithAnimatedGIFURL(url) {
-					completionHandler(image, true, nil)
-			} else {
-				completionHandler(nil, false, nil)
-			}
-		
-		}
-	}
-	
-	class func getAnimatedGifDataForUrl(url: String, completionHandler: (NSData?, Bool, NSError?) -> Void) {
-		if let url = NSURL(string: url) {
-			if let imageData = NSData(contentsOfURL: url) {
-				completionHandler(imageData, true, nil)
-			} else {
-				completionHandler(nil, false, nil)
-			}
-			
-		}
-	}
-	
-	class func getGifsForTagQuery(tagQuery: String, completionHandler: ([Gif]?, Bool, NSError?) -> Void) {
-		Alamofire.request(.GET, endpointForGifsFromTag(tagQuery))
-			.responseJSON { response in
-				if (response.result.isSuccess) {
-					let json = JSON(response.result.value!)
-					var allGifs:Array = Array<Gif>()
-					let results = json["gifs"] as JSON
-					var count = 0
-					for jsonGif in results.arrayValue {
-						let gif = Gif(json:jsonGif, index: count)
-						allGifs.append(gif)
-						count++
-					}
-					completionHandler(allGifs, response.result.isSuccess, nil)
-					return
-				}
-				completionHandler([Gif](), response.result.isSuccess, response.result.error)
-			}
-				
-		}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+}
+
+func ==(lhs: Gif, rhs: Gif) -> Bool {
+	return lhs.id == rhs.id
 }

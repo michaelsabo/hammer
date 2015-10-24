@@ -21,107 +21,85 @@ class DisplayViewController: UIViewController {
 		var tags: [Tag]?
 	
 		@IBOutlet weak var tagsViewContainer: UIView!
+		weak var loadingView: NVActivityIndicatorView!
+		var displayGifViewModel: DisplayViewModel!
 	
+		required init?(coder aDecoder: NSCoder) {
+			super.init(coder: aDecoder)
+		}
+
     override func viewDidLoad() {
       super.viewDidLoad()
+			setupView()
+			bindViewModel()
+		}
+	
+		func setupView() {
 			navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: "copyImageToClipboard")
 			self.view.backgroundColor = UIColor.flatWhiteColorDark()
 			self.navigationController?.navigationBar.barTintColor = UIColor.flatTealColor()
 			self.navigationController?.navigationBar.tintColor = UIColor.flatWhiteColor()
 			let loadingFrame = CGRectMake((self.view.frame.size.width/2.0)-25, (self.imageView.frame.size.height/2)-20, 50.0, 40.0)
 			let loadingView = NVActivityIndicatorView(frame: loadingFrame, type: .LineScalePulseOut, color: UIColor.flatTealColor())
-			loadingView.tag = 100
+			loadingView.tag = kLoadingAnimationTag
 			self.view.addSubview(loadingView)
 			loadingView.startAnimation()
-			if (gif != nil) {
-					getGifImage()
-					getTagsForImage()
-			}
 		}
 	
-	
-		func displayGif(image: UIImage) {
-			if (gif != nil) {
-			dispatch_async(dispatch_get_main_queue()) { [unowned self] in
-				let loader = self.view.viewWithTag(100) as? NVActivityIndicatorView
-				loader?.stopAnimation()
-				loader?.removeFromSuperview()
-				self.gifImage = image
-				self.imageView.image = image
-				self.imageView.contentMode = UIViewContentMode.ScaleAspectFit
-				self.imageView.translatesAutoresizingMaskIntoConstraints = false
-				self.imageView.clipsToBounds = true
-				}
-			}
-		}
-	
-		func getGifImage() {
-			if let gifData = gif {
-				dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
-					Gif.getAnimatedGifDataForUrl(gifData.url, completionHandler: { [unowned self] (imageData, isSuccess, error) in
-						if (isSuccess) {
-							self.gifData = imageData!
-							self.displayGif(UIImage.animatedImageWithAnimatedGIFData(imageData!))
-						}
-						
-					})
-				}
-			}
-		}
-	
-		func getTagsForImage() {
-			dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), {
-				TagWrapper.getTagsForImageId((self.gif?.id)!, completionHandler: { [unowned self] (tags, isSuccess, error) in
-					if (isSuccess) {
-						self.tags = tags
-						self.addTagsToLabels()
+		func bindViewModel() {
+			self.displayGifViewModel.imageReturned.producer
+				.start({ s in
+					if (self.displayGifViewModel.searchComplete.value == true) {
+								let animation = self.view.viewWithTag(kLoadingAnimationTag) as? NVActivityIndicatorView
+								animation?.stopAnimation()
+								animation?.removeFromSuperview()
 					}
-				})
+					self.imageView.image = self.displayGifViewModel.gif.value.gifImage
+			})
+			
+			self.displayGifViewModel.tagsUpdated.producer.start({ s in
+				if (self.displayGifViewModel.tags.value.count > 0) {
+					self.addTagsToLabels()
+				}
 			})
 		}
 	
 	func addTagsToLabels() {
-		if let tagsList = tags {
-			dispatch_async(dispatch_get_main_queue()) { [unowned self] in
-				var labelDictionary:[String: AnyObject] = ["imageView": self.imageView]
-				var labelArray = [String]()
-				var count = 0
+			var labelDictionary:[String: AnyObject] = ["imageView": self.imageView]
+			var labelArray = [String]()
+			var count = 0
 
-						for tag in tagsList  {
-							let label = PaddedTagLabel()
-							label.text = tag.text
-							label.translatesAutoresizingMaskIntoConstraints = false
-							label.backgroundColor = UIColor.grayColor()
-							label.frame.size = CGSize(width: 40, height: 20)
-							label.numberOfLines = 0
-							self.view.addSubview(label)
-							labelArray.append("label\(count)")
-							let labelName = "label\(count)"
-							labelDictionary[labelName] = label
-							let constraint = NSLayoutConstraint.init(item: label, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Bottom, multiplier: 1, constant: 0)
-							self.view.addConstraint(constraint)
-							count++
-						}
-						var labelHorizontalLayout = "-5-"
-						for label in labelArray {
-							labelHorizontalLayout += "["  + label +  "]-"
-						}
-						if (labelArray.count > 0) {
-							self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|\(labelHorizontalLayout)>=5-|", options: [], metrics: nil, views: labelDictionary))
-						}
+			for tag in self.displayGifViewModel.tags.value  {
+				let label = PaddedTagLabel()
+				label.text = tag.text
+				label.translatesAutoresizingMaskIntoConstraints = false
+				label.backgroundColor = UIColor.grayColor()
+				label.frame.size = CGSize(width: 40, height: 20)
+				label.numberOfLines = 0
+				self.view.addSubview(label)
+				labelArray.append("label\(count)")
+				let labelName = "label\(count)"
+				labelDictionary[labelName] = label
+				let constraint = NSLayoutConstraint.init(item: label, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Bottom, multiplier: 1, constant: 0)
+				self.view.addConstraint(constraint)
+				count++
 			}
-		}
+			var labelHorizontalLayout = "-5-"
+			for label in labelArray {
+				labelHorizontalLayout += "["  + label +  "]-"
+			}
+			if (labelArray.count > 0) {
+				self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|\(labelHorizontalLayout)>=5-|", options: [], metrics: nil, views: labelDictionary))
+			}
 	}
 	
 		func copyImageToClipboard() {
-			var pasteboard: UIPasteboard?
-			if gifData != nil {
-			 pasteboard = UIPasteboard.generalPasteboard()
-				pasteboard!.persistent = true
-				pasteboard!.setData(gifData!, forPasteboardType: kUTTypeGIF as String)
-			} else {
-				print("nothing to copy")
+			let pasteboard = UIPasteboard.generalPasteboard()
+			pasteboard.persistent = true
+			if let copiedGif = self.displayGifViewModel.gif.value.gifData {
+				pasteboard.setData(copiedGif, forPasteboardType: kUTTypeGIF as String)
 			}
+
 		}
 
 	override func viewWillDisappear(animated: Bool) {

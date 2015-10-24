@@ -20,6 +20,7 @@ class GifService {
 	func endpointForGifsFromTag(query: String) -> String{
 		return Request.forEndpoint("gifs?q=\(query)")
 	}
+
 	
 	func getGifsResponse() -> SignalProducer<GifResponse, NSError> {
 		return SignalProducer{ sink, _ in
@@ -56,5 +57,41 @@ class GifService {
 			}
 		}
 	}
+	
+	func retrieveThumbnailimageFor(gif gif: Gif) -> SignalProducer<Gif, NSError> {
+		return SignalProducer { sink, _ in
+			Alamofire.request(.GET, gif.thumbnailUrl)
+				.responseData { response in
+					if (response.result.isSuccess) {
+						if let data = response.result.value {
+							gif.thumbnailImage = UIImage(data: data)
+							sendNext(sink, gif)
+							sendCompleted(sink)
+						}
+					} else {
+						
+					}
+			}
+		}
+	}
+	
+	func retrieveImageDataFor(gif gif: Gif) -> SignalProducer<Gif, NSError> {
+		return SignalProducer { sink, _ in
+			Alamofire.request(.GET, gif.url)
+				.responseData { response in
+					if (response.result.isSuccess) {
+						if let data = response.result.value {
+							gif.gifData = data
+							gif.gifImage = UIImage.animatedImageWithAnimatedGIFData(data)
+							sendNext(sink, gif)
+							sendCompleted(sink)
+						}
+					} else {
+						
+					}
+			}
+		}
+	}
+	
 	
 }

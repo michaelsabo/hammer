@@ -23,7 +23,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	let kImageCell = "ImageCell"
 	
 	var homeViewModel: HomeViewModel = {
-		return HomeViewModel(searchTagService: TagAutocompleteService(), gifRetrieveService: GifService())
+		return HomeViewModel(searchTagService: TagService(), gifRetrieveService: GifService())
 	}()
 	
 	override func viewDidLoad() {
@@ -101,15 +101,10 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 		
-		let detailController = storyboard?.instantiateViewControllerWithIdentifier("DisplayViewController") as? DisplayViewController
-		if let detailController = detailController {
-			if (self.homeViewModel.isSearching.value) {
-				detailController.gif = self.homeViewModel.gifsForDisplay.value[indexPath.item]
-			} else {
-				detailController.gif = self.homeViewModel.gifsForDisplay.value[indexPath.item]
-			}
-			navigationController?.pushViewController(detailController, animated: true)
-		}
+		let displayViewController = storyboard?.instantiateViewControllerWithIdentifier("DisplayViewController") as! DisplayViewController
+		let gif = self.homeViewModel.gifsForDisplay.value[indexPath.item]
+		displayViewController.displayGifViewModel = DisplayViewModel(gifService: GifService(), tagService: TagService(), gif: gif)
+		navigationController?.pushViewController(displayViewController, animated: true)
 	}
 	
 	func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
