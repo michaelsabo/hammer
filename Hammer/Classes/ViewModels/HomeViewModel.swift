@@ -28,26 +28,23 @@ class HomeViewModel {
 		self.gifService = gifRetrieveService
 		
 		gifService.getGifsResponse()
-			.observeOn(QueueScheduler.mainQueueScheduler).start(Event.sink(error: {
-				print("Error \($0)")
-				},
-				next: {
-					response in
+			.on(next: {
+				response in
 					if (response.gifs.count > 0) {
 						self.gifCollection.value = response.gifs
 						self.gifsForDisplay.value = response.gifs
-					} 
-			}))
+					}
+				})
+				.start()
 		
 		tagService.getAllTags()
-			.observeOn(QueueScheduler.mainQueueScheduler).start(Event.sink(error: {
-				print("Error \($0)")
-				}, next: {
-					response in
+			.on(next: {
+				response in
 					if (response.tags.count > 0) {
 						self.allTags.value = response.tags
 					}
-			}))
+			})
+			.start()
 		
 		isSearching.producer
 			.start( {
@@ -79,28 +76,25 @@ class HomeViewModel {
 		
 		}()
 	
-	lazy var tableWillHide: PropertyOf<Bool> = {
+	lazy var tableWillHide: AnyProperty<Bool> = {
 		let property = MutableProperty(false)
 		property <~ self.searchText.producer
 			.map {
 				return !(($0.characters.count > 1) && self.isSearching.value)
 		}
-		return PropertyOf(property)
+		return AnyProperty(property)
 		}()
 	
 	func getGifsForTagSearch() -> Void {
 		gifService.getGifsForTagSearchResponse(self.searchText.value)
-			.observeOn(QueueScheduler.mainQueueScheduler).start(Event.sink(error: {
-				print("Error \($0)")
-				},
-				next: {
+			.on(next: {
 					response in
 					if (response.gifs.count > 0) {
 						self.gifsForDisplay.value = response.gifs
 					} else {
 						self.gifsForDisplay.value = [Gif]()
 					}
-			}))
+			}).start()
 	}
 	
 	func displayCellForGifs(indexPath indexPath: NSIndexPath, cell: ImageCell) -> ImageCell {

@@ -21,7 +21,6 @@ class DisplayViewController: UIViewController {
 		var tags: [Tag]?
 	
 		@IBOutlet weak var tagsViewContainer: UIView!
-		weak var loadingView: NVActivityIndicatorView!
 		var displayGifViewModel: DisplayViewModel!
 	
 		required init?(coder aDecoder: NSCoder) {
@@ -48,7 +47,7 @@ class DisplayViewController: UIViewController {
 	
 		func bindViewModel() {
 			self.displayGifViewModel.imageReturned.producer
-				.start({ s in
+				.start({ _ in
 					if (self.displayGifViewModel.searchComplete.value == true) {
 								let animation = self.view.viewWithTag(kLoadingAnimationTag) as? NVActivityIndicatorView
 								animation?.stopAnimation()
@@ -57,7 +56,7 @@ class DisplayViewController: UIViewController {
 					self.imageView.image = self.displayGifViewModel.gif.value.gifImage
 			})
 			
-			self.displayGifViewModel.tagsUpdated.producer.start({ s in
+			self.displayGifViewModel.tagsUpdated.producer.start({ _ in
 				if (self.displayGifViewModel.tags.value.count > 0) {
 					self.addTagsToLabels()
 				}
@@ -73,14 +72,14 @@ class DisplayViewController: UIViewController {
 				let label = PaddedTagLabel()
 				label.text = tag.text
 				label.translatesAutoresizingMaskIntoConstraints = false
-				label.backgroundColor = UIColor.grayColor()
-				label.frame.size = CGSize(width: 40, height: 20)
+				label.backgroundColor = UIColor.flatTealColor()
 				label.numberOfLines = 0
 				self.view.addSubview(label)
+				label.setNeedsLayout()
 				labelArray.append("label\(count)")
 				let labelName = "label\(count)"
 				labelDictionary[labelName] = label
-				let constraint = NSLayoutConstraint.init(item: label, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Bottom, multiplier: 1, constant: 0)
+				let constraint = NSLayoutConstraint.init(item: label, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Bottom, multiplier: 1, constant: 5)
 				self.view.addConstraint(constraint)
 				count++
 			}
@@ -106,12 +105,13 @@ class DisplayViewController: UIViewController {
 		super.viewWillDisappear(animated)
 		self.gif = nil
 		self.tags = nil
+		self.imageView = nil
+		self.displayGifViewModel = nil
+		
 	}
 
 	deinit {
-		gifImage = nil
-		gif = nil
-		tags = nil
+		print("deiniting")
 	}
 }
 

@@ -22,13 +22,13 @@ class TagService {
 	}
 	
 	func getAllTags() -> SignalProducer<TagsResponse, NSError> {
-		return SignalProducer {	sink, _ in
-			Alamofire.request(.GET, getEndpointForTags())
+		return SignalProducer { [unowned self]	sink, _ in
+			Alamofire.request(.GET, self.getEndpointForTags())
 				.responseJSON { response in
 					if (response.result.isSuccess) {
 						let tags = TagsResponse(json: JSON(response.result.value!))
-						sendNext(sink, tags)
-						sendCompleted(sink)
+						sink.sendNext(tags)
+						sink.sendCompleted()
 					} else {
 
 					}
@@ -38,13 +38,13 @@ class TagService {
 	}
 	
 	func getTagsForGifId(id: String) -> SignalProducer<TagsResponse, NSError> {
-		return SignalProducer { sink, _ in
-			Alamofire.request(.GET, getEndpointForImageTags(id))
+		return SignalProducer { [unowned self] sink, _ in
+			Alamofire.request(.GET, self.getEndpointForImageTags(id))
 				.responseJSON { response in
 					if (response.result.isSuccess) {
 						let tags = TagsResponse(json: JSON(response.result.value!))
-						sendNext(sink, tags)
-						sendCompleted(sink)
+						sink.sendNext(tags)
+						sink.sendCompleted()
 					} else {
 
 					}

@@ -23,14 +23,14 @@ class GifService {
 
 	
 	func getGifsResponse() -> SignalProducer<GifResponse, NSError> {
-		return SignalProducer{ sink, _ in
-				Alamofire.request(.GET, endpointForGifs())
+		return SignalProducer{ [unowned self]sink, _ in
+				Alamofire.request(.GET, self.endpointForGifs())
 					.responseJSON { response in
 						if let json = response.result.value {
 							let gifs = GifResponse(gifsJSON: JSON(json))
 							if (response.result.isSuccess) {
-								sendNext(sink, gifs)
-								sendCompleted(sink)
+								sink.sendNext(gifs)
+								sink.sendCompleted()
 							}
 						} else {
 
@@ -41,14 +41,14 @@ class GifService {
 	}
 	
 	func getGifsForTagSearchResponse(query: String) -> SignalProducer<GifResponse, NSError> {
-		return SignalProducer{ sink, _ in
-			Alamofire.request(.GET, endpointForGifsFromTag(query))
+		return SignalProducer{ [unowned self] sink, _ in
+			Alamofire.request(.GET, self.endpointForGifsFromTag(query))
 				.responseJSON { response in
 					if let json = response.result.value {
 						let gifs = GifResponse(gifsJSON: JSON(json))
 						if (response.result.isSuccess) {
-							sendNext(sink, gifs)
-							sendCompleted(sink)
+							sink.sendNext(gifs)
+							sink.sendCompleted()
 						}
 					} else {
 						
@@ -65,8 +65,8 @@ class GifService {
 					if (response.result.isSuccess) {
 						if let data = response.result.value {
 							gif.thumbnailImage = UIImage(data: data)
-							sendNext(sink, gif)
-							sendCompleted(sink)
+							sink.sendNext(gif)
+							sink.sendCompleted()
 						}
 					} else {
 						
@@ -83,8 +83,8 @@ class GifService {
 						if let data = response.result.value {
 							gif.gifData = data
 							gif.gifImage = UIImage.animatedImageWithAnimatedGIFData(data)
-							sendNext(sink, gif)
-							sendCompleted(sink)
+							sink.sendNext(gif)
+							sink.sendCompleted()
 						}
 					} else {
 						

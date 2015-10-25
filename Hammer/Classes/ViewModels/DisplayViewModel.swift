@@ -27,26 +27,21 @@ class DisplayViewModel : NSObject {
 		super.init()
 		
 		gifService.retrieveImageDataFor(gif: gif)
-			.observeOn(QueueScheduler.mainQueueScheduler).start(Event.sink(error: {
-					print("Error \($0)")
-				},
-				next: {
-					response in
+			.on(next: {
+				response in
 					guard (response.gifData != nil) else {
 						return
 					}
 					self.gif.value = response
-		}))
+		}).start()
 		
 		tagService.getTagsForGifId(gif.id)
-			.observeOn(QueueScheduler.mainQueueScheduler).start(Event.sink(error: {
-				print("Error \($0)")
-				}, next: {
-					response in
+			.on(next: {
+				response in
 					if (response.tags.count > 0) {
 						self.tags.value = response.tags
 					}
-			}))
+			}).start()
 	}
 	
 	lazy var tagsUpdated: SignalProducer<[Tag], NoError> = {
