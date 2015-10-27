@@ -9,7 +9,9 @@
 import UIKit
 
 class ImageCell: UICollectionViewCell {
-		@IBOutlet weak var imageView: UIImageView!
+	@IBOutlet weak var imageView: UIImageView!
+	
+	var hasLoaded = false
 	
 	init(_ coder: NSCoder? = nil) {
 		

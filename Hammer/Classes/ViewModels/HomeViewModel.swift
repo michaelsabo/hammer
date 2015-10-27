@@ -102,8 +102,11 @@ class HomeViewModel {
 			cell.imageView.layer.masksToBounds = true
 			let gif = self.gifsForDisplay.value[indexPath.item]
 			if let image = gif.thumbnailImage {
+				cell.imageView.image = nil
 				cell.imageView.image = image
 				cell.imageView.layer.cornerRadius = 10.0
+				cell.userInteractionEnabled = true
+				return cell
 			} else {
 				dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
 					Gif.getThumbnailImageForGif(gif, completionHandler: { [unowned self] (responseGif, isSuccess, error) in
@@ -113,12 +116,14 @@ class HomeViewModel {
 								self.gifsForDisplay.value[index].thumbnailImage = responseGif!.thumbnailImage
 								cell.imageView.image = self.gifsForDisplay.value[index].thumbnailImage
 								cell.imageView.layer.cornerRadius = 10.0
+								cell.hasLoaded = true
 							}
 						} else if (isSuccess && self.isSearching.value) {
 							if let index = self.gifsForDisplay.value.indexOf(responseGif!) {
 								self.gifsForDisplay.value[index].thumbnailImage = responseGif!.thumbnailImage
 								cell.imageView.image = self.gifsForDisplay.value[index].thumbnailImage
 								cell.imageView.layer.cornerRadius = 10.0
+								cell.hasLoaded = true
 							}
 						} else {
 							cell.userInteractionEnabled = false

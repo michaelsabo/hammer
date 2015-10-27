@@ -77,8 +77,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		if (self.homeViewModel.gifsForDisplay.value.count == 0) {
 			return kCustomRows
-		} else if (self.homeViewModel.isSearching.value) {
-			return self.homeViewModel.gifsForDisplay.value.count
 		} else {
 			return self.homeViewModel.gifsForDisplay.value.count
 		}
@@ -86,16 +84,11 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		var cell = collectionView.dequeueReusableCellWithReuseIdentifier("ImageCell", forIndexPath: indexPath) as! ImageCell
-		cell.userInteractionEnabled = true
-		if (self.homeViewModel.isSearching.value && indexPath.item < self.homeViewModel.gifsForDisplay.value.count) {
-			cell = self.homeViewModel.displayCellForGifs(indexPath: indexPath, cell: cell)
-			return cell
-		} else if (!self.homeViewModel.isSearching.value && indexPath.item < self.homeViewModel.gifsForDisplay.value.count) {
-			cell = self.homeViewModel.displayCellForGifs(indexPath: indexPath, cell: cell)
-			return cell
-		} else {
-			cell.userInteractionEnabled = false
-		}
+		cell.userInteractionEnabled = false
+		cell = self.homeViewModel.displayCellForGifs(indexPath: indexPath, cell: cell)
+		print("cell for item \(indexPath.row)")
+		cell.layer.shouldRasterize = true;
+		cell.layer.rasterizationScale = UIScreen.mainScreen().scale;
 		return cell
 	}
 	
@@ -109,12 +102,13 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
 		let myCell = cell as! ImageCell
-		
+		myCell.layer.removeAllAnimations()
+		myCell.imageView.image = nil
 		if (indexPath.item < self.homeViewModel.gifsForDisplay.value.count && self.homeViewModel.gifsForDisplay.value[indexPath.item].thumbnailImage != nil) {
 			print("in here \(indexPath.row)")
-			myCell.imageView.image = nil
 			myCell.imageView.image = self.homeViewModel.gifsForDisplay.value[indexPath.item].thumbnailImage
-		} else {
+		}
+		if (myCell.hasLoaded == false){
 			var transition:CATransition
 			transition = CATransition()
 			transition.startProgress = 0.7
@@ -126,6 +120,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		}
 	}
 	
+	func scrollViewDidScroll(scrollView: UIScrollView) {
+		view.endEditing(true)
+	}
 	
 	// MARK: UITableView Data Methods
 	
@@ -150,7 +147,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		let cellIdentifier = "AutocompleteResultCell"
 		var cell = autocompleteTableView.dequeueReusableCellWithIdentifier(cellIdentifier) as UITableViewCell!
-		
+		cell.textLabel?.textColor = UIColor.flatWhiteColor()
+		cell.backgroundColor = UIColor.flatMintColor()
 		if (cell == nil) {
 			cell = UITableViewCell.init(style: UITableViewCellStyle.Default, reuseIdentifier: cellIdentifier)
 		}
