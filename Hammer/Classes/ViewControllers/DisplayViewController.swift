@@ -47,16 +47,20 @@ class DisplayViewController: UIViewController {
 	
 		func bindViewModel() {
 			self.displayGifViewModel.imageReturned.producer
-				.start({ _ in
+				.take(1)
+				.startWithNext({ sink in
 					if (self.displayGifViewModel.searchComplete.value == true) {
 								let animation = self.view.viewWithTag(kLoadingAnimationTag) as? NVActivityIndicatorView
 								animation?.stopAnimation()
 								animation?.removeFromSuperview()
+							self.imageView.image = self.displayGifViewModel.gif.value.gifImage
+						
 					}
-					self.imageView.image = self.displayGifViewModel.gif.value.gifImage
 			})
 			
-			self.displayGifViewModel.tagsUpdated.producer.start({ _ in
+			self.displayGifViewModel.tags.producer
+				.take(2)
+				.startWithNext({ _ in
 				if (self.displayGifViewModel.tags.value.count > 0) {
 					self.addTagsToLabels()
 				}
@@ -103,10 +107,6 @@ class DisplayViewController: UIViewController {
 
 	override func viewWillDisappear(animated: Bool) {
 		super.viewWillDisappear(animated)
-		self.gif = nil
-		self.tags = nil
-		self.imageView = nil
-		self.displayGifViewModel = nil
 		
 	}
 

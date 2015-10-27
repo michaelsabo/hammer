@@ -15,6 +15,7 @@ class DisplayViewModel : NSObject {
 	let gif = MutableProperty<Gif>(Gif())
 	let tags = MutableProperty<[Tag]>([Tag]())
 	let searchComplete = MutableProperty(false)
+	let tagComplete = MutableProperty(false)
 	
 	private let gifService: GifService
 	private let tagService: TagService
@@ -27,26 +28,40 @@ class DisplayViewModel : NSObject {
 		super.init()
 		
 		gifService.retrieveImageDataFor(gif: gif)
+			.take(1)
 			.on(next: {
 				response in
 					guard (response.gifData != nil) else {
 						return
 					}
 					self.gif.value = response
-		}).start()
+		}).take(1).start()
 		
 		tagService.getTagsForGifId(gif.id)
+			.take(1)
 			.on(next: {
 				response in
 					if (response.tags.count > 0) {
 						self.tags.value = response.tags
 					}
+				self.tagComplete.value = true
 			}).start()
 	}
 	
-	lazy var tagsUpdated: SignalProducer<[Tag], NoError> = {
-		return self.tags.producer
-			.map { return $0 }
+	lazy var tagsReturned: AnyProperty<Bool> = {
+		let property = MutableProperty(false)
+		
+		property <~ self.tags.producer
+			.filter { (value:[Tag]) in
+				if (self.tagComplete.value == true) {
+					return true
+				}
+				return false
+			}
+			.map { (value:[Tag]) in
+				return true
+		}
+		return AnyProperty(property)
 		
 		}()
 	
@@ -62,6 +77,7 @@ class DisplayViewModel : NSObject {
 			}
 		}()
 	
-	
-	
 }
+	
+	
+	

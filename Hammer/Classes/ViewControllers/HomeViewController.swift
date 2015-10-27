@@ -108,14 +108,22 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-		var transition:CATransition
-		transition = CATransition()
-		transition.startProgress = 0.7
-		transition.endProgress = 1.0
-		transition.type = kCATransitionMoveIn
-		transition.subtype = kCATransitionFromLeft
-		transition.duration = 0.15
-		cell.layer.addAnimation(transition, forKey: kCATransitionReveal)
+		let myCell = cell as! ImageCell
+		
+		if (indexPath.item < self.homeViewModel.gifsForDisplay.value.count && self.homeViewModel.gifsForDisplay.value[indexPath.item].thumbnailImage != nil) {
+			print("in here \(indexPath.row)")
+			myCell.imageView.image = nil
+			myCell.imageView.image = self.homeViewModel.gifsForDisplay.value[indexPath.item].thumbnailImage
+		} else {
+			var transition:CATransition
+			transition = CATransition()
+			transition.startProgress = 0.7
+			transition.endProgress = 1.0
+			transition.type = kCATransitionMoveIn
+			transition.subtype = kCATransitionFromLeft
+			transition.duration = 0.15
+			myCell.layer.addAnimation(transition, forKey: kCATransitionReveal)
+		}
 	}
 	
 	
@@ -191,12 +199,5 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		return true
 	}
 
-
-	// In a storyboard-based application, you will often want to do a little preparation before navigation
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-		// Get the new view controller using segue.destinationViewController.
-		// Pass the selected object to the new view controller.
-	}
-	
 	
 }
