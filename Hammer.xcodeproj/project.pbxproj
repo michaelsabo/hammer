@@ -18,11 +18,22 @@
 		2719DA311BCC848500BD02AD /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2719DA2F1BCC848500BD02AD /* UIKitExtensions.swift */; };
 		273410FF1BC8515400674FC7 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 272957FD1BC843A500D5BFC6 /* ReactiveCocoa.framework */; };
 		273411011BC8515400674FC7 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273411001BC8515400674FC7 /* Result.framework */; };
+		273994131BE54FEF00E4399C /* GifTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273994121BE54FEF00E4399C /* GifTest.swift */; };
+		273994151BE54FFC00E4399C /* TagTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273994141BE54FFC00E4399C /* TagTest.swift */; };
+		273994181BE550E700E4399C /* gifs.json in Resources */ = {isa = PBXBuildFile; fileRef = 273994171BE550E700E4399C /* gifs.json */; };
+		2739941B1BE5521300E4399C /* TestingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2739941A1BE5521300E4399C /* TestingHelper.swift */; };
+		2739941D1BE553B900E4399C /* Pods_Hammer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2739941C1BE553B900E4399C /* Pods_Hammer.framework */; };
+		2739941E1BE553C800E4399C /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 272957FD1BC843A500D5BFC6 /* ReactiveCocoa.framework */; };
+		2739941F1BE553C800E4399C /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273411001BC8515400674FC7 /* Result.framework */; };
+		273994201BE554C600E4399C /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C75CAD1BC21CC0008AC322 /* Gif.swift */; };
+		273994241BE5550D00E4399C /* DisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C75CAF1BC22E1B008AC322 /* DisplayViewController.swift */; };
+		273994261BE555C600E4399C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273994251BE555C600E4399C /* UIKit.framework */; };
+		273994281BE5560900E4399C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273994271BE5560900E4399C /* Foundation.framework */; };
+		273E6CED1BE57A1F00FF55D5 /* tags.json in Resources */ = {isa = PBXBuildFile; fileRef = 273E6CEC1BE57A1F00FF55D5 /* tags.json */; };
 		276C7FB31BC204EE0028DC0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FB21BC204EE0028DC0D /* AppDelegate.swift */; };
 		276C7FB81BC204EE0028DC0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 276C7FB61BC204EE0028DC0D /* Main.storyboard */; };
 		276C7FBD1BC204EE0028DC0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 276C7FBC1BC204EE0028DC0D /* Assets.xcassets */; };
 		276C7FC01BC204EE0028DC0D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 276C7FBE1BC204EE0028DC0D /* LaunchScreen.storyboard */; };
-		276C7FCB1BC204EE0028DC0D /* HammerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FCA1BC204EE0028DC0D /* HammerTests.swift */; };
 		276C7FD61BC204EF0028DC0D /* HammerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FD51BC204EF0028DC0D /* HammerUITests.swift */; };
 		276C7FF91BC2097A0028DC0D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FF81BC2097A0028DC0D /* HomeViewController.swift */; };
 		276C7FFA1BC2097A0028DC0D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FF81BC2097A0028DC0D /* HomeViewController.swift */; };
@@ -87,6 +98,14 @@
 		272957FD1BC843A500D5BFC6 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
 		272958011BC846C000D5BFC6 /* Box.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Box.framework; path = Carthage/Build/iOS/Box.framework; sourceTree = "<group>"; };
 		273411001BC8515400674FC7 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		273994121BE54FEF00E4399C /* GifTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifTest.swift; sourceTree = "<group>"; };
+		273994141BE54FFC00E4399C /* TagTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagTest.swift; sourceTree = "<group>"; };
+		273994171BE550E700E4399C /* gifs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gifs.json; sourceTree = "<group>"; };
+		2739941A1BE5521300E4399C /* TestingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingHelper.swift; sourceTree = "<group>"; };
+		2739941C1BE553B900E4399C /* Pods_Hammer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_Hammer.framework; path = "Pods/../build/Debug-iphoneos/Pods_Hammer.framework"; sourceTree = "<group>"; };
+		273994251BE555C600E4399C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		273994271BE5560900E4399C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		273E6CEC1BE57A1F00FF55D5 /* tags.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tags.json; sourceTree = "<group>"; };
 		276C7FAF1BC204EE0028DC0D /* Hammer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hammer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		276C7FB21BC204EE0028DC0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		276C7FB71BC204EE0028DC0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -94,7 +113,6 @@
 		276C7FBF1BC204EE0028DC0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		276C7FC11BC204EE0028DC0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		276C7FC61BC204EE0028DC0D /* HammerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HammerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		276C7FCA1BC204EE0028DC0D /* HammerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HammerTests.swift; sourceTree = "<group>"; };
 		276C7FCC1BC204EE0028DC0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		276C7FD11BC204EF0028DC0D /* HammerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HammerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		276C7FD51BC204EF0028DC0D /* HammerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HammerUITests.swift; sourceTree = "<group>"; };
@@ -129,6 +147,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				273994281BE5560900E4399C /* Foundation.framework in Frameworks */,
+				273994261BE555C600E4399C /* UIKit.framework in Frameworks */,
+				2739941E1BE553C800E4399C /* ReactiveCocoa.framework in Frameworks */,
+				2739941F1BE553C800E4399C /* Result.framework in Frameworks */,
+				2739941D1BE553B900E4399C /* Pods_Hammer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,6 +194,39 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		273994101BE54FC800E4399C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				273994121BE54FEF00E4399C /* GifTest.swift */,
+				273994141BE54FFC00E4399C /* TagTest.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		273994111BE54FC800E4399C /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		273994161BE550D400E4399C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				273994171BE550E700E4399C /* gifs.json */,
+				273E6CEC1BE57A1F00FF55D5 /* tags.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		273994191BE551FF00E4399C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				2739941A1BE5521300E4399C /* TestingHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		276C7FA61BC204EE0028DC0D = {
 			isa = PBXGroup;
 			children = (
@@ -210,7 +266,10 @@
 		276C7FC91BC204EE0028DC0D /* HammerTests */ = {
 			isa = PBXGroup;
 			children = (
-				276C7FCA1BC204EE0028DC0D /* HammerTests.swift */,
+				273994191BE551FF00E4399C /* Helpers */,
+				273994161BE550D400E4399C /* Resources */,
+				273994101BE54FC800E4399C /* Models */,
+				273994111BE54FC800E4399C /* ViewModels */,
 				276C7FCC1BC204EE0028DC0D /* Info.plist */,
 			);
 			path = HammerTests;
@@ -312,6 +371,9 @@
 		71F7D88780EDD987612499BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				273994271BE5560900E4399C /* Foundation.framework */,
+				273994251BE555C600E4399C /* UIKit.framework */,
+				2739941C1BE553B900E4399C /* Pods_Hammer.framework */,
 				273411001BC8515400674FC7 /* Result.framework */,
 				272958011BC846C000D5BFC6 /* Box.framework */,
 				272957FD1BC843A500D5BFC6 /* ReactiveCocoa.framework */,
@@ -449,6 +511,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				273E6CED1BE57A1F00FF55D5 /* tags.json in Resources */,
+				273994181BE550E700E4399C /* gifs.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -552,18 +616,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				273994241BE5550D00E4399C /* DisplayViewController.swift in Sources */,
 				2719DA2A1BCC7B6A00BD02AD /* HomeViewModel.swift in Sources */,
 				278983C01BC6234C004C1FAA /* Tag.swift in Sources */,
 				27BAA1AA1BCCC97900EAE554 /* RAC.swift in Sources */,
-				276C7FCB1BC204EE0028DC0D /* HammerTests.swift in Sources */,
 				276C7FFA1BC2097A0028DC0D /* HomeViewController.swift in Sources */,
 				2719DA2D1BCC7F3A00BD02AD /* TagService.swift in Sources */,
 				2711AE3E1BDB2AFB000C47B2 /* CollectionViewLayout.swift in Sources */,
 				2783332B1BDBE1FA00F4786E /* DisplayViewModel.swift in Sources */,
 				2719DA311BCC848500BD02AD /* UIKitExtensions.swift in Sources */,
+				273994201BE554C600E4399C /* Gif.swift in Sources */,
 				278CA01F1BCDB09E000904D7 /* ServiceConfig.swift in Sources */,
 				278CA0181BCDA9CE000904D7 /* GifService.swift in Sources */,
 				27D16A451BDC1A55000B75B2 /* LoadingAnimation.swift in Sources */,
+				2739941B1BE5521300E4399C /* TestingHelper.swift in Sources */,
+				273994151BE54FFC00E4399C /* TagTest.swift in Sources */,
+				273994131BE54FEF00E4399C /* GifTest.swift in Sources */,
 				276C7FFF1BC2116F0028DC0D /* ImageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -745,10 +813,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = HammerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.flyingdinos.HammerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Hammer/Classes/Objective-C/Hammer-Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hammer.app/Hammer";
 			};
 			name = Debug;
@@ -757,10 +831,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = HammerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.flyingdinos.HammerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Hammer/Classes/Objective-C/Hammer-Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hammer.app/Hammer";
 			};
 			name = Release;

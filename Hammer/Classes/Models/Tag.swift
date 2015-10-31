@@ -29,8 +29,9 @@ class Tag {
 
 class TagsResponse {
 	var tags: [Tag]
-	
+  var response: ServiceResponse
 	init (json: JSON) {
 		tags = json["tags"].arrayValue.map { Tag(json: $0) }
+    response = ServiceResponse.Success
 	}
 }
