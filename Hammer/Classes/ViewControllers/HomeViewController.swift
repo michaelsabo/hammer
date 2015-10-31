@@ -28,7 +28,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		self.title = "JIFME"
+		self.title = "JifMe"
 		self.view.backgroundColor = UIColor.flatWhiteColorDark()
 		self.viewCollection.backgroundColor = UIColor.flatWhiteColorDark()
 		self.navigationController?.navigationBar.barTintColor = UIColor.flatTealColor()
@@ -43,9 +43,13 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		tagSearch.delegate = self
 		self.homeViewModel.searchText <~ tagSearch.rac_textSignalProducer()
 		RAC(autocompleteTableView, "hidden") <~ self.homeViewModel.tableWillHide.producer
-		self.homeViewModel.collectionUpdated.producer.start({ s in
-			self.viewCollection.reloadData()
+
+		self.homeViewModel.gifsForDisplay.producer.startWithSignal( { signal, disposable in
+			signal.observe({ _ in
+				self.viewCollection.reloadData()
+			})
 		})
+		
 		self.homeViewModel.searchingTagsSignal.producer.start({ s in
 			self.adjustHeightOfTableView()
 			self.autocompleteTableView.reloadData()
@@ -58,9 +62,10 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		autocompleteTableView.translatesAutoresizingMaskIntoConstraints = false
 		autocompleteTableView.delegate = self
 		autocompleteTableView.dataSource = self
-		if (UIScreen().applicationFrame.width > 400) {
+		print("\(UIScreen.mainScreen().bounds.width)")
+		if (UIScreen.mainScreen().bounds.width > 400) {
 			self.viewCollection.collectionViewLayout = LargeCollectionViewLayout.init()
-		} else if (UIScreen().applicationFrame.width > 350) {
+		} else if (UIScreen.mainScreen().bounds.width > 350) {
 			self.viewCollection.collectionViewLayout = MediumCollectionViewLayout.init()
 		} else {
 			self.viewCollection.collectionViewLayout = SmallCollectionViewLayout.init()
@@ -86,7 +91,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		var cell = collectionView.dequeueReusableCellWithReuseIdentifier("ImageCell", forIndexPath: indexPath) as! ImageCell
 		cell.userInteractionEnabled = false
 		cell = self.homeViewModel.displayCellForGifs(indexPath: indexPath, cell: cell)
-		print("cell for item \(indexPath.row)")
+		print("cell for item \(indexPath.item)")
 		cell.layer.shouldRasterize = true;
 		cell.layer.rasterizationScale = UIScreen.mainScreen().scale;
 		return cell
@@ -122,6 +127,11 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	func scrollViewDidScroll(scrollView: UIScrollView) {
 		view.endEditing(true)
+	}
+	
+	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+		let indexpaths = self.viewCollection.indexPathsForVisibleItems()
+		self.viewCollection.reloadItemsAtIndexPaths(indexpaths)
 	}
 	
 	// MARK: UITableView Data Methods
@@ -161,6 +171,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		self.tagSearch.text = self.homeViewModel.foundTags.value[indexPath.row].text
+		self.homeViewModel.searchText.value = self.homeViewModel.foundTags.value[indexPath.row].text
 		autocompleteTableView .deselectRowAtIndexPath(indexPath, animated: true)
 		textFieldShouldReturn(self.tagSearch)
 	}

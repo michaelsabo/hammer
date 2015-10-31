@@ -19,6 +19,7 @@ class DisplayViewController: UIViewController {
 		var gifData: NSData?
 		var pasteBoard: UIPasteboard?
 		var tags: [Tag]?
+		var labelsArray: [UILabel]?
 	
 		@IBOutlet weak var tagsViewContainer: UIView!
 		var displayGifViewModel: DisplayViewModel!
@@ -65,22 +66,27 @@ class DisplayViewController: UIViewController {
 					self.addTagsToLabels()
 				}
 			})
+			
+
 		}
 	
 	func addTagsToLabels() {
 			var labelDictionary:[String: AnyObject] = ["imageView": self.imageView]
 			var labelArray = [String]()
 			var count = 0
-
+			self.labelsArray = [UILabel]()
 			for tag in self.displayGifViewModel.tags.value  {
 				let label = PaddedTagLabel()
 				label.text = tag.text
 				label.translatesAutoresizingMaskIntoConstraints = false
 				label.backgroundColor = UIColor.flatTealColor()
 				label.numberOfLines = 0
+				label.layer.masksToBounds = true
+				label.lineBreakMode = NSLineBreakMode.ByWordWrapping
 				self.view.addSubview(label)
 				label.setNeedsLayout()
 				labelArray.append("label\(count)")
+				self.labelsArray?.append(label)
 				let labelName = "label\(count)"
 				labelDictionary[labelName] = label
 				let constraint = NSLayoutConstraint.init(item: label, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Bottom, multiplier: 1, constant: 5)
@@ -94,20 +100,20 @@ class DisplayViewController: UIViewController {
 			if (labelArray.count > 0) {
 				self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|\(labelHorizontalLayout)>=5-|", options: [], metrics: nil, views: labelDictionary))
 			}
+			self.view.layoutIfNeeded()
 	}
 	
-		func copyImageToClipboard() {
-			let pasteboard = UIPasteboard.generalPasteboard()
-			pasteboard.persistent = true
-			if let copiedGif = self.displayGifViewModel.gif.value.gifData {
-				pasteboard.setData(copiedGif, forPasteboardType: kUTTypeGIF as String)
-			}
-
+	func copyImageToClipboard() {
+		let pasteboard = UIPasteboard.generalPasteboard()
+		pasteboard.persistent = true
+		if let copiedGif = self.displayGifViewModel.gif.value.gifData {
+			pasteboard.setData(copiedGif, forPasteboardType: kUTTypeGIF as String)
 		}
 
-	override func viewWillDisappear(animated: Bool) {
+	}
+	
+		override func viewWillDisappear(animated: Bool) {
 		super.viewWillDisappear(animated)
-		
 	}
 
 	deinit {
@@ -124,6 +130,7 @@ class PaddedTagLabel : UILabel {
 	
 	override func drawTextInRect(rect: CGRect) {
 		let insets = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
+		self.layer.cornerRadius = 5.0
 		self.setNeedsLayout()
 		return super.drawTextInRect(UIEdgeInsetsInsetRect(rect, insets))
 	}

@@ -35,7 +35,7 @@ class DisplayViewModel : NSObject {
 						return
 					}
 					self.gif.value = response
-		}).take(1).start()
+		}).start()
 		
 		tagService.getTagsForGifId(gif.id)
 			.take(1)
@@ -77,6 +77,10 @@ class DisplayViewModel : NSObject {
 			}
 		}()
 	
+	
+	deinit {
+		print("deiniting view model")
+	}
 }
 	
 	

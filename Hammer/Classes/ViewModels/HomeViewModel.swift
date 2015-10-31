@@ -9,7 +9,7 @@
 import UIKit
 import ReactiveCocoa
 
-class HomeViewModel {
+class HomeViewModel : NSObject {
 	
 	let searchText = MutableProperty<String>("")
 	let isSearching = MutableProperty<Bool>(false)
@@ -26,7 +26,7 @@ class HomeViewModel {
 	init(searchTagService: TagService, gifRetrieveService: GifService) {
 		self.tagService = searchTagService
 		self.gifService = gifRetrieveService
-		
+		super.init()
 		gifService.getGifsResponse()
 			.on(next: {
 				response in
@@ -86,7 +86,7 @@ class HomeViewModel {
 		}()
 	
 	func getGifsForTagSearch() -> Void {
-		gifService.getGifsForTagSearchResponse(self.searchText.value)
+		gifService.getGifsForTagSearchResponse(self.searchText.value.replaceSpaces())
 			.on(next: {
 					response in
 					if (response.gifs.count > 0) {
@@ -117,6 +117,7 @@ class HomeViewModel {
 								cell.imageView.image = self.gifsForDisplay.value[index].thumbnailImage
 								cell.imageView.layer.cornerRadius = 10.0
 								cell.hasLoaded = true
+								cell.userInteractionEnabled = true
 							}
 						} else if (isSuccess && self.isSearching.value) {
 							if let index = self.gifsForDisplay.value.indexOf(responseGif!) {
@@ -124,6 +125,7 @@ class HomeViewModel {
 								cell.imageView.image = self.gifsForDisplay.value[index].thumbnailImage
 								cell.imageView.layer.cornerRadius = 10.0
 								cell.hasLoaded = true
+								cell.userInteractionEnabled = true
 							}
 						} else {
 							cell.userInteractionEnabled = false
