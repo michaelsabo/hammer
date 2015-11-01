@@ -17,6 +17,12 @@ class DisplayViewModel : NSObject {
 	let searchComplete = MutableProperty(false)
 	let tagComplete = MutableProperty(false)
 	
+  let gifRequestSignal: Signal<Bool, NoError>
+  let tagRequestSignal: Signal<Bool, NoError>
+  
+  private let gifRequestObserver: Observer<Bool, NoError>
+  private let tagRequestObserver: Observer<Bool, NoError>
+  
 	private let gifService: GifService
 	private let tagService: TagService
 	
@@ -25,30 +31,37 @@ class DisplayViewModel : NSObject {
 		self.gifService = gifService
 		self.tagService = tagService
 		self.gif.value = gif
+    
+    let (gifSignal, gifObserver) = Signal<Bool, NoError>.pipe()
+    self.gifRequestSignal = gifSignal
+    self.gifRequestObserver = gifObserver
+    
+    let (tagSignal, tagObserver) = Signal<Bool, NoError>.pipe()
+    self.tagRequestSignal = tagSignal
+    self.tagRequestObserver = tagObserver
+    
 		super.init()
 		
 		gifService.retrieveImageDataFor(gif: gif)
-			.take(1)
 			.on(next: { [unowned self]
 				response in
 					guard (response.gifData != nil) else {
 						return
 					}
 					self.gif.value = response
-		}).start()
+        }, completed: {
+          self.gifRequestObserver.sendNext(true)
+      }).start()
 		
 		tagService.getTagsForGifId(gif.id)
-			.take(1)
 			.on(next: { [unowned self]
 				response in
 					if (response.tags.count > 0) {
 						self.tags.value = response.tags
 					}
         }, completed: {
-          self.tagComplete.value = true
+          self.tagRequestObserver.sendNext(true)
       }).start()
-    
-    
 	}
 	
 	lazy var imageReturned: SignalProducer<UIImage, NoError> = {

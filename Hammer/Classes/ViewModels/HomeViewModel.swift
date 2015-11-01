@@ -20,15 +20,22 @@ class HomeViewModel : NSObject {
 	var gifCollection = MutableProperty<[Gif]>([Gif]())
 	var gifsForDisplay = MutableProperty<[Gif]>([Gif]())
 	
+  let isSearchingSignal: Signal<Bool, NoError>
+  private let isSearchingObserver: Observer<Bool, NoError>
+  
 	private let tagService: TagService
 	private let gifService: GifService
 	
 	init(searchTagService: TagService, gifRetrieveService: GifService) {
 		self.tagService = searchTagService
 		self.gifService = gifRetrieveService
+    let (searchingSignal, searchingObserver) = Signal<Bool, NoError>.pipe()
+    self.isSearchingSignal = searchingSignal
+    self.isSearchingObserver = searchingObserver
 		super.init()
+
 		gifService.getGifsResponse()
-			.on(next: {
+			.on(next: { [unowned self]
 				response in
 					if (response.gifs.count > 0) {
 						self.gifCollection.value = response.gifs
@@ -38,7 +45,7 @@ class HomeViewModel : NSObject {
 				.start()
 		
 		tagService.getAllTags()
-			.on(next: {
+			.on(next: { [unowned self]
 				response in
 					if (response.tags.count > 0) {
 						self.allTags.value = response.tags
@@ -46,38 +53,33 @@ class HomeViewModel : NSObject {
 			})
 			.start()
 		
-		isSearching.producer
-			.start( {
-				if ($0.value == false) {
-					self.gifsForDisplay.value = self.gifCollection.value
-				}
-			})
+    isSearchingSignal
+      .observeNext({ [unowned self] (searching:Bool) in
+        if (!searching) {
+          self.gifsForDisplay.value = self.gifCollection.value
+        }
+      })
 	}
+  
+  func userEndedSearch() {
+    self.isSearchingObserver.sendNext(false)
+  }
 	
 	lazy var searchingTagsSignal: SignalProducer<[Tag], NoError> = {
 		return self.searchText.producer
+      .on(next: { _ in self.isSearchingObserver.sendNext(false) })
 			.filter { $0.characters.count > 1 }
-			.map { (value: String) -> [Tag] in
-				var matches = [Tag]()
+			.map { [unowned self] (value: String) -> [Tag] in
 				self.foundTags.value = [Tag]()
-				self.isSearching.value = true
+				self.isSearchingObserver.sendNext(true)
 				for tag in self.allTags.value as [Tag] {
 					if ((tag.text.lowercaseString.rangeOfString(value.lowercaseString)) != nil) {
 						self.foundTags.value.append(tag)
 					}
 				}
-				return matches
+				return self.foundTags.value
 		}
-		}()
-	
-	lazy var tableWillHide: AnyProperty<Bool> = {
-		let property = MutableProperty(false)
-		property <~ self.searchText.producer
-			.map {
-				return !(($0.characters.count > 1) && self.isSearching.value)
-		}
-		return AnyProperty(property)
-		}()
+  }()
 	
 	func getGifsForTagSearch() -> Void {
 		gifService.getGifsForTagSearchResponse(self.searchText.value.replaceSpaces())
@@ -96,6 +98,7 @@ class HomeViewModel : NSObject {
       cell.imageView.layer.masksToBounds = true
       let gif = self.gifsForDisplay.value[indexPath.item]
       cell.userInteractionEnabled = true
+      cell.imageView.layer.cornerRadius = 10.0
       let imageProducer = NSURLSession.sharedSession().rac_dataWithRequest(NSURLRequest(URL: NSURL(string: gif.thumbnailUrl)!))
         .map({[weak gif = gif] data, _ in
             if let image = UIImage(data: data) {
@@ -122,9 +125,5 @@ class HomeViewModel : NSObject {
     }
     return cell
   }
-
-	
-	
-	
 }
 

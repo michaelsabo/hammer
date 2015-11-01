@@ -28,7 +28,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		self.title = "JifMe"
+		self.title = "Jif It"
 		self.view.backgroundColor = UIColor.flatWhiteColorDark()
 		self.viewCollection.backgroundColor = UIColor.flatWhiteColorDark()
 		self.navigationController?.navigationBar.barTintColor = UIColor.flatTealColor()
@@ -42,13 +42,24 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func setupBindings() {
 		tagSearch.delegate = self
 		self.homeViewModel.searchText <~ tagSearch.rac_textSignalProducer()
-		RAC(autocompleteTableView, "hidden") <~ self.homeViewModel.tableWillHide.producer
+    self.homeViewModel.isSearchingSignal.observeNext({
+    	self.autocompleteTableView.hidden = !$0
+    })
 
 		self.homeViewModel.gifsForDisplay.producer.startWithSignal( { signal, disposable in
 			signal.observe({ _ in
 				self.viewCollection.reloadData()
 			})
 		})
+    
+    self.homeViewModel.isSearchingSignal
+      .observeNext({ [unowned self] (searching:Bool) in
+        if searching {
+          
+          self.adjustHeightOfTableView()
+          self.autocompleteTableView.reloadData()
+        }
+      })
 		
 		self.homeViewModel.searchingTagsSignal.producer.start({ s in
 			self.adjustHeightOfTableView()
@@ -144,7 +155,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		self.tagSearch.text = self.homeViewModel.foundTags.value[indexPath.row].text
 		self.homeViewModel.searchText.value = self.homeViewModel.foundTags.value[indexPath.row].text
-		autocompleteTableView .deselectRowAtIndexPath(indexPath, animated: true)
+		autocompleteTableView.deselectRowAtIndexPath(indexPath, animated: true)
 		textFieldShouldReturn(self.tagSearch)
 	}
 	
@@ -158,6 +169,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
 		view.endEditing(true)
+    self.homeViewModel.userEndedSearch()
 	}
 	
 	// MARK: UI Text Field Delegates
@@ -174,8 +186,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	func textFieldShouldClear(textField: UITextField) -> Bool {
 		tagSearch.text = ""
-		autocompleteTableView.hidden = true
-		self.homeViewModel.isSearching.value = false
+		self.homeViewModel.userEndedSearch()
 		viewCollection.reloadData()
 		return true
 	}

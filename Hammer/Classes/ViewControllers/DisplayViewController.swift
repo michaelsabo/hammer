@@ -45,27 +45,21 @@ class DisplayViewController: UIViewController {
 		}
 	
 		func bindViewModel() {
-			self.displayGifViewModel.imageReturned.producer
-				.take(1)
-				.startWithNext({[unowned self] sink in
-					if (self.displayGifViewModel.searchComplete.value == true) {
-								let animation = self.view.viewWithTag(kLoadingAnimationTag) as? NVActivityIndicatorView
-								animation?.stopAnimation()
-								animation?.removeFromSuperview()
-							self.imageView.image = self.displayGifViewModel.gif.value.gifImage
-						
-					}
-			})
-			
-			self.displayGifViewModel.tagComplete.producer
-				.startWithNext({ [unowned self] _ in
-				if (self.displayGifViewModel.tags.value.count > 0) {
-					self.addTagsToLabels()
-				}
-			})
-			
-
-		}
+      self.displayGifViewModel.gifRequestSignal
+        .observeNext({[unowned self] sink in
+          let animation = self.view.viewWithTag(kLoadingAnimationTag) as? NVActivityIndicatorView
+          animation?.stopAnimation()
+          animation?.removeFromSuperview()
+          self.imageView.image = self.displayGifViewModel.gif.value.gifImage
+      })
+      
+      self.displayGifViewModel.tagRequestSignal
+        .observeNext({[unowned self] sink in
+          if (self.displayGifViewModel.tags.value.count > 0) {
+            self.addTagsToLabels()
+          }
+      })
+  }
 	
 	func addTagsToLabels() {
       var labelDictionary:[String: AnyObject] = ["imageView": self.imageView]
