@@ -55,7 +55,6 @@
 		27C75CB01BC22E1B008AC322 /* DisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C75CAF1BC22E1B008AC322 /* DisplayViewController.swift */; };
 		27D16A441BDC1A55000B75B2 /* LoadingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D16A431BDC1A55000B75B2 /* LoadingAnimation.swift */; };
 		27D16A451BDC1A55000B75B2 /* LoadingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D16A431BDC1A55000B75B2 /* LoadingAnimation.swift */; };
-		5C19115AE12D01E3E472F9AA /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908BDBAEAF2106D88927E9A6 /* Pods.framework */; };
 		C8B8CBB3436E409112AB700A /* Pods_Hammer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F588B3F15172A45489803A8E /* Pods_Hammer.framework */; };
 /* End PBXBuildFile section */
 
@@ -145,7 +144,6 @@
 				273411011BC8515400674FC7 /* Result.framework in Frameworks */,
 				273410FF1BC8515400674FC7 /* ReactiveCocoa.framework in Frameworks */,
 				C8B8CBB3436E409112AB700A /* Pods_Hammer.framework in Frameworks */,
-				5C19115AE12D01E3E472F9AA /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -621,7 +619,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hammer/Pods-Hammer-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -811,6 +809,7 @@
 				CLANG_ENABLE_MODULE_DEBUGGING = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
