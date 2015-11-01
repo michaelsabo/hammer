@@ -169,21 +169,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		27123A301BE66D07000C5466 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				27123A311BE66D07000C5466 /* Images */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		27123A311BE66D07000C5466 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Images;
-			sourceTree = "<group>";
-		};
 		27197E131BC239B500525F33 /* Objective-C */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,7 +257,6 @@
 		276C7FB11BC204EE0028DC0D /* Hammer */ = {
 			isa = PBXGroup;
 			children = (
-				27123A301BE66D07000C5466 /* Resources */,
 				278CA0191BCDAA87000904D7 /* Application */,
 				276C7FBC1BC204EE0028DC0D /* Assets.xcassets */,
 				276C7FF11BC2092E0028DC0D /* Classes */,
@@ -830,7 +814,7 @@
 					"\"SwiftyJSON\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.flyingdinos.Hammer;
-				PRODUCT_NAME = "Jif It";
+				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Hammer/Classes/Objective-C/Hammer-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -866,7 +850,7 @@
 					"\"SwiftyJSON\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.flyingdinos.Hammer;
-				PRODUCT_NAME = "Jif It";
+				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Hammer/Classes/Objective-C/Hammer-Bridging-Header.h";
 			};
