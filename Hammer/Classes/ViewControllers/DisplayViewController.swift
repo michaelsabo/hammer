@@ -20,7 +20,7 @@ class DisplayViewController: UIViewController {
 		weak var gifData: NSData?
 		var pasteBoard: UIPasteboard?
 		var tags: [Tag]?
-		var tagLabels: [UILabel]? =  [UILabel]()
+		var tagLabels: [PaddedTagLabel]? =  [PaddedTagLabel]()
 		var displayGifViewModel: DisplayViewModel!
 	
 		required init?(coder aDecoder: NSCoder) {
@@ -64,9 +64,6 @@ class DisplayViewController: UIViewController {
   }
 	
 	func addTagsToLabels() {
-      var labelDictionary:[String: AnyObject] = ["imageView": self.imageView]
-			var labelArray = [String]()
-			var count = 0
 			for tag in self.displayGifViewModel.tags.value  {
 				let label = PaddedTagLabel()
 				label.text = tag.text
@@ -75,28 +72,35 @@ class DisplayViewController: UIViewController {
         label.textColor = UIColor.flatWhiteColor()
 				label.backgroundColor = UIColor.flatTealColor()
 				label.numberOfLines = 0
-				label.layer.masksToBounds = false
+				label.layer.masksToBounds = true
         label.tag = 200
 				label.lineBreakMode = NSLineBreakMode.ByWordWrapping
 				self.view.addSubview(label)
-				labelArray.append("label\(count)")
-        tagLabels?.append(label)
-				let labelName = "label\(count)"
-				labelDictionary[labelName] = label
-				let constraint = NSLayoutConstraint.init(item: label, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Bottom, multiplier: 1, constant: 15)
-				self.view.addConstraint(constraint)
-        print(label.frame.size.width)
-				count++
+        label.setNeedsDisplay()
+        self.tagLabels?.append(label)
 			}
-			var labelHorizontalLayout = "-5-"
-			for label in labelArray {
-				labelHorizontalLayout += "["  + label +  "]-"
-			}
-			if (labelArray.count > 0) {
-				self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|\(labelHorizontalLayout)>=2-|", options: [], metrics: nil, views: labelDictionary))
-			}
-    self.view.setNeedsDisplay()
-    self.view.layoutIfNeeded()
+
+    if tagLabels?.count < 1 {
+      return
+    }
+    var prevLabel: PaddedTagLabel?
+    var count = 0
+
+    for lbl in self.tagLabels! {
+      var constraints = [NSLayoutConstraint]()
+      if count == 0 {
+         constraints.append(NSLayoutConstraint.init(item: lbl, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Bottom, multiplier: 1, constant: 5))
+      } else {
+        constraints.append(NSLayoutConstraint.init(item: lbl, attribute: .Top, relatedBy: .Equal, toItem: prevLabel, attribute: .Bottom, multiplier: 1, constant: 2))
+      }
+      constraints.append(NSLayoutConstraint.init(item: lbl, attribute: .Left, relatedBy: .Equal, toItem: self.view, attribute: .Left, multiplier: 1, constant: 4))
+      constraints.append(NSLayoutConstraint.init(item: self.view, attribute: .RightMargin, relatedBy: .GreaterThanOrEqual, toItem: lbl, attribute: .Right, multiplier: 1, constant: 4))
+      self.view.addConstraints(constraints)
+      
+      count++
+      prevLabel = lbl
+    }
+    	self.view.updateConstraintsIfNeeded()
 	}
 
   
