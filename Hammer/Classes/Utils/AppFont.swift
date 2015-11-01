@@ -10,6 +10,6 @@ import Foundation
 
 struct App {
   static func font() -> UIFont {
-  	return UIFont(name: "HelveticaNeue-Bold", size: 14.0)!
+  	return UIFont(name: "HelveticaNeue-Bold", size: 16.0)!
   }
 }

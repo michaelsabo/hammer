@@ -55,7 +55,8 @@
 		27C75CB01BC22E1B008AC322 /* DisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C75CAF1BC22E1B008AC322 /* DisplayViewController.swift */; };
 		27D16A441BDC1A55000B75B2 /* LoadingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D16A431BDC1A55000B75B2 /* LoadingAnimation.swift */; };
 		27D16A451BDC1A55000B75B2 /* LoadingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D16A431BDC1A55000B75B2 /* LoadingAnimation.swift */; };
-		C8B8CBB3436E409112AB700A /* Pods_Hammer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F588B3F15172A45489803A8E /* Pods_Hammer.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		5C19115AE12D01E3E472F9AA /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908BDBAEAF2106D88927E9A6 /* Pods.framework */; };
+		C8B8CBB3436E409112AB700A /* Pods_Hammer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F588B3F15172A45489803A8E /* Pods_Hammer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,7 +110,7 @@
 		273994271BE5560900E4399C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		273E6CEC1BE57A1F00FF55D5 /* tags.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tags.json; sourceTree = "<group>"; };
 		274C1EA31BE5DCFA007B1D8A /* AppFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppFont.swift; sourceTree = "<group>"; };
-		276C7FAF1BC204EE0028DC0D /* Hammer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hammer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		276C7FAF1BC204EE0028DC0D /* Jif It.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Jif It.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		276C7FB21BC204EE0028DC0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		276C7FB71BC204EE0028DC0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		276C7FBC1BC204EE0028DC0D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -132,6 +133,7 @@
 		27D16A431BDC1A55000B75B2 /* LoadingAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingAnimation.swift; sourceTree = "<group>"; };
 		57E0D0BB6577F1CE7A1D237C /* Pods-Hammer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hammer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hammer/Pods-Hammer.debug.xcconfig"; sourceTree = "<group>"; };
 		59DC8D6AF48616A7006723F2 /* Pods-Hammer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hammer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hammer/Pods-Hammer.release.xcconfig"; sourceTree = "<group>"; };
+		908BDBAEAF2106D88927E9A6 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F588B3F15172A45489803A8E /* Pods_Hammer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hammer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -143,6 +145,7 @@
 				273411011BC8515400674FC7 /* Result.framework in Frameworks */,
 				273410FF1BC8515400674FC7 /* ReactiveCocoa.framework in Frameworks */,
 				C8B8CBB3436E409112AB700A /* Pods_Hammer.framework in Frameworks */,
+				5C19115AE12D01E3E472F9AA /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,6 +171,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		27123A301BE66D07000C5466 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				27123A311BE66D07000C5466 /* Images */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		27123A311BE66D07000C5466 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		27197E131BC239B500525F33 /* Objective-C */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,7 +264,7 @@
 		276C7FB01BC204EE0028DC0D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				276C7FAF1BC204EE0028DC0D /* Hammer.app */,
+				276C7FAF1BC204EE0028DC0D /* Jif It.app */,
 				276C7FC61BC204EE0028DC0D /* HammerTests.xctest */,
 				276C7FD11BC204EF0028DC0D /* HammerUITests.xctest */,
 			);
@@ -256,6 +274,7 @@
 		276C7FB11BC204EE0028DC0D /* Hammer */ = {
 			isa = PBXGroup;
 			children = (
+				27123A301BE66D07000C5466 /* Resources */,
 				278CA0191BCDAA87000904D7 /* Application */,
 				276C7FBC1BC204EE0028DC0D /* Assets.xcassets */,
 				276C7FF11BC2092E0028DC0D /* Classes */,
@@ -382,6 +401,7 @@
 				272958011BC846C000D5BFC6 /* Box.framework */,
 				272957FD1BC843A500D5BFC6 /* ReactiveCocoa.framework */,
 				F588B3F15172A45489803A8E /* Pods_Hammer.framework */,
+				908BDBAEAF2106D88927E9A6 /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -410,6 +430,7 @@
 				34DBD584D3C4EE7B37C4DA80 /* Copy Pods Resources */,
 				272958001BC8458900D5BFC6 /* ShellScript */,
 				2719DA321BCC9CF100BD02AD /* CopyFiles */,
+				27CE4A851BE6892700B62D64 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -417,7 +438,7 @@
 			);
 			name = Hammer;
 			productName = Hammer;
-			productReference = 276C7FAF1BC204EE0028DC0D /* Hammer.app */;
+			productReference = 276C7FAF1BC204EE0028DC0D /* Jif It.app */;
 			productType = "com.apple.product-type.application";
 		};
 		276C7FC51BC204EE0028DC0D /* HammerTests */ = {
@@ -545,6 +566,19 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
+		27CE4A851BE6892700B62D64 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/Fabric.framework/run\" b0a759f1abeb8628534dc5eb8f88bf5abd8bf30f 5f3711b839efb38bdede354c06b7a2dd09e080cb878ee43422f36ce3a7fae6db";
+		};
 		34DBD584D3C4EE7B37C4DA80 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -587,7 +621,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hammer/Pods-Hammer-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -780,12 +814,24 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Hammer",
 				);
 				INFOPLIST_FILE = Hammer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"ChameleonFramework\"",
+					"-framework",
+					"\"NVActivityIndicatorView\"",
+					"-framework",
+					"\"SwiftyJSON\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.flyingdinos.Hammer;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Jif It";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Hammer/Classes/Objective-C/Hammer-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -799,17 +845,29 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_MODULE_DEBUGGING = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Hammer",
 				);
 				INFOPLIST_FILE = Hammer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"ChameleonFramework\"",
+					"-framework",
+					"\"NVActivityIndicatorView\"",
+					"-framework",
+					"\"SwiftyJSON\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.flyingdinos.Hammer;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Jif It";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Hammer/Classes/Objective-C/Hammer-Bridging-Header.h";
 			};

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "276C7FAE1BC204EE0028DC0D"
-               BuildableName = "Hammer.app"
+               BuildableName = "Jif It.app"
                BlueprintName = "Hammer"
                ReferencedContainer = "container:Hammer.xcodeproj">
             </BuildableReference>
@@ -53,7 +53,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "276C7FAE1BC204EE0028DC0D"
-            BuildableName = "Hammer.app"
+            BuildableName = "Jif It.app"
             BlueprintName = "Hammer"
             ReferencedContainer = "container:Hammer.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "276C7FAE1BC204EE0028DC0D"
-            BuildableName = "Hammer.app"
+            BuildableName = "Jif It.app"
             BlueprintName = "Hammer"
             ReferencedContainer = "container:Hammer.xcodeproj">
          </BuildableReference>
@@ -95,7 +95,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "276C7FAE1BC204EE0028DC0D"
-            BuildableName = "Hammer.app"
+            BuildableName = "Jif It.app"
             BlueprintName = "Hammer"
             ReferencedContainer = "container:Hammer.xcodeproj">
          </BuildableReference>

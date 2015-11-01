@@ -10,6 +10,7 @@ import UIKit
 import MobileCoreServices
 import ChameleonFramework
 import NVActivityIndicatorView
+import ReactiveCocoa
 
 class DisplayViewController: UIViewController {
 
@@ -19,7 +20,7 @@ class DisplayViewController: UIViewController {
 		weak var gifData: NSData?
 		var pasteBoard: UIPasteboard?
 		var tags: [Tag]?
-	
+		var tagLabels: [UILabel]? =  [UILabel]()
 		var displayGifViewModel: DisplayViewModel!
 	
 		required init?(coder aDecoder: NSCoder) {
@@ -54,6 +55,7 @@ class DisplayViewController: UIViewController {
       })
       
       self.displayGifViewModel.tagRequestSignal
+        .observeOn(UIScheduler())
         .observeNext({[unowned self] sink in
           if (self.displayGifViewModel.tags.value.count > 0) {
             self.addTagsToLabels()
@@ -73,15 +75,17 @@ class DisplayViewController: UIViewController {
         label.textColor = UIColor.flatWhiteColor()
 				label.backgroundColor = UIColor.flatTealColor()
 				label.numberOfLines = 0
-				label.layer.masksToBounds = true
+				label.layer.masksToBounds = false
+        label.tag = 200
 				label.lineBreakMode = NSLineBreakMode.ByWordWrapping
 				self.view.addSubview(label)
-				label.setNeedsLayout()
 				labelArray.append("label\(count)")
+        tagLabels?.append(label)
 				let labelName = "label\(count)"
 				labelDictionary[labelName] = label
-				let constraint = NSLayoutConstraint.init(item: label, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Bottom, multiplier: 1, constant: 5)
+				let constraint = NSLayoutConstraint.init(item: label, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Bottom, multiplier: 1, constant: 15)
 				self.view.addConstraint(constraint)
+        print(label.frame.size.width)
 				count++
 			}
 			var labelHorizontalLayout = "-5-"
@@ -89,11 +93,13 @@ class DisplayViewController: UIViewController {
 				labelHorizontalLayout += "["  + label +  "]-"
 			}
 			if (labelArray.count > 0) {
-				self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|\(labelHorizontalLayout)>=5-|", options: [], metrics: nil, views: labelDictionary))
+				self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|\(labelHorizontalLayout)>=2-|", options: [], metrics: nil, views: labelDictionary))
 			}
-			self.view.layoutIfNeeded()
+    self.view.setNeedsDisplay()
+    self.view.layoutIfNeeded()
 	}
-	
+
+  
 	func copyImageToClipboard() {
 		let pasteboard = UIPasteboard.generalPasteboard()
 		pasteboard.persistent = true
@@ -103,6 +109,11 @@ class DisplayViewController: UIViewController {
 	}
 	
   override func viewWillDisappear(animated: Bool) {
+    for label in self.view.subviews {
+      if label.isKindOfClass(PaddedTagLabel.self) {
+        label.removeFromSuperview()
+      }
+    }
 		super.viewWillDisappear(animated)
 	}
 
@@ -118,7 +129,7 @@ class PaddedTagLabel : UILabel {
 	let bottomInset:CGFloat = 3.0
 	let leftInset:CGFloat = 6.0
 	let rightInset:CGFloat = 6.0
-	
+
 	override func drawTextInRect(rect: CGRect) {
 		let insets = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
 		self.layer.cornerRadius = 5.0

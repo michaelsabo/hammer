@@ -17,7 +17,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	@IBOutlet weak var viewCollection: UICollectionView!
 	@IBOutlet weak var tagSearch: UITextField!
 	var autocompleteTableView: UITableView = UITableView()
-
 	
 	let kCustomRows = 8
 	let kImageCell = "ImageCell"
@@ -55,11 +54,10 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     self.homeViewModel.isSearchingSignal
       .observeNext({ [unowned self] (searching:Bool) in
         if searching {
-          
           self.adjustHeightOfTableView()
           self.autocompleteTableView.reloadData()
         }
-      })
+    })
 		
 		self.homeViewModel.searchingTagsSignal.producer.start({ s in
 			self.adjustHeightOfTableView()

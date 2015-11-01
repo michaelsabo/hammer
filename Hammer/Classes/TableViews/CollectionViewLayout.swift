@@ -36,8 +36,8 @@ class MediumCollectionViewLayout : UICollectionViewFlowLayout {
 	
 	override init() {
 		super.init()
-		self.itemSize = CGSizeMake(120, 130)
-		self.sectionInset = UIEdgeInsetsMake(5, 5, 5, 5)
+		self.itemSize = CGSizeMake(115, 125)
+		self.sectionInset = UIEdgeInsetsMake(5, 8, 5, 8)
 		self.minimumInteritemSpacing = 3.0
 		self.minimumLineSpacing = 2.0
 		

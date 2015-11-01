@@ -1,18 +1,22 @@
 PODS:
-  - Alamofire (3.1.0)
+  - Alamofire (3.1.1)
   - ChameleonFramework/Default (2.0.4)
   - ChameleonFramework/Swift (2.0.4):
     - ChameleonFramework/Default
-  - NVActivityIndicatorView (2.0)
-  - SwiftyJSON (2.3.0)
-  - TLYShyNavBar (0.10.1)
+  - Crashlytics (3.3.4)
+  - Fabric (1.5.5):
+    - Fabric/Base (= 1.5.5)
+  - Fabric/Base (1.5.5)
+  - NVActivityIndicatorView (2.1)
+  - SwiftyJSON (2.3.1)
 
 DEPENDENCIES:
   - Alamofire (~> 3.1.0)
   - ChameleonFramework/Swift
+  - Crashlytics
+  - Fabric
   - NVActivityIndicatorView
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
-  - TLYShyNavBar
 
 EXTERNAL SOURCES:
   SwiftyJSON:
@@ -20,14 +24,15 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SwiftyJSON:
-    :commit: 83dc3138b14571200ea7f070933a2a510491e997
+    :commit: ece271ab33839d11c2153d71fb59c53545132cf9
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 SPEC CHECKSUMS:
-  Alamofire: 415bd7f56197722978759078486689f7ef913dce
+  Alamofire: 9b0a7188b961a03914a99304488bd226b0e46c0e
   ChameleonFramework: 5abe69b1f2a6cc79c3c435fcd9d3d855748225ee
-  NVActivityIndicatorView: cf985d36b502d01e4670d3026fb8e30494a6fd6a
-  SwiftyJSON: cacfe0373d584585716bd1d43202c24cc66afd65
-  TLYShyNavBar: abeab693235fc21b5bd9c8de6e971da62fc3d1d9
+  Crashlytics: 41c082440d2e14da444186fff65e79c0b4b35d4c
+  Fabric: 190bf1a6eb65f7500de1347d027d2e59a7e53db1
+  NVActivityIndicatorView: 84aa48f7ec1efbfd0645e9f469097d94c6f65417
+  SwiftyJSON: 592b53bee5ef3dd9b3bebc6b9cb7ee35426ae8c3
 
-COCOAPODS: 0.38.2
+COCOAPODS: 0.39.0
