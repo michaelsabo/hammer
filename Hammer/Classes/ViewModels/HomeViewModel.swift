@@ -70,12 +70,6 @@ class HomeViewModel : NSObject {
 		}
 		}()
 	
-	lazy var collectionUpdated: SignalProducer<[Gif], NoError> = {
-		return self.gifsForDisplay.producer
-			.map { return $0 }
-		
-		}()
-	
 	lazy var tableWillHide: AnyProperty<Bool> = {
 		let property = MutableProperty(false)
 		property <~ self.searchText.producer

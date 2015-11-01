@@ -29,7 +29,7 @@ class DisplayViewModel : NSObject {
 		
 		gifService.retrieveImageDataFor(gif: gif)
 			.take(1)
-			.on(next: {
+			.on(next: { [unowned self]
 				response in
 					guard (response.gifData != nil) else {
 						return
@@ -39,7 +39,7 @@ class DisplayViewModel : NSObject {
 		
 		tagService.getTagsForGifId(gif.id)
 			.take(1)
-			.on(next: {
+			.on(next: { [unowned self]
 				response in
 					if (response.tags.count > 0) {
 						self.tags.value = response.tags
@@ -52,7 +52,7 @@ class DisplayViewModel : NSObject {
 		let property = MutableProperty(false)
 		
 		property <~ self.tags.producer
-			.filter { (value:[Tag]) in
+			.filter { [unowned self] (value:[Tag]) in
 				if (self.tagComplete.value == true) {
 					return true
 				}
@@ -68,7 +68,7 @@ class DisplayViewModel : NSObject {
 	lazy var imageReturned: SignalProducer<UIImage, NoError> = {
 		return self.gif.producer
 			.filter { $0.gifImage != nil }
-			.map { (value: Gif) -> UIImage in
+			.map { [unowned self]  (value: Gif) -> UIImage in
 				self.searchComplete.value = true
 				if let image = value.gifImage {
 					return image
@@ -76,8 +76,7 @@ class DisplayViewModel : NSObject {
 				return UIImage()
 			}
 		}()
-	
-	
+
 	deinit {
 		print("deiniting view model")
 	}

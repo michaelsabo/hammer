@@ -14,14 +14,12 @@ import NVActivityIndicatorView
 class DisplayViewController: UIViewController {
 
 		@IBOutlet weak var imageView: UIImageView!
-		var gifImage: UIImage?
-	  var gif: Gif?
-		var gifData: NSData?
+		weak var gifImage: UIImage?
+    weak var gif: Gif?
+		weak var gifData: NSData?
 		var pasteBoard: UIPasteboard?
 		var tags: [Tag]?
-		var labelsArray: [UILabel]?
 	
-		@IBOutlet weak var tagsViewContainer: UIView!
 		var displayGifViewModel: DisplayViewModel!
 	
 		required init?(coder aDecoder: NSCoder) {
@@ -49,7 +47,7 @@ class DisplayViewController: UIViewController {
 		func bindViewModel() {
 			self.displayGifViewModel.imageReturned.producer
 				.take(1)
-				.startWithNext({ sink in
+				.startWithNext({[unowned self] sink in
 					if (self.displayGifViewModel.searchComplete.value == true) {
 								let animation = self.view.viewWithTag(kLoadingAnimationTag) as? NVActivityIndicatorView
 								animation?.stopAnimation()
@@ -60,8 +58,7 @@ class DisplayViewController: UIViewController {
 			})
 			
 			self.displayGifViewModel.tags.producer
-				.take(2)
-				.startWithNext({ _ in
+				.startWithNext({ [unowned self] _ in
 				if (self.displayGifViewModel.tags.value.count > 0) {
 					self.addTagsToLabels()
 				}
@@ -71,14 +68,14 @@ class DisplayViewController: UIViewController {
 		}
 	
 	func addTagsToLabels() {
-			var labelDictionary:[String: AnyObject] = ["imageView": self.imageView]
+      var labelDictionary:[String: AnyObject] = ["imageView": self.imageView]
 			var labelArray = [String]()
 			var count = 0
-			self.labelsArray = [UILabel]()
 			for tag in self.displayGifViewModel.tags.value  {
 				let label = PaddedTagLabel()
 				label.text = tag.text
 				label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = UIColor.flatWhiteColor()
 				label.backgroundColor = UIColor.flatTealColor()
 				label.numberOfLines = 0
 				label.layer.masksToBounds = true
@@ -86,7 +83,6 @@ class DisplayViewController: UIViewController {
 				self.view.addSubview(label)
 				label.setNeedsLayout()
 				labelArray.append("label\(count)")
-				self.labelsArray?.append(label)
 				let labelName = "label\(count)"
 				labelDictionary[labelName] = label
 				let constraint = NSLayoutConstraint.init(item: label, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Bottom, multiplier: 1, constant: 5)
@@ -112,7 +108,7 @@ class DisplayViewController: UIViewController {
 
 	}
 	
-		override func viewWillDisappear(animated: Bool) {
+  override func viewWillDisappear(animated: Bool) {
 		super.viewWillDisappear(animated)
 	}
 

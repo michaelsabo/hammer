@@ -62,7 +62,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		autocompleteTableView.translatesAutoresizingMaskIntoConstraints = false
 		autocompleteTableView.delegate = self
 		autocompleteTableView.dataSource = self
-		print("\(UIScreen.mainScreen().bounds.width)")
 		if (UIScreen.mainScreen().bounds.width > 400) {
 			self.viewCollection.collectionViewLayout = LargeCollectionViewLayout.init()
 		} else if (UIScreen.mainScreen().bounds.width > 350) {
@@ -91,14 +90,12 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		var cell = collectionView.dequeueReusableCellWithReuseIdentifier("ImageCell", forIndexPath: indexPath) as! ImageCell
 		cell.userInteractionEnabled = false
 		cell = self.homeViewModel.displayCellForGifs(indexPath: indexPath, cell: cell)
-		print("cell for item \(indexPath.item)")
 		cell.layer.shouldRasterize = true;
 		cell.layer.rasterizationScale = UIScreen.mainScreen().scale;
 		return cell
 	}
 	
 	func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-		
 		let displayViewController = storyboard?.instantiateViewControllerWithIdentifier("DisplayViewController") as! DisplayViewController
 		let gif = self.homeViewModel.gifsForDisplay.value[indexPath.item]
 		displayViewController.displayGifViewModel = DisplayViewModel(gifService: GifService(), tagService: TagService(), gif: gif)
@@ -110,18 +107,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		myCell.layer.removeAllAnimations()
 		myCell.imageView.image = nil
 		if (indexPath.item < self.homeViewModel.gifsForDisplay.value.count && self.homeViewModel.gifsForDisplay.value[indexPath.item].thumbnailImage != nil) {
-			print("in here \(indexPath.row)")
 			myCell.imageView.image = self.homeViewModel.gifsForDisplay.value[indexPath.item].thumbnailImage
-		}
-		if (myCell.hasLoaded == false){
-			var transition:CATransition
-			transition = CATransition()
-			transition.startProgress = 0.7
-			transition.endProgress = 1.0
-			transition.type = kCATransitionMoveIn
-			transition.subtype = kCATransitionFromLeft
-			transition.duration = 0.15
-			myCell.layer.addAnimation(transition, forKey: kCATransitionReveal)
 		}
 	}
 	
