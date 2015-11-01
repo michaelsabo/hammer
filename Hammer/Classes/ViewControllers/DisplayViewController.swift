@@ -57,7 +57,7 @@ class DisplayViewController: UIViewController {
 					}
 			})
 			
-			self.displayGifViewModel.tags.producer
+			self.displayGifViewModel.tagComplete.producer
 				.startWithNext({ [unowned self] _ in
 				if (self.displayGifViewModel.tags.value.count > 0) {
 					self.addTagsToLabels()
@@ -105,7 +105,6 @@ class DisplayViewController: UIViewController {
 		if let copiedGif = self.displayGifViewModel.gif.value.gifData {
 			pasteboard.setData(copiedGif, forPasteboardType: kUTTypeGIF as String)
 		}
-
 	}
 	
   override func viewWillDisappear(animated: Bool) {

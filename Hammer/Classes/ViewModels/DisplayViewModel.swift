@@ -44,26 +44,12 @@ class DisplayViewModel : NSObject {
 					if (response.tags.count > 0) {
 						self.tags.value = response.tags
 					}
-				self.tagComplete.value = true
-			}).start()
+        }, completed: {
+          self.tagComplete.value = true
+      }).start()
+    
+    
 	}
-	
-	lazy var tagsReturned: AnyProperty<Bool> = {
-		let property = MutableProperty(false)
-		
-		property <~ self.tags.producer
-			.filter { [unowned self] (value:[Tag]) in
-				if (self.tagComplete.value == true) {
-					return true
-				}
-				return false
-			}
-			.map { (value:[Tag]) in
-				return true
-		}
-		return AnyProperty(property)
-		
-		}()
 	
 	lazy var imageReturned: SignalProducer<UIImage, NoError> = {
 		return self.gif.producer
@@ -71,6 +57,7 @@ class DisplayViewModel : NSObject {
 			.map { [unowned self]  (value: Gif) -> UIImage in
 				self.searchComplete.value = true
 				if let image = value.gifImage {
+          
 					return image
 				}
 				return UIImage()

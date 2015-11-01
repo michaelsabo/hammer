@@ -90,34 +90,20 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		var cell = collectionView.dequeueReusableCellWithReuseIdentifier("ImageCell", forIndexPath: indexPath) as! ImageCell
 		cell.userInteractionEnabled = false
 		cell = self.homeViewModel.displayCellForGifs(indexPath: indexPath, cell: cell)
-		cell.layer.shouldRasterize = true;
-		cell.layer.rasterizationScale = UIScreen.mainScreen().scale;
 		return cell
 	}
 	
 	func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 		let displayViewController = storyboard?.instantiateViewControllerWithIdentifier("DisplayViewController") as! DisplayViewController
-		let gif = self.homeViewModel.gifsForDisplay.value[indexPath.item]
-		displayViewController.displayGifViewModel = DisplayViewModel(gifService: GifService(), tagService: TagService(), gif: gif)
-		navigationController?.pushViewController(displayViewController, animated: true)
-	}
-	
-	func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-		let myCell = cell as! ImageCell
-		myCell.layer.removeAllAnimations()
-		myCell.imageView.image = nil
-		if (indexPath.item < self.homeViewModel.gifsForDisplay.value.count && self.homeViewModel.gifsForDisplay.value[indexPath.item].thumbnailImage != nil) {
-			myCell.imageView.image = self.homeViewModel.gifsForDisplay.value[indexPath.item].thumbnailImage
-		}
+    let gif = self.homeViewModel.gifsForDisplay.value[indexPath.item]
+    if (gif.thumbnailImage != nil) {
+      displayViewController.displayGifViewModel = DisplayViewModel(gifService: GifService(), tagService: TagService(), gif: gif)
+      navigationController?.pushViewController(displayViewController, animated: true)
+    }
 	}
 	
 	func scrollViewDidScroll(scrollView: UIScrollView) {
 		view.endEditing(true)
-	}
-	
-	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-		let indexpaths = self.viewCollection.indexPathsForVisibleItems()
-		self.viewCollection.reloadItemsAtIndexPaths(indexpaths)
 	}
 	
 	// MARK: UITableView Data Methods
