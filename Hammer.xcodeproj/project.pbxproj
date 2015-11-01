@@ -109,7 +109,7 @@
 		273994271BE5560900E4399C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		273E6CEC1BE57A1F00FF55D5 /* tags.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tags.json; sourceTree = "<group>"; };
 		274C1EA31BE5DCFA007B1D8A /* AppFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppFont.swift; sourceTree = "<group>"; };
-		276C7FAF1BC204EE0028DC0D /* Jif It.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Jif It.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		276C7FAF1BC204EE0028DC0D /* Hammer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hammer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		276C7FB21BC204EE0028DC0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		276C7FB71BC204EE0028DC0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		276C7FBC1BC204EE0028DC0D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -247,7 +247,7 @@
 		276C7FB01BC204EE0028DC0D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				276C7FAF1BC204EE0028DC0D /* Jif It.app */,
+				276C7FAF1BC204EE0028DC0D /* Hammer.app */,
 				276C7FC61BC204EE0028DC0D /* HammerTests.xctest */,
 				276C7FD11BC204EF0028DC0D /* HammerUITests.xctest */,
 			);
@@ -420,7 +420,7 @@
 			);
 			name = Hammer;
 			productName = Hammer;
-			productReference = 276C7FAF1BC204EE0028DC0D /* Jif It.app */;
+			productReference = 276C7FAF1BC204EE0028DC0D /* Hammer.app */;
 			productType = "com.apple.product-type.application";
 		};
 		276C7FC51BC204EE0028DC0D /* HammerTests */ = {
@@ -546,7 +546,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "/usr/local/bin/carthage copy-frameworks --copy-bcsymbolmaps";
 		};
 		27CE4A851BE6892700B62D64 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -814,7 +814,7 @@
 					"\"SwiftyJSON\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.flyingdinos.Hammer;
-				PRODUCT_NAME = "${TARGET_NAME}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Hammer/Classes/Objective-C/Hammer-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -850,7 +850,7 @@
 					"\"SwiftyJSON\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.flyingdinos.Hammer;
-				PRODUCT_NAME = "${TARGET_NAME}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Hammer/Classes/Objective-C/Hammer-Bridging-Header.h";
 			};
