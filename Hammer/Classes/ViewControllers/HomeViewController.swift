@@ -146,9 +146,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 			cell = UITableViewCell.init(style: UITableViewCellStyle.Default, reuseIdentifier: cellIdentifier)
 		}
 		if (self.homeViewModel.foundTags.value.count-1 >= indexPath.row) {
+      cell.textLabel?.font = App.font()
 			cell.textLabel?.text = self.homeViewModel.foundTags.value[indexPath.row].text
 		}
-		
 		return cell
 	}
 	
@@ -157,10 +157,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		self.homeViewModel.searchText.value = self.homeViewModel.foundTags.value[indexPath.row].text
 		autocompleteTableView.deselectRowAtIndexPath(indexPath, animated: true)
 		textFieldShouldReturn(self.tagSearch)
-	}
-	
-	func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-		
 	}
 	
 	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

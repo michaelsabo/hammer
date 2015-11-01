@@ -42,7 +42,6 @@ class GifService {
 	
 	func getGifsForTagSearchResponse(query: String) -> SignalProducer<GifResponse, NSError> {
 		return SignalProducer{ [unowned self] sink, _ in
-			print(self.endpointForGifsFromTag(query))
 			Alamofire.request(.GET, self.endpointForGifsFromTag(query))
 				.responseJSON { response in
 					if let json = response.result.value {

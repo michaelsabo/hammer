@@ -68,6 +68,7 @@ class DisplayViewController: UIViewController {
 			for tag in self.displayGifViewModel.tags.value  {
 				let label = PaddedTagLabel()
 				label.text = tag.text
+        label.font = App.font()
 				label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.flatWhiteColor()
 				label.backgroundColor = UIColor.flatTealColor()
@@ -106,6 +107,7 @@ class DisplayViewController: UIViewController {
 	}
 
 	deinit {
+    self.displayGifViewModel.cleanUpSignals()
 		print("deiniting")
 	}
 }

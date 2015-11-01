@@ -70,12 +70,16 @@ class DisplayViewModel : NSObject {
 			.map { [unowned self]  (value: Gif) -> UIImage in
 				self.searchComplete.value = true
 				if let image = value.gifImage {
-          
 					return image
 				}
 				return UIImage()
 			}
 		}()
+  
+  func cleanUpSignals() {
+    self.gifRequestObserver.sendCompleted()
+    self.tagRequestObserver.sendCompleted()
+  }
 
 	deinit {
 		print("deiniting view model")
