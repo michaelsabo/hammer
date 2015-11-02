@@ -88,18 +88,12 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	// MARK: UICollectionView Data Methods
 	
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		if (self.homeViewModel.gifsForDisplay.value.count == 0) {
-			return kCustomRows
-		} else {
 			return self.homeViewModel.gifsForDisplay.value.count
-		}
 	}
 	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-		var cell = collectionView.dequeueReusableCellWithReuseIdentifier("ImageCell", forIndexPath: indexPath) as! ImageCell
-		cell.userInteractionEnabled = false
-		cell = self.homeViewModel.displayCellForGifs(indexPath: indexPath, cell: cell)
-		return cell
+		let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ImageCell", forIndexPath: indexPath) as! ImageCell
+		return self.homeViewModel.displayCellForGifs(indexPath: indexPath, cell: cell)
 	}
 	
 	func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
@@ -114,6 +108,14 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func scrollViewDidScroll(scrollView: UIScrollView) {
 		view.endEditing(true)
 	}
+  
+  func scrollViewDidScrollToTop(scrollView: UIScrollView) {
+    viewCollection.reloadItemsAtIndexPaths(viewCollection.indexPathsForVisibleItems())
+  }
+  
+  func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    viewCollection.reloadItemsAtIndexPaths(viewCollection.indexPathsForVisibleItems())
+  }
 	
 	// MARK: UITableView Data Methods
 	

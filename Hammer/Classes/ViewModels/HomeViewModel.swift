@@ -94,7 +94,9 @@ class HomeViewModel : NSObject {
 	}
 
   func displayCellForGifs(indexPath indexPath: NSIndexPath, cell: ImageCell) -> ImageCell {
+    //TODO refactor this
     if (indexPath.item < self.gifsForDisplay.value.count) {
+      cell.userInteractionEnabled = false
       cell.imageView.layer.masksToBounds = true
       let gif = self.gifsForDisplay.value[indexPath.item]
       if let image = gif.thumbnailImage {
