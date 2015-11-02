@@ -7,6 +7,7 @@ PODS:
   - Fabric (1.5.5):
     - Fabric/Base (= 1.5.5)
   - Fabric/Base (1.5.5)
+  - Font-Awesome-Swift (1.1.0)
   - NVActivityIndicatorView (2.1)
   - SwiftyJSON (2.3.1)
 
@@ -15,6 +16,7 @@ DEPENDENCIES:
   - ChameleonFramework/Swift
   - Crashlytics
   - Fabric
+  - Font-Awesome-Swift (~> 1.1.0)
   - NVActivityIndicatorView
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
 
@@ -32,6 +34,7 @@ SPEC CHECKSUMS:
   ChameleonFramework: 5abe69b1f2a6cc79c3c435fcd9d3d855748225ee
   Crashlytics: 41c082440d2e14da444186fff65e79c0b4b35d4c
   Fabric: 190bf1a6eb65f7500de1347d027d2e59a7e53db1
+  Font-Awesome-Swift: e9c7501987071d207a098bb9b3465d1f94ce7b39
   NVActivityIndicatorView: 84aa48f7ec1efbfd0645e9f469097d94c6f65417
   SwiftyJSON: 592b53bee5ef3dd9b3bebc6b9cb7ee35426ae8c3
 

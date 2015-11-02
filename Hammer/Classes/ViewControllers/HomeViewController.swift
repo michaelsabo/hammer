@@ -11,6 +11,7 @@ import SwiftyJSON
 import ReactiveCocoa
 import ChameleonFramework
 import NVActivityIndicatorView
+import Font_Awesome_Swift
 
 class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UICollectionViewDelegateFlowLayout {
 	
@@ -34,6 +35,12 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 			self.navigationController?.navigationBar.tintColor = UIColor.flatWhiteColor()
 		let textAttributes = [NSForegroundColorAttributeName:UIColor.flatWhiteColor()]
 		self.navigationController?.navigationBar.titleTextAttributes = textAttributes
+    
+    let codeIcon = UIBarButtonItem()
+    codeIcon.FAIcon = FAType.FACode
+    codeIcon.action = "showLicenses"
+    codeIcon.target = self
+    navigationItem.leftBarButtonItem = codeIcon
 		setupViews()
 		setupBindings()
 	}
@@ -66,7 +73,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func setupViews() {
-		let frame = CGRectMake(0, 120, view.frame.width, 200)
+		let frame = CGRectMake(0, 110, view.frame.width, 200)
 		autocompleteTableView = UITableView.init(frame: frame, style: UITableViewStyle.Plain)
 		autocompleteTableView.translatesAutoresizingMaskIntoConstraints = false
 		autocompleteTableView.delegate = self
@@ -186,6 +193,12 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		viewCollection.reloadData()
 		return true
 	}
+  
+  func showLicenses() {
+    let settingsController = SettingsViewController()
+    self.presentViewController(settingsController, animated: true, completion: nil)
+  	
+  }
 
 	
 }
