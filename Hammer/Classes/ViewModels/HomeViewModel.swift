@@ -97,31 +97,39 @@ class HomeViewModel : NSObject {
     if (indexPath.item < self.gifsForDisplay.value.count) {
       cell.imageView.layer.masksToBounds = true
       let gif = self.gifsForDisplay.value[indexPath.item]
-      cell.userInteractionEnabled = true
-      cell.imageView.layer.cornerRadius = 10.0
-      let imageProducer = NSURLSession.sharedSession().rac_dataWithRequest(NSURLRequest(URL: NSURL(string: gif.thumbnailUrl)!))
-        .map({[weak gif = gif] data, _ in
-            if let image = UIImage(data: data) {
-              gif?.thumbnailData = data
-              gif?.thumbnailImage = image
-              return image
+      if let image = gif.thumbnailImage {
+        cell.imageView.image = nil
+        cell.imageView.image = image
+        cell.imageView.layer.cornerRadius = 10.0
+        cell.userInteractionEnabled = true
+        return cell
+      } else {
+        cell.imageView.image = UIImage()
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
+          Gif.getThumbnailImageForGif(gif, completionHandler: { [unowned self] (responseGif, isSuccess, error) in
+            cell.imageView.layer.cornerRadius = 10.0
+            if (isSuccess && !self.isSearching.value) {
+              if let index = self.gifsForDisplay.value.indexOf(responseGif!) {
+                self.gifsForDisplay.value[index].thumbnailImage = responseGif!.thumbnailImage
+                cell.imageView.image = self.gifsForDisplay.value[index].thumbnailImage
+                cell.imageView.layer.cornerRadius = 10.0
+                cell.hasLoaded = true
+                cell.userInteractionEnabled = true
+              }
+            } else if (isSuccess && self.isSearching.value) {
+              if let index = self.gifsForDisplay.value.indexOf(responseGif!) {
+                self.gifsForDisplay.value[index].thumbnailImage = responseGif!.thumbnailImage
+                cell.imageView.image = self.gifsForDisplay.value[index].thumbnailImage
+                cell.imageView.layer.cornerRadius = 10.0
+                cell.hasLoaded = true
+                cell.userInteractionEnabled = true
+              }
+            } else {
+              cell.userInteractionEnabled = false
             }
-            return UIImage()
-        })
-        .flatMapError {_ in SignalProducer<UIImage, NoError>(value: UIImage()) }
-      
-      let prepForReuse = cell.rac_prepareForReuseSignal.toSignalProducer()
-        .map {_ in () }
-        .flatMapError {_ in SignalProducer<(), NoError>.empty }
-      
-      let imageUntilReuse = imageProducer
-        .takeUntil(prepForReuse)
-        .observeOn(UIScheduler())
-      
-      let nilThenImageUntilReuse = SignalProducer<AnyObject?, NoError>(value: nil)
-        .concat(imageUntilReuse .map { $0 as AnyObject? })
-      
-      DynamicProperty(object: cell.imageView, keyPath: "image") <~ nilThenImageUntilReuse
+            })
+        }
+      }
     }
     return cell
   }

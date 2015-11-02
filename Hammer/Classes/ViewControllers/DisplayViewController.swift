@@ -64,24 +64,12 @@ class DisplayViewController: UIViewController {
   }
 	
 	func addTagsToLabels() {
-			for tag in self.displayGifViewModel.tags.value  {
-				let label = PaddedTagLabel()
-				label.text = tag.text
-        label.font = App.font()
-				label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = UIColor.flatWhiteColor()
-				label.backgroundColor = UIColor.flatTealColor()
-				label.numberOfLines = 0
-				label.layer.masksToBounds = true
-        label.tag = 200
-				label.lineBreakMode = NSLineBreakMode.ByWordWrapping
-				self.view.addSubview(label)
-        label.setNeedsDisplay()
-        self.tagLabels?.append(label)
-			}
-
-    if tagLabels?.count < 1 {
-      return
+    
+    for tag in self.displayGifViewModel.tags.value  {
+      let label = PaddedTagLabel.init(text: tag.text)
+      self.view.addSubview(label)
+      label.setNeedsDisplay()
+      self.tagLabels?.append(label)
     }
     var prevLabel: PaddedTagLabel?
     var count = 0
@@ -100,9 +88,8 @@ class DisplayViewController: UIViewController {
       count++
       prevLabel = lbl
     }
-    	self.view.updateConstraintsIfNeeded()
+    self.view.updateConstraintsIfNeeded()
 	}
-
   
 	func copyImageToClipboard() {
 		let pasteboard = UIPasteboard.generalPasteboard()
@@ -113,11 +100,6 @@ class DisplayViewController: UIViewController {
 	}
 	
   override func viewWillDisappear(animated: Bool) {
-    for label in self.view.subviews {
-      if label.isKindOfClass(PaddedTagLabel.self) {
-        label.removeFromSuperview()
-      }
-    }
 		super.viewWillDisappear(animated)
 	}
 
@@ -133,6 +115,19 @@ class PaddedTagLabel : UILabel {
 	let bottomInset:CGFloat = 3.0
 	let leftInset:CGFloat = 6.0
 	let rightInset:CGFloat = 6.0
+  
+  convenience init(text: String) {
+    self.init()
+    self.font = App.font()
+    self.text = text
+    self.translatesAutoresizingMaskIntoConstraints = false
+    self.textColor = UIColor.flatWhiteColor()
+    self.backgroundColor = UIColor.flatTealColor()
+    self.numberOfLines = 0
+    self.layer.masksToBounds = true
+    self.tag = 200
+    self.lineBreakMode = NSLineBreakMode.ByWordWrapping
+  }
 
 	override func drawTextInRect(rect: CGRect) {
 		let insets = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
