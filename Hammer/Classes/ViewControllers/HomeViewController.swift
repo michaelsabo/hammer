@@ -195,8 +195,13 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
   
   func showLicenses() {
-    let settingsController = SettingsViewController()
-    self.presentViewController(settingsController, animated: true, completion: nil)
+    let settingsController = SettingsViewController(nibName: "Settings", bundle: NSBundle.mainBundle())
+		self.definesPresentationContext = true
+//    self.navigationController?.pushViewController(settingsController, animated: true)
+   self.navigationController?.pushViewController(settingsController, animated: true)
+//      self.navigationController?.presentViewController(settingsController, animated: true, completion: nil)
+  
+    
   	
   }
 

@@ -8,53 +8,56 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController, UINavigationBarDelegate  {
+class SettingsViewController : UIViewController, UINavigationBarDelegate, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource   {
 		
-  var scrollView: UIScrollView!
+  let cellIdentifier = "tableCell"
+  
+  @IBOutlet weak var tableView: UITableView!
   
   override func viewDidLoad() {
-    super.viewDidLoad()
-    let navigationBar = UINavigationBar(frame: CGRectMake(0, 0, self.view.frame.size.width, 64))
-    navigationBar.barTintColor = UIColor.flatTealColor()
-    navigationBar.tintColor = UIColor.flatWhiteColor()
-    let textAttributes = [NSForegroundColorAttributeName:UIColor.flatWhiteColor()]
-    navigationBar.titleTextAttributes = textAttributes
+    
+    let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "removeViewController")
+    let navigationBar = UINavigationBar(title: "Settings", viewWidth: UIScreen.mainScreen().bounds.width, withRightButtons: nil, andLeftButtons: [doneButton])
     navigationBar.delegate = self;
-    let navigationItem = UINavigationItem()
-    navigationItem.title = "Acknowledgements"
-    navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "removeViewController")
-    navigationBar.items = [navigationItem]
     self.view.addSubview(navigationBar)
-    
-    scrollView = UIScrollView(frame: CGRect(x: 0, y: 64, width: view.bounds.width, height: view.bounds.height-64))
-    scrollView.backgroundColor = UIColor.flatWhiteColor()
-    
-    self.view.addSubview(scrollView)
-    let textView = UITextView(frame: CGRect(x: 0, y: 64, width: view.bounds.width, height: view.bounds.height))
-    if let path = NSBundle.mainBundle().pathForResource("Licenses", ofType: "txt") {
-      let licenses = try? NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding) as String
-      textView.text = licenses
-      textView.backgroundColor = UIColor.flatWhiteColor()
-      textView.setNeedsDisplay()
-      self.view.addSubview(textView)
-      scrollView.contentSize = textView.contentSize
-    }
-    self.view.layoutIfNeeded()
+    super.viewDidLoad()
   }
-
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-      // Dispose of any resources that can be recreated.
+  
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
   }
   
   func removeViewController() {
     self.dismissViewControllerAnimated(true, completion: nil)
   }
   
-  func positionForBar(bar: UIBarPositioning) -> UIBarPosition {
-    return UIBarPosition.TopAttached
-  }
-
   
-
+  //MARK: Table View Methods
+  func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    return "Options"
+  }
+  
+  
+  func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    return 1
+  }
+  
+  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return 1
+  }
+  
+  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    let cell = UITableViewCell.init()
+    cell.textLabel?.text = "Licenses"
+    cell.tag = 100
+    return cell
+  }
+  
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    let licVC = LicensesViewController()
+    tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    self.navigationController?.pushViewController(licVC, animated: true)
+  }
+  
+  
 }
