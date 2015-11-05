@@ -13,11 +13,7 @@ class LicensesViewController : UIViewController, UINavigationBarDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    let navigationBar = UINavigationBar(title: "Licenses", viewWidth: UIScreen.mainScreen().bounds.width, withRightButtons: nil, andLeftButtons: nil)
-    navigationBar.delegate = self;
-    self.view.addSubview(navigationBar)
-    
+    self.configureNavigationBar()
     scrollView = UIScrollView(frame: CGRect(x: 0, y: 64, width: view.bounds.width, height: view.bounds.height))
     scrollView.backgroundColor = UIColor.flatWhiteColor()
     

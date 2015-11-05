@@ -8,20 +8,13 @@
 
 import Foundation
 
-extension UINavigationBar {
-  
-  convenience init(title: String, viewWidth: CGFloat, withRightButtons rightButtons: [UIBarButtonItem]?, andLeftButtons leftButtons:[UIBarButtonItem]?) {
-    self.init(frame:CGRectMake(0, 0, viewWidth, 64))
-    self.barTintColor = UIColor.flatTealColor()
-    self.tintColor = UIColor.flatWhiteColor()
+extension UIViewController
+{
+  func configureNavigationBar (){
+    
+    navigationController?.navigationBar.barTintColor = UIColor.flatTealColor()
+    navigationController?.navigationBar.tintColor = UIColor.flatWhiteColor()
     let textAttributes = [NSForegroundColorAttributeName:UIColor.flatWhiteColor()]
-    self.titleTextAttributes = textAttributes
-    let navigationItems = UINavigationItem()
-    navigationItems.title = title
-    navigationItems.leftBarButtonItems = leftButtons
-    navigationItems.rightBarButtonItems = rightButtons
-    self.items = [navigationItems]
-
+    navigationController?.navigationBar.titleTextAttributes = textAttributes
   }
-  
 }

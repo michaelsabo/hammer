@@ -31,13 +31,10 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		self.title = "Jif It"
 		self.view.backgroundColor = UIColor.flatWhiteColorDark()
 		self.viewCollection.backgroundColor = UIColor.flatWhiteColorDark()
-		self.navigationController?.navigationBar.barTintColor = UIColor.flatTealColor()
-			self.navigationController?.navigationBar.tintColor = UIColor.flatWhiteColor()
-		let textAttributes = [NSForegroundColorAttributeName:UIColor.flatWhiteColor()]
-		self.navigationController?.navigationBar.titleTextAttributes = textAttributes
+		self.configureNavigationBar()
     
     let codeIcon = UIBarButtonItem()
-    codeIcon.FAIcon = FAType.FACode
+    codeIcon.FAIcon = FAType.FAGears
     codeIcon.action = "showLicenses"
     codeIcon.target = self
     navigationItem.leftBarButtonItem = codeIcon
@@ -196,10 +193,11 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
   
   func showLicenses() {
     let settingsController = SettingsViewController(nibName: "Settings", bundle: NSBundle.mainBundle())
-		self.definesPresentationContext = true
+		
+  let navController = UINavigationController.init(rootViewController: settingsController)
 //    self.navigationController?.pushViewController(settingsController, animated: true)
-   self.navigationController?.pushViewController(settingsController, animated: true)
-//      self.navigationController?.presentViewController(settingsController, animated: true, completion: nil)
+//   self.navigationController?.pushViewController(settingsController, animated: true)
+      self.presentViewController(navController, animated: true, completion: nil)
   
     
   	

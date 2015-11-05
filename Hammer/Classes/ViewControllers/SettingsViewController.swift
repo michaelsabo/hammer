@@ -15,11 +15,11 @@ class SettingsViewController : UIViewController, UINavigationBarDelegate, UINavi
   @IBOutlet weak var tableView: UITableView!
   
   override func viewDidLoad() {
-    
+    self.title = "Settings"
+    self.configureNavigationBar()
     let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "removeViewController")
-    let navigationBar = UINavigationBar(title: "Settings", viewWidth: UIScreen.mainScreen().bounds.width, withRightButtons: nil, andLeftButtons: [doneButton])
-    navigationBar.delegate = self;
-    self.view.addSubview(navigationBar)
+		navigationController?.navigationItem.leftBarButtonItems = [doneButton]
+    self.navigationItem.leftBarButtonItem = doneButton
     super.viewDidLoad()
   }
   
