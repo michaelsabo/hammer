@@ -78,6 +78,8 @@
 		27F1D7421BE98E7A0014F2AF /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F1D7411BE98E7A0014F2AF /* NavigationBar.swift */; };
 		27F1D7431BE98E7A0014F2AF /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F1D7411BE98E7A0014F2AF /* NavigationBar.swift */; };
 		27F1D7441BE98E7A0014F2AF /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F1D7411BE98E7A0014F2AF /* NavigationBar.swift */; };
+		27F3B3281BEE80BC00B94731 /* PaddedTagLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F3B3271BEE80BC00B94731 /* PaddedTagLabel.swift */; };
+		27F3B3291BEE80BC00B94731 /* PaddedTagLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F3B3271BEE80BC00B94731 /* PaddedTagLabel.swift */; };
 		C8B8CBB3436E409112AB700A /* Pods_Hammer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F588B3F15172A45489803A8E /* Pods_Hammer.framework */; };
 /* End PBXBuildFile section */
 
@@ -113,7 +115,7 @@
 /* Begin PBXFileReference section */
 		0BE9876206B273B95EFACDD8 /* Pods-HammerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HammerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HammerTests/Pods-HammerTests.release.xcconfig"; sourceTree = "<group>"; };
 		2711AE3C1BDB2AFB000C47B2 /* CollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewLayout.swift; sourceTree = "<group>"; };
-		27197E151BC239DC00525F33 /* Hammer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hammer-Bridging-Header.h"; sourceTree = "<group>"; };
+		27197E151BC239DC00525F33 /* Hammer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Hammer-Bridging-Header.h"; path = "Classes/Objective-C/Hammer-Bridging-Header.h"; sourceTree = "<group>"; };
 		27197E161BC239DC00525F33 /* UIImage+animatedGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+animatedGIF.h"; sourceTree = "<group>"; };
 		27197E171BC239DC00525F33 /* UIImage+animatedGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+animatedGIF.m"; sourceTree = "<group>"; };
 		2719DA281BCC7B6A00BD02AD /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 		27F1D7391BE98DC10014F2AF /* Licenses.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Licenses.xib; sourceTree = "<group>"; };
 		27F1D73D1BE98E0B0014F2AF /* LicensesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicensesViewController.swift; sourceTree = "<group>"; };
 		27F1D7411BE98E7A0014F2AF /* NavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NavigationBar.swift; path = Utils/NavigationBar.swift; sourceTree = "<group>"; };
+		27F3B3271BEE80BC00B94731 /* PaddedTagLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaddedTagLabel.swift; path = Utils/PaddedTagLabel.swift; sourceTree = "<group>"; };
 		57E0D0BB6577F1CE7A1D237C /* Pods-Hammer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hammer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hammer/Pods-Hammer.debug.xcconfig"; sourceTree = "<group>"; };
 		59DC8D6AF48616A7006723F2 /* Pods-Hammer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hammer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hammer/Pods-Hammer.release.xcconfig"; sourceTree = "<group>"; };
 		908BDBAEAF2106D88927E9A6 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -210,7 +213,6 @@
 			children = (
 				27197E161BC239DC00525F33 /* UIImage+animatedGIF.h */,
 				27197E171BC239DC00525F33 /* UIImage+animatedGIF.m */,
-				27197E151BC239DC00525F33 /* Hammer-Bridging-Header.h */,
 			);
 			path = "Objective-C";
 			sourceTree = "<group>";
@@ -370,7 +372,6 @@
 				27D689AE1BC8596000701F4B /* Service */,
 				27197E131BC239B500525F33 /* Objective-C */,
 				27C75CB11BC23303008AC322 /* Helpers */,
-				276C7FFC1BC211120028DC0D /* Cells */,
 				276C7FF21BC2092E0028DC0D /* Models */,
 				276C7FF31BC2092E0028DC0D /* ViewControllers */,
 				276C7FF51BC2092E0028DC0D /* ViewModels */,
@@ -413,12 +414,14 @@
 			children = (
 				276C7FFD1BC2116F0028DC0D /* ImageCell.swift */,
 			);
-			path = Cells;
+			name = Cells;
+			path = ../Cells;
 			sourceTree = "<group>";
 		};
 		278CA0191BCDAA87000904D7 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				27197E151BC239DC00525F33 /* Hammer-Bridging-Header.h */,
 				276C7FB21BC204EE0028DC0D /* AppDelegate.swift */,
 			);
 			name = Application;
@@ -427,6 +430,7 @@
 		27BAA1AC1BCCCBCC00EAE554 /* TableViews */ = {
 			isa = PBXGroup;
 			children = (
+				276C7FFC1BC211120028DC0D /* Cells */,
 				2711AE3C1BDB2AFB000C47B2 /* CollectionViewLayout.swift */,
 			);
 			path = TableViews;
@@ -436,6 +440,7 @@
 			isa = PBXGroup;
 			children = (
 				27F1D7411BE98E7A0014F2AF /* NavigationBar.swift */,
+				27F3B3271BEE80BC00B94731 /* PaddedTagLabel.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -768,6 +773,7 @@
 				278983BF1BC6234C004C1FAA /* Tag.swift in Sources */,
 				27F1D73E1BE98E0B0014F2AF /* LicensesViewController.swift in Sources */,
 				278CA01E1BCDB09E000904D7 /* ServiceConfig.swift in Sources */,
+				27F3B3281BEE80BC00B94731 /* PaddedTagLabel.swift in Sources */,
 				279692361BE9AE5A00063A98 /* SettingsViewController.swift in Sources */,
 				27197E181BC239DC00525F33 /* UIImage+animatedGIF.m in Sources */,
 				278CA0171BCDA9CE000904D7 /* GifService.swift in Sources */,
@@ -814,6 +820,7 @@
 				27D16A451BDC1A55000B75B2 /* LoadingAnimation.swift in Sources */,
 				2739941B1BE5521300E4399C /* TestingHelper.swift in Sources */,
 				273994151BE54FFC00E4399C /* TagTest.swift in Sources */,
+				27F3B3291BEE80BC00B94731 /* PaddedTagLabel.swift in Sources */,
 				273994131BE54FEF00E4399C /* GifTest.swift in Sources */,
 				276C7FFF1BC2116F0028DC0D /* ImageCell.swift in Sources */,
 			);

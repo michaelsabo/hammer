@@ -8,6 +8,7 @@
 
 import Foundation
 import ReactiveCocoa
+import MobileCoreServices
 
 class DisplayViewModel : NSObject {
 	
@@ -79,6 +80,14 @@ class DisplayViewModel : NSObject {
   func cleanUpSignals() {
     self.gifRequestObserver.sendCompleted()
     self.tagRequestObserver.sendCompleted()
+  }
+  
+  func shareButtonClicked() {
+    let pasteboard = UIPasteboard.generalPasteboard()
+    pasteboard.persistent = true
+    if let copiedGif = self.gif.value.gifData {
+      pasteboard.setData(copiedGif, forPasteboardType: kUTTypeGIF as String)
+    }
   }
 
 	deinit {
