@@ -34,7 +34,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		self.configureNavigationBar()
     
     let codeIcon = UIBarButtonItem()
-    codeIcon.FAIcon = FAType.FAGears
+    codeIcon.FAIcon = FAType.FAGear
     codeIcon.action = "showLicenses"
     codeIcon.target = self
     navigationItem.leftBarButtonItem = codeIcon

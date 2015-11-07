@@ -1,14 +1,17 @@
 PODS:
-  - Alamofire (3.1.1)
+  - Alamofire (3.1.2)
   - ChameleonFramework/Default (2.0.4)
   - ChameleonFramework/Swift (2.0.4):
     - ChameleonFramework/Default
-  - Crashlytics (3.3.4)
-  - Fabric (1.5.5):
-    - Fabric/Base (= 1.5.5)
-  - Fabric/Base (1.5.5)
+  - Crashlytics (3.4.0):
+    - Fabric (~> 1.6.0)
+  - Fabric (1.6.0):
+    - Fabric/Base (= 1.6.0)
+  - Fabric/Base (1.6.0)
   - Font-Awesome-Swift (1.1.0)
+  - Nimble (3.0.0)
   - NVActivityIndicatorView (2.1)
+  - Quick (0.8.0)
   - SwiftyJSON (2.3.1)
 
 DEPENDENCIES:
@@ -17,7 +20,9 @@ DEPENDENCIES:
   - Crashlytics
   - Fabric
   - Font-Awesome-Swift (~> 1.1.0)
+  - Nimble (= 3.0.0)
   - NVActivityIndicatorView
+  - Quick (~> 0.8.0)
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
 
 EXTERNAL SOURCES:
@@ -30,12 +35,14 @@ CHECKOUT OPTIONS:
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 SPEC CHECKSUMS:
-  Alamofire: 9b0a7188b961a03914a99304488bd226b0e46c0e
+  Alamofire: 7c16ca65f3c7e681fd925fd7f2dec7747ff96855
   ChameleonFramework: 5abe69b1f2a6cc79c3c435fcd9d3d855748225ee
-  Crashlytics: 41c082440d2e14da444186fff65e79c0b4b35d4c
-  Fabric: 190bf1a6eb65f7500de1347d027d2e59a7e53db1
+  Crashlytics: 1ee87895c37472eb3f01f409ea1654a464d2f8d4
+  Fabric: d737eda3a26ac940a5430230eedb35f16b226131
   Font-Awesome-Swift: e9c7501987071d207a098bb9b3465d1f94ce7b39
+  Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
   NVActivityIndicatorView: 84aa48f7ec1efbfd0645e9f469097d94c6f65417
+  Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
   SwiftyJSON: 592b53bee5ef3dd9b3bebc6b9cb7ee35426ae8c3
 
 COCOAPODS: 0.39.0

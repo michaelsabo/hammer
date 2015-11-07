@@ -34,22 +34,32 @@ class SettingsViewController : UIViewController, UINavigationBarDelegate, UINavi
   
   //MARK: Table View Methods
   func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return "Options"
+    if (section == 0) {
+      return "Customizations"
+    } else {
+      return "Legalese"
+    }
   }
   
   
   func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-    return 1
+    return 2
   }
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 1
+    if (section == 0) {
+      return 0
+    } else {
+      return 1
+    }
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = UITableViewCell.init()
-    cell.textLabel?.text = "Licenses"
-    cell.tag = 100
+    if (indexPath.section == 1) {
+      cell.textLabel?.text = "Licenses"
+      cell.tag = 100
+    }
     return cell
   }
   
