@@ -11,6 +11,7 @@ import ReactiveCocoa
 
 class HomeViewModel : NSObject {
 	
+  let title: String = "Gallery"
 	let searchText = MutableProperty<String>("")
 	let isSearching = MutableProperty<Bool>(false)
 	

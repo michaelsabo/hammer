@@ -80,6 +80,8 @@
 		27F1D7441BE98E7A0014F2AF /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F1D7411BE98E7A0014F2AF /* NavigationBar.swift */; };
 		27F3B3281BEE80BC00B94731 /* PaddedTagLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F3B3271BEE80BC00B94731 /* PaddedTagLabel.swift */; };
 		27F3B3291BEE80BC00B94731 /* PaddedTagLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F3B3271BEE80BC00B94731 /* PaddedTagLabel.swift */; };
+		27F3B32B1BEE89CE00B94731 /* ScreenHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F3B32A1BEE89CE00B94731 /* ScreenHelpers.swift */; };
+		27F3B32C1BEE89CE00B94731 /* ScreenHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F3B32A1BEE89CE00B94731 /* ScreenHelpers.swift */; };
 		C8B8CBB3436E409112AB700A /* Pods_Hammer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F588B3F15172A45489803A8E /* Pods_Hammer.framework */; };
 /* End PBXBuildFile section */
 
@@ -166,6 +168,7 @@
 		27F1D73D1BE98E0B0014F2AF /* LicensesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicensesViewController.swift; sourceTree = "<group>"; };
 		27F1D7411BE98E7A0014F2AF /* NavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NavigationBar.swift; path = Utils/NavigationBar.swift; sourceTree = "<group>"; };
 		27F3B3271BEE80BC00B94731 /* PaddedTagLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaddedTagLabel.swift; path = Utils/PaddedTagLabel.swift; sourceTree = "<group>"; };
+		27F3B32A1BEE89CE00B94731 /* ScreenHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenHelpers.swift; sourceTree = "<group>"; };
 		57E0D0BB6577F1CE7A1D237C /* Pods-Hammer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hammer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hammer/Pods-Hammer.debug.xcconfig"; sourceTree = "<group>"; };
 		59DC8D6AF48616A7006723F2 /* Pods-Hammer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hammer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hammer/Pods-Hammer.release.xcconfig"; sourceTree = "<group>"; };
 		908BDBAEAF2106D88927E9A6 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -441,6 +444,7 @@
 			children = (
 				27F1D7411BE98E7A0014F2AF /* NavigationBar.swift */,
 				27F3B3271BEE80BC00B94731 /* PaddedTagLabel.swift */,
+				27F3B32A1BEE89CE00B94731 /* ScreenHelpers.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -783,6 +787,7 @@
 				27BAA1A91BCCC97900EAE554 /* RAC.swift in Sources */,
 				2719DA2C1BCC7F3A00BD02AD /* TagService.swift in Sources */,
 				276C7FB31BC204EE0028DC0D /* AppDelegate.swift in Sources */,
+				27F3B32B1BEE89CE00B94731 /* ScreenHelpers.swift in Sources */,
 				2783332A1BDBE1FA00F4786E /* DisplayViewModel.swift in Sources */,
 				2711AE3D1BDB2AFB000C47B2 /* CollectionViewLayout.swift in Sources */,
 				276C7FF91BC2097A0028DC0D /* HomeViewController.swift in Sources */,
@@ -799,6 +804,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27F3B32C1BEE89CE00B94731 /* ScreenHelpers.swift in Sources */,
 				27F1D73F1BE98E0B0014F2AF /* LicensesViewController.swift in Sources */,
 				27981B271BED54A90069C1DC /* SettingsViewModel.swift in Sources */,
 				273994241BE5550D00E4399C /* DisplayViewController.swift in Sources */,

@@ -28,7 +28,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		self.title = "Jif It"
+		self.title = self.homeViewModel.title
 		self.view.backgroundColor = UIColor.flatWhiteColorDark()
 		self.viewCollection.backgroundColor = UIColor.flatWhiteColorDark()
 		self.configureNavigationBar()
@@ -75,9 +75,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		autocompleteTableView.translatesAutoresizingMaskIntoConstraints = false
 		autocompleteTableView.delegate = self
 		autocompleteTableView.dataSource = self
-		if (UIScreen.mainScreen().bounds.width > 400) {
+		if (Screen.screenWidth > 400) {
 			self.viewCollection.collectionViewLayout = LargeCollectionViewLayout.init()
-		} else if (UIScreen.mainScreen().bounds.width > 350) {
+		} else if (Screen.screenWidth > 350) {
 			self.viewCollection.collectionViewLayout = MediumCollectionViewLayout.init()
 		} else {
 			self.viewCollection.collectionViewLayout = SmallCollectionViewLayout.init()

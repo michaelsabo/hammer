@@ -22,7 +22,8 @@ class DisplayViewController: UIViewController {
 		var displayGifViewModel: DisplayViewModel!
   
     var cocoaActionShare: CocoaAction!
-	
+		var shareButton: UIBarButtonItem?
+  
 		required init?(coder aDecoder: NSCoder) {
 			super.init(coder: aDecoder)
 		}
@@ -36,7 +37,7 @@ class DisplayViewController: UIViewController {
 		func setupView() {
 			self.view.backgroundColor = UIColor.flatWhiteColorDark()
 			self.configureNavigationBar()
-			let loadingFrame = CGRectMake((self.view.frame.size.width/2.0)-25, (self.imageView.frame.size.height/2)-20, 50.0, 40.0)
+			let loadingFrame = CGRectMake((Screen.screenWidth/2.0)-30, (self.imageView.frame.origin.y)+(self.imageView.frame.size.height/2)-20, 60.0, 50.0)
 			let loadingView = NVActivityIndicatorView(frame: loadingFrame, type: .LineScalePulseOut, color: UIColor.flatTealColor())
 			loadingView.tag = kLoadingAnimationTag
 			self.view.addSubview(loadingView)
@@ -49,7 +50,7 @@ class DisplayViewController: UIViewController {
         return SignalProducer.empty
       }
       cocoaActionShare = CocoaAction(shareAction, input: ())
-      navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: cocoaActionShare, action: CocoaAction.selector)
+      shareButton = UIBarButtonItem(barButtonSystemItem: .Action, target: cocoaActionShare, action: CocoaAction.selector)
       
       self.displayGifViewModel.gifRequestSignal
         .observeNext({[unowned self] sink in
@@ -57,6 +58,7 @@ class DisplayViewController: UIViewController {
           animation?.stopAnimation()
           animation?.removeFromSuperview()
           self.imageView.image = self.displayGifViewModel.gif.value.gifImage
+          self.navigationItem.rightBarButtonItem = self.shareButton
       })
       
       self.displayGifViewModel.tagRequestSignal
