@@ -16,7 +16,7 @@ class DisplayViewController: UIViewController {
 
 		@IBOutlet weak var imageView: UIImageView!
 		weak var gifImage: UIImage?
-    weak var gif: Gif?
+    var gif: Gif?
 		weak var gifData: NSData?
 		var pasteBoard: UIPasteboard?
 		var tags: [Tag]?
@@ -36,8 +36,7 @@ class DisplayViewController: UIViewController {
 		func setupView() {
 			navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: "copyImageToClipboard")
 			self.view.backgroundColor = UIColor.flatWhiteColorDark()
-			self.navigationController?.navigationBar.barTintColor = UIColor.flatTealColor()
-			self.navigationController?.navigationBar.tintColor = UIColor.flatWhiteColor()
+			self.configureNavigationBar()
 			let loadingFrame = CGRectMake((self.view.frame.size.width/2.0)-25, (self.imageView.frame.size.height/2)-20, 50.0, 40.0)
 			let loadingView = NVActivityIndicatorView(frame: loadingFrame, type: .LineScalePulseOut, color: UIColor.flatTealColor())
 			loadingView.tag = kLoadingAnimationTag

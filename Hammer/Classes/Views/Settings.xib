@@ -4,13 +4,33 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SettingsViewController" customModule="Hammer" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SettingsViewController" customModule="Hammer" customModuleProvider="target">
+            <connections>
+                <outlet property="tableView" destination="sek-Ki-US7" id="WdV-AJ-ETt"/>
+                <outlet property="view" destination="iN0-l3-epB" id="cv1-6i-u5q"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="sek-Ki-US7">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="591"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="2pO-fY-KaX"/>
+                        <outlet property="delegate" destination="-1" id="AT4-88-vQl"/>
+                    </connections>
+                </tableView>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <constraints>
+                <constraint firstItem="sek-Ki-US7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="HV1-rw-NUT"/>
+                <constraint firstItem="sek-Ki-US7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="OTd-g2-bIA"/>
+                <constraint firstAttribute="bottom" secondItem="sek-Ki-US7" secondAttribute="bottom" constant="9" id="RHd-Rd-Tyx"/>
+                <constraint firstAttribute="trailing" secondItem="sek-Ki-US7" secondAttribute="trailing" id="oRV-66-LqA"/>
+            </constraints>
         </view>
     </objects>
 </document>

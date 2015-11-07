@@ -17,11 +17,11 @@ enum TagFields : String {
 	case Tags = "tags"
 }
 
-class Tag {
+struct Tag {
 	var id: String
 	var text: String
 	
-	required init(json: JSON) {
+	init(json: JSON) {
 		self.id = json[TagFields.Id.rawValue].stringValue
 		self.text = json[TagFields.Text.rawValue].stringValue
 	}
