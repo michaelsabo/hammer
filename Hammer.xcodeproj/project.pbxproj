@@ -82,6 +82,8 @@
 		27F3B3291BEE80BC00B94731 /* PaddedTagLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F3B3271BEE80BC00B94731 /* PaddedTagLabel.swift */; };
 		27F3B32B1BEE89CE00B94731 /* ScreenHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F3B32A1BEE89CE00B94731 /* ScreenHelpers.swift */; };
 		27F3B32C1BEE89CE00B94731 /* ScreenHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F3B32A1BEE89CE00B94731 /* ScreenHelpers.swift */; };
+		27F3B32F1BEE961B00B94731 /* GifServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F3B32E1BEE961B00B94731 /* GifServiceSpec.swift */; };
+		27F3B3311BEEA7BC00B94731 /* TagServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F3B3301BEEA7BC00B94731 /* TagServiceSpec.swift */; };
 		C8B8CBB3436E409112AB700A /* Pods_Hammer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F588B3F15172A45489803A8E /* Pods_Hammer.framework */; };
 /* End PBXBuildFile section */
 
@@ -169,6 +171,8 @@
 		27F1D7411BE98E7A0014F2AF /* NavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NavigationBar.swift; path = Utils/NavigationBar.swift; sourceTree = "<group>"; };
 		27F3B3271BEE80BC00B94731 /* PaddedTagLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaddedTagLabel.swift; path = Utils/PaddedTagLabel.swift; sourceTree = "<group>"; };
 		27F3B32A1BEE89CE00B94731 /* ScreenHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenHelpers.swift; sourceTree = "<group>"; };
+		27F3B32E1BEE961B00B94731 /* GifServiceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifServiceSpec.swift; sourceTree = "<group>"; };
+		27F3B3301BEEA7BC00B94731 /* TagServiceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagServiceSpec.swift; sourceTree = "<group>"; };
 		57E0D0BB6577F1CE7A1D237C /* Pods-Hammer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hammer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hammer/Pods-Hammer.debug.xcconfig"; sourceTree = "<group>"; };
 		59DC8D6AF48616A7006723F2 /* Pods-Hammer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hammer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hammer/Pods-Hammer.release.xcconfig"; sourceTree = "<group>"; };
 		908BDBAEAF2106D88927E9A6 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -348,6 +352,7 @@
 		276C7FC91BC204EE0028DC0D /* HammerTests */ = {
 			isa = PBXGroup;
 			children = (
+				27F3B32D1BEE960800B94731 /* Services */,
 				273994191BE551FF00E4399C /* Helpers */,
 				273994161BE550D400E4399C /* Resources */,
 				273994101BE54FC800E4399C /* Models */,
@@ -457,6 +462,15 @@
 				278CA01D1BCDB09E000904D7 /* ServiceConfig.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		27F3B32D1BEE960800B94731 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				27F3B32E1BEE961B00B94731 /* GifServiceSpec.swift */,
+				27F3B3301BEEA7BC00B94731 /* TagServiceSpec.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		71F7D88780EDD987612499BA /* Frameworks */ = {
@@ -823,8 +837,10 @@
 				273994201BE554C600E4399C /* Gif.swift in Sources */,
 				278CA01F1BCDB09E000904D7 /* ServiceConfig.swift in Sources */,
 				278CA0181BCDA9CE000904D7 /* GifService.swift in Sources */,
+				27F3B3311BEEA7BC00B94731 /* TagServiceSpec.swift in Sources */,
 				27D16A451BDC1A55000B75B2 /* LoadingAnimation.swift in Sources */,
 				2739941B1BE5521300E4399C /* TestingHelper.swift in Sources */,
+				27F3B32F1BEE961B00B94731 /* GifServiceSpec.swift in Sources */,
 				273994151BE54FFC00E4399C /* TagTest.swift in Sources */,
 				27F3B3291BEE80BC00B94731 /* PaddedTagLabel.swift in Sources */,
 				273994131BE54FEF00E4399C /* GifTest.swift in Sources */,

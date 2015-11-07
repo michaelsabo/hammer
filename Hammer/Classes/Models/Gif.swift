@@ -51,6 +51,14 @@ struct Gif: Equatable {
 		self.thumbnailUrl = json[GifFields.ImgurThumbnailUrl.rawValue].stringValue
 		self.index = index
 	}
+  
+  init(id: String, url: String, thumbnailUrl: String, index: Int) {
+    self.init()
+    self.id =  id
+    self.url = url
+    self.thumbnailUrl = thumbnailUrl
+    self.index = index
+  }
 
 	static func getThumbnailImageForGif(var gif: Gif, completionHandler: (Gif?, Bool, NSError?) -> Void) {
 		Alamofire.request(.GET, gif.thumbnailUrl)

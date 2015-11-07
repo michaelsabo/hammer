@@ -25,6 +25,11 @@ struct Tag {
 		self.id = json[TagFields.Id.rawValue].stringValue
 		self.text = json[TagFields.Text.rawValue].stringValue
 	}
+  
+  init(id: String, text: String) {
+    self.id =  id
+    self.text = text
+  }
 }
 
 class TagsResponse {
