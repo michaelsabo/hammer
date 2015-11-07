@@ -15,10 +15,8 @@ class TagServiceSpec: QuickSpec {
   override func spec() {
     
     var tagService: TagService!
-    var tag: Tag!
     beforeEach {
       tagService = TagService()
-      tag = Tag(id: "the-office", text: "the office")
     }
     
     describe("Tag Service") {

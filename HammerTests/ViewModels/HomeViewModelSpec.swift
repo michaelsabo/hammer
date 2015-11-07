@@ -8,19 +8,23 @@
 
 import Quick
 import Nimble
+import ReactiveCocoa
+import SwiftyJSON
 
 class HomeViewModelSpec: QuickSpec {
   
   override func spec() {
-
+		
       describe("HomeViewModel") {
         var homeViewModel: HomeViewModel!
+       
         beforeEach {
           homeViewModel = HomeViewModel(searchTagService: TagService(), gifRetrieveService: GifService())
+          
         }
         
-        it("should return gifs after being initialized") {
-          expect(homeViewModel.gifsForDisplay.value.count).toEventually(beGreaterThan(0), timeout: 4)
+        it("should be empty ") {
+          expect(homeViewModel.foundTags.value.count).to(equal(0))
         }
 
   
