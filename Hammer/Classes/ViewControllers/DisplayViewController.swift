@@ -16,7 +16,7 @@ class DisplayViewController: UIViewController {
 
 		@IBOutlet weak var imageView: UIImageView!
 		weak var gifImage: UIImage?
-    weak var gif: Gif?
+    var gif: Gif?
 		weak var gifData: NSData?
 		var pasteBoard: UIPasteboard?
 		var tags: [Tag]?

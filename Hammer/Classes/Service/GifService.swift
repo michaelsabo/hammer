@@ -58,7 +58,7 @@ class GifService {
 		}
 	}
 	
-	func retrieveThumbnailimageFor(gif gif: Gif) -> SignalProducer<Gif, NSError> {
+	func retrieveThumbnailimageFor(var gif gif: Gif) -> SignalProducer<Gif, NSError> {
 		return SignalProducer { sink, _ in
 			Alamofire.request(.GET, gif.thumbnailUrl)
 				.responseData { response in
@@ -75,7 +75,7 @@ class GifService {
 		}
 	}
 	
-	func retrieveImageDataFor(gif gif: Gif) -> SignalProducer<Gif, NSError> {
+	func retrieveImageDataFor(var gif gif: Gif) -> SignalProducer<Gif, NSError> {
 		return SignalProducer { sink, _ in
 			Alamofire.request(.GET, gif.url)
 				.responseData { response in
