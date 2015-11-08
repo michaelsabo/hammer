@@ -24,6 +24,11 @@ class GifResponse {
 		response = ServiceResponse.Success
 		gifs = gifsJSON["gifs"].arrayValue.map { Gif(json: $0, index: count++) }
 	}
+  
+  init() {
+    self.gifs = [Gif]()
+    self.response = ServiceResponse.Success
+  }
 }
 
 class Gif: Equatable {

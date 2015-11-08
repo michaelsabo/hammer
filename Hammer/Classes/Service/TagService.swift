@@ -10,7 +10,7 @@ import ReactiveCocoa
 import Alamofire
 import SwiftyJSON
 
-struct TagService {
+class TagService {
 
 	
 	func getEndpointForTags() -> String {

@@ -54,7 +54,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		})
     
 		self.homeViewModel.searchingTagsSignal.producer.start({ s in
-      
 			self.adjustHeightOfTableView()
 			self.autocompleteTableView.reloadData()
 		})
@@ -184,14 +183,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
   
   func showLicenses() {
     let settingsController = SettingsViewController(nibName: "Settings", bundle: NSBundle.mainBundle())
-		
-  let navController = UINavigationController.init(rootViewController: settingsController)
-//    self.navigationController?.pushViewController(settingsController, animated: true)
-//   self.navigationController?.pushViewController(settingsController, animated: true)
-      self.presentViewController(navController, animated: true, completion: nil)
-  
-    
-  	
+    let navController = UINavigationController.init(rootViewController: settingsController)
+    self.presentViewController(navController, animated: true, completion: nil)
   }
 
 	

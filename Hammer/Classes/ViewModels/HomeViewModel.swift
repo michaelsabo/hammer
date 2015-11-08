@@ -16,13 +16,11 @@ class HomeViewModel : NSObject {
 	let isSearching = MutableProperty<Bool>(false)
 	
 	let foundTags = MutableProperty<[Tag]>([Tag]())
-	let allTags =  MutableProperty<[Tag]>([Tag]())
+	var allTags =  MutableProperty<[Tag]>([Tag]())
 	
 	var gifCollection = MutableProperty<[Gif]>([Gif]())
 	var gifsForDisplay = MutableProperty<[Gif]>([Gif]())
 	
-  var tags = [Tag]()
-  
   let isSearchingSignal: Signal<Bool, NoError>
   private let isSearchingObserver: Observer<Bool, NoError>
   
@@ -36,8 +34,7 @@ class HomeViewModel : NSObject {
     self.isSearchingSignal = searchingSignal
     self.isSearchingObserver = searchingObserver
 		super.init()
-		
-    
+
 		gifService.getGifsResponse()
 			.on(next: {
 				response in
@@ -53,14 +50,12 @@ class HomeViewModel : NSObject {
 				response in
 					if (response.tags.count > 0) {
 						self.allTags.value = response.tags
-            self.tags = response.tags
-            self.allTags.value = self.tags
 					}
 			})
 			.start()
 		
     isSearchingSignal
-      .observeNext({ [unowned self] (searching:Bool) in
+      .observeNext({ (searching:Bool) in
         if (!searching) {
           self.gifsForDisplay.value = self.gifCollection.value
         }

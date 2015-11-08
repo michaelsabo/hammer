@@ -8,6 +8,7 @@
 
 import XCTest
 import SwiftyJSON
+import Hammer
 
 class TagTest: XCTestCase {
     

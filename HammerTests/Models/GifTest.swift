@@ -8,7 +8,7 @@
 
 import XCTest
 import SwiftyJSON
-
+import Hammer
 
 class GifTest: XCTestCase {
 	

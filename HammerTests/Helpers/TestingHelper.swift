@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import Hammer
 
 class TestingHelper {
     

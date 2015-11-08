@@ -10,16 +10,35 @@ import Foundation
 import SwiftyJSON
 import ReactiveCocoa
 
+
 class MockGifService : GifService {
   
-//  let gifs =  GifResponse(gifsJSON: JSON(data: TestingHelper.jsonFromFile("gifs")))
-//	
-//  
-//  override func getGifsResponse() -> SignalProducer<GifResponse, NSError> {
-//    return SignalProducer { observer, disposable in
-//      observer.sendNext(self.gifs)
-//      observer.sendCompleted()
-//    }
-//  }
+  let gifResponse =  GifResponse(gifsJSON: JSON(data: TestingHelper.jsonFromFile("gifs")))
+	
+  
+  override func getGifsResponse() -> SignalProducer<GifResponse, NSError> {
+    return SignalProducer { observer, disposable in
+      observer.sendNext(self.gifResponse)
+      observer.sendCompleted()
+    }
+  }
+  
+  override func getGifsForTagSearchResponse(query: String) -> SignalProducer<GifResponse, NSError> {
+    return SignalProducer { observer, disposable in
+    	let singleGif = GifResponse()
+      singleGif.gifs = [self.gifResponse.gifs[0]]
+      observer.sendNext(singleGif)
+      observer.sendCompleted()
+    }
+  }
+  
+  override func retrieveImageDataFor(gif gif: Gif) -> SignalProducer<Gif, NSError> {
+    return SignalProducer { observer, disposable in
+      print("in here")
+      let singleGif = self.gifResponse.gifs[0]
+      observer.sendNext(singleGif)
+      observer.sendCompleted()
+    }
+  }
   
 }

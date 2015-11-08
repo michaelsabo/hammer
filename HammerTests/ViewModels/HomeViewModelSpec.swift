@@ -15,26 +15,46 @@ class HomeViewModelSpec: QuickSpec {
   
   override func spec() {
 		
-//      describe("HomeViewModel") {
-//        let homeViewModel = HomeViewModel(searchTagService: MockTagService(), gifRetrieveService: MockGifService())
-//
-//        
-//        it("should be empty ") {
-//          let (producer, observer) = SignalProducer<String, NoError>.buffer()
-//          producer.start()
-//          
-//          homeViewModel.searchText <~ producer
-//          
-//          homeViewModel.searchingTagsSignal.producer.start({ s in
-//                expect(s.value?.count).to(equal(1))
-//          })
-//          observer.sendNext("no")
-//          
-//          
-//        }
-//
-//  
-//    }
+      describe("HomeViewModel") {
+        let homeViewModel = HomeViewModel(searchTagService: MockTagService(), gifRetrieveService: MockGifService())
+
+        
+        context("searching for gifs") {
+          let (producer, observer) = SignalProducer<String, NoError>.buffer()
+          producer.start()
+          homeViewModel.searchText <~ producer
+          
+          it("should return found tags when searching ") {
+            var searching = false
+            homeViewModel.isSearchingSignal.observeNext({searching = $0})
+            homeViewModel.searchingTagsSignal.startWithNext({tags in
+              expect(homeViewModel.foundTags.value.count).to(equal(1))
+              expect(searching).to(beTrue())
+              homeViewModel.endSeaching()
+              expect(searching).to(beFalse())
+            })
+            observer.sendNext("dwight")
+          }
+          
+          it("should update the gifs being displayed when a match is found ") {
+            expect(homeViewModel.gifsForDisplay.value.count).to(equal(3))
+            observer.sendNext("dwight")
+            homeViewModel.getGifsForTagSearch()
+            expect(homeViewModel.gifsForDisplay.value.count).to(equal(1))
+            expect(homeViewModel.gifsForDisplay.value.first?.id).to(equal("p5tJEpm"))
+          }
+          
+          it("should update the gif collection when a user is done searching ") {
+            observer.sendNext("dwight")
+            homeViewModel.getGifsForTagSearch()
+            expect(homeViewModel.gifsForDisplay.value.count).to(equal(1))
+            observer.sendNext("")
+            expect(homeViewModel.gifsForDisplay.value.count).to(equal(3))
+          }
+        }
+        
+        
+    }
   }
   
   

@@ -24,8 +24,8 @@ class DisplayViewModel : NSObject {
   private let gifRequestObserver: Observer<Bool, NoError>
   private let tagRequestObserver: Observer<Bool, NoError>
   
-	private let gifService: GifService
-	private let tagService: TagService
+	let gifService: GifService
+  let tagService: TagService
 	
 	init(gifService: GifService, tagService: TagService, gif: Gif) {
 		
@@ -42,40 +42,34 @@ class DisplayViewModel : NSObject {
     self.tagRequestObserver = tagObserver
     
 		super.init()
-		
-		gifService.retrieveImageDataFor(gif: gif)
-			.on(next: { [unowned self]
-				response in
-					guard (response.gifData != nil) else {
-						return
-					}
-					self.gif.value = response
+    startGifImageSingal()
+    startTagSignal()
+	}
+  
+  func startGifImageSingal() {
+    self.gifService.retrieveImageDataFor(gif: self.gif.value)
+      .on(next: { [unowned self]
+        response in
+        guard (response.gifData != nil) else {
+          return
+        }
+        self.gif.value = response
         }, completed: {
           self.gifRequestObserver.sendNext(true)
       }).start()
-		
-		tagService.getTagsForGifId(gif.id)
-			.on(next: { [unowned self]
-				response in
-					if (response.tags.count > 0) {
-						self.tags.value = response.tags
-					}
+  }
+  
+  func startTagSignal() {
+    self.tagService.getTagsForGifId(self.gif.value.id)
+      .on(next: { [unowned self]
+        response in
+        if (response.tags.count > 0) {
+          self.tags.value = response.tags
+        }
         }, completed: {
           self.tagRequestObserver.sendNext(true)
       }).start()
-	}
-	
-	lazy var imageReturned: SignalProducer<UIImage, NoError> = {
-		return self.gif.producer
-			.filter { $0.gifImage != nil }
-			.map { [unowned self]  (value: Gif) -> UIImage in
-				self.searchComplete.value = true
-				if let image = value.gifImage {
-					return image
-				}
-				return UIImage()
-			}
-		}()
+  }
   
   func cleanUpSignals() {
     self.gifRequestObserver.sendCompleted()

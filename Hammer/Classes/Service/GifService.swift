@@ -11,7 +11,7 @@ import ReactiveCocoa
 import Alamofire
 import SwiftyJSON
 
-struct GifService {
+class GifService {
 
 	func endpointForGifs() -> String {
 			return Request.forEndpoint("gifs")

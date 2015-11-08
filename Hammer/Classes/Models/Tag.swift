@@ -26,10 +26,10 @@ class Tag {
 		self.text = json[TagFields.Text.rawValue].stringValue
 	}
   
-//  init(id: String, text: String) {
-//    self.id =  id
-//    self.text = text
-//  }
+  init(id: String, text: String) {
+    self.id =  id
+    self.text = text
+  }
 }
 
 class TagsResponse {
@@ -39,4 +39,8 @@ class TagsResponse {
 		self.tags = json["tags"].arrayValue.map { Tag(json: $0) }
     self.response = ServiceResponse.Success
 	}
+  init () {
+    self.tags = [Tag]()
+    self.response = ServiceResponse.Success
+  }
 }

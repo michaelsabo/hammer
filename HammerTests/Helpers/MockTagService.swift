@@ -10,16 +10,33 @@ import Foundation
 import SwiftyJSON
 import ReactiveCocoa
 
+
 class MockTagService : TagService {
   
-//  let tags =  TagsResponse(json: JSON(data: TestingHelper.jsonFromFile("tags")))
-//  
-//  
-//  override func getAllTags() -> SignalProducer<TagsResponse, NSError> {
-//    return SignalProducer { observer, disposable in
-//      observer.sendNext(self.tags)
-//      observer.sendCompleted()
-//    }
-//  }
+  let tagResponse =  TagsResponse(json: JSON(data: TestingHelper.jsonFromFile("tags")))
+  
+  
+  override func getAllTags() -> SignalProducer<TagsResponse, NSError> {
+    return SignalProducer { observer, disposable in
+      observer.sendNext(self.tagResponse)
+      observer.sendCompleted()
+    }
+  }
+  
+  override func getTagsForGifId(id: String) -> SignalProducer<TagsResponse, NSError> {
+    return SignalProducer { observer, disposable in
+      if (id == "none") {
+        observer.sendNext(TagsResponse())
+        observer.sendCompleted()
+      	return
+      }
+      let stubbedTags = TagsResponse()
+      for var i=0; i < 3; i++ {
+        stubbedTags.tags.append(self.tagResponse.tags[i])
+      }
+      observer.sendNext(stubbedTags)
+      observer.sendCompleted()
+    }
+  }
   
 }
