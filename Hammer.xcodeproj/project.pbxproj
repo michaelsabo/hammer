@@ -68,6 +68,8 @@
 		27CD49AD1BEF039700586B4D /* PaddedTagLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F3B3271BEE80BC00B94731 /* PaddedTagLabel.swift */; };
 		27CD49AE1BEF039700586B4D /* ScreenHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F3B32A1BEE89CE00B94731 /* ScreenHelpers.swift */; };
 		27CD49B01BEF0C5100586B4D /* DisplayViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CD49AF1BEF0C5100586B4D /* DisplayViewModelSpec.swift */; };
+		27CD49B11BEF1FE800586B4D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273994271BE5560900E4399C /* Foundation.framework */; };
+		27CD49B21BEF1FEE00586B4D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273994251BE555C600E4399C /* UIKit.framework */; };
 		27D16A441BDC1A55000B75B2 /* LoadingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D16A431BDC1A55000B75B2 /* LoadingAnimation.swift */; };
 		27F1D73A1BE98DC10014F2AF /* Licenses.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27F1D7391BE98DC10014F2AF /* Licenses.xib */; };
 		27F1D73C1BE98DC10014F2AF /* Licenses.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27F1D7391BE98DC10014F2AF /* Licenses.xib */; };
@@ -182,6 +184,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27CD49B21BEF1FEE00586B4D /* UIKit.framework in Frameworks */,
+				27CD49B11BEF1FE800586B4D /* Foundation.framework in Frameworks */,
 				273411011BC8515400674FC7 /* Result.framework in Frameworks */,
 				273410FF1BC8515400674FC7 /* ReactiveCocoa.framework in Frameworks */,
 				C8B8CBB3436E409112AB700A /* Pods_Hammer.framework in Frameworks */,

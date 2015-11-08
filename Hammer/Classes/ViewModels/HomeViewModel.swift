@@ -94,6 +94,17 @@ class HomeViewModel : NSObject {
 					}
 			}).start()
 	}
+  
+  func tagTableViewCellHeight() -> Int {
+    var tableHeight: Int
+    if (self.foundTags.value.count >= 5) {
+      tableHeight = 35 * 5
+    } else {
+      tableHeight = self.foundTags.value.count * 35
+    }
+    return tableHeight;
+
+  }
 
   func displayCellForGifs(indexPath indexPath: NSIndexPath, cell: ImageCell) -> ImageCell {
     //TODO refactor this

@@ -23,14 +23,14 @@ class GifService {
 
 	
 	func getGifsResponse() -> SignalProducer<GifResponse, NSError> {
-		return SignalProducer{ sink, _ in
+		return SignalProducer{ observer, disposable in
 				Alamofire.request(.GET, self.endpointForGifs())
 					.responseJSON { response in
 						if let json = response.result.value {
 							let gifs = GifResponse(gifsJSON: JSON(json))
 							if (response.result.isSuccess) {
-								sink.sendNext(gifs)
-								sink.sendCompleted()
+								observer.sendNext(gifs)
+								observer.sendCompleted()
 							}
 						} else {
 
@@ -41,14 +41,14 @@ class GifService {
 	}
 	
 	func getGifsForTagSearchResponse(query: String) -> SignalProducer<GifResponse, NSError> {
-		return SignalProducer{  sink, _ in
+		return SignalProducer{  observer, disposable in
 			Alamofire.request(.GET, self.endpointForGifsFromTag(query))
 				.responseJSON { response in
 					if let json = response.result.value {
 						let gifs = GifResponse(gifsJSON: JSON(json))
 						if (response.result.isSuccess) {
-							sink.sendNext(gifs)
-							sink.sendCompleted()
+							observer.sendNext(gifs)
+							observer.sendCompleted()
 						}
 					} else {
 						
@@ -59,14 +59,14 @@ class GifService {
 	}
 	
 	func retrieveThumbnailimageFor(gif gif: Gif) -> SignalProducer<Gif, NSError> {
-		return SignalProducer { sink, _ in
+		return SignalProducer { observer, disposable in
 			Alamofire.request(.GET, gif.thumbnailUrl)
 				.responseData { response in
 					if (response.result.isSuccess) {
 						if let data = response.result.value {
 							gif.thumbnailImage = UIImage(data: data)
-							sink.sendNext(gif)
-							sink.sendCompleted()
+							observer.sendNext(gif)
+							observer.sendCompleted()
 						}
 					} else {
 						
@@ -76,15 +76,15 @@ class GifService {
 	}
 	
 	func retrieveImageDataFor(gif gif: Gif) -> SignalProducer<Gif, NSError> {
-		return SignalProducer { sink, _ in
+		return SignalProducer { observer, disposable in
 			Alamofire.request(.GET, gif.url)
 				.responseData { response in
 					if (response.result.isSuccess) {
 						if let data = response.result.value {
 							gif.gifData = data
 							gif.gifImage = UIImage.animatedImageWithAnimatedGIFData(data)
-							sink.sendNext(gif)
-							sink.sendCompleted()
+							observer.sendNext(gif)
+							observer.sendCompleted()
 						}
 					} else {
 						

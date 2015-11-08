@@ -52,7 +52,7 @@ class DisplayViewController: UIViewController {
       shareButton = UIBarButtonItem(barButtonSystemItem: .Action, target: cocoaActionShare, action: CocoaAction.selector)
       
       self.displayGifViewModel.gifRequestSignal
-        .observeNext({[unowned self] sink in
+        .observeNext({[unowned self] observer in
           let animation = self.view.viewWithTag(kLoadingAnimationTag) as? NVActivityIndicatorView
           animation?.stopAnimation()
           animation?.removeFromSuperview()
@@ -62,7 +62,7 @@ class DisplayViewController: UIViewController {
       
       self.displayGifViewModel.tagRequestSignal
         .observeOn(UIScheduler())
-        .observeNext({[unowned self] sink in
+        .observeNext({[unowned self] observer in
           if (self.displayGifViewModel.tags.value.count > 0) {
             self.addTagsToLabels()
           }

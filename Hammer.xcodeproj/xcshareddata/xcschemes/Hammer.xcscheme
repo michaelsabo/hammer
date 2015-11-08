@@ -26,7 +26,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -35,16 +36,6 @@
                BlueprintIdentifier = "276C7FC51BC204EE0028DC0D"
                BuildableName = "HammerTests.xctest"
                BlueprintName = "HammerTests"
-               ReferencedContainer = "container:Hammer.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "276C7FD01BC204EF0028DC0D"
-               BuildableName = "HammerUITests.xctest"
-               BlueprintName = "HammerUITests"
                ReferencedContainer = "container:Hammer.xcodeproj">
             </BuildableReference>
          </TestableReference>

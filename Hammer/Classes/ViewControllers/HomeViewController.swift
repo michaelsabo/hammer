@@ -122,13 +122,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func adjustHeightOfTableView() {
-		var tableHeight: Int
-		if (self.homeViewModel.foundTags.value.count >= 5) {
-			tableHeight = 35 * 5
-		} else {
-			tableHeight = self.homeViewModel.foundTags.value.count * 35
-		}
-		autocompleteTableView.frame = CGRectMake(autocompleteTableView.frame.origin.x, autocompleteTableView.frame.origin.y, CGFloat(autocompleteTableView.frame.size.width), CGFloat(tableHeight));
+		autocompleteTableView.frame = CGRectMake(autocompleteTableView.frame.origin.x, autocompleteTableView.frame.origin.y, CGFloat(autocompleteTableView.frame.size.width), CGFloat(self.homeViewModel.tagTableViewCellHeight()));
 	}
 	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

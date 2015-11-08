@@ -12,7 +12,6 @@ import MobileCoreServices
 
 class DisplayViewModel : NSObject {
 	
-	
 	let gif = MutableProperty<Gif>(Gif())
 	let tags = MutableProperty<[Tag]>([Tag]())
 	let searchComplete = MutableProperty(false)
