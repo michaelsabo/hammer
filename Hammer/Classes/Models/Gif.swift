@@ -26,7 +26,7 @@ class GifResponse {
 	}
 }
 
-struct Gif: Equatable {
+class Gif: Equatable {
 	
 	var id: String
 	var url: String
@@ -44,7 +44,7 @@ struct Gif: Equatable {
 		index = 0
 	}
 	
-	init(json: JSON, index: Int) {
+	convenience init(json: JSON, index: Int) {
 		self.init()
 		self.id =  json[GifFields.ImgurId.rawValue].stringValue
 		self.url = json[GifFields.ImgurUrl.rawValue].stringValue
@@ -52,7 +52,7 @@ struct Gif: Equatable {
 		self.index = index
 	}
   
-  init(id: String, url: String, thumbnailUrl: String, index: Int) {
+  convenience init(id: String, url: String, thumbnailUrl: String, index: Int) {
     self.init()
     self.id =  id
     self.url = url
@@ -60,7 +60,7 @@ struct Gif: Equatable {
     self.index = index
   }
 
-	static func getThumbnailImageForGif(var gif: Gif, completionHandler: (Gif?, Bool, NSError?) -> Void) {
+	class func getThumbnailImageForGif(gif: Gif, completionHandler: (Gif?, Bool, NSError?) -> Void) {
 		Alamofire.request(.GET, gif.thumbnailUrl)
 			.responseData { response in
 				if (response.result.isSuccess) {

@@ -45,9 +45,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func setupBindings() {
 		tagSearch.delegate = self
 		self.homeViewModel.searchText <~ tagSearch.rac_textSignalProducer()
-    self.homeViewModel.isSearchingSignal.observeNext({
-    	self.autocompleteTableView.hidden = !$0
-    })
+    RAC(self.autocompleteTableView, "hidden") <~ SignalProducer(signal: self.homeViewModel.isSearchingSignal.map({!$0}))
 
 		self.homeViewModel.gifsForDisplay.producer.startWithSignal( { signal, disposable in
 			signal.observe({ _ in
@@ -55,15 +53,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 			})
 		})
     
-    self.homeViewModel.isSearchingSignal
-      .observeNext({ [unowned self] (searching:Bool) in
-        if searching {
-          self.adjustHeightOfTableView()
-          self.autocompleteTableView.reloadData()
-        }
-    })
-		
 		self.homeViewModel.searchingTagsSignal.producer.start({ s in
+      
 			self.adjustHeightOfTableView()
 			self.autocompleteTableView.reloadData()
 		})
@@ -169,7 +160,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
 		view.endEditing(true)
-    self.homeViewModel.userEndedSearch()
+    self.homeViewModel.endSeaching()
 	}
 	
 	// MARK: UI Text Field Delegates
@@ -186,7 +177,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	func textFieldShouldClear(textField: UITextField) -> Bool {
 		tagSearch.text = ""
-		self.homeViewModel.userEndedSearch()
+		self.homeViewModel.endSeaching()
 		viewCollection.reloadData()
 		return true
 	}

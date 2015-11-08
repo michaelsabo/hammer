@@ -60,9 +60,10 @@ class HomeViewModel : NSObject {
           self.gifsForDisplay.value = self.gifCollection.value
         }
       })
+
 	}
   
-  func userEndedSearch() {
+  func endSeaching() {
     self.isSearchingObserver.sendNext(false)
   }
 	

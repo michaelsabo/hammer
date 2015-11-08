@@ -17,7 +17,7 @@ enum TagFields : String {
 	case Tags = "tags"
 }
 
-struct Tag {
+class Tag {
 	var id: String
 	var text: String
 	
