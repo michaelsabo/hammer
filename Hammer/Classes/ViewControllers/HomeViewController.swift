@@ -61,8 +61,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	func setupViews() {
 		let frame = CGRectMake(0, 110, view.frame.width, 200)
-		autocompleteTableView = UITableView.init(frame: frame, style: UITableViewStyle.Plain)
-		autocompleteTableView.translatesAutoresizingMaskIntoConstraints = false
+		autocompleteTableView = SearchGifsTableView(frame: frame, style: UITableViewStyle.Plain)
 		autocompleteTableView.delegate = self
 		autocompleteTableView.dataSource = self
 		if (Screen.screenWidth > 400) {
@@ -73,8 +72,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 			self.viewCollection.collectionViewLayout = SmallCollectionViewLayout.init()
 		}
 		
-		autocompleteTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "AutocompleteResultCell")
 		tagSearch.translatesAutoresizingMaskIntoConstraints = false
+    tagSearch.font = App.font(20.0)
 		viewCollection.translatesAutoresizingMaskIntoConstraints = false
 		view.addSubview(autocompleteTableView)
 	}
@@ -100,7 +99,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func scrollViewDidScroll(scrollView: UIScrollView) {
-		view.endEditing(true)
+    if (autocompleteTableView.hidden) {
+      view.endEditing(true)
+    }
 	}
   
   func scrollViewDidScrollToTop(scrollView: UIScrollView) {

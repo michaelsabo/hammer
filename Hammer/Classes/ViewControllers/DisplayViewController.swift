@@ -20,8 +20,8 @@ class DisplayViewController: UIViewController {
 		var tagLabels: [PaddedTagLabel]? =  [PaddedTagLabel]()
 		var displayGifViewModel: DisplayViewModel!
   
-    weak var cocoaActionShare: CocoaAction!
-		weak var shareButton: UIBarButtonItem?
+    var cocoaActionShare: CocoaAction!
+		var shareButton: UIBarButtonItem?
   
 		required init?(coder aDecoder: NSCoder) {
 			super.init(coder: aDecoder)

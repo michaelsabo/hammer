@@ -13,22 +13,27 @@ class ImageCell: UICollectionViewCell {
 	
 	var hasLoaded = false
 	
-	init(_ coder: NSCoder? = nil) {
-		
-		
-		if let coder = coder {
-			super.init(coder: coder)!
-		} else {
-			super.init()
-		}
-		self.contentView.layer.masksToBounds = true
-		self.contentView.backgroundColor = UIColor.clearColor()
-		
-	}
 	
-	required convenience init(coder: NSCoder) {
-		self.init(coder)
-	}
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+    initialize()
+  }
 	
+  func initialize() {
+    self.contentView.layer.masksToBounds = true
+    self.contentView.backgroundColor = UIColor.clearColor()
+    self.userInteractionEnabled = false
+  }
+  
+  func setImage(image: UIImage?) {
+    if let thumbnail = image {
+      self.imageView.image = thumbnail
+      self.imageView.layer.masksToBounds = true
+      self.imageView.layer.cornerRadius = 10.0
+      hasLoaded = true
+      self.userInteractionEnabled = true
+    }
+
+  }
 	
 }
