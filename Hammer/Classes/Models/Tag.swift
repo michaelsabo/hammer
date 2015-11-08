@@ -21,22 +21,22 @@ class Tag {
 	var id: String
 	var text: String
 	
-	init(json: JSON) {
+	required init(json: JSON) {
 		self.id = json[TagFields.Id.rawValue].stringValue
 		self.text = json[TagFields.Text.rawValue].stringValue
 	}
   
-  init(id: String, text: String) {
-    self.id =  id
-    self.text = text
-  }
+//  init(id: String, text: String) {
+//    self.id =  id
+//    self.text = text
+//  }
 }
 
 class TagsResponse {
 	var tags: [Tag]
   var response: ServiceResponse
 	init (json: JSON) {
-		tags = json["tags"].arrayValue.map { Tag(json: $0) }
-    response = ServiceResponse.Success
+		self.tags = json["tags"].arrayValue.map { Tag(json: $0) }
+    self.response = ServiceResponse.Success
 	}
 }

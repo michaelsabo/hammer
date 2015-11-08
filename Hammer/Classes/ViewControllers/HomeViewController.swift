@@ -22,7 +22,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	let kCustomRows = 8
 	let kImageCell = "ImageCell"
 	
-	var homeViewModel: HomeViewModel = {
+	let homeViewModel: HomeViewModel = {
 		return HomeViewModel(searchTagService: TagService(), gifRetrieveService: GifService())
 	}()
 	
