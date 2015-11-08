@@ -11,7 +11,7 @@ import ReactiveCocoa
 import Alamofire
 import SwiftyJSON
 
-class GifService {
+struct GifService {
 
 	func endpointForGifs() -> String {
 			return Request.forEndpoint("gifs")
@@ -23,7 +23,7 @@ class GifService {
 
 	
 	func getGifsResponse() -> SignalProducer<GifResponse, NSError> {
-		return SignalProducer{ [unowned self]sink, _ in
+		return SignalProducer{ sink, _ in
 				Alamofire.request(.GET, self.endpointForGifs())
 					.responseJSON { response in
 						if let json = response.result.value {
@@ -41,7 +41,7 @@ class GifService {
 	}
 	
 	func getGifsForTagSearchResponse(query: String) -> SignalProducer<GifResponse, NSError> {
-		return SignalProducer{ [unowned self] sink, _ in
+		return SignalProducer{  sink, _ in
 			Alamofire.request(.GET, self.endpointForGifsFromTag(query))
 				.responseJSON { response in
 					if let json = response.result.value {
@@ -58,7 +58,7 @@ class GifService {
 		}
 	}
 	
-	func retrieveThumbnailimageFor(var gif gif: Gif) -> SignalProducer<Gif, NSError> {
+	func retrieveThumbnailimageFor(gif gif: Gif) -> SignalProducer<Gif, NSError> {
 		return SignalProducer { sink, _ in
 			Alamofire.request(.GET, gif.thumbnailUrl)
 				.responseData { response in
@@ -75,7 +75,7 @@ class GifService {
 		}
 	}
 	
-	func retrieveImageDataFor(var gif gif: Gif) -> SignalProducer<Gif, NSError> {
+	func retrieveImageDataFor(gif gif: Gif) -> SignalProducer<Gif, NSError> {
 		return SignalProducer { sink, _ in
 			Alamofire.request(.GET, gif.url)
 				.responseData { response in

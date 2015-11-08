@@ -10,7 +10,7 @@ import ReactiveCocoa
 import Alamofire
 import SwiftyJSON
 
-class TagService {
+struct TagService {
 
 	
 	func getEndpointForTags() -> String {
@@ -22,7 +22,7 @@ class TagService {
 	}
 	
 	func getAllTags() -> SignalProducer<TagsResponse, NSError> {
-		return SignalProducer { [unowned self]	sink, _ in
+		return SignalProducer { 	sink, _ in
 			Alamofire.request(.GET, self.getEndpointForTags())
 				.responseJSON { response in
 					if (response.result.isSuccess) {
@@ -38,7 +38,7 @@ class TagService {
 	}
 	
 	func getTagsForGifId(id: String) -> SignalProducer<TagsResponse, NSError> {
-		return SignalProducer { [unowned self] sink, _ in
+		return SignalProducer {  sink, _ in
 			Alamofire.request(.GET, self.getEndpointForImageTags(id))
 				.responseJSON { response in
 					if (response.result.isSuccess) {

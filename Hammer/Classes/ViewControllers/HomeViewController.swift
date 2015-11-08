@@ -22,7 +22,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	let kCustomRows = 8
 	let kImageCell = "ImageCell"
 	
-	var homeViewModel: HomeViewModel = {
+	let homeViewModel: HomeViewModel = {
 		return HomeViewModel(searchTagService: TagService(), gifRetrieveService: GifService())
 	}()
 	
@@ -45,9 +45,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func setupBindings() {
 		tagSearch.delegate = self
 		self.homeViewModel.searchText <~ tagSearch.rac_textSignalProducer()
-    self.homeViewModel.isSearchingSignal.observeNext({
-    	self.autocompleteTableView.hidden = !$0
-    })
 
 		self.homeViewModel.gifsForDisplay.producer.startWithSignal( { signal, disposable in
 			signal.observe({ _ in
@@ -57,16 +54,15 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     self.homeViewModel.isSearchingSignal
       .observeNext({ [unowned self] (searching:Bool) in
+        self.autocompleteTableView.hidden = !searching
         if searching {
           self.adjustHeightOfTableView()
           self.autocompleteTableView.reloadData()
         }
     })
 		
-		self.homeViewModel.searchingTagsSignal.producer.start({ s in
-			self.adjustHeightOfTableView()
-			self.autocompleteTableView.reloadData()
-		})
+    self.homeViewModel.stopSearching()
+
 	}
 	
 	func setupViews() {
@@ -169,7 +165,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
 		view.endEditing(true)
-    self.homeViewModel.userEndedSearch()
+    self.homeViewModel.stopSearching()
 	}
 	
 	// MARK: UI Text Field Delegates
@@ -186,7 +182,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	func textFieldShouldClear(textField: UITextField) -> Bool {
 		tagSearch.text = ""
-		self.homeViewModel.userEndedSearch()
+		self.homeViewModel.stopSearching()
 		viewCollection.reloadData()
 		return true
 	}

@@ -15,20 +15,26 @@ class HomeViewModelSpec: QuickSpec {
   
   override func spec() {
 		
-      describe("HomeViewModel") {
-        var homeViewModel: HomeViewModel!
-       
-        beforeEach {
-          homeViewModel = HomeViewModel(searchTagService: TagService(), gifRetrieveService: GifService())
-          
-        }
-        
-        it("should be empty ") {
-          expect(homeViewModel.foundTags.value.count).to(equal(0))
-        }
-
-  
-    }
+//      describe("HomeViewModel") {
+//        let homeViewModel = HomeViewModel(searchTagService: MockTagService(), gifRetrieveService: MockGifService())
+//
+//        
+//        it("should be empty ") {
+//          let (producer, observer) = SignalProducer<String, NoError>.buffer()
+//          producer.start()
+//          
+//          homeViewModel.searchText <~ producer
+//          
+//          homeViewModel.searchingTagsSignal.producer.start({ s in
+//                expect(s.value?.count).to(equal(1))
+//          })
+//          observer.sendNext("no")
+//          
+//          
+//        }
+//
+//  
+//    }
   }
   
   

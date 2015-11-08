@@ -16,13 +16,12 @@ class DisplayViewController: UIViewController {
 
 		@IBOutlet weak var imageView: UIImageView!
     var gif: Gif?
-		var pasteBoard: UIPasteboard?
 		var tags: [Tag]?
 		var tagLabels: [PaddedTagLabel]? =  [PaddedTagLabel]()
 		var displayGifViewModel: DisplayViewModel!
   
-    var cocoaActionShare: CocoaAction!
-		var shareButton: UIBarButtonItem?
+    weak var cocoaActionShare: CocoaAction!
+		weak var shareButton: UIBarButtonItem?
   
 		required init?(coder aDecoder: NSCoder) {
 			super.init(coder: aDecoder)
