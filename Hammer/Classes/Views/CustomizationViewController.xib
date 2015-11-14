@@ -6,7 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChooseAnimationViewController" customModule="Hammer" customModuleProvider="target">
             <connections>
-                <outlet property="animationCollection" destination="aEA-hw-bmf" id="ur1-SU-owa"/>
+                <outlet property="animationCollection" destination="aEA-hw-bmf" id="bXG-GF-Trs"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Ai0-3k-jys"/>
             </connections>
         </placeholder>
@@ -24,8 +24,8 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                     <connections>
-                        <outlet property="dataSource" destination="-1" id="qqM-m2-hV5"/>
-                        <outlet property="delegate" destination="-1" id="bFB-Yb-pyA"/>
+                        <outlet property="dataSource" destination="-1" id="Z97-sd-UiW"/>
+                        <outlet property="delegate" destination="-1" id="mfD-Hq-qE7"/>
                     </connections>
                 </collectionView>
             </subviews>

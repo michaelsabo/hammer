@@ -28,9 +28,9 @@ class DisplayViewModel : NSObject {
 	
 	init(gifService: GifService, tagService: TagService, gif: Gif) {
 		
-		self.gifService = gifService
-		self.tagService = tagService
-		self.gif.value = gif
+    self.gifService = gifService
+    self.tagService = tagService
+    self.gif.value = gif
     
     let (gifSignal, gifObserver) = Signal<Bool, NoError>.pipe()
     self.gifRequestSignal = gifSignal
@@ -40,7 +40,7 @@ class DisplayViewModel : NSObject {
     self.tagRequestSignal = tagSignal
     self.tagRequestObserver = tagObserver
     
-		super.init()
+    super.init()
     startGifImageSingal()
     startTagSignal()
 	}
@@ -82,6 +82,8 @@ class DisplayViewModel : NSObject {
       pasteboard.setData(copiedGif, forPasteboardType: kUTTypeGIF as String)
     }
   }
+  
+  
 
 	deinit {
 		print("deiniting view model")

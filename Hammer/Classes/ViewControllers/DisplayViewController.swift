@@ -20,7 +20,7 @@ class DisplayViewController: UIViewController {
 		var tagLabels: [PaddedTagLabel]? =  [PaddedTagLabel]()
 		var displayGifViewModel: DisplayViewModel!
   
-    var cocoaActionShare: CocoaAction!
+    var cocoaActionShare: CocoaAction?
 		var shareButton: UIBarButtonItem?
   
 		required init?(coder aDecoder: NSCoder) {
@@ -96,6 +96,12 @@ class DisplayViewController: UIViewController {
     }
     self.view.updateConstraintsIfNeeded()
 	}
+  
+  override func viewWillDisappear(animated: Bool) {
+    super.viewWillAppear(animated)
+    shareButton = nil
+    cocoaActionShare = nil
+  }
 
   deinit {
     self.displayGifViewModel.cleanUpSignals()

@@ -58,8 +58,7 @@ class SettingsViewController : UIViewController, UINavigationBarDelegate, UINavi
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     if (indexPath.section == 0 && indexPath.row == 0) {
-      let cavc = ChooseAnimationViewController()
-//      cavc.initialize()
+      let cavc = ChooseAnimationViewController(nibName: "CustomizationViewController", bundle: NSBundle.mainBundle())
       tableView.deselectRowAtIndexPath(indexPath, animated: true)
       self.navigationController?.pushViewController(cavc, animated: true)
     } else {

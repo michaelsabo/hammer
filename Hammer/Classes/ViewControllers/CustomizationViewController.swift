@@ -14,31 +14,35 @@ class ChooseAnimationViewController: UIViewController, UICollectionViewDelegate,
   
   @IBOutlet weak var animationCollection: UICollectionView!
   var selectedIndex : NSIndexPath?
+  var animationArray = [AnimationModel?]()
+  
+  
+  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+  }
+
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+  }
   
   func initialize() {
-
-    
+    self.animationCollection.registerClass(AnimationCell.self, forCellWithReuseIdentifier: "AnimationCell")
     if (Screen.screenWidth > 400) {
-      animationCollection.collectionViewLayout = LargeCollectionViewLayout.init()
+      animationCollection.collectionViewLayout = LargeCollectionViewLayout()
     } else if (Screen.screenWidth > 350) {
-      animationCollection.collectionViewLayout = MediumCollectionViewLayout.init()
+      animationCollection.collectionViewLayout = MediumCollectionViewLayout()
     } else {
-      animationCollection.collectionViewLayout = SmallCollectionViewLayout.init()
+      animationCollection.collectionViewLayout = SmallCollectionViewLayout()
     }
     animationCollection.allowsMultipleSelection = false
     animationCollection.backgroundColor = UIColor.flatWhiteColorDark()
-    animationCollection.registerClass(AnimationCell.self, forCellWithReuseIdentifier: "AnimationCell")
+    
   }
   
-
   override func viewDidLoad() {
     super.viewDidLoad()
-  }
-  
-  override func viewWillAppear(animated: Bool) {
-    super.viewWillAppear(true)
     initialize()
-    animationCollection.reloadData()
+   	animationCollection.reloadData()
   }
   
   func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -52,45 +56,17 @@ class ChooseAnimationViewController: UIViewController, UICollectionViewDelegate,
   func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
     return CGSizeMake(Screen.screenWidth, 40);
   }
-  
-  
-//  func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-//    print("index path item -> \(indexPath.item)")
-//    let cell = collectionView.dequeueReusableCellWithReuseIdentifier("AnimationCell", forIndexPath: indexPath) as! AnimationCell
-//    
-//    cell.reloadAnimation()
-//    print("animation model item \(cell.animationModel.item)")
-//    if (cell.animationModel.hasLoaded == false) {
-//      cell.initialize(indexPath.item)
-//      var animationView : NVActivityIndicatorView? = nil
-//      animationView = NVActivityIndicatorView(frame: cell.contentView.frame, type: activityTypes[indexPath.item],  color: UIColor.flatTealColor())
-//      animationView?.translatesAutoresizingMaskIntoConstraints = true
-//      animationView?.layer.masksToBounds = true
-//      cell.setAnimation(animationView)
-//    }
-//    if (cell.selected) {
-//      cell.layer.borderWidth = 7.0
-//    } else {
-//      cell.layer.borderWidth = 2.0
-//    }
-//    return cell
-//  }
-  
-  var animationArray = [AnimationModel?]()
-  
+
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier("AnimationCell", forIndexPath: indexPath) as! AnimationCell
     
     if animationArray.count > indexPath.item {
-      
       if let foundAnimation = animationArray[indexPath.item] {
+        cell.setBorder()
         cell.reloadAnimation(foundAnimation.animationView)
-        if (foundAnimation.animationView == nil) {
-          print("FUCKKKK")
-        }
         return cell
       } else {
-        print("why am i here")
+        
       }
     } else {
       cell.removeAnimation()
@@ -100,8 +76,6 @@ class ChooseAnimationViewController: UIViewController, UICollectionViewDelegate,
       cell.setAnimation(view)
       animationArray.insert(cell.animationModel, atIndex: indexPath.item)
     }
-    
-
     return cell
   }
   
@@ -110,9 +84,10 @@ class ChooseAnimationViewController: UIViewController, UICollectionViewDelegate,
   }
   
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    var model = animationArray[indexPath.item]
 		let cell = collectionView.cellForItemAtIndexPath(indexPath) as! AnimationCell
-    cell.selected = true
-		cell.performSelectionAnimations()
+    model?.selected = true
+    cell.setBorder()
   }
   
   func collectionView(collectionView: UICollectionView, shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -120,9 +95,11 @@ class ChooseAnimationViewController: UIViewController, UICollectionViewDelegate,
   }
   
   func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-    let cell = collectionView.cellForItemAtIndexPath(indexPath) as! AnimationCell
-    cell.selected = false
-    cell.removeBorder()
+    var model = animationArray[indexPath.item]
+    if let cell = collectionView.cellForItemAtIndexPath(indexPath) as! AnimationCell? {
+      model?.selected = false
+      cell.setBorder()
+    }
   }
 	
   
@@ -160,6 +137,7 @@ class ChooseAnimationViewController: UIViewController, UICollectionViewDelegate,
 
 struct AnimationModel {
   var hasLoaded = false
+  var selected = false
   var animationView: NVActivityIndicatorView?
   var item : Int?
   init() {
@@ -176,12 +154,21 @@ class AnimationCell : UICollectionViewCell {
   }()
   
   func initialize(item: Int) {
+    self.animationModel.item = item
+//    setBorder(false)
+    setBorderColor()
+    self.layer.borderWidth = 2.0
+    self.selectedBackgroundView?.layer.borderWidth = 7.0
+  }
+  
+  func setBorderColor() {
+    self.layer.masksToBounds = true
     self.backgroundColor = UIColor.flatWhiteColorDark()
     self.layer.borderColor = UIColor.flatTealColor().CGColor
     self.layer.cornerRadius = 10.0
-    self.layer.borderWidth = 2.0
-    self.layer.masksToBounds = true
-    self.animationModel.item = item
+    self.selectedBackgroundView?.backgroundColor = UIColor.flatWhiteColorDark()
+    self.selectedBackgroundView?.layer.borderColor = UIColor.flatTealColor().CGColor
+    self.selectedBackgroundView?.layer.cornerRadius = 10.0
   }
   
   func reloadAnimation(animation: NVActivityIndicatorView?) {
@@ -190,7 +177,6 @@ class AnimationCell : UICollectionViewCell {
         animation.removeFromSuperview()
       }
     }
-    removeBorder()
     self.animationView = nil
 		self.animationModel.animationView = animation
     self.animationView = animation
@@ -212,23 +198,23 @@ class AnimationCell : UICollectionViewCell {
   }
   
   func setAnimation(animation: NVActivityIndicatorView?) {
-
-      self.animationModel.animationView = animation
-      self.animationModel.hasLoaded = true
-      self.animationView = self.animationModel.animationView!
-      self.addSubview(self.animationView!)
-      self.animationModel.animationView?.startAnimation()
-			
+    self.animationModel.animationView = animation
+    self.animationModel.hasLoaded = true
+    self.animationView = self.animationModel.animationView!
+    self.addSubview(self.animationView!)
+    self.animationModel.animationView?.startAnimation()
   }
   
-  func performSelectionAnimations() {
-    self.layer.borderWidth = 7.0
-    self.layer.cornerRadius = 10.0
+  func setBorder() {
+    setBorderColor()
+    if (self.selected) {
+      self.layer.borderWidth = 7.0
+    } else {
+      self.layer.borderWidth = 2.0
+    }
   }
-  func removeBorder() {
-    self.layer.borderWidth = 2.0
-    self.layer.cornerRadius = 10.0
-  }
+  
+  
   
   override func prepareForReuse() {
     super.prepareForReuse()
