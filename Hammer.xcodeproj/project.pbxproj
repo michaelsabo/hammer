@@ -1020,7 +1020,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/Hammer",
-					"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries",
 				);
 				INFOPLIST_FILE = Hammer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
@@ -1037,8 +1036,6 @@
 					"\"SwiftyJSON\"",
 					"-ObjC",
 					"-lz",
-					"-framework",
-					Reveal,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.flyingdinos.Hammer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1062,7 +1059,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/Hammer",
-					"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries",
 				);
 				INFOPLIST_FILE = Hammer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
@@ -1079,8 +1075,6 @@
 					"\"SwiftyJSON\"",
 					"-ObjC",
 					"-lz",
-					"-framework",
-					Reveal,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.flyingdinos.Hammer;
 				PRODUCT_NAME = "$(TARGET_NAME)";

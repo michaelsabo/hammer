@@ -44,8 +44,8 @@ class DisplayViewController: UIViewController {
 		}
 	
 		func bindViewModel() {
-      let shareAction = Action<Void, Void, NSError> {
-        self.displayGifViewModel.shareButtonClicked()
+      let shareAction = Action<Void, Void, NSError> { [unowned self] in
+        self.shareButtonClicked()
         return SignalProducer.empty
       }
       cocoaActionShare = CocoaAction(shareAction, input: ())
@@ -97,10 +97,19 @@ class DisplayViewController: UIViewController {
     self.view.updateConstraintsIfNeeded()
 	}
   
+  func shareButtonClicked() {
+    if let copiedGif = self.displayGifViewModel.gif.value.gifData {
+      let vc = UIActivityViewController(activityItems: [copiedGif], applicationActivities: [])
+      presentViewController(vc, animated: true, completion: nil)
+    } else {
+      let ac = UIAlertController(title: "Woahhhh", message: "Something went wrong when processing. \nLet's do this again", preferredStyle: UIAlertControllerStyle.Alert)
+      presentViewController(ac, animated: true, completion: nil)
+    }
+  }
+
+  
   override func viewWillDisappear(animated: Bool) {
     super.viewWillAppear(animated)
-    shareButton = nil
-    cocoaActionShare = nil
   }
 
   deinit {
