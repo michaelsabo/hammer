@@ -35,15 +35,7 @@ class HomeViewModel : NSObject {
     self.isSearchingObserver = searchingObserver
 		super.init()
 
-		gifService.getGifsResponse()
-			.on(next: {
-				response in
-					if (response.gifs.count > 0) {
-						self.gifCollection.value = response.gifs
-						self.gifsForDisplay.value = response.gifs
-					}
-				})
-				.start()
+    getGifs()
 		
 		tagService.getAllTags()
 			.on(next: {
@@ -62,6 +54,18 @@ class HomeViewModel : NSObject {
       })
 
 	}
+  
+  func getGifs() {
+    gifService.getGifsResponse()
+      .on(next: {
+        response in
+        if (response.gifs.count > 0) {
+          self.gifCollection.value = response.gifs
+          self.gifsForDisplay.value = response.gifs
+        }
+      })
+      .start()
+  }
   
   func endSeaching() {
     self.isSearchingObserver.sendNext(false)
@@ -97,48 +101,35 @@ class HomeViewModel : NSObject {
   
   func tagTableViewCellHeight() -> Int {
     var tableHeight: Int
-    if (self.foundTags.value.count >= 5) {
-      tableHeight = 35 * 5
+    if (self.foundTags.value.count >= 7) {
+      tableHeight = 35 * 7
     } else {
       tableHeight = self.foundTags.value.count * 35
     }
     return tableHeight;
-
   }
 
   func displayCellForGifs(indexPath indexPath: NSIndexPath, cell: ImageCell) -> ImageCell {
     //TODO refactor this
     if (indexPath.item < self.gifsForDisplay.value.count) {
-      cell.userInteractionEnabled = false
-      cell.imageView.layer.masksToBounds = true
       let gif = self.gifsForDisplay.value[indexPath.item]
       if let image = gif.thumbnailImage {
         cell.imageView.image = nil
-        cell.imageView.image = image
-        cell.imageView.layer.cornerRadius = 10.0
-        cell.userInteractionEnabled = true
+        cell.setImage(image)
         return cell
       } else {
         cell.imageView.image = UIImage()
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
           Gif.getThumbnailImageForGif(gif, completionHandler: { [unowned self] (responseGif, isSuccess, error) in
-            cell.imageView.layer.cornerRadius = 10.0
             if (isSuccess && !self.isSearching.value) {
               if let index = self.gifsForDisplay.value.indexOf(responseGif!) {
                 self.gifsForDisplay.value[index].thumbnailImage = responseGif!.thumbnailImage
-                cell.imageView.image = self.gifsForDisplay.value[index].thumbnailImage
-                cell.imageView.layer.cornerRadius = 10.0
-                cell.hasLoaded = true
-                cell.userInteractionEnabled = true
+                cell.setImage(self.gifsForDisplay.value[index].thumbnailImage)
               }
             } else if (isSuccess && self.isSearching.value) {
               if let index = self.gifsForDisplay.value.indexOf(responseGif!) {
                 self.gifsForDisplay.value[index].thumbnailImage = responseGif!.thumbnailImage
-                cell.imageView.image = self.gifsForDisplay.value[index].thumbnailImage
-                cell.imageView.layer.cornerRadius = 10.0
-                cell.hasLoaded = true
-                cell.userInteractionEnabled = true
-              }
+                cell.setImage(self.gifsForDisplay.value[index].thumbnailImage)              }
             } else {
               cell.userInteractionEnabled = false
             }

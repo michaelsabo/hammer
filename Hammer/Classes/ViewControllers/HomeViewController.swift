@@ -21,7 +21,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	let kCustomRows = 8
 	let kImageCell = "ImageCell"
-	
+	var refreshControl = UIRefreshControl()
+  
 	let homeViewModel: HomeViewModel = {
 		return HomeViewModel(searchTagService: TagService(), gifRetrieveService: GifService())
 	}()
@@ -35,7 +36,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     let codeIcon = UIBarButtonItem()
     codeIcon.FAIcon = FAType.FAGear
-    codeIcon.action = "showLicenses"
+    codeIcon.action = "showSettings"
     codeIcon.target = self
     navigationItem.leftBarButtonItem = codeIcon
 		setupViews()
@@ -50,6 +51,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		self.homeViewModel.gifsForDisplay.producer.startWithSignal( { signal, disposable in
 			signal.observe({ _ in
 				self.viewCollection.reloadData()
+        self.refreshControl.endRefreshing()
 			})
 		})
     
@@ -61,8 +63,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	func setupViews() {
 		let frame = CGRectMake(0, 110, view.frame.width, 200)
-		autocompleteTableView = UITableView.init(frame: frame, style: UITableViewStyle.Plain)
-		autocompleteTableView.translatesAutoresizingMaskIntoConstraints = false
+		autocompleteTableView = SearchGifsTableView(frame: frame, style: UITableViewStyle.Plain)
 		autocompleteTableView.delegate = self
 		autocompleteTableView.dataSource = self
 		if (Screen.screenWidth > 400) {
@@ -73,11 +74,17 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 			self.viewCollection.collectionViewLayout = SmallCollectionViewLayout.init()
 		}
 		
-		autocompleteTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "AutocompleteResultCell")
 		tagSearch.translatesAutoresizingMaskIntoConstraints = false
+    tagSearch.font = App.font(20.0)
 		viewCollection.translatesAutoresizingMaskIntoConstraints = false
 		view.addSubview(autocompleteTableView)
+    refreshControl.addTarget(self, action: "refreshImages", forControlEvents: UIControlEvents.ValueChanged)
+    viewCollection.addSubview(refreshControl)
 	}
+  
+  func refreshImages() {
+    self.homeViewModel.getGifs()
+  }
 	
 	// MARK: UICollectionView Data Methods
 	
@@ -100,7 +107,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func scrollViewDidScroll(scrollView: UIScrollView) {
-		view.endEditing(true)
+    if (autocompleteTableView.hidden) {
+      view.endEditing(true)
+    }
 	}
   
   func scrollViewDidScrollToTop(scrollView: UIScrollView) {
@@ -159,23 +168,18 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	// MARK: UI Text Field Delegates
 	
 	func textFieldShouldReturn(textField: UITextField) -> Bool {
-		if (tagSearch.text?.characters.count > 0) {
-			self.homeViewModel.isSearching.value = true
-			self.homeViewModel.getGifsForTagSearch()
-			view.endEditing(true)
-			autocompleteTableView.hidden = true
-		}
+    self.homeViewModel.getGifsForTagSearch()
+    view.endEditing(true)
+    autocompleteTableView.hidden = true
 		return true
 	}
 	
 	func textFieldShouldClear(textField: UITextField) -> Bool {
-		tagSearch.text = ""
 		self.homeViewModel.endSeaching()
-		viewCollection.reloadData()
 		return true
 	}
   
-  func showLicenses() {
+  func showSettings() {
     let settingsController = SettingsViewController(nibName: "Settings", bundle: NSBundle.mainBundle())
     let navController = UINavigationController.init(rootViewController: settingsController)
     self.presentViewController(navController, animated: true, completion: nil)

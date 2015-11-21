@@ -16,22 +16,23 @@ enum GifFields: String {
 	case ImgurThumbnailUrl = "thumbnail_url"
 }
 
-class GifResponse {
-	var gifs: [Gif]
+class Gifs  {
+	var gifs = [Gif]()
 	var response: ServiceResponse
+
 	init(gifsJSON: JSON) {
 		var count = 0
 		response = ServiceResponse.Success
-		gifs = gifsJSON["gifs"].arrayValue.map { Gif(json: $0, index: count++) }
+		gifs = removeDuplicates(gifsJSON["gifs"].arrayValue.map { Gif(json: $0, index: count++) })
 	}
   
   init() {
-    self.gifs = [Gif]()
     self.response = ServiceResponse.Success
   }
+  
 }
 
-class Gif: Equatable {
+class Gif: NSObject {
 	
 	var id: String
 	var url: String
@@ -42,7 +43,7 @@ class Gif: Equatable {
 	var gifData: NSData?
 	var thumbnailData: NSData?
 	
-	init() {
+	override init() {
 		id = ""
 		url = ""
 		thumbnailUrl = ""
@@ -64,6 +65,12 @@ class Gif: Equatable {
     self.thumbnailUrl = thumbnailUrl
     self.index = index
   }
+  
+  override var hashValue : Int {
+    get {
+      return self.id.hashValue
+    }
+  }
 
 	class func getThumbnailImageForGif(gif: Gif, completionHandler: (Gif?, Bool, NSError?) -> Void) {
 		Alamofire.request(.GET, gif.thumbnailUrl)
@@ -79,9 +86,30 @@ class Gif: Equatable {
 				}
 		}
 	}
-	
+  
+  
 }
 
 func ==(lhs: Gif, rhs: Gif) -> Bool {
-	return lhs.id == rhs.id
+	return lhs.hashValue == rhs.hashValue
 }
+
+extension Gifs {
+  
+  func removeDuplicates(collection: [Gif]) -> [Gif] {
+    
+    var keys = [String]()
+    var array = [Gif]()
+    for gif in collection {
+      if (keys.contains(gif.id)) {
+        continue
+      }
+      keys.append(gif.id)
+      array.append(gif)
+    }
+    return array
+  }
+  
+}
+
+

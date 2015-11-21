@@ -14,6 +14,10 @@ class SettingsViewController : UIViewController, UINavigationBarDelegate, UINavi
   
   @IBOutlet weak var tableView: UITableView!
   
+  let settingsViewModel : SettingsViewModel = {
+    return SettingsViewModel()
+  }()
+  
   override func viewDidLoad() {
     self.title = "Settings"
     self.configureNavigationBar()
@@ -34,39 +38,34 @@ class SettingsViewController : UIViewController, UINavigationBarDelegate, UINavi
   
   //MARK: Table View Methods
   func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    if (section == 0) {
-      return "Customizations"
-    } else {
-      return "Legalese"
-    }
+    return settingsViewModel.titleForSection(section)
   }
   
   
   func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-    return 2
+    return settingsViewModel.numberOfSections
   }
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if (section == 0) {
-      return 0
-    } else {
-      return 1
-    }
+    return settingsViewModel.numberOfRowsForSection(section)
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = UITableViewCell.init()
-    if (indexPath.section == 1) {
-      cell.textLabel?.text = "Licenses"
-      cell.tag = 100
-    }
+    cell.textLabel?.text = settingsViewModel.titleForSectionAndRow(indexPath)
     return cell
   }
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    let licVC = LicensesViewController()
-    tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    self.navigationController?.pushViewController(licVC, animated: true)
+    if (indexPath.section == 0 && indexPath.row == 0) {
+      let cavc = ChooseAnimationViewController(nibName: "CustomizationViewController", bundle: NSBundle.mainBundle())
+      tableView.deselectRowAtIndexPath(indexPath, animated: true)
+      self.navigationController?.pushViewController(cavc, animated: true)
+    } else {
+      let licVC = LicensesViewController()
+      tableView.deselectRowAtIndexPath(indexPath, animated: true)
+      self.navigationController?.pushViewController(licVC, animated: true)
+    }
   }
   
   
