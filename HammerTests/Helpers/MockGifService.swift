@@ -13,19 +13,19 @@ import ReactiveCocoa
 
 class MockGifService : GifService {
   
-  let gifResponse =  GifResponse(gifsJSON: JSON(data: TestingHelper.jsonFromFile("gifs")))
+  let gifResponse =  Gifs(gifsJSON: JSON(data: TestingHelper.jsonFromFile("gifs")))
 	
   
-  override func getGifsResponse() -> SignalProducer<GifResponse, NSError> {
+  override func getGifsResponse() -> SignalProducer<Gifs, NSError> {
     return SignalProducer { observer, disposable in
       observer.sendNext(self.gifResponse)
       observer.sendCompleted()
     }
   }
   
-  override func getGifsForTagSearchResponse(query: String) -> SignalProducer<GifResponse, NSError> {
+  override func getGifsForTagSearchResponse(query: String) -> SignalProducer<Gifs, NSError> {
     return SignalProducer { observer, disposable in
-    	let singleGif = GifResponse()
+    	let singleGif = Gifs()
       singleGif.gifs = [self.gifResponse.gifs[0]]
       observer.sendNext(singleGif)
       observer.sendCompleted()

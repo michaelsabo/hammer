@@ -13,12 +13,12 @@ import ReactiveCocoa
 
 class MockTagService : TagService {
   
-  let tagResponse =  TagsResponse(json: JSON(data: TestingHelper.jsonFromFile("tags")))
-  
+  let tagsResponse =  TagsResponse(json: JSON(data: TestingHelper.jsonFromFile("tags")))
+  let taggedResponse = Tag(json: JSON(data: TestingHelper.jsonFromFile("tag")))
   
   override func getAllTags() -> SignalProducer<TagsResponse, NSError> {
     return SignalProducer { observer, disposable in
-      observer.sendNext(self.tagResponse)
+      observer.sendNext(self.tagsResponse)
       observer.sendCompleted()
     }
   }
@@ -32,9 +32,16 @@ class MockTagService : TagService {
       }
       let stubbedTags = TagsResponse()
       for var i=0; i < 3; i++ {
-        stubbedTags.tags.append(self.tagResponse.tags[i])
+        stubbedTags.tags.append(self.tagsResponse.tags[i])
       }
       observer.sendNext(stubbedTags)
+      observer.sendCompleted()
+    }
+  }
+  
+  override func tagGifWith(id id: String, tag: String) -> SignalProducer<Tag, NSError> {
+    return SignalProducer { observer, disposable in
+      observer.sendNext(self.taggedResponse)
       observer.sendCompleted()
     }
   }

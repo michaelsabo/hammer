@@ -24,7 +24,7 @@ class GifTest: XCTestCase {
     }
     
     func testInitialization() {
-    	let response = GifResponse(gifsJSON: json!)
+    	let response = Gifs(gifsJSON: json!)
     	
     	XCTAssertEqual(response.gifs.count, 3)
     	XCTAssertNotNil(response.gifs[0].id)
