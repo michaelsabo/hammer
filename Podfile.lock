@@ -3,11 +3,9 @@ PODS:
   - ChameleonFramework/Default (2.0.4)
   - ChameleonFramework/Swift (2.0.4):
     - ChameleonFramework/Default
-  - Crashlytics (3.4.0):
+  - Crashlytics (3.4.1):
     - Fabric (~> 1.6.0)
-  - Fabric (1.6.0):
-    - Fabric/Base (= 1.6.0)
-  - Fabric/Base (1.6.0)
+  - Fabric (1.6.1)
   - Font-Awesome-Swift (1.1.0)
   - Nimble (3.0.0)
   - NVActivityIndicatorView (2.1)
@@ -31,14 +29,14 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SwiftyJSON:
-    :commit: ece271ab33839d11c2153d71fb59c53545132cf9
+    :commit: 10f67900bdf2fb0faba3371249a6fefdcaa880c5
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 SPEC CHECKSUMS:
   Alamofire: 7c16ca65f3c7e681fd925fd7f2dec7747ff96855
   ChameleonFramework: 5abe69b1f2a6cc79c3c435fcd9d3d855748225ee
-  Crashlytics: 1ee87895c37472eb3f01f409ea1654a464d2f8d4
-  Fabric: d737eda3a26ac940a5430230eedb35f16b226131
+  Crashlytics: 41574a245bc6ae10c55d57f385ebd2004e5bee05
+  Fabric: bf0ceb04e7c924090efc5f8c55e4fbcca189e0a0
   Font-Awesome-Swift: e9c7501987071d207a098bb9b3465d1f94ce7b39
   Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
   NVActivityIndicatorView: 84aa48f7ec1efbfd0645e9f469097d94c6f65417

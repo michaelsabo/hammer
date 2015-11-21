@@ -62,7 +62,7 @@ class ChooseAnimationViewController: UIViewController, UICollectionViewDelegate,
     
     if animationArray.count > indexPath.item {
       if let foundAnimation = animationArray[indexPath.item] {
-        cell.setBorder()
+        cell.setBorder(foundAnimation.selected)
         cell.reloadAnimation(foundAnimation.animationView)
         return cell
       } else {
@@ -84,10 +84,9 @@ class ChooseAnimationViewController: UIViewController, UICollectionViewDelegate,
   }
   
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    var model = animationArray[indexPath.item]
 		let cell = collectionView.cellForItemAtIndexPath(indexPath) as! AnimationCell
-    model?.selected = true
-    cell.setBorder()
+    animationArray[indexPath.item]?.selected = true
+    cell.setBorder(true)
   }
   
   func collectionView(collectionView: UICollectionView, shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -95,10 +94,10 @@ class ChooseAnimationViewController: UIViewController, UICollectionViewDelegate,
   }
   
   func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-    var model = animationArray[indexPath.item]
+    
     if let cell = collectionView.cellForItemAtIndexPath(indexPath) as! AnimationCell? {
-      model?.selected = false
-      cell.setBorder()
+      animationArray[indexPath.item]?.selected = false
+      cell.setBorder(false)
     }
   }
 	
@@ -205,9 +204,9 @@ class AnimationCell : UICollectionViewCell {
     self.animationModel.animationView?.startAnimation()
   }
   
-  func setBorder() {
+  func setBorder(isSelected: Bool) {
     setBorderColor()
-    if (self.selected) {
+    if (isSelected) {
       self.layer.borderWidth = 7.0
     } else {
       self.layer.borderWidth = 2.0

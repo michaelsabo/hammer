@@ -22,12 +22,12 @@ class GifService {
 	}
 
 	
-	func getGifsResponse() -> SignalProducer<GifResponse, NSError> {
+	func getGifsResponse() -> SignalProducer<Gifs, NSError> {
 		return SignalProducer{ observer, disposable in
 				Alamofire.request(.GET, self.endpointForGifs())
 					.responseJSON { response in
 						if let json = response.result.value {
-							let gifs = GifResponse(gifsJSON: JSON(json))
+							let gifs = Gifs(gifsJSON: JSON(json))
 							if (response.result.isSuccess) {
 								observer.sendNext(gifs)
 								observer.sendCompleted()
@@ -40,12 +40,12 @@ class GifService {
 		}
 	}
 	
-	func getGifsForTagSearchResponse(query: String) -> SignalProducer<GifResponse, NSError> {
+	func getGifsForTagSearchResponse(query: String) -> SignalProducer<Gifs, NSError> {
 		return SignalProducer{  observer, disposable in
 			Alamofire.request(.GET, self.endpointForGifsFromTag(query))
 				.responseJSON { response in
 					if let json = response.result.value {
-						let gifs = GifResponse(gifsJSON: JSON(json))
+						let gifs = Gifs(gifsJSON: JSON(json))
 						if (response.result.isSuccess) {
 							observer.sendNext(gifs)
 							observer.sendCompleted()

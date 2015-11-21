@@ -35,15 +35,7 @@ class HomeViewModel : NSObject {
     self.isSearchingObserver = searchingObserver
 		super.init()
 
-		gifService.getGifsResponse()
-			.on(next: {
-				response in
-					if (response.gifs.count > 0) {
-						self.gifCollection.value = response.gifs
-						self.gifsForDisplay.value = response.gifs
-					}
-				})
-				.start()
+    getGifs()
 		
 		tagService.getAllTags()
 			.on(next: {
@@ -62,6 +54,18 @@ class HomeViewModel : NSObject {
       })
 
 	}
+  
+  func getGifs() {
+    gifService.getGifsResponse()
+      .on(next: {
+        response in
+        if (response.gifs.count > 0) {
+          self.gifCollection.value = response.gifs
+          self.gifsForDisplay.value = response.gifs
+        }
+      })
+      .start()
+  }
   
   func endSeaching() {
     self.isSearchingObserver.sendNext(false)

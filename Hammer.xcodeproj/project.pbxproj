@@ -150,7 +150,6 @@
 		275212B41BEF89A300BE3FE9 /* SearchGifsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchGifsTableView.swift; sourceTree = "<group>"; };
 		275212BA1BEFA47400BE3FE9 /* CustomizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizationViewController.swift; sourceTree = "<group>"; };
 		275212BD1BEFA48700BE3FE9 /* CustomizationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomizationViewController.xib; sourceTree = "<group>"; };
-		275212C01BEFB3DF00BE3FE9 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 		275C39851BE702DC0028B4C6 /* jif_me.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jif_me.png; sourceTree = "<group>"; };
 		275C39871BE702DC0028B4C6 /* Licenses.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Licenses.txt; sourceTree = "<group>"; };
 		276C7FAF1BC204EE0028DC0D /* Hammer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hammer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -249,7 +248,6 @@
 		2719DA371BCC9D3200BD02AD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				275212C01BEFB3DF00BE3FE9 /* Reveal.framework */,
 				2719DA351BCC9D2800BD02AD /* Result.framework.dSYM */,
 				2719DA331BCC9D2200BD02AD /* ReactiveCocoa.framework.dSYM */,
 			);
@@ -725,7 +723,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/Fabric.framework/run\" b0a759f1abeb8628534dc5eb8f88bf5abd8bf30f 5f3711b839efb38bdede354c06b7a2dd09e080cb878ee43422f36ce3a7fae6db";
+			shellScript = "./Pods/Fabric.framework/run b0a759f1abeb8628534dc5eb8f88bf5abd8bf30f 5f3711b839efb38bdede354c06b7a2dd09e080cb878ee43422f36ce3a7fae6db";
 		};
 		30793A4B156A5C5A97FD32FE /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
