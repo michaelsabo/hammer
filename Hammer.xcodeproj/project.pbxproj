@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		19A6B23F611142EF3AE6C695 /* Pods_HammerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B86951B2AC1AD5240FF11A6D /* Pods_HammerTests.framework */; };
+		2707A1501C00225B0003FF5B /* ContainerOverflowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2707A14F1C00225B0003FF5B /* ContainerOverflowView.swift */; };
+		2707A1511C00225B0003FF5B /* ContainerOverflowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2707A14F1C00225B0003FF5B /* ContainerOverflowView.swift */; };
 		2711AE3D1BDB2AFB000C47B2 /* CollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711AE3C1BDB2AFB000C47B2 /* CollectionViewLayout.swift */; };
 		27197E181BC239DC00525F33 /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 27197E171BC239DC00525F33 /* UIImage+animatedGIF.m */; };
 		2719DA291BCC7B6A00BD02AD /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2719DA281BCC7B6A00BD02AD /* HomeViewModel.swift */; };
@@ -124,6 +126,7 @@
 
 /* Begin PBXFileReference section */
 		0BE9876206B273B95EFACDD8 /* Pods-HammerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HammerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HammerTests/Pods-HammerTests.release.xcconfig"; sourceTree = "<group>"; };
+		2707A14F1C00225B0003FF5B /* ContainerOverflowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerOverflowView.swift; sourceTree = "<group>"; };
 		27084BCF1BEEE21D009F77FE /* MockGifService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockGifService.swift; sourceTree = "<group>"; };
 		27084BD11BEEE2E8009F77FE /* MockTagService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockTagService.swift; sourceTree = "<group>"; };
 		2711AE3C1BDB2AFB000C47B2 /* CollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewLayout.swift; sourceTree = "<group>"; };
@@ -300,6 +303,7 @@
 				27F1D7391BE98DC10014F2AF /* Licenses.xib */,
 				2796923C1BE9B49E00063A98 /* Settings.xib */,
 				275212BD1BEFA48700BE3FE9 /* CustomizationViewController.xib */,
+				2707A14F1C00225B0003FF5B /* ContainerOverflowView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -835,6 +839,7 @@
 				274C1EA41BE5DCFA007B1D8A /* AppFont.swift in Sources */,
 				27F1D7421BE98E7A0014F2AF /* NavigationBar.swift in Sources */,
 				2719DA301BCC848500BD02AD /* UIKitExtensions.swift in Sources */,
+				2707A1501C00225B0003FF5B /* ContainerOverflowView.swift in Sources */,
 				27C75CAE1BC21CC0008AC322 /* Gif.swift in Sources */,
 				27D16A441BDC1A55000B75B2 /* LoadingAnimation.swift in Sources */,
 				27981B261BED54A90069C1DC /* SettingsViewModel.swift in Sources */,
@@ -858,6 +863,7 @@
 				27CD49A01BEF037500586B4D /* GifService.swift in Sources */,
 				27CD49A11BEF037500586B4D /* ServiceConfig.swift in Sources */,
 				27CD49A21BEF037500586B4D /* Gif.swift in Sources */,
+				2707A1511C00225B0003FF5B /* ContainerOverflowView.swift in Sources */,
 				27CD49A31BEF037500586B4D /* Tag.swift in Sources */,
 				27CD49A41BEF037500586B4D /* HomeViewModel.swift in Sources */,
 				27CD49A51BEF037500586B4D /* DisplayViewModel.swift in Sources */,
