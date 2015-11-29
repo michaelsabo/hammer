@@ -26,7 +26,7 @@ class TagTest: XCTestCase {
     func testInitialization() {
         let response = TagsResponse(json: json!)
         
-        XCTAssertEqual(response.tags.count, 8)
+        XCTAssertEqual(response.tags.count, 15)
         XCTAssertNotNil(response.tags[0].id)
         XCTAssertNotNil(response.tags[0].text)
         XCTAssertEqual(response.response, ServiceResponse.Success)

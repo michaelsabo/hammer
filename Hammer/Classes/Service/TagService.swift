@@ -12,18 +12,11 @@ import SwiftyJSON
 
 class TagService {
 
-	
-	func getEndpointForTags() -> String {
-		return Request.forEndpoint("tags")
-	}
-	
-	func getEndpointForImageTags(id : String) -> String {
-		return Request.forEndpoint("gifs/\(id)/tags")
-	}
+
 	
 	func getAllTags() -> SignalProducer<TagsResponse, NSError> {
 		return SignalProducer { 	observer, disposable in
-			Alamofire.request(.GET, self.getEndpointForTags())
+			Alamofire.request(Router.Tags)
 				.responseJSON { response in
 					if (response.result.isSuccess) {
 						let tags = TagsResponse(json: JSON(response.result.value!))
@@ -37,9 +30,9 @@ class TagService {
 		}
 	}
 	
-	func getTagsForGifId(id: String) -> SignalProducer<TagsResponse, NSError> {
+	func getTagsForGifId(id: Int) -> SignalProducer<TagsResponse, NSError> {
 		return SignalProducer {  observer, disposable in
-			Alamofire.request(.GET, self.getEndpointForImageTags(id))
+			Alamofire.request(Router.TagsForGif(id))
 				.responseJSON { response in
 					if (response.result.isSuccess) {
 						let tags = TagsResponse(json: JSON(response.result.value!))

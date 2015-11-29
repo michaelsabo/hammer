@@ -79,7 +79,7 @@ class HomeViewModel : NSObject {
 				self.foundTags.value = [Tag]()
 				self.isSearchingObserver.sendNext(true)
 				for tag in self.allTags.value as [Tag] {
-					if ((tag.text.lowercaseString.rangeOfString(value.lowercaseString)) != nil) {
+					if ((tag.name.lowercaseString.rangeOfString(value.lowercaseString)) != nil) {
 						self.foundTags.value.append(tag)
 					}
 				}

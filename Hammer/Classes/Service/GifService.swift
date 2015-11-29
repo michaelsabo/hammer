@@ -12,19 +12,10 @@ import Alamofire
 import SwiftyJSON
 
 class GifService {
-
-	func endpointForGifs() -> String {
-			return Request.forEndpoint("gifs")
-	}
-	
-	func endpointForGifsFromTag(query: String) -> String{
-		return Request.forEndpoint("gifs?q=\(query)")
-	}
-
 	
 	func getGifsResponse() -> SignalProducer<Gifs, NSError> {
 		return SignalProducer{ observer, disposable in
-				Alamofire.request(.GET, self.endpointForGifs())
+				Alamofire.request(Router.Gifs)
 					.responseJSON { response in
 						if let json = response.result.value {
 							let gifs = Gifs(gifsJSON: JSON(json))
@@ -42,7 +33,8 @@ class GifService {
 	
 	func getGifsForTagSearchResponse(query: String) -> SignalProducer<Gifs, NSError> {
 		return SignalProducer{  observer, disposable in
-			Alamofire.request(.GET, self.endpointForGifsFromTag(query))
+      print(Router.GifsForTag(query).URL)
+			Alamofire.request(Router.GifsForTag(query))
 				.responseJSON { response in
 					if let json = response.result.value {
 						let gifs = Gifs(gifsJSON: JSON(json))

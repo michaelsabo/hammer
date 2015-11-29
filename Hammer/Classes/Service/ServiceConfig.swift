@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 enum ServiceError: Int {
 	case AccessDenied = 0,
@@ -25,11 +26,32 @@ enum ServiceResponse: Int {
 	Failure
 }
 
-enum Request: String {
-	case Production = "http://ham-flyingdinos.rhcloud.com/api/",
-	Local = "http://localhost:9292/api/"
+enum Router: URLRequestConvertible {
+  static let Test = NSURL(string: "http://ham-flyingdinos.rhcloud.com/api")!
+  static let Production = NSURL(string: "http://52.2.139.235/api")!
+  static let Local = NSURL(string: "http://localhost:9292/api/")!
 	
-	static func forEndpoint(endpoint: String) -> String {
-			return Production.rawValue + endpoint
-	}
+  case Gifs
+  case GifsForTag(String)
+  case Tags
+  case TagsForGif(Int)
+  
+  var URL: NSURL { return Router.Production.URLByAppendingPathComponent(route.path) }
+  
+  var route: (path: String, parameters: [String : AnyObject]?) {
+    switch self {
+    case .Gifs: return ("/gifs", nil)
+    case .GifsForTag (let tag): return ("/gifs", ["q": tag])
+    case .Tags : return ("/tags", nil)
+    case .TagsForGif (let gifId) : return ("/gifs/\(gifId)/tags", nil)
+    }
+  }
+  
+  var URLRequest: NSMutableURLRequest {
+    return Alamofire
+      .ParameterEncoding
+      .URL
+      .encode(NSURLRequest(URL: URL), parameters: (route.parameters ?? [ : ])).0
+  }
+
 }

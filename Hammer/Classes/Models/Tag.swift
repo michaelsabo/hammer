@@ -15,20 +15,24 @@ enum TagFields : String {
 	case Id = "id"
 	case Text = "text"
 	case Tags = "tags"
+  case Name = "name"
 }
 
 class Tag {
-	var id: String
+	var id: Int
 	var text: String
+  var name: String
 	
 	required init(json: JSON) {
-		self.id = json[TagFields.Id.rawValue].stringValue
+		self.id = json[TagFields.Id.rawValue].intValue
 		self.text = json[TagFields.Text.rawValue].stringValue
+    self.name = json[TagFields.Name.rawValue].stringValue
 	}
   
-  init(id: String, text: String) {
+  init(id: Int, text: String, name: String) {
     self.id =  id
     self.text = text
+    self.name = name
   }
 }
 

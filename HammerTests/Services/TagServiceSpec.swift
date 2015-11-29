@@ -22,14 +22,6 @@ class TagServiceSpec: QuickSpec {
     
     describe("Tag Service") {
      	
-      it("should return the correct endpoint for all gifs") {
-        expect(tagService.getEndpointForTags()).to(equal("http://ham-flyingdinos.rhcloud.com/api/tags"))
-      }
-      
-      it("should return the correct endpoint for gif search") {
-        expect(tagService.getEndpointForImageTags("my-query")).to(equal("http://ham-flyingdinos.rhcloud.com/api/gifs/my-query/tags"))
-      }
-      
       it("should return gifs in the response") {
         var tagsResponse : TagsResponse!
         waitUntil(timeout: 3.5) { done in
@@ -41,13 +33,13 @@ class TagServiceSpec: QuickSpec {
             .start()
           
         }
-        expect(tagsResponse.tags.count).to(equal(8))
+        expect(tagsResponse.tags.count).to(equal(15))
       }
       
       it("should return gifs for a tag search") {
         var tagsResponse : TagsResponse!
         waitUntil { done in
-          tagService.getTagsForGifId("dadUkD4")
+          tagService.getTagsForGifId(10)
             .on(next: {
               tagsResponse = $0
               done()
@@ -60,7 +52,7 @@ class TagServiceSpec: QuickSpec {
       it("should return no tags for an image without") {
         var tagsResponse : TagsResponse!
         waitUntil { done in
-          tagService.getTagsForGifId("none")
+          tagService.getTagsForGifId(999)
             .on(next: {
               tagsResponse = $0
               done()

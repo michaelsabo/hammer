@@ -138,20 +138,19 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		let cellIdentifier = "AutocompleteResultCell"
 		var cell = autocompleteTableView.dequeueReusableCellWithIdentifier(cellIdentifier) as UITableViewCell!
 		cell.textLabel?.textColor = UIColor.flatWhiteColor()
-		cell.backgroundColor = UIColor.flatMintColor()
+		cell.backgroundColor = UIColor.flatTealColor()
 		if (cell == nil) {
 			cell = UITableViewCell.init(style: UITableViewCellStyle.Default, reuseIdentifier: cellIdentifier)
 		}
 		if (self.homeViewModel.foundTags.value.count-1 >= indexPath.row) {
       cell.textLabel?.font = App.font()
-			cell.textLabel?.text = self.homeViewModel.foundTags.value[indexPath.row].text
+			cell.textLabel?.text = self.homeViewModel.foundTags.value[indexPath.row].name
 		}
 		return cell
 	}
 	
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		self.tagSearch.text = self.homeViewModel.foundTags.value[indexPath.row].text
-		self.homeViewModel.searchText.value = self.homeViewModel.foundTags.value[indexPath.row].text
 		autocompleteTableView.deselectRowAtIndexPath(indexPath, animated: true)
 		textFieldShouldReturn(self.tagSearch)
 	}
