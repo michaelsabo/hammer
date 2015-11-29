@@ -41,13 +41,13 @@ class TagServiceSpec: QuickSpec {
             .start()
           
         }
-        expect(tagsResponse.tags.count).to(equal(8))
+        expect(tagsResponse.tags.count).to(equal(15))
       }
       
       it("should return gifs for a tag search") {
         var tagsResponse : TagsResponse!
         waitUntil { done in
-          tagService.getTagsForGifId("dadUkD4")
+          tagService.getTagsForGifId(10)
             .on(next: {
               tagsResponse = $0
               done()
@@ -60,7 +60,7 @@ class TagServiceSpec: QuickSpec {
       it("should return no tags for an image without") {
         var tagsResponse : TagsResponse!
         waitUntil { done in
-          tagService.getTagsForGifId("none")
+          tagService.getTagsForGifId(999)
             .on(next: {
               tagsResponse = $0
               done()

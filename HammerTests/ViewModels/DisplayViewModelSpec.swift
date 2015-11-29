@@ -16,7 +16,7 @@ class DisplayViewModelSpec: QuickSpec {
   override func spec() {
     
     describe("Display View Model") {
-      let gif = Gif(id: "p5tJEpm", url: "http://i.imgur.com/p5tJEpm.gif", thumbnailUrl: "http://i.imgur.com/p5tJEpmb.gif", index: 0)
+      let gif = Gif(id: 10, url: "http://i.imgur.com/p5tJEpm.gif", thumbnailUrl: "http://i.imgur.com/p5tJEpmb.gif", index: 0)
       let displayViewModel = DisplayViewModel(gifService: MockGifService(), tagService: MockTagService(), gif: gif)
       
       

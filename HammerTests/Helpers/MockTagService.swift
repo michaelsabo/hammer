@@ -23,9 +23,9 @@ class MockTagService : TagService {
     }
   }
   
-  override func getTagsForGifId(id: String) -> SignalProducer<TagsResponse, NSError> {
+  override func getTagsForGifId(id: Int) -> SignalProducer<TagsResponse, NSError> {
     return SignalProducer { observer, disposable in
-      if (id == "none") {
+      if (id == 999) {
         observer.sendNext(TagsResponse())
         observer.sendCompleted()
       	return

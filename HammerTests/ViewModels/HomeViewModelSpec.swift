@@ -33,23 +33,23 @@ class HomeViewModelSpec: QuickSpec {
               homeViewModel.endSeaching()
               expect(searching).to(beFalse())
             })
-            observer.sendNext("dwight")
+            observer.sendNext("ben")
           }
           
           it("should update the gifs being displayed when a match is found ") {
-            expect(homeViewModel.gifsForDisplay.value.count).to(equal(3))
-            observer.sendNext("dwight")
+            expect(homeViewModel.gifsForDisplay.value.count).to(equal(17))
+            observer.sendNext("ben")
             homeViewModel.getGifsForTagSearch()
             expect(homeViewModel.gifsForDisplay.value.count).to(equal(1))
-            expect(homeViewModel.gifsForDisplay.value.first?.id).to(equal("p5tJEpm"))
+            expect(homeViewModel.gifsForDisplay.value.first?.id).to(equal(1001))
           }
           
           it("should update the gif collection when a user is done searching ") {
-            observer.sendNext("dwight")
+            observer.sendNext("ben")
             homeViewModel.getGifsForTagSearch()
             expect(homeViewModel.gifsForDisplay.value.count).to(equal(1))
             observer.sendNext("")
-            expect(homeViewModel.gifsForDisplay.value.count).to(equal(3))
+            expect(homeViewModel.gifsForDisplay.value.count).to(equal(17))
           }
         }
         

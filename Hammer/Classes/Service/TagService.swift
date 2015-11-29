@@ -57,7 +57,7 @@ class TagService {
     }
   }
 	
-	func getTagsForGifId(id: String) -> SignalProducer<TagsResponse, NSError> {
+	func getTagsForGifId(id: Int) -> SignalProducer<TagsResponse, NSError> {
 		return SignalProducer {  observer, disposable in
 			Alamofire.request(.GET, self.endpointForGifTags(id))
 				.responseJSON { response in

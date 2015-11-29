@@ -11,7 +11,7 @@ import SwiftyJSON
 import Alamofire
 
 enum GifFields: String {
-	case ImgurId = "id"
+	case Id = "id"
 	case ImgurUrl = "url"
 	case ImgurThumbnailUrl = "thumbnail_url"
 }
@@ -34,7 +34,7 @@ class Gifs  {
 
 class Gif: NSObject {
 	
-	var id: String
+	var id: Int
 	var url: String
 	var thumbnailUrl: String
 	var thumbnailImage: UIImage?
@@ -44,7 +44,7 @@ class Gif: NSObject {
 	var thumbnailData: NSData?
 	
 	override init() {
-		id = ""
+		id = 0
 		url = ""
 		thumbnailUrl = ""
 		index = 0
@@ -52,13 +52,13 @@ class Gif: NSObject {
 	
 	convenience init(json: JSON, index: Int) {
 		self.init()
-		self.id =  json[GifFields.ImgurId.rawValue].stringValue
+		self.id =  json[GifFields.Id.rawValue].intValue
 		self.url = json[GifFields.ImgurUrl.rawValue].stringValue
 		self.thumbnailUrl = json[GifFields.ImgurThumbnailUrl.rawValue].stringValue
 		self.index = index
 	}
   
-  convenience init(id: String, url: String, thumbnailUrl: String, index: Int) {
+  convenience init(id: Int, url: String, thumbnailUrl: String, index: Int) {
     self.init()
     self.id =  id
     self.url = url
@@ -98,7 +98,7 @@ extension Gifs {
   
   func removeDuplicates(collection: [Gif]) -> [Gif] {
     
-    var keys = [String]()
+    var keys = [Int]()
     var array = [Gif]()
     for gif in collection {
       if (keys.contains(gif.id)) {

@@ -110,6 +110,10 @@ class DisplayViewController: UIViewController {
   func shareButtonClicked() {
     if let copiedGif = self.displayGifViewModel.gif.value.gifData {
       let vc = UIActivityViewController(activityItems: [copiedGif], applicationActivities: [])
+      if (vc.respondsToSelector(Selector("popoverPresentationController"))) {
+        vc.popoverPresentationController?.sourceView = self.view
+        vc.popoverPresentationController?.barButtonItem = self.shareButton
+      }
       presentViewController(vc, animated: true, completion: nil)
     } else {
       let ac = UIAlertController(title: "Woahhhh", message: "Something went wrong when processing. \nLet's do this again", preferredStyle: UIAlertControllerStyle.Alert)
