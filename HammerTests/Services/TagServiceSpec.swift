@@ -21,14 +21,7 @@ class TagServiceSpec: QuickSpec {
     }
     
     describe("Tag Service") {
-     	
-      it("should return the correct endpoint for all gifs") {
-        expect(tagService.endpointForTags()).to(equal("http://ham-flyingdinos.rhcloud.com/api/tags"))
-      }
-      
-      it("should return the correct endpoint for gif search") {
-        expect(tagService.endpointForGifTags("zXzXzX")).to(equal("http://ham-flyingdinos.rhcloud.com/api/gifs/zXzXzX/tags"))
-      }
+
       
       it("should return gifs in the response") {
         var tagsResponse : TagsResponse!
@@ -80,7 +73,7 @@ class TagServiceSpec: QuickSpec {
             })
             .start()
         }
-        expect(taggedResponse.id).to(equal("custom-tag"))
+        expect(taggedResponse.id).to(equal(1111))
         expect(taggedResponse.text).to(equal("custom tag"))
       }
 

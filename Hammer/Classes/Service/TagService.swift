@@ -12,22 +12,9 @@ import SwiftyJSON
 
 class TagService {
 
-	
-	func endpointForTags() -> String {
-		return Request.forEndpoint("tags")
-	}
-	
-	func endpointForGifTags(id : String) -> String {
-		return Request.forEndpoint("gifs/\(id)/tags")
-	}
-  
-  func endpointForTaggingGifWith(id id : String, tag: String) -> String {
-    return "\(endpointForGifTags(id))/\(tag)"
-  }
-	
   func tagGifWith(id id : String, tag: String) -> SignalProducer<Tag, NSError> {
 		return SignalProducer { 	observer, disposable in
-      Alamofire.request(.POST, self.endpointForTaggingGifWith(id: id, tag: tag))
+			Alamofire.request(Router.Tags)
 				.responseJSON { response in
 					if (response.result.isSuccess) {
             let json = JSON(response.result.value!)
@@ -43,7 +30,7 @@ class TagService {
   
   func getAllTags() -> SignalProducer<TagsResponse, NSError> {
     return SignalProducer { 	observer, disposable in
-      Alamofire.request(.GET, self.endpointForTags())
+      Alamofire.request(Router.Tags)
         .responseJSON { response in
           if (response.result.isSuccess) {
             let tags = TagsResponse(json: JSON(response.result.value!))
@@ -59,7 +46,7 @@ class TagService {
 	
 	func getTagsForGifId(id: Int) -> SignalProducer<TagsResponse, NSError> {
 		return SignalProducer {  observer, disposable in
-			Alamofire.request(.GET, self.endpointForGifTags(id))
+			Alamofire.request(Router.TagsForGif(id))
 				.responseJSON { response in
 					if (response.result.isSuccess) {
 						let tags = TagsResponse(json: JSON(response.result.value!))

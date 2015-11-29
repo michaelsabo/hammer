@@ -68,12 +68,12 @@ class GifServiceSpec: QuickSpec {
       }
       
       it("should return the thumbnail image") {
-        expect(gif.thumbnailImage).to(beNil())
+        expect(gif.thumbnailData).to(beNil())
         gifService.retrieveThumbnailimageFor(gif: gif)
           .on(next: { gif = $0 } )
         	.start()
         
-        expect(gif.thumbnailImage).toEventually(beTruthy(), timeout: 5)
+        expect(gif.thumbnailData).toEventually(beTruthy(), timeout: 5)
       }
       
     }

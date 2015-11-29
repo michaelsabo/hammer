@@ -25,9 +25,9 @@ class ImageCell: UICollectionViewCell {
     self.userInteractionEnabled = false
   }
   
-  func setImage(image: UIImage?) {
-    if let thumbnail = image {
-      self.imageView.image = thumbnail
+  func setImage(image: NSData?) {
+    if let data = image {
+      self.imageView.image = UIImage(data: data)
       self.imageView.layer.masksToBounds = true
       self.imageView.layer.cornerRadius = 10.0
       hasLoaded = true

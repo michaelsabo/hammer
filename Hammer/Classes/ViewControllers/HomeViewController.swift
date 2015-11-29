@@ -100,7 +100,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 		let displayViewController = storyboard?.instantiateViewControllerWithIdentifier("DisplayViewController") as! DisplayViewController
     let gif = self.homeViewModel.gifsForDisplay.value[indexPath.item]
-    if (gif.thumbnailImage != nil) {
+    if (gif.thumbnailData != nil) {
       displayViewController.displayGifViewModel = DisplayViewModel(gifService: GifService(), tagService: TagService(), gif: gif)
       navigationController?.pushViewController(displayViewController, animated: true)
     }

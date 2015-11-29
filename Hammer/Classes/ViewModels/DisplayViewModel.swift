@@ -23,6 +23,8 @@ class DisplayViewModel : NSObject {
   private let gifRequestObserver: Observer<Bool, NoError>
   private let tagRequestObserver: Observer<Bool, NoError>
   
+  var gifData : NSData!
+  
 	let gifService: GifService
   let tagService: TagService
 	
@@ -49,10 +51,11 @@ class DisplayViewModel : NSObject {
     self.gifService.retrieveImageDataFor(gif: self.gif.value)
       .on(next: { [unowned self]
         response in
-        guard (response.gifData != nil) else {
+        guard (response != nil) else {
           return
         }
-        self.gif.value = response
+//        self.gif.value = response
+          self.gifData = NSData(data: response!)
         }, completed: {
           self.gifRequestObserver.sendNext(true)
       }).start()

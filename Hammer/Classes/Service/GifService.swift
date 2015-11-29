@@ -56,7 +56,7 @@ class GifService {
 				.responseData { response in
 					if (response.result.isSuccess) {
 						if let data = response.result.value {
-							gif.thumbnailImage = UIImage(data: data)
+              gif.thumbnailData = UIImageJPEGRepresentation(UIImage(data: data)!, 0.1)
 							observer.sendNext(gif)
 							observer.sendCompleted()
 						}
@@ -67,15 +67,15 @@ class GifService {
 		}
 	}
 	
-	func retrieveImageDataFor(gif gif: Gif) -> SignalProducer<Gif, NSError> {
+	func retrieveImageDataFor(gif gif: Gif) -> SignalProducer<NSData?, NSError> {
 		return SignalProducer { observer, disposable in
 			Alamofire.request(.GET, gif.url)
 				.responseData { response in
 					if (response.result.isSuccess) {
 						if let data = response.result.value {
-							gif.gifData = data
-							gif.gifImage = UIImage.animatedImageWithAnimatedGIFData(data)
-							observer.sendNext(gif)
+//							gif.gifData = data
+//							gif.gifImage = UIImage.animatedImageWithAnimatedGIFData(data)
+							observer.sendNext(data)
 							observer.sendCompleted()
 						}
 					} else {

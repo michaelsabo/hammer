@@ -56,7 +56,7 @@ class DisplayViewController: UIViewController {
           let animation = self.view.viewWithTag(kLoadingAnimationTag) as? NVActivityIndicatorView
           animation?.stopAnimation()
           animation?.removeFromSuperview()
-          self.imageView.image = self.displayGifViewModel.gif.value.gifImage
+          self.imageView.image = UIImage.animatedImageWithAnimatedGIFData(self.displayGifViewModel.gifData)
           self.navigationItem.rightBarButtonItem = self.shareButton
       })
       
@@ -71,37 +71,31 @@ class DisplayViewController: UIViewController {
 	
 	func addTagsToLabels() {
     
-    let tagContainer = ContainerOverflowView()
-    tagContainer.translatesAutoresizingMaskIntoConstraints = false
-    view.addSubview(tagContainer)
-    self.view.addConstraint(NSLayoutConstraint.init(item: tagContainer, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Bottom, multiplier: 1, constant: 5))
-    
     for tag in self.displayGifViewModel.tags.value  {
-      let label = PaddedTagLabel.init(text: tag.text)
-//      self.view.addSubview(label)
-//      label.setNeedsDisplay()
+      let label = PaddedTagLabel.init(text: tag.name)
+      self.view.addSubview(label)
+      label.setNeedsDisplay()
       self.tagLabels?.append(label)
     }
-    tagContainer.addViews(self.tagLabels!)
     
     
-//    var prevLabel: PaddedTagLabel?
-//    var count = 0
-//
-//    for lbl in self.tagLabels! {
-//      var constraints = [NSLayoutConstraint]()
-//      if count == 0 {
-//         constraints.append(NSLayoutConstraint.init(item: lbl, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Bottom, multiplier: 1, constant: 5))
-//      } else {
-//        constraints.append(NSLayoutConstraint.init(item: lbl, attribute: .Top, relatedBy: .Equal, toItem: prevLabel, attribute: .Bottom, multiplier: 1, constant: 2))
-//      }
-//      constraints.append(NSLayoutConstraint.init(item: lbl, attribute: .Left, relatedBy: .Equal, toItem: self.view, attribute: .Left, multiplier: 1, constant: 4))
-//      constraints.append(NSLayoutConstraint.init(item: self.view, attribute: .RightMargin, relatedBy: .GreaterThanOrEqual, toItem: lbl, attribute: .Right, multiplier: 1, constant: 4))
-//      self.view.addConstraints(constraints)
-//      
-//      count++
-//      prevLabel = lbl
-//    }
+    var prevLabel: PaddedTagLabel?
+    var count = 0
+
+    for lbl in self.tagLabels! {
+      var constraints = [NSLayoutConstraint]()
+      if count == 0 {
+         constraints.append(NSLayoutConstraint.init(item: lbl, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Bottom, multiplier: 1, constant: 5))
+      } else {
+        constraints.append(NSLayoutConstraint.init(item: lbl, attribute: .Top, relatedBy: .Equal, toItem: prevLabel, attribute: .Bottom, multiplier: 1, constant: 2))
+      }
+      constraints.append(NSLayoutConstraint.init(item: lbl, attribute: .Left, relatedBy: .Equal, toItem: self.view, attribute: .Left, multiplier: 1, constant: 4))
+      constraints.append(NSLayoutConstraint.init(item: self.view, attribute: .RightMargin, relatedBy: .GreaterThanOrEqual, toItem: lbl, attribute: .Right, multiplier: 1, constant: 4))
+      self.view.addConstraints(constraints)
+      
+      count++
+      prevLabel = lbl
+    }
     self.view.setNeedsLayout()
     self.view.updateConstraintsIfNeeded()
     self.view.layoutIfNeeded()

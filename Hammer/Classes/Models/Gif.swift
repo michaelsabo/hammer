@@ -37,8 +37,6 @@ class Gif: NSObject {
 	var id: Int
 	var url: String
 	var thumbnailUrl: String
-	var thumbnailImage: UIImage?
-	var gifImage: UIImage?
 	var index: Int!
 	var gifData: NSData?
 	var thumbnailData: NSData?
@@ -77,7 +75,8 @@ class Gif: NSObject {
 			.responseData { response in
 				if (response.result.isSuccess) {
 					if let data = response.result.value {
-						gif.thumbnailImage = UIImage(data: data)
+            let compressed = UIImageJPEGRepresentation(UIImage(data: data)!, 0.10)!
+						gif.thumbnailData = compressed
 						completionHandler(gif, response.result.isSuccess, nil)
 						return
 					}
