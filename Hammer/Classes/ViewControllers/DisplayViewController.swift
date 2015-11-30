@@ -108,45 +108,54 @@ class DisplayViewController: UIViewController {
     guard tagsAddedToView else {
       return
     }
-    
+    addConstraintsForTags()
+  }
+  
+  func addConstraintsForTags() {
     let maxWidth = Screen.screenWidth
     let xPadding : CGFloat = 4.0
     let yPadding : CGFloat = 5.0
     let zeroPadding : CGFloat = 0.0
     var currentX : CGFloat = 0
     
-    var previousIndexOfFirstItem = 0
+    var indexesOfFirstItemInRow : [Int] = [0]
+    var indexOfLastItemInRow : [Int] = [0]
+    var rowCurrentWidth : [CGFloat] = [0]
+    var numberOfRows = 1
     
     for (index, label) in (self.tagLabels?.enumerate())! {
-      self.view.addSubview(label)
       let objWidth = label.frame.size.width
-
       
-      if (index == 0 || (currentX + objWidth) > maxWidth) {
-        currentX = objWidth + xPadding
+      if (index == 0) {
+        self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Bottom, multiplier: 1, constant: yPadding))
+        self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Left, relatedBy: .Equal, toItem: self.view, attribute: .Left, multiplier: 1, constant: xPadding))
         
-        if (index == 0) {
-          self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Bottom, multiplier: 1, constant: yPadding))
-          self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Left, relatedBy: .Equal, toItem: self.view, attribute: .Left, multiplier: 1, constant: xPadding))
-          previousIndexOfFirstItem = index
-          
-        } else {
-          let viewAbove = self.tagLabels?[previousIndexOfFirstItem]
-          self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Top, relatedBy: .Equal, toItem: viewAbove, attribute: .Bottom, multiplier: 1, constant: yPadding))
-          self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Left, relatedBy: .Equal, toItem: self.view, attribute: .Left, multiplier: 1, constant: xPadding))
-          previousIndexOfFirstItem = index
-          
-        }
+        rowCurrentWidth[numberOfRows-1] = objWidth + xPadding
+        
       } else {
-        currentX += xPadding + objWidth
-        let previousView = self.tagLabels?[index-1]
-        self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Top, relatedBy: .Equal, toItem: previousView, attribute: .Top, multiplier: 1, constant: zeroPadding))
-        self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Left, relatedBy: .Equal, toItem: previousView, attribute: .Right, multiplier: 1, constant: xPadding))
-        
+        for (i, width) in rowCurrentWidth.enumerate() {
+          if ((width + objWidth) < maxWidth) {
+            let previousView = (self.tagLabels?[indexOfLastItemInRow[i]])! as PaddedTagLabel
+            self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Top, relatedBy: .Equal, toItem: previousView, attribute: .Top, multiplier: 1, constant: zeroPadding))
+            self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Left, relatedBy: .Equal, toItem: previousView, attribute: .Right, multiplier: 1, constant: xPadding))
+            
+            indexOfLastItemInRow[i] = index
+            rowCurrentWidth[i] += objWidth + xPadding
+            break
+          } else {
+            let viewAbove = (self.tagLabels?[indexesOfFirstItemInRow.last!])! as PaddedTagLabel
+            self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Top, relatedBy: .Equal, toItem: viewAbove, attribute: .Bottom, multiplier: 1, constant: yPadding))
+            self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Left, relatedBy: .Equal, toItem: self.view, attribute: .Left, multiplier: 1, constant: xPadding))
+            indexesOfFirstItemInRow.append(index)
+            indexOfLastItemInRow.append(index)
+            rowCurrentWidth.append((objWidth + xPadding))
+            numberOfRows += 1
+            break
+          }
+        }
       }
     }
     tagsAddedToView = false
-    
   }
   
   func shareButtonClicked() {
