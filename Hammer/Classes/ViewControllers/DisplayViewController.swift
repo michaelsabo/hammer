@@ -38,6 +38,7 @@ class DisplayViewController: UIViewController {
 	
 		func setupView() {
 			self.view.backgroundColor = UIColor.flatWhiteColorDark()
+      self.view.clipsToBounds = true
 			self.configureNavigationBar()
 			let loadingFrame = CGRectMake((Screen.screenWidth/2.0)-30, (self.imageView.frame.origin.y)+(self.imageView.frame.size.height/2)-20, 60.0, 50.0)
 			let loadingView = NVActivityIndicatorView(frame: loadingFrame, type: .LineScalePulseOut, color: UIColor.flatTealColor())
@@ -66,7 +67,7 @@ class DisplayViewController: UIViewController {
       self.displayGifViewModel.tagRequestSignal
         .observeOn(UIScheduler())
         .observeNext({[unowned self] observer in
-//          self.displayNewTagButton()
+          self.displayNewTagButton()
           if (self.displayGifViewModel.tags.value.count > 0) {
             self.horizonalTagLayout()
           }
@@ -87,9 +88,6 @@ class DisplayViewController: UIViewController {
     newTagButton.layer.cornerRadius = 5.0
     
     self.view.addSubview(newTagButton)
-    self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Bottom, multiplier: 1, constant: 3))
-    self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Left, relatedBy: .Equal, toItem: self.view, attribute: .Left, multiplier: 1, constant: 4))
-    self.view.addConstraint(NSLayoutConstraint.init(item: self.view, attribute: .RightMargin, relatedBy: .GreaterThanOrEqual, toItem: newTagButton, attribute: .Right, multiplier: 1, constant: 4))
   }
 
   func horizonalTagLayout() {
@@ -116,7 +114,6 @@ class DisplayViewController: UIViewController {
     let xPadding : CGFloat = 4.0
     let yPadding : CGFloat = 5.0
     let zeroPadding : CGFloat = 0.0
-    var currentX : CGFloat = 0
     
     var indexesOfFirstItemInRow : [Int] = [0]
     var indexOfLastItemInRow : [Int] = [0]
@@ -155,6 +152,28 @@ class DisplayViewController: UIViewController {
         }
       }
     }
+    
+    guard self.tagLabels?.count > 0 else {
+      self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Top, multiplier: 1, constant: yPadding))
+      self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Left, relatedBy: .Equal, toItem: self.view, attribute: .Left, multiplier: 1, constant: xPadding))
+      return
+    }
+    
+    let buttonWidth = newTagButton.frame.size.width
+    
+    if ((rowCurrentWidth[numberOfRows-1] + buttonWidth) > maxWidth) {
+      let labelAbove = (self.tagLabels?[indexesOfFirstItemInRow[numberOfRows-1]])! as PaddedTagLabel
+      self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Top, relatedBy: .Equal, toItem: labelAbove, attribute: .Bottom, multiplier: 1, constant: yPadding))
+      self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Left, relatedBy: .Equal, toItem: self.view, attribute: .Left, multiplier: 1, constant: xPadding))
+      
+    } else {
+      let lastLabel = (self.tagLabels?[indexOfLastItemInRow[numberOfRows-1]])! as PaddedTagLabel
+      self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Top, relatedBy: .Equal, toItem: lastLabel, attribute: .Top, multiplier: 1, constant: zeroPadding))
+      self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Left, relatedBy: .Equal, toItem: lastLabel, attribute: .Right, multiplier: 1, constant: xPadding))
+    }
+    
+    
+    
     tagsAddedToView = false
   }
   
@@ -170,11 +189,6 @@ class DisplayViewController: UIViewController {
       let ac = UIAlertController(title: "Woahhhh", message: "Something went wrong when processing. \nLet's do this again", preferredStyle: UIAlertControllerStyle.Alert)
       presentViewController(ac, animated: true, completion: nil)
     }
-  }
-
-  
-  override func viewWillDisappear(animated: Bool) {
-    super.viewWillAppear(animated)
   }
 
   deinit {
