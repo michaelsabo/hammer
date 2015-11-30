@@ -11,6 +11,7 @@ import MobileCoreServices
 import ChameleonFramework
 import NVActivityIndicatorView
 import ReactiveCocoa
+import Font_Awesome_Swift
 
 class DisplayViewController: UIViewController {
 
@@ -19,6 +20,8 @@ class DisplayViewController: UIViewController {
 		var tags: [Tag]?
 		var tagLabels: [PaddedTagLabel]? =  [PaddedTagLabel]()
 		var displayGifViewModel: DisplayViewModel!
+    var newTagButton : UIButton!
+    var tagsAddedToView = false
   
     var cocoaActionShare: CocoaAction?
 		var shareButton: UIBarButtonItem?
@@ -63,43 +66,88 @@ class DisplayViewController: UIViewController {
       self.displayGifViewModel.tagRequestSignal
         .observeOn(UIScheduler())
         .observeNext({[unowned self] observer in
+//          self.displayNewTagButton()
           if (self.displayGifViewModel.tags.value.count > 0) {
-            self.addTagsToLabels()
+            self.horizonalTagLayout()
           }
+
       })
   }
-	
-	func addTagsToLabels() {
+  
+  func displayNewTagButton() {
+    newTagButton = UIButton()
+    newTagButton.titleLabel?.font = App.font()
+    newTagButton.setTitle("add a new tag", forState: .Normal)
+    newTagButton.setTitleColor(UIColor.flatWhiteColor(), forState: .Normal)
+    newTagButton.backgroundColor = UIColor.flatTealColor()
+    newTagButton.setFAText(prefixText: "", icon: FAType.FATag, postfixText: "  Add new tag!", size: 18, forState: .Normal)
+    newTagButton.titleLabel?.font = App.font()
+    newTagButton.contentEdgeInsets = UIEdgeInsets(top: 3.0, left: 6.0, bottom: 3.0, right: 6.0)
+    newTagButton.translatesAutoresizingMaskIntoConstraints = false
+    newTagButton.layer.cornerRadius = 5.0
     
+    self.view.addSubview(newTagButton)
+    self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Bottom, multiplier: 1, constant: 3))
+    self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Left, relatedBy: .Equal, toItem: self.view, attribute: .Left, multiplier: 1, constant: 4))
+    self.view.addConstraint(NSLayoutConstraint.init(item: self.view, attribute: .RightMargin, relatedBy: .GreaterThanOrEqual, toItem: newTagButton, attribute: .Right, multiplier: 1, constant: 4))
+  }
+
+  func horizonalTagLayout() {
     for tag in self.displayGifViewModel.tags.value  {
       let label = PaddedTagLabel.init(text: tag.name)
       self.view.addSubview(label)
       label.setNeedsDisplay()
       self.tagLabels?.append(label)
     }
+    tagsAddedToView = true
+  }
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
     
-    
-    var prevLabel: PaddedTagLabel?
-    var count = 0
-
-    for lbl in self.tagLabels! {
-      var constraints = [NSLayoutConstraint]()
-      if count == 0 {
-         constraints.append(NSLayoutConstraint.init(item: lbl, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Bottom, multiplier: 1, constant: 5))
-      } else {
-        constraints.append(NSLayoutConstraint.init(item: lbl, attribute: .Top, relatedBy: .Equal, toItem: prevLabel, attribute: .Bottom, multiplier: 1, constant: 2))
-      }
-      constraints.append(NSLayoutConstraint.init(item: lbl, attribute: .Left, relatedBy: .Equal, toItem: self.view, attribute: .Left, multiplier: 1, constant: 4))
-      constraints.append(NSLayoutConstraint.init(item: self.view, attribute: .RightMargin, relatedBy: .GreaterThanOrEqual, toItem: lbl, attribute: .Right, multiplier: 1, constant: 4))
-      self.view.addConstraints(constraints)
-      
-      count++
-      prevLabel = lbl
+    guard tagsAddedToView else {
+      return
     }
-    self.view.setNeedsLayout()
-    self.view.updateConstraintsIfNeeded()
-    self.view.layoutIfNeeded()
-	}
+    
+    let maxWidth = Screen.screenWidth
+    let xPadding : CGFloat = 4.0
+    let yPadding : CGFloat = 5.0
+    let zeroPadding : CGFloat = 0.0
+    var currentX : CGFloat = 0
+    
+    var previousIndexOfFirstItem = 0
+    
+    for (index, label) in (self.tagLabels?.enumerate())! {
+      self.view.addSubview(label)
+      let objWidth = label.frame.size.width
+
+      
+      if (index == 0 || (currentX + objWidth) > maxWidth) {
+        currentX = objWidth + xPadding
+        
+        if (index == 0) {
+          self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Bottom, multiplier: 1, constant: yPadding))
+          self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Left, relatedBy: .Equal, toItem: self.view, attribute: .Left, multiplier: 1, constant: xPadding))
+          previousIndexOfFirstItem = index
+          
+        } else {
+          let viewAbove = self.tagLabels?[previousIndexOfFirstItem]
+          self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Top, relatedBy: .Equal, toItem: viewAbove, attribute: .Bottom, multiplier: 1, constant: yPadding))
+          self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Left, relatedBy: .Equal, toItem: self.view, attribute: .Left, multiplier: 1, constant: xPadding))
+          previousIndexOfFirstItem = index
+          
+        }
+      } else {
+        currentX += xPadding + objWidth
+        let previousView = self.tagLabels?[index-1]
+        self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Top, relatedBy: .Equal, toItem: previousView, attribute: .Top, multiplier: 1, constant: zeroPadding))
+        self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Left, relatedBy: .Equal, toItem: previousView, attribute: .Right, multiplier: 1, constant: xPadding))
+        
+      }
+    }
+    tagsAddedToView = false
+    
+  }
   
   func shareButtonClicked() {
     if let copiedGif = self.displayGifViewModel.gif.value.gifData {

@@ -12,7 +12,7 @@ target 'Hammer' do
 	pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
 	pod 'ChameleonFramework/Swift'
 	pod 'NVActivityIndicatorView'
-  pod 'Font-Awesome-Swift', '~> 1.1.0'
+  pod 'Font-Awesome-Swift'
   pod 'Fabric'
   pod 'Crashlytics'
 end
