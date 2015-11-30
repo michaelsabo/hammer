@@ -71,7 +71,6 @@ class DisplayViewController: UIViewController {
           if (self.displayGifViewModel.tags.value.count > 0) {
             self.horizonalTagLayout()
           }
-
       })
   }
   
@@ -86,7 +85,6 @@ class DisplayViewController: UIViewController {
     newTagButton.contentEdgeInsets = UIEdgeInsets(top: 3.0, left: 6.0, bottom: 3.0, right: 6.0)
     newTagButton.translatesAutoresizingMaskIntoConstraints = false
     newTagButton.layer.cornerRadius = 5.0
-    
     self.view.addSubview(newTagButton)
   }
 
@@ -102,7 +100,6 @@ class DisplayViewController: UIViewController {
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-    
     guard tagsAddedToView else {
       return
     }
@@ -114,11 +111,7 @@ class DisplayViewController: UIViewController {
     let xPadding : CGFloat = 4.0
     let yPadding : CGFloat = 5.0
     let zeroPadding : CGFloat = 0.0
-    
-    var indexesOfFirstItemInRow : [Int] = [0]
-    var indexOfLastItemInRow : [Int] = [0]
-    var rowCurrentWidth : [CGFloat] = [0]
-    var numberOfRows = 1
+    var rowTupleArray = [(row: 0, firstItemIndex: 0, lastItemIndex: 0, currentWidth: CGFloat(0.0))]
     
     for (index, label) in (self.tagLabels?.enumerate())! {
       let objWidth = label.frame.size.width
@@ -126,27 +119,21 @@ class DisplayViewController: UIViewController {
       if (index == 0) {
         self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Bottom, multiplier: 1, constant: yPadding))
         self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Left, relatedBy: .Equal, toItem: self.view, attribute: .Left, multiplier: 1, constant: xPadding))
-        
-        rowCurrentWidth[numberOfRows-1] = objWidth + xPadding
-        
+        rowTupleArray[rowTupleArray.count-1].currentWidth = objWidth + xPadding
       } else {
-        for (i, width) in rowCurrentWidth.enumerate() {
-          if ((width + objWidth) < maxWidth) {
-            let previousView = (self.tagLabels?[indexOfLastItemInRow[i]])! as PaddedTagLabel
+        for (i, row) in rowTupleArray.enumerate() {
+          if ((row.currentWidth + objWidth) < maxWidth) {
+            let previousView = (self.tagLabels?[rowTupleArray[i].lastItemIndex])! as PaddedTagLabel
             self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Top, relatedBy: .Equal, toItem: previousView, attribute: .Top, multiplier: 1, constant: zeroPadding))
             self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Left, relatedBy: .Equal, toItem: previousView, attribute: .Right, multiplier: 1, constant: xPadding))
-            
-            indexOfLastItemInRow[i] = index
-            rowCurrentWidth[i] += objWidth + xPadding
+            rowTupleArray[i].currentWidth += objWidth + xPadding
+            rowTupleArray[i].lastItemIndex = index
             break
           } else {
-            let viewAbove = (self.tagLabels?[indexesOfFirstItemInRow.last!])! as PaddedTagLabel
+            let viewAbove = (self.tagLabels?[rowTupleArray[i].firstItemIndex])! as PaddedTagLabel
             self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Top, relatedBy: .Equal, toItem: viewAbove, attribute: .Bottom, multiplier: 1, constant: yPadding))
             self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Left, relatedBy: .Equal, toItem: self.view, attribute: .Left, multiplier: 1, constant: xPadding))
-            indexesOfFirstItemInRow.append(index)
-            indexOfLastItemInRow.append(index)
-            rowCurrentWidth.append((objWidth + xPadding))
-            numberOfRows += 1
+            rowTupleArray.append((rowTupleArray.count, index, index, (objWidth + xPadding)))
             break
           }
         }
@@ -161,19 +148,16 @@ class DisplayViewController: UIViewController {
     
     let buttonWidth = newTagButton.frame.size.width
     
-    if ((rowCurrentWidth[numberOfRows-1] + buttonWidth) > maxWidth) {
-      let labelAbove = (self.tagLabels?[indexesOfFirstItemInRow[numberOfRows-1]])! as PaddedTagLabel
+    if ((rowTupleArray[rowTupleArray.count-1].currentWidth + buttonWidth) > maxWidth) {
+      let labelAbove = (self.tagLabels?[rowTupleArray[rowTupleArray.count-1].firstItemIndex])! as PaddedTagLabel
       self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Top, relatedBy: .Equal, toItem: labelAbove, attribute: .Bottom, multiplier: 1, constant: yPadding))
       self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Left, relatedBy: .Equal, toItem: self.view, attribute: .Left, multiplier: 1, constant: xPadding))
       
     } else {
-      let lastLabel = (self.tagLabels?[indexOfLastItemInRow[numberOfRows-1]])! as PaddedTagLabel
+      let lastLabel = (self.tagLabels?[rowTupleArray[rowTupleArray.count-1].lastItemIndex])! as PaddedTagLabel
       self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Top, relatedBy: .Equal, toItem: lastLabel, attribute: .Top, multiplier: 1, constant: zeroPadding))
       self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Left, relatedBy: .Equal, toItem: lastLabel, attribute: .Right, multiplier: 1, constant: xPadding))
     }
-    
-    
-    
     tagsAddedToView = false
   }
   
