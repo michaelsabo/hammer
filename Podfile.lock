@@ -7,6 +7,9 @@ PODS:
     - Fabric (~> 1.6.0)
   - Fabric (1.6.1)
   - Font-Awesome-Swift (1.4.3)
+  - Masonry (0.6.3)
+  - MMPopupView (1.5):
+    - Masonry
   - Nimble (3.0.0)
   - NVActivityIndicatorView (2.1)
   - Quick (0.8.0)
@@ -18,6 +21,7 @@ DEPENDENCIES:
   - Crashlytics
   - Fabric
   - Font-Awesome-Swift
+  - MMPopupView
   - Nimble (= 3.0.0)
   - NVActivityIndicatorView
   - Quick (~> 0.8.0)
@@ -38,6 +42,8 @@ SPEC CHECKSUMS:
   Crashlytics: 41574a245bc6ae10c55d57f385ebd2004e5bee05
   Fabric: bf0ceb04e7c924090efc5f8c55e4fbcca189e0a0
   Font-Awesome-Swift: fb4184509f353a648324d88b0f3dd3cf1d6162bf
+  Masonry: ff105a956abcd19a618b2028b121cb638d7a8e2f
+  MMPopupView: 746353f225c6d72fa1325d2dd680f2d0ea4d6023
   Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
   NVActivityIndicatorView: 84aa48f7ec1efbfd0645e9f469097d94c6f65417
   Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab

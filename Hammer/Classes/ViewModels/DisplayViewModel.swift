@@ -19,9 +19,11 @@ class DisplayViewModel : NSObject {
 	
   let gifRequestSignal: Signal<Bool, NoError>
   let tagRequestSignal: Signal<Bool, NoError>
+  let createTagRequestSignal: Signal<Bool, NoError>
   
   private let gifRequestObserver: Observer<Bool, NoError>
   private let tagRequestObserver: Observer<Bool, NoError>
+  private let createTagRequestObserver: Observer<Bool, NoError>
   
   var gifData : NSData!
   
@@ -42,6 +44,10 @@ class DisplayViewModel : NSObject {
     self.tagRequestSignal = tagSignal
     self.tagRequestObserver = tagObserver
     
+    let (createTagSignal, createTagObserver) = Signal<Bool, NoError>.pipe()
+    self.createTagRequestSignal = createTagSignal
+    self.createTagRequestObserver = createTagObserver
+    
     super.init()
     startGifImageSingal()
     startTagSignal()
@@ -54,9 +60,8 @@ class DisplayViewModel : NSObject {
         guard (response != nil) else {
           return
         }
-//        self.gif.value = response
           self.gifData = NSData(data: response!)
-        }, completed: {
+        }, completed: { [unowned self] _ in
           self.gifRequestObserver.sendNext(true)
       }).start()
   }
@@ -68,14 +73,26 @@ class DisplayViewModel : NSObject {
         if (response.tags.count > 0) {
           self.tags.value = response.tags
         }
-        }, completed: {
+        }, completed: { [unowned self] _ in
           self.tagRequestObserver.sendNext(true)
       }).start()
   }
   
+  func startCreateTagSignalRequest(tagText: String ) {
+    self.tagService.tagGifWith(id: self.gif.value.id, tag: tagText)
+      .on(next: {
+        response in
+        
+        }, completed: { [unowned self] in
+          self.createTagRequestObserver.sendNext(true)
+      }).start()
+  }
+  
+  
   func cleanUpSignals() {
     self.gifRequestObserver.sendCompleted()
     self.tagRequestObserver.sendCompleted()
+    self.createTagRequestObserver.sendCompleted()
   }
   
   func shareButtonClicked() {

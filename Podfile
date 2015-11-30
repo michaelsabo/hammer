@@ -15,6 +15,7 @@ target 'Hammer' do
   pod 'Font-Awesome-Swift'
   pod 'Fabric'
   pod 'Crashlytics'
+  pod 'MMPopupView'
 end
 
 target 'HammerTests' do

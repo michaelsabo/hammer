@@ -12,6 +12,9 @@ import ChameleonFramework
 import NVActivityIndicatorView
 import ReactiveCocoa
 import Font_Awesome_Swift
+import MMPopupView
+
+
 
 class DisplayViewController: UIViewController {
 
@@ -68,8 +71,14 @@ class DisplayViewController: UIViewController {
         .observeOn(UIScheduler())
         .observeNext({[unowned self] observer in
           self.displayNewTagButton()
-          if (self.displayGifViewModel.tags.value.count > 0) {
-            self.horizonalTagLayout()
+          self.horizonalTagLayout()
+      })
+      
+      self.displayGifViewModel.createTagRequestSignal
+        .observeOn(UIScheduler())
+        .observeNext({ observer in
+          if (observer.boolValue == true) {
+            print("Success")
           }
       })
   }
@@ -85,10 +94,28 @@ class DisplayViewController: UIViewController {
     newTagButton.contentEdgeInsets = UIEdgeInsets(top: 3.0, left: 6.0, bottom: 3.0, right: 6.0)
     newTagButton.translatesAutoresizingMaskIntoConstraints = false
     newTagButton.layer.cornerRadius = 5.0
+    newTagButton.addTarget(self, action: "displayTagAlert", forControlEvents: .TouchUpInside)
     self.view.addSubview(newTagButton)
+  }
+  
+  func displayTagAlert() {
+    let alertConfig = MMAlertViewConfig.globalConfig()
+    alertConfig.defaultTextOK = "Tag it!"
+    alertConfig.defaultTextConfirm = "Tag it!"
+    alertConfig.defaultTextCancel = "Ruh roh, cancel"
+    let alertView = MMAlertView.init(inputTitle: "DO IT", detail: "Throw some fire on this", placeholder: "lingo here..", handler: { tagText in
+      if (tagText.characters.count > 2) {
+        self.displayGifViewModel.startCreateTagSignalRequest(tagText)
+      }
+      
+    })
+    alertView.attachedView = self.view
+    alertView.show()
+    
   }
 
   func horizonalTagLayout() {
+    
     for tag in self.displayGifViewModel.tags.value  {
       let label = PaddedTagLabel.init(text: tag.name)
       self.view.addSubview(label)
@@ -141,7 +168,7 @@ class DisplayViewController: UIViewController {
     }
     
     guard self.tagLabels?.count > 0 else {
-      self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Top, multiplier: 1, constant: yPadding))
+      self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Bottom, multiplier: 1, constant: yPadding))
       self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Left, relatedBy: .Equal, toItem: self.view, attribute: .Left, multiplier: 1, constant: xPadding))
       return
     }
