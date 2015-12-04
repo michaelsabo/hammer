@@ -94,14 +94,7 @@ class DisplayViewModel : NSObject {
     self.tagRequestObserver.sendCompleted()
     self.createTagRequestObserver.sendCompleted()
   }
-  
-  func shareButtonClicked() {
-    let pasteboard = UIPasteboard.generalPasteboard()
-    pasteboard.persistent = true
-    if let copiedGif = self.gif.value.gifData {
-      pasteboard.setData(copiedGif, forPasteboardType: kUTTypeGIF as String)
-    }
-  }
+
   
   
 

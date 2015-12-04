@@ -84,17 +84,9 @@ class DisplayViewController: UIViewController {
   }
   
   func displayNewTagButton() {
-    newTagButton = UIButton()
-    newTagButton.titleLabel?.font = App.font()
-    newTagButton.setTitle("add a new tag", forState: .Normal)
-    newTagButton.setTitleColor(UIColor.flatWhiteColor(), forState: .Normal)
-    newTagButton.backgroundColor = UIColor.flatTealColor()
-    newTagButton.setFAText(prefixText: "", icon: FAType.FATag, postfixText: "  Add new tag!", size: 18, forState: .Normal)
-    newTagButton.titleLabel?.font = App.font()
-    newTagButton.contentEdgeInsets = UIEdgeInsets(top: 3.0, left: 6.0, bottom: 3.0, right: 6.0)
-    newTagButton.translatesAutoresizingMaskIntoConstraints = false
-    newTagButton.layer.cornerRadius = 5.0
-    newTagButton.addTarget(self, action: "displayTagAlert", forControlEvents: .TouchUpInside)
+    newTagButton = UIButton().newButton(withTitle: "new tag", target: self, selector: "displayTagAlert", forControlEvent: .TouchUpInside)
+    newTagButton.setFAText(prefixText: "", icon: FAType.FATag, postfixText: " add new tag!", size: 16, forState: .Normal)
+    newTagButton.sizeToFit()
     self.view.addSubview(newTagButton)
   }
   
@@ -118,6 +110,7 @@ class DisplayViewController: UIViewController {
     
     for tag in self.displayGifViewModel.tags.value  {
       let label = PaddedTagLabel.init(text: tag.name)
+      label.setFAText(prefixText: "", icon: FAType.FATag, postfixText: " \(label.text!)", size: 16)
       self.view.addSubview(label)
       label.setNeedsDisplay()
       self.tagLabels?.append(label)
@@ -170,6 +163,7 @@ class DisplayViewController: UIViewController {
     guard self.tagLabels?.count > 0 else {
       self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Bottom, multiplier: 1, constant: yPadding))
       self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Left, relatedBy: .Equal, toItem: self.view, attribute: .Left, multiplier: 1, constant: xPadding))
+      self.view.addConstraint(NSLayoutConstraint.init(item: self.view, attribute: .Right, relatedBy: .GreaterThanOrEqual, toItem: newTagButton, attribute: .RightMargin, multiplier: 1, constant: xPadding))
       return
     }
     
@@ -179,11 +173,13 @@ class DisplayViewController: UIViewController {
       let labelAbove = (self.tagLabels?[rowTupleArray[rowTupleArray.count-1].firstItemIndex])! as PaddedTagLabel
       self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Top, relatedBy: .Equal, toItem: labelAbove, attribute: .Bottom, multiplier: 1, constant: yPadding))
       self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Left, relatedBy: .Equal, toItem: self.view, attribute: .Left, multiplier: 1, constant: xPadding))
+      self.view.addConstraint(NSLayoutConstraint.init(item: self.view, attribute: .Right, relatedBy: .GreaterThanOrEqual, toItem: newTagButton, attribute: .RightMargin, multiplier: 1, constant: xPadding))
       
     } else {
       let lastLabel = (self.tagLabels?[rowTupleArray[rowTupleArray.count-1].lastItemIndex])! as PaddedTagLabel
       self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Top, relatedBy: .Equal, toItem: lastLabel, attribute: .Top, multiplier: 1, constant: zeroPadding))
       self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Left, relatedBy: .Equal, toItem: lastLabel, attribute: .Right, multiplier: 1, constant: xPadding))
+      self.view.addConstraint(NSLayoutConstraint.init(item: self.view, attribute: .Right, relatedBy: .GreaterThanOrEqual, toItem: newTagButton, attribute: .RightMargin, multiplier: 1, constant: xPadding))
     }
     tagsAddedToView = false
   }
