@@ -14,8 +14,6 @@ import ReactiveCocoa
 import Font_Awesome_Swift
 import MMPopupView
 
-
-
 class DisplayViewController: UIViewController {
 
 		@IBOutlet weak var imageView: UIImageView!
@@ -51,8 +49,8 @@ class DisplayViewController: UIViewController {
 		}
 	
 		func bindViewModel() {
-      let shareAction = Action<Void, Void, NSError> { [unowned self] in
-        self.shareButtonClicked()
+      let shareAction = Action<Void, Void, NSError> { [weak self] in
+        self?.shareButtonClicked()
         return SignalProducer.empty
       }
       cocoaActionShare = CocoaAction(shareAction, input: ())
@@ -63,51 +61,69 @@ class DisplayViewController: UIViewController {
           let animation = self.view.viewWithTag(kLoadingAnimationTag) as? NVActivityIndicatorView
           animation?.stopAnimation()
           animation?.removeFromSuperview()
-          self.imageView.image = UIImage.animatedImageWithAnimatedGIFData(self.displayGifViewModel.gifData)
+          self.displayGifViewModel.gifImage.value = UIImage.animatedImageWithAnimatedGIFData(self.displayGifViewModel.gifData)
+          self.imageView.image = self.displayGifViewModel.gifImage.value
           self.navigationItem.rightBarButtonItem = self.shareButton
       })
       
       self.displayGifViewModel.tagRequestSignal
         .observeOn(UIScheduler())
         .observeNext({[unowned self] observer in
+          self.removeTagsAndButton()
           self.displayNewTagButton()
           self.horizonalTagLayout()
       })
       
       self.displayGifViewModel.createTagRequestSignal
         .observeOn(UIScheduler())
-        .observeNext({ observer in
+        .observeNext({ [unowned self] observer in
           if (observer.boolValue == true) {
-            print("Success")
+            UserDefaults.incrementTagsAdded()
+            self.displayGifViewModel.startTagSignal()
           }
       })
+  }
+  
+  func removeTagsAndButton() {
+    for subview in view.subviews {
+      if subview.tag == 200 || subview.tag == 10005 {
+        subview.removeFromSuperview()
+      }
+    }
   }
   
   func displayNewTagButton() {
     newTagButton = UIButton().newButton(withTitle: "new tag", target: self, selector: "displayTagAlert", forControlEvent: .TouchUpInside)
     newTagButton.setFAText(prefixText: "", icon: FAType.FATag, postfixText: " add new tag!", size: 16, forState: .Normal)
     newTagButton.sizeToFit()
+    newTagButton.tag = 10005
     self.view.addSubview(newTagButton)
   }
   
   func displayTagAlert() {
     let alertConfig = MMAlertViewConfig.globalConfig()
-    alertConfig.defaultTextOK = "Tag it!"
-    alertConfig.defaultTextConfirm = "Tag it!"
-    alertConfig.defaultTextCancel = "Ruh roh, cancel"
-    let alertView = MMAlertView.init(inputTitle: "DO IT", detail: "Throw some fire on this", placeholder: "lingo here..", handler: { tagText in
+    alertConfig.defaultTextConfirm = "I WILL!"
+    alertConfig.defaultTextCancel = "You Won't"
+    alertConfig.backgroundColor = UIColor.flatWhiteColor()
+    alertConfig.titleColor = UIColor.flatTealColor()
+    alertConfig.detailColor = UIColor.flatTealColor()
+    alertConfig.splitColor = UIColor.flatBlueColor()
+    alertConfig.itemNormalColor = UIColor.flatTealColor()
+    alertConfig.itemHighlightColor = UIColor.flatTealColor()
+    
+    let alertView = MMAlertView.init(inputTitle: "New Tag", detail: self.displayGifViewModel.alertDetail, placeholder: "lingo here..", handler: {  tagText in
       if (tagText.characters.count > 2) {
-        self.displayGifViewModel.startCreateTagSignalRequest(tagText)
+        self.displayGifViewModel.startCreateTagSignalRequest(tagText.lowercaseString)
+      } else {
+       
       }
-      
     })
     alertView.attachedView = self.view
     alertView.show()
-    
   }
 
   func horizonalTagLayout() {
-    
+    self.tagLabels = [PaddedTagLabel]()
     for tag in self.displayGifViewModel.tags.value  {
       let label = PaddedTagLabel.init(text: tag.name)
       label.setFAText(prefixText: "", icon: FAType.FATag, postfixText: " \(label.text!)", size: 16)
@@ -185,21 +201,31 @@ class DisplayViewController: UIViewController {
   }
   
   func shareButtonClicked() {
-    if let copiedGif = self.displayGifViewModel.gif.value.gifData {
+    if let copiedGif =  self.displayGifViewModel.gifData {
       let vc = UIActivityViewController(activityItems: [copiedGif], applicationActivities: [])
       if (vc.respondsToSelector(Selector("popoverPresentationController"))) {
         vc.popoverPresentationController?.sourceView = self.view
         vc.popoverPresentationController?.barButtonItem = self.shareButton
       }
+      vc.completionWithItemsHandler = {
+        (activityType: String?, completed: Bool, items: [AnyObject]?, err:NSError?) -> Void in
+        if !completed {
+          return
+        } else {
+          UserDefaults.incrementTotalShares()
+        }
+      }
       presentViewController(vc, animated: true, completion: nil)
     } else {
-      let ac = UIAlertController(title: "Woahhhh", message: "Something went wrong when processing. \nLet's do this again", preferredStyle: UIAlertControllerStyle.Alert)
+      let ac = UIAlertController(title: "Woahhhh", message: "Something went wrong when processing. Let's do this again", preferredStyle: UIAlertControllerStyle.Alert)
+      let okAction = UIAlertAction.init(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+      ac.addAction(okAction)
       presentViewController(ac, animated: true, completion: nil)
     }
   }
 
   deinit {
-    self.displayGifViewModel.cleanUpSignals()
+    self.displayGifViewModel.stopServiceSignals()
 		print("deiniting")
 	}
 }

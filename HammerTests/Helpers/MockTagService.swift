@@ -39,7 +39,7 @@ class MockTagService : TagService {
     }
   }
   
-  override func tagGifWith(id id: String, tag: String) -> SignalProducer<Tag, NSError> {
+  override func tagGifWith(id id : Int, tag: String) -> SignalProducer<Tag, NSError> {
     return SignalProducer { observer, disposable in
       observer.sendNext(self.taggedResponse)
       observer.sendCompleted()

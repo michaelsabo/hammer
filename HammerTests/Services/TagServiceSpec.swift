@@ -66,7 +66,7 @@ class TagServiceSpec: QuickSpec {
       it("should return the tag just created") {
         var taggedResponse : Tag!
         waitUntil { done in
-          tagService.tagGifWith(id: "blah", tag: "custom-tag")
+          tagService.tagGifWith(id: 1111, tag: "custom-tag")
             .on(next: {
               taggedResponse = $0
               done()

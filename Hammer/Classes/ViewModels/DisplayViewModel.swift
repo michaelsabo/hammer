@@ -16,24 +16,28 @@ class DisplayViewModel : NSObject {
 	let tags = MutableProperty<[Tag]>([Tag]())
 	let searchComplete = MutableProperty(false)
 	let tagComplete = MutableProperty(false)
+  
 	
   let gifRequestSignal: Signal<Bool, NoError>
   let tagRequestSignal: Signal<Bool, NoError>
   let createTagRequestSignal: Signal<Bool, NoError>
+  let stopSignals : SignalProducer<(), NoError>
   
   private let gifRequestObserver: Observer<Bool, NoError>
   private let tagRequestObserver: Observer<Bool, NoError>
   private let createTagRequestObserver: Observer<Bool, NoError>
+  private let stopSignalObserver: Observer<(), NoError>
   
   var gifData : NSData!
+  var gifImage = MutableProperty<UIImage?>(UIImage())
   
 	let gifService: GifService
   let tagService: TagService
 	
-	init(gifService: GifService, tagService: TagService, gif: Gif) {
+	init(gif: Gif) {
 		
-    self.gifService = gifService
-    self.tagService = tagService
+    self.gifService = GifService()
+    self.tagService = TagService()
     self.gif.value = gif
     
     let (gifSignal, gifObserver) = Signal<Bool, NoError>.pipe()
@@ -47,7 +51,11 @@ class DisplayViewModel : NSObject {
     let (createTagSignal, createTagObserver) = Signal<Bool, NoError>.pipe()
     self.createTagRequestSignal = createTagSignal
     self.createTagRequestObserver = createTagObserver
-    
+
+    let (stopSignal, stopObserver) = SignalProducer<(), NoError>.buffer()
+    self.stopSignals = stopSignal
+    self.stopSignalObserver = stopObserver
+
     super.init()
     startGifImageSingal()
     startTagSignal()
@@ -63,7 +71,7 @@ class DisplayViewModel : NSObject {
           self.gifData = NSData(data: response!)
         }, completed: { [unowned self] _ in
           self.gifRequestObserver.sendNext(true)
-      }).start()
+      }).takeUntil(self.stopSignals).start()
   }
   
   func startTagSignal() {
@@ -75,7 +83,13 @@ class DisplayViewModel : NSObject {
         }
         }, completed: { [unowned self] _ in
           self.tagRequestObserver.sendNext(true)
-      }).start()
+      }).takeUntil(self.stopSignals).start()
+  }
+  
+  var alertDetail : String  {
+    let randomDetail = ["Aren't you a lyrical word smith?", "Think.....harderrrrr", "Is this the best you can do?", "Throw some fire on this?", "What would Shia Labeouf write?", "Try and think of how rainbows are made", "How do you sleep at night?"]
+    let randomNumber = Int(arc4random_uniform(7))
+    return randomDetail[randomNumber]
   }
   
   func startCreateTagSignalRequest(tagText: String ) {
@@ -85,14 +99,12 @@ class DisplayViewModel : NSObject {
         
         }, completed: { [unowned self] in
           self.createTagRequestObserver.sendNext(true)
-      }).start()
+      }).takeUntil(self.stopSignals).start()
   }
   
   
-  func cleanUpSignals() {
-    self.gifRequestObserver.sendCompleted()
-    self.tagRequestObserver.sendCompleted()
-    self.createTagRequestObserver.sendCompleted()
+  func stopServiceSignals() {
+    self.stopSignalObserver.sendNext()
   }
 
   

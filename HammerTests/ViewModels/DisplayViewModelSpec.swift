@@ -38,6 +38,13 @@ class DisplayViewModelSpec: QuickSpec {
           }
           expect(called).to(beTrue())
         }
+        
+        it("random alert detail should never be nil") {
+          for _ in 0...100 {
+            expect(displayViewModel.alertDetail).to(beTruthy())
+          }
+        }
+
 
 
       }

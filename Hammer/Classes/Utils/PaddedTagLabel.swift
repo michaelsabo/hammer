@@ -27,6 +27,7 @@ class PaddedTagLabel : UILabel {
     self.layer.masksToBounds = true
     self.tag = 200
     self.lineBreakMode = NSLineBreakMode.ByWordWrapping
+    self.clipsToBounds = true
   }
   
   override func drawTextInRect(rect: CGRect) {
