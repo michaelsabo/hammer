@@ -13,6 +13,18 @@ PODS:
   - Nimble (3.0.0)
   - NVActivityIndicatorView (2.1)
   - Quick (0.8.0)
+  - ReactiveCocoa (4.0.4-alpha-4):
+    - ReactiveCocoa/UI (= 4.0.4-alpha-4)
+    - Result (~> 1.0)
+  - ReactiveCocoa/Core (4.0.4-alpha-4):
+    - ReactiveCocoa/no-arc
+    - Result (~> 1.0)
+  - ReactiveCocoa/no-arc (4.0.4-alpha-4):
+    - Result (~> 1.0)
+  - ReactiveCocoa/UI (4.0.4-alpha-4):
+    - ReactiveCocoa/Core
+    - Result (~> 1.0)
+  - Result (1.0.0)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
@@ -25,6 +37,7 @@ DEPENDENCIES:
   - Nimble (= 3.0.0)
   - NVActivityIndicatorView
   - Quick (~> 0.8.0)
+  - ReactiveCocoa (= 4.0.4-alpha-4)
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
 
 EXTERNAL SOURCES:
@@ -47,6 +60,8 @@ SPEC CHECKSUMS:
   Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
   NVActivityIndicatorView: 84aa48f7ec1efbfd0645e9f469097d94c6f65417
   Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
+  ReactiveCocoa: e459ea92099447802df20c4735e31e8139b06094
+  Result: feaaff535eb59c414c6c7f95e6145ab991b1b07f
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
 COCOAPODS: 0.39.0

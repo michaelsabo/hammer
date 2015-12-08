@@ -14,8 +14,6 @@
 		2719DA2C1BCC7F3A00BD02AD /* TagService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2719DA2B1BCC7F3A00BD02AD /* TagService.swift */; };
 		2719DA301BCC848500BD02AD /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2719DA2F1BCC848500BD02AD /* UIKitExtensions.swift */; };
 		2733CB551C13595F00217645 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2733CB541C13595F00217645 /* UserDefaults.swift */; };
-		273410FF1BC8515400674FC7 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 272957FD1BC843A500D5BFC6 /* ReactiveCocoa.framework */; };
-		273411011BC8515400674FC7 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273411001BC8515400674FC7 /* Result.framework */; };
 		273994181BE550E700E4399C /* gifs.json in Resources */ = {isa = PBXBuildFile; fileRef = 273994171BE550E700E4399C /* gifs.json */; };
 		273E6CED1BE57A1F00FF55D5 /* tags.json in Resources */ = {isa = PBXBuildFile; fileRef = 273E6CEC1BE57A1F00FF55D5 /* tags.json */; };
 		274520161C11347A004B67F3 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274520151C11347A004B67F3 /* UIExtensions.swift */; };
@@ -135,8 +133,6 @@
 		2719DA281BCC7B6A00BD02AD /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		2719DA2B1BCC7F3A00BD02AD /* TagService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagService.swift; sourceTree = "<group>"; };
 		2719DA2F1BCC848500BD02AD /* UIKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
-		2719DA331BCC9D2200BD02AD /* ReactiveCocoa.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = ReactiveCocoa.framework.dSYM; path = ../Carthage/Build/iOS/ReactiveCocoa.framework.dSYM; sourceTree = "<group>"; };
-		2719DA351BCC9D2800BD02AD /* Result.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Result.framework.dSYM; path = ../Carthage/Build/iOS/Result.framework.dSYM; sourceTree = "<group>"; };
 		272957FD1BC843A500D5BFC6 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
 		272958011BC846C000D5BFC6 /* Box.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Box.framework; path = Carthage/Build/iOS/Box.framework; sourceTree = "<group>"; };
 		27322B361BED2F55008B4455 /* HomeViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModelSpec.swift; sourceTree = "<group>"; };
@@ -207,8 +203,6 @@
 			files = (
 				27CD49B21BEF1FEE00586B4D /* UIKit.framework in Frameworks */,
 				27CD49B11BEF1FE800586B4D /* Foundation.framework in Frameworks */,
-				273411011BC8515400674FC7 /* Result.framework in Frameworks */,
-				273410FF1BC8515400674FC7 /* ReactiveCocoa.framework in Frameworks */,
 				C8B8CBB3436E409112AB700A /* Pods_Hammer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -255,8 +249,6 @@
 		2719DA371BCC9D3200BD02AD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2719DA351BCC9D2800BD02AD /* Result.framework.dSYM */,
-				2719DA331BCC9D2200BD02AD /* ReactiveCocoa.framework.dSYM */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -540,7 +532,6 @@
 				276C7FAD1BC204EE0028DC0D /* Resources */,
 				A3172D6F50D1659039999632 /* Embed Pods Frameworks */,
 				34DBD584D3C4EE7B37C4DA80 /* Copy Pods Resources */,
-				272958001BC8458900D5BFC6 /* ShellScript */,
 				2719DA321BCC9CF100BD02AD /* CopyFiles */,
 				27322B331BED2DBB008B4455 /* ShellScript */,
 				27CE4A851BE6892700B62D64 /* ShellScript */,
@@ -693,21 +684,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HammerTests/Pods-HammerTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		272958001BC8458900D5BFC6 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/ReactiveCocoa.framework",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks --copy-bcsymbolmaps";
 		};
 		27322B331BED2DBB008B4455 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;

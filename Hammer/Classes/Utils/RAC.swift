@@ -130,17 +130,17 @@ precedence 90
 }
 
 public func <~ <E>(rac: RAC, producer: SignalProducer<String, E>) -> RACDisposable {
-	let signal = toRACSignal(producer.map({ $0 as AnyObject? }))
+	let signal = producer.map({ $0 as AnyObject? }).toRACSignal()
 	return rac.assignSignal(signal)
 }
 
 public func <~ <E>(rac: RAC, producer: SignalProducer<Bool, E>) -> RACDisposable {
-	let signal = toRACSignal(producer.map({ $0 as AnyObject? }))
+	let signal = producer.map({ $0 as AnyObject? }).toRACSignal()
 	return rac.assignSignal(signal)
 }
 
 public func <~ <E>(rac: RAC, producer: SignalProducer<UIImage, E>) -> RACDisposable {
-	let signal = toRACSignal(producer.map({ $0 as AnyObject? }))
+	let signal = producer.map({ $0 as AnyObject? }).toRACSignal()
 	return rac.assignSignal(signal)
 }
 

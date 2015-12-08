@@ -8,6 +8,7 @@ def testing_pods
 end
 
 target 'Hammer' do
+  pod 'ReactiveCocoa', '4.0.4-alpha-4'
 	pod 'Alamofire', '~> 3.1.0'
 	pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
 	pod 'ChameleonFramework/Swift'
