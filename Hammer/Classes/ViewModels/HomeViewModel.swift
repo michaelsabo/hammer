@@ -113,9 +113,9 @@ class HomeViewModel : NSObject {
     //TODO refactor this
     if (indexPath.item < self.gifsForDisplay.value.count) {
       let gif = self.gifsForDisplay.value[indexPath.item]
-      if let image = gif.thumbnailImage {
+      if let data = gif.thumbnailData {
         cell.imageView.image = nil
-        cell.setImage(image)
+        cell.setImage(data)
         return cell
       } else {
         cell.imageView.image = UIImage()
@@ -123,13 +123,12 @@ class HomeViewModel : NSObject {
           Gif.getThumbnailImageForGif(gif, completionHandler: { [unowned self] (responseGif, isSuccess, error) in
             if (isSuccess && !self.isSearching.value) {
               if let index = self.gifsForDisplay.value.indexOf(responseGif!) {
-                self.gifsForDisplay.value[index].thumbnailImage = responseGif!.thumbnailImage
-                cell.setImage(self.gifsForDisplay.value[index].thumbnailImage)
+                cell.setImage(self.gifsForDisplay.value[index].thumbnailData)
               }
             } else if (isSuccess && self.isSearching.value) {
               if let index = self.gifsForDisplay.value.indexOf(responseGif!) {
-                self.gifsForDisplay.value[index].thumbnailImage = responseGif!.thumbnailImage
-                cell.setImage(self.gifsForDisplay.value[index].thumbnailImage)              }
+                cell.setImage(self.gifsForDisplay.value[index].thumbnailData)
+              }
             } else {
               cell.userInteractionEnabled = false
             }

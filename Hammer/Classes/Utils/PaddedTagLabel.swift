@@ -11,8 +11,8 @@ import Foundation
 
 class PaddedTagLabel : UILabel {
   
-  let topInset: CGFloat = 3.0
-  let bottomInset:CGFloat = 3.0
+  let topInset: CGFloat = 6.0
+  let bottomInset:CGFloat = 6.0
   let leftInset:CGFloat = 6.0
   let rightInset:CGFloat = 6.0
   
@@ -27,6 +27,7 @@ class PaddedTagLabel : UILabel {
     self.layer.masksToBounds = true
     self.tag = 200
     self.lineBreakMode = NSLineBreakMode.ByWordWrapping
+    self.clipsToBounds = true
   }
   
   override func drawTextInRect(rect: CGRect) {

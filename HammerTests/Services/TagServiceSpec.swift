@@ -21,7 +21,8 @@ class TagServiceSpec: QuickSpec {
     }
     
     describe("Tag Service") {
-     	
+
+      
       it("should return gifs in the response") {
         var tagsResponse : TagsResponse!
         waitUntil(timeout: 3.5) { done in
@@ -61,6 +62,21 @@ class TagServiceSpec: QuickSpec {
         }
         expect(tagsResponse.tags.count).to(equal(0))
       }
+      
+      it("should return the tag just created") {
+        var taggedResponse : Tag!
+        waitUntil { done in
+          tagService.tagGifWith(id: 1111, tag: "custom-tag")
+            .on(next: {
+              taggedResponse = $0
+              done()
+            })
+            .start()
+        }
+        expect(taggedResponse.id).to(equal(1111))
+        expect(taggedResponse.text).to(equal("custom tag"))
+      }
+
       
     }
   }

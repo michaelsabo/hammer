@@ -12,23 +12,37 @@ import SwiftyJSON
 
 class TagService {
 
-
-	
-	func getAllTags() -> SignalProducer<TagsResponse, NSError> {
+  func tagGifWith(id id : Int, tag: String) -> SignalProducer<Tag, NSError> {
 		return SignalProducer { 	observer, disposable in
-			Alamofire.request(Router.Tags)
+			Alamofire.request(Router.TagGifWithId(id, tag))
 				.responseJSON { response in
 					if (response.result.isSuccess) {
-						let tags = TagsResponse(json: JSON(response.result.value!))
-						observer.sendNext(tags)
-						observer.sendCompleted()
+            let json = JSON(response.result.value!)
+						let tag = Tag(json: json["tag"])
+            observer.sendNext(tag)
+            observer.sendCompleted()
 					} else {
 
 					}
 			}
-			
 		}
 	}
+  
+  func getAllTags() -> SignalProducer<TagsResponse, NSError> {
+    return SignalProducer { 	observer, disposable in
+      Alamofire.request(Router.Tags)
+        .responseJSON { response in
+          if (response.result.isSuccess) {
+            let tags = TagsResponse(json: JSON(response.result.value!))
+            observer.sendNext(tags)
+            observer.sendCompleted()
+          } else {
+
+          }
+      }
+      
+    }
+  }
 	
 	func getTagsForGifId(id: Int) -> SignalProducer<TagsResponse, NSError> {
 		return SignalProducer {  observer, disposable in

@@ -32,11 +32,11 @@ class MockGifService : GifService {
     }
   }
   
-  override func retrieveImageDataFor(gif gif: Gif) -> SignalProducer<Gif, NSError> {
+  override func retrieveImageDataFor(gif gif: Gif) -> SignalProducer<NSData?, NSError> {
     return SignalProducer { observer, disposable in
       print("in here")
       let singleGif = self.gifResponse.gifs[0]
-      observer.sendNext(singleGif)
+      observer.sendNext(singleGif.thumbnailData)
       observer.sendCompleted()
     }
   }

@@ -35,6 +35,7 @@ enum Router: URLRequestConvertible {
   case GifsForTag(String)
   case Tags
   case TagsForGif(Int)
+  case TagGifWithId(Int, String)
   
   var URL: NSURL { return Router.Production.URLByAppendingPathComponent(route.path) }
   
@@ -44,14 +45,24 @@ enum Router: URLRequestConvertible {
     case .GifsForTag (let tag): return ("/gifs", ["q": tag])
     case .Tags : return ("/tags", nil)
     case .TagsForGif (let gifId) : return ("/gifs/\(gifId)/tags", nil)
+    case .TagGifWithId (let gifId, let tagName) : return ("/gifs/\(gifId)/tags", ["tag": tagName])
+    }
+  }
+  
+  var method : Alamofire.Method  {
+    switch self {
+    case .TagGifWithId(_,_)  : return .POST
+    default : return .GET
     }
   }
   
   var URLRequest: NSMutableURLRequest {
+    let mutableURLRequest = NSMutableURLRequest(URL: URL)
+    mutableURLRequest.HTTPMethod = method.rawValue
     return Alamofire
       .ParameterEncoding
       .URL
-      .encode(NSURLRequest(URL: URL), parameters: (route.parameters ?? [ : ])).0
+      .encode(mutableURLRequest, parameters: (route.parameters ?? [ : ])).0
   }
 
 }

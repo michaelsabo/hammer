@@ -8,3 +8,9 @@
 #import "UIImage+animatedGIF.h"
 
 #endif
+
+#import <Masonry/Masonry.h>
+#import "MMPopupView/MMPopupItem.h"
+#import "MMPopupView/MMAlertView.h"
+#import "MMPopupView/MMSheetView.h"
+#import "MMPopupView/MMPopupWindow.h"
