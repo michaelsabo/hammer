@@ -71,19 +71,21 @@ class HomeViewModel : NSObject {
     self.isSearchingObserver.sendNext(false)
   }
 	
-	lazy var searchingTagsSignal: SignalProducer<[Tag], NoError> = {
+	lazy var searchingTagsSignal: SignalProducer<[Tag]?, NoError> = {
 		return self.searchText.producer
       .on(next: { _ in self.isSearchingObserver.sendNext(false) })
 			.filter { $0.characters.count > 1 }
-			.map { [unowned self] (value: String) -> [Tag] in
-				self.foundTags.value = [Tag]()
-				self.isSearchingObserver.sendNext(true)
-				for tag in self.allTags.value as [Tag] {
-					if ((tag.name.lowercaseString.rangeOfString(value.lowercaseString)) != nil) {
-						self.foundTags.value.append(tag)
-					}
-				}
-				return self.foundTags.value
+			.map { [weak self] (value: String) -> [Tag]? in
+				self?.foundTags.value = [Tag]()
+				self?.isSearchingObserver.sendNext(true)
+        if let tags = self?.allTags.value as [Tag]? {
+          for tag in tags {
+            if ((tag.name.lowercaseString.rangeOfString(value.lowercaseString)) != nil) {
+              self?.foundTags.value.append(tag)
+            }
+          }
+        }
+				return self?.foundTags.value
 		}
   }()
 	

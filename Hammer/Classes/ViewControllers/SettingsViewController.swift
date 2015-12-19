@@ -57,15 +57,9 @@ class SettingsViewController : UIViewController, UINavigationBarDelegate, UINavi
   }
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    if (indexPath.section == 0 && indexPath.row == 0) {
-      let cavc = ChooseAnimationViewController(nibName: "CustomizationViewController", bundle: NSBundle.mainBundle())
-      tableView.deselectRowAtIndexPath(indexPath, animated: true)
-      self.navigationController?.pushViewController(cavc, animated: true)
-    } else {
-      let licVC = LicensesViewController()
-      tableView.deselectRowAtIndexPath(indexPath, animated: true)
-      self.navigationController?.pushViewController(licVC, animated: true)
-    }
+    let licVC = LicensesViewController()
+    tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    self.navigationController?.pushViewController(licVC, animated: true)
   }
   
   

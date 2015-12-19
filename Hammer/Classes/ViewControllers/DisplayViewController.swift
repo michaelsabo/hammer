@@ -57,29 +57,29 @@ class DisplayViewController: UIViewController {
       shareButton = UIBarButtonItem(barButtonSystemItem: .Action, target: cocoaActionShare, action: CocoaAction.selector)
       
       self.displayGifViewModel.gifRequestSignal
-        .observeNext({[unowned self] observer in
-          let animation = self.view.viewWithTag(kLoadingAnimationTag) as? NVActivityIndicatorView
+        .observeNext({[weak self] observer in
+          let animation = self?.view.viewWithTag(kLoadingAnimationTag) as? NVActivityIndicatorView
           animation?.stopAnimation()
           animation?.removeFromSuperview()
-          self.displayGifViewModel.gifImage.value = UIImage.animatedImageWithAnimatedGIFData(self.displayGifViewModel.gifData)
-          self.imageView.image = self.displayGifViewModel.gifImage.value
-          self.navigationItem.rightBarButtonItem = self.shareButton
+          self?.displayGifViewModel.gifImage.value = UIImage.animatedImageWithAnimatedGIFData(self?.displayGifViewModel.gifData)
+          self?.imageView.image = self?.displayGifViewModel.gifImage.value
+          self?.navigationItem.rightBarButtonItem = self?.shareButton
       })
       
       self.displayGifViewModel.tagRequestSignal
         .observeOn(UIScheduler())
-        .observeNext({[unowned self] observer in
-          self.removeTagsAndButton()
-          self.displayNewTagButton()
-          self.horizonalTagLayout()
+        .observeNext({[weak self] observer in
+          self?.removeTagsAndButton()
+          self?.displayNewTagButton()
+          self?.horizonalTagLayout()
       })
       
       self.displayGifViewModel.createTagRequestSignal
         .observeOn(UIScheduler())
-        .observeNext({ [unowned self] observer in
+        .observeNext({ [weak self] observer in
           if (observer.boolValue == true) {
             UserDefaults.incrementTagsAdded()
-            self.displayGifViewModel.startTagSignal()
+            self?.displayGifViewModel.startTagSignal()
           }
       })
   }

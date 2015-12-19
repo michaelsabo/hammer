@@ -63,26 +63,26 @@ class DisplayViewModel : NSObject {
   
   func startGifImageSingal() {
     self.gifService.retrieveImageDataFor(gif: self.gif.value)
-      .on(next: { [unowned self]
+      .on(next: { [weak self]
         response in
         guard (response != nil) else {
           return
         }
-          self.gifData = NSData(data: response!)
-        }, completed: { [unowned self] _ in
-          self.gifRequestObserver.sendNext(true)
+          self?.gifData = NSData(data: response!)
+        }, completed: { [weak self] _ in
+          self?.gifRequestObserver.sendNext(true)
       }).takeUntil(self.stopSignals).start()
   }
   
   func startTagSignal() {
     self.tagService.getTagsForGifId(self.gif.value.id)
-      .on(next: { [unowned self]
+      .on(next: { [weak self]
         response in
         if (response.tags.count > 0) {
-          self.tags.value = response.tags
+          self?.tags.value = response.tags
         }
-        }, completed: { [unowned self] _ in
-          self.tagRequestObserver.sendNext(true)
+        }, completed: { [weak self] _ in
+          self?.tagRequestObserver.sendNext(true)
       }).takeUntil(self.stopSignals).start()
   }
   
@@ -97,8 +97,8 @@ class DisplayViewModel : NSObject {
       .on(next: {
         response in
         
-        }, completed: { [unowned self] in
-          self.createTagRequestObserver.sendNext(true)
+        }, completed: { [weak self] in
+          self?.createTagRequestObserver.sendNext(true)
       }).takeUntil(self.stopSignals).start()
   }
   
