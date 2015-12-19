@@ -33,6 +33,7 @@ enum Router: URLRequestConvertible {
 	
   case Gifs
   case GifsForTag(String)
+  case AddGif(String)
   case Tags
   case TagsForGif(Int)
   case TagGifWithId(Int, String)
@@ -43,6 +44,7 @@ enum Router: URLRequestConvertible {
     switch self {
     case .Gifs: return ("/gifs", nil)
     case .GifsForTag (let tag): return ("/gifs", ["q": tag])
+    case .AddGif(let imgurId) : return ("/gifs", ["gif": imgurId])
     case .Tags : return ("/tags", nil)
     case .TagsForGif (let gifId) : return ("/gifs/\(gifId)/tags", nil)
     case .TagGifWithId (let gifId, let tagName) : return ("/gifs/\(gifId)/tags", ["tag": tagName])
@@ -52,6 +54,7 @@ enum Router: URLRequestConvertible {
   var method : Alamofire.Method  {
     switch self {
     case .TagGifWithId(_,_)  : return .POST
+    case .AddGif(_)  : return .POST
     default : return .GET
     }
   }

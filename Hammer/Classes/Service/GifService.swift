@@ -84,6 +84,22 @@ class GifService {
 			}
 		}
 	}
+  
+  func addGif(id id : String) -> SignalProducer<Bool, NSError> {
+    return SignalProducer { 	observer, disposable in
+      Alamofire.request(Router.AddGif(id))
+        .responseJSON { response in
+          if (response.result.isSuccess) {
+//            let json = JSON(response.result.value!)
+//            let gif = Gif(json: json["gif"], index: 0)
+            observer.sendNext(true)
+            observer.sendCompleted()
+          } else {
+            
+          }
+      }
+    }
+  }
 	
 	
 }
