@@ -45,7 +45,7 @@ class ActionViewController: UIViewController {
       }
     }
     
-    guard (imgurId.characters.count > 1) else {
+    guard imgurId.characters.count > 1 else {
      self.messageLabel.text = "Wasn't able to parse the imgur id - #failed"
       return
     }
@@ -53,18 +53,16 @@ class ActionViewController: UIViewController {
     let gifService = GifService()
     gifService.addGif(id: imgurId)
       .on(next: { [weak self] response in
-        if (response) {
+        if response {
           self?.messageLabel.text = "Success"
         }
-      }).start()
-
+    }).start()
   }
-  
 
-    @IBAction func done() {
-        // Return any edited content to the host app.
-        // This template doesn't do anything, so we just echo the passed in items.
-        self.extensionContext!.completeRequestReturningItems(self.extensionContext!.inputItems, completionHandler: nil)
-    }
+  @IBAction func done() {
+      // Return any edited content to the host app.
+      // This template doesn't do anything, so we just echo the passed in items.
+      self.extensionContext!.completeRequestReturningItems(self.extensionContext!.inputItems, completionHandler: nil)
+  }
 
 }

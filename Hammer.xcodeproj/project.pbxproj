@@ -580,6 +580,7 @@
 				27322B331BED2DBB008B4455 /* ShellScript */,
 				27CE4A851BE6892700B62D64 /* ShellScript */,
 				2780FE591C25C74000653D49 /* Embed App Extensions */,
+				276DBAE31C298A02004539C8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -777,6 +778,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
+		};
+		276DBAE31C298A02004539C8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n#swiftlint\necho \"hellos\"\nelse\n    echo \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 		27CE4A851BE6892700B62D64 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1317,6 +1331,7 @@
 				2780FE581C25C74000653D49 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
