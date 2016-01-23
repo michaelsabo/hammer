@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="Hammer" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="iN0-l3-epB" id="aKU-mr-KrE"/>
+                <outlet property="viewCollection" destination="F5z-Lm-bC2" id="LGz-kf-975"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="F5z-Lm-bC2">
+                    <rect key="frame" x="0.0" y="67" width="600" height="533"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Nek-vn-g7J">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="e1z-pL-fGA"/>
+                        <outlet property="delegate" destination="-1" id="UeA-Uy-FF9"/>
+                    </connections>
+                </collectionView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="F5z-Lm-bC2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="2HA-Pb-Mtv"/>
+                <constraint firstAttribute="bottom" secondItem="F5z-Lm-bC2" secondAttribute="bottom" id="2n6-7V-8MI"/>
+                <constraint firstAttribute="trailing" secondItem="F5z-Lm-bC2" secondAttribute="trailing" id="R2d-m5-kTL"/>
+                <constraint firstItem="F5z-Lm-bC2" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="dzu-48-Qzf"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+        </view>
+    </objects>
+</document>

@@ -15,7 +15,7 @@ import Font_Awesome_Swift
 
 class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UICollectionViewDelegateFlowLayout {
 	
-	@IBOutlet weak var viewCollection: UICollectionView!
+  @IBOutlet weak var viewCollection: UICollectionView!
 	@IBOutlet weak var tagSearch: UITextField!
 	var autocompleteTableView: UITableView = UITableView()
 	
@@ -31,7 +31,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		super.viewDidLoad()
 		self.title = self.homeViewModel.title
 		self.view.backgroundColor = UIColor.flatWhiteColorDark()
-		self.viewCollection.backgroundColor = UIColor.flatWhiteColorDark()
+		
 		self.configureNavigationBar()
     
     let codeIcon = UIBarButtonItem()
@@ -44,8 +44,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func setupBindings() {
-		tagSearch.delegate = self
-		self.homeViewModel.searchText <~ tagSearch.rac_textSignalProducer()
+//		tagSearch.delegate = self
+//		self.homeViewModel.searchText <~ tagSearch.rac_textSignalProducer()
     RAC(self.autocompleteTableView, "hidden") <~ SignalProducer(signal: self.homeViewModel.isSearchingSignal.map({!$0}))
 
 		self.homeViewModel.gifsForDisplay.producer.startWithSignal( { signal, disposable in
@@ -62,20 +62,24 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func setupViews() {
+    
+    self.viewCollection.registerNib(UINib.init(nibName: "ImageCell", bundle: nil), forCellWithReuseIdentifier: "ImageCell")
 		let frame = CGRectMake(0, 110, view.frame.width, 200)
 		autocompleteTableView = SearchGifsTableView(frame: frame, style: UITableViewStyle.Plain)
 		autocompleteTableView.delegate = self
 		autocompleteTableView.dataSource = self
 		if (Screen.screenWidth > 400) {
-			self.viewCollection.collectionViewLayout = LargeCollectionViewLayout.init()
+      self.viewCollection.collectionViewLayout = LargeCollectionViewLayout.init()
 		} else if (Screen.screenWidth > 350) {
-			self.viewCollection.collectionViewLayout = MediumCollectionViewLayout.init()
+      self.viewCollection.collectionViewLayout = MediumCollectionViewLayout.init()
 		} else {
-			self.viewCollection.collectionViewLayout = SmallCollectionViewLayout.init()
+      self.viewCollection.collectionViewLayout = SmallCollectionViewLayout.init()
 		}
-		
-		tagSearch.translatesAutoresizingMaskIntoConstraints = false
-    tagSearch.font = App.font(20.0)
+//    self.view.addSubview(self.viewCollection)
+    self.viewCollection.backgroundColor = UIColor.flatWhiteColorDark()
+    
+//		tagSearch.translatesAutoresizingMaskIntoConstraints = false
+//    tagSearch.font = App.font(20.0)
 		viewCollection.translatesAutoresizingMaskIntoConstraints = false
 		view.addSubview(autocompleteTableView)
     refreshControl.addTarget(self, action: "refreshImages", forControlEvents: UIControlEvents.ValueChanged)
