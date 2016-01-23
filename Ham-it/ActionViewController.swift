@@ -35,9 +35,6 @@ class ActionViewController: UIViewController {
       }
     }
   }
-  @IBAction func addGifToHam(sender: UILabel) {
-    
-  }
   
   @IBOutlet weak var messageLabel: UILabel!
   @IBAction func addGif(sender: UIButton) {
