@@ -14,7 +14,7 @@ import ReactiveCocoa
 import Font_Awesome_Swift
 import MMPopupView
 
-class DisplayViewController: UIViewController {
+class DisplayViewController: UIViewController, UINavigationBarDelegate, UINavigationControllerDelegate {
 
 		@IBOutlet weak var imageView: UIImageView!
     var gif: Gif?
@@ -30,7 +30,15 @@ class DisplayViewController: UIViewController {
 		required init?(coder aDecoder: NSCoder) {
 			super.init(coder: aDecoder)
 		}
-
+  
+    convenience  init() {
+      self.init(nibName: "DisplayViewController", bundle: nil)
+    }
+  
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+      super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+  
     override func viewDidLoad() {
       super.viewDidLoad()
 			setupView()

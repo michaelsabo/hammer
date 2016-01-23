@@ -75,7 +75,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		} else {
       self.viewCollection.collectionViewLayout = SmallCollectionViewLayout.init()
 		}
-//    self.view.addSubview(self.viewCollection)
     self.viewCollection.backgroundColor = UIColor.flatWhiteColorDark()
     
 //		tagSearch.translatesAutoresizingMaskIntoConstraints = false
@@ -102,7 +101,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-		let displayViewController = storyboard?.instantiateViewControllerWithIdentifier("DisplayViewController") as! DisplayViewController
+    let displayViewController = DisplayViewController(nibName: "DisplayViewController", bundle: NSBundle.mainBundle())
     let gif = self.homeViewModel.gifsForDisplay.value[indexPath.item]
     if (gif.thumbnailData != nil) {
       displayViewController.displayGifViewModel = DisplayViewModel(gif: gif)
