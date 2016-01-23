@@ -8,6 +8,7 @@
 
 import UIKit
 import ReactiveCocoa
+import GameKit
 
 class HomeViewModel : NSObject {
 	
@@ -139,6 +140,17 @@ class HomeViewModel : NSObject {
       }
     }
     return cell
+  }
+  
+  func mixupGifArray() {
+    if #available(iOS 9.0, *) {
+      let newArray = GKRandomSource.sharedRandom().arrayByShufflingObjectsInArray(self.gifsForDisplay.value) as! [Gif]
+      self.gifCollection.value = newArray
+      self.gifsForDisplay.value = newArray
+    } else {
+        // Fallback on earlier versions
+    }
+    
   }
 }
 

@@ -183,6 +183,18 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     let navController = UINavigationController.init(rootViewController: settingsController)
     self.presentViewController(navController, animated: true, completion: nil)
   }
+  
+  // MARK: shake delegates
+  
+  override func canBecomeFirstResponder() -> Bool {
+    return true
+  }
+  
+  override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
+    if motion == .MotionShake {
+      self.homeViewModel.mixupGifArray()
+    }
+  }
 
 	
 }

@@ -165,6 +165,8 @@ class DisplayViewController: UIViewController {
             rowTupleArray[i].currentWidth += objWidth + xPadding
             rowTupleArray[i].lastItemIndex = index
             break
+          } else if (i < rowTupleArray.count-1) {
+            continue
           } else {
             let viewAbove = (self.tagLabels?[rowTupleArray[i].firstItemIndex])! as PaddedTagLabel
             self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Top, relatedBy: .Equal, toItem: viewAbove, attribute: .Bottom, multiplier: 1, constant: yPadding))

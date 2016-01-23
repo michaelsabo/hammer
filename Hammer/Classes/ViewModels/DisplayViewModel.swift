@@ -31,8 +31,8 @@ class DisplayViewModel : NSObject {
   var gifData : NSData!
   var gifImage = MutableProperty<UIImage?>(UIImage())
   
-	let gifService: GifService
-  let tagService: TagService
+	var gifService: GifService
+  var tagService: TagService
 	
 	init(gif: Gif) {
 		
