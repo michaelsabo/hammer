@@ -17,12 +17,16 @@ class DisplayViewModelSpec: QuickSpec {
     
     describe("Display View Model") {
       let gif = Gif(id: 10, url: "http://i.imgur.com/p5tJEpm.gif", thumbnailUrl: "http://i.imgur.com/p5tJEpmb.gif", index: 0)
-      let displayViewModel = DisplayViewModel(gifService: MockGifService(), tagService: MockTagService(), gif: gif)
-      
+      let displayViewModel = DisplayViewModel(gif: gif)
+      displayViewModel.gifService = MockGifService()
+      displayViewModel.tagService = MockTagService()
       
       context("retrieving") {
         
+        
+        
         it("tags for gif id") {
+          displayViewModel.startTagSignal()
           expect(displayViewModel.tags.value.count).to(equal(3))
         }
         
