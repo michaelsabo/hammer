@@ -14,7 +14,7 @@ extension UIViewController
     
     navigationController?.navigationBar.barTintColor = UIColor.flatTealColor()
     navigationController?.navigationBar.tintColor = UIColor.flatWhiteColor()
-    let textAttributes = [NSForegroundColorAttributeName:UIColor.flatWhiteColor()]
+    let textAttributes:[String:AnyObject] = [NSForegroundColorAttributeName:UIColor.flatWhiteColor()]
     navigationController?.navigationBar.titleTextAttributes = textAttributes
   }
 }

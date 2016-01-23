@@ -34,6 +34,8 @@
 		276C7FD61BC204EF0028DC0D /* HammerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FD51BC204EF0028DC0D /* HammerUITests.swift */; };
 		276C7FF91BC2097A0028DC0D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FF81BC2097A0028DC0D /* HomeViewController.swift */; };
 		276C7FFE1BC2116F0028DC0D /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FFD1BC2116F0028DC0D /* ImageCell.swift */; };
+		276D06D21C53DCA80086A44B /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276D06D11C53DCA80086A44B /* SearchView.swift */; };
+		276D06D41C53DCB70086A44B /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 276D06D31C53DCB70086A44B /* SearchView.xib */; };
 		2780FE4E1C25C74000653D49 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2780FE4D1C25C74000653D49 /* ActionViewController.swift */; };
 		2780FE511C25C74000653D49 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2780FE4F1C25C74000653D49 /* MainInterface.storyboard */; };
 		2780FE551C25C74000653D49 /* Ham-it.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2780FE4B1C25C74000653D49 /* Ham-it.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -187,6 +189,8 @@
 		276C7FD71BC204EF0028DC0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		276C7FF81BC2097A0028DC0D /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		276C7FFD1BC2116F0028DC0D /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		276D06D11C53DCA80086A44B /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		276D06D31C53DCB70086A44B /* SearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchView.xib; sourceTree = "<group>"; };
 		2780FE4B1C25C74000653D49 /* Ham-it.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Ham-it.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2780FE4D1C25C74000653D49 /* ActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
 		2780FE501C25C74000653D49 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
@@ -337,6 +341,7 @@
 				27B6CFEE1C53388B008B66C4 /* HomeViewController.xib */,
 				27B6CFF01C533973008B66C4 /* ImageCell.xib */,
 				279D22DE1C535BA900EDFA11 /* DisplayViewController.xib */,
+				276D06D31C53DCB70086A44B /* SearchView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -506,6 +511,7 @@
 		27BAA1AC1BCCCBCC00EAE554 /* TableViews */ = {
 			isa = PBXGroup;
 			children = (
+				276D06D11C53DCA80086A44B /* SearchView.swift */,
 				276C7FFC1BC211120028DC0D /* Cells */,
 				2711AE3C1BDB2AFB000C47B2 /* CollectionViewLayout.swift */,
 				275212B41BEF89A300BE3FE9 /* SearchGifsTableView.swift */,
@@ -719,6 +725,7 @@
 				276C7FC01BC204EE0028DC0D /* LaunchScreen.storyboard in Resources */,
 				279D22DF1C535BA900EDFA11 /* DisplayViewController.xib in Resources */,
 				27F1D73A1BE98DC10014F2AF /* Licenses.xib in Resources */,
+				276D06D41C53DCB70086A44B /* SearchView.xib in Resources */,
 				275C39881BE702DC0028B4C6 /* jif_me.png in Resources */,
 				276C7FBD1BC204EE0028DC0D /* Assets.xcassets in Resources */,
 				27B6CFF11C533973008B66C4 /* ImageCell.xib in Resources */,
@@ -918,6 +925,7 @@
 				27F3B32B1BEE89CE00B94731 /* ScreenHelpers.swift in Sources */,
 				2783332A1BDBE1FA00F4786E /* DisplayViewModel.swift in Sources */,
 				2711AE3D1BDB2AFB000C47B2 /* CollectionViewLayout.swift in Sources */,
+				276D06D21C53DCA80086A44B /* SearchView.swift in Sources */,
 				276C7FF91BC2097A0028DC0D /* HomeViewController.swift in Sources */,
 				274C1EA41BE5DCFA007B1D8A /* AppFont.swift in Sources */,
 				27F1D7421BE98E7A0014F2AF /* NavigationBar.swift in Sources */,

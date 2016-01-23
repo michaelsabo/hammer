@@ -12,7 +12,7 @@ import GameKit
 
 class HomeViewModel : NSObject {
 	
-  let title: String = "Gallery"
+  let title: String = "HAM"
 	let searchText = MutableProperty<String>("")
 	let isSearching = MutableProperty<Bool>(false)
 	
@@ -91,7 +91,7 @@ class HomeViewModel : NSObject {
   }()
 	
 	func getGifsForTagSearch() -> Void {
-		gifService.getGifsForTagSearchResponse(self.searchText.value.replaceSpaces())
+		gifService.getGifsForTagSearchResponse(self.searchText.value.lowercaseString)
 			.on(next: {
 					response in
 					if (response.gifs.count > 0) {
@@ -105,9 +105,9 @@ class HomeViewModel : NSObject {
   func tagTableViewCellHeight() -> Int {
     var tableHeight: Int
     if (self.foundTags.value.count >= 7) {
-      tableHeight = 35 * 7
+      tableHeight = 45 * 7
     } else {
-      tableHeight = self.foundTags.value.count * 35
+      tableHeight = self.foundTags.value.count * 45
     }
     return tableHeight;
   }
@@ -143,14 +143,9 @@ class HomeViewModel : NSObject {
   }
   
   func mixupGifArray() {
-    if #available(iOS 9.0, *) {
-      let newArray = GKRandomSource.sharedRandom().arrayByShufflingObjectsInArray(self.gifsForDisplay.value) as! [Gif]
-      self.gifCollection.value = newArray
-      self.gifsForDisplay.value = newArray
-    } else {
-        // Fallback on earlier versions
-    }
-    
+    let newArray = GKRandomSource.sharedRandom().arrayByShufflingObjectsInArray(self.gifsForDisplay.value) as! [Gif]
+    self.gifCollection.value = newArray
+    self.gifsForDisplay.value = newArray
   }
 }
 

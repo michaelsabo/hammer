@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let navController = UINavigationController.init(rootViewController: controller)
     self.window?.rootViewController = navController
     window?.makeKeyAndVisible()
-    Fabric.with([Crashlytics.self])
+//    Fabric.with([Crashlytics.self])
 		return true
 	}
 
