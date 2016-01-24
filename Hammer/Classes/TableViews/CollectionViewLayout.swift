@@ -79,3 +79,17 @@ class LargeCollectionViewLayout : UICollectionViewFlowLayout {
 		return true
 	}
 }
+
+extension UICollectionView {
+  
+  func setCollectionViewLayout() {
+    if (Screen.screenWidth > 400) {
+      self.collectionViewLayout = LargeCollectionViewLayout.init()
+    } else if (Screen.screenWidth > 350) {
+      self.collectionViewLayout = MediumCollectionViewLayout.init()
+    } else {
+      self.collectionViewLayout = SmallCollectionViewLayout.init()
+    }
+  }
+  
+}

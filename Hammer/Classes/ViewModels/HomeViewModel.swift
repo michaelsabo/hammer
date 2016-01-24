@@ -13,6 +13,7 @@ import GameKit
 class HomeViewModel : NSObject {
 	
   let title: String = "HAM"
+  let cellHeight:Int = 55
 	let searchText = MutableProperty<String>("")
 	let isSearching = MutableProperty<Bool>(false)
 	
@@ -105,9 +106,9 @@ class HomeViewModel : NSObject {
   func tagTableViewCellHeight() -> Int {
     var tableHeight: Int
     if (self.foundTags.value.count >= 7) {
-      tableHeight = 45 * 7
+      tableHeight = cellHeight * 7
     } else {
-      tableHeight = self.foundTags.value.count * 45
+      tableHeight = self.foundTags.value.count * cellHeight
     }
     return tableHeight;
   }
