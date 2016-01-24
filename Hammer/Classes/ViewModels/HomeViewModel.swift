@@ -36,7 +36,6 @@ class HomeViewModel : NSObject {
     self.isSearchingSignal = searchingSignal
     self.isSearchingObserver = searchingObserver
 		super.init()
-
     getGifs()
 		
 		tagService.getAllTags()
@@ -112,9 +111,8 @@ class HomeViewModel : NSObject {
     }
     return tableHeight;
   }
-
-  func displayCellForGifs(indexPath indexPath: NSIndexPath, cell: ImageCell) -> ImageCell {
-    //TODO refactor this
+  
+  func displayThumbnailForGif(indexPath indexPath: NSIndexPath, cell: ImageCell) -> ImageCell {
     if (indexPath.item < self.gifsForDisplay.value.count) {
       let gif = self.gifsForDisplay.value[indexPath.item]
       if let data = gif.thumbnailData {
@@ -123,21 +121,11 @@ class HomeViewModel : NSObject {
         return cell
       } else {
         cell.imageView.image = UIImage()
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
-          Gif.getThumbnailImageForGif(gif, completionHandler: { [unowned self] (responseGif, isSuccess, error) in
-            if (isSuccess && !self.isSearching.value) {
-              if let index = self.gifsForDisplay.value.indexOf(responseGif!) {
-                cell.setImage(self.gifsForDisplay.value[index].thumbnailData)
-              }
-            } else if (isSuccess && self.isSearching.value) {
-              if let index = self.gifsForDisplay.value.indexOf(responseGif!) {
-                cell.setImage(self.gifsForDisplay.value[index].thumbnailData)
-              }
-            } else {
-              cell.userInteractionEnabled = false
-            }
-            })
-        }
+        gifService.retrieveThumbnailImageFor(gif: gif)
+          .on(next: { [weak cell] responseGif in
+            cell?.setImage(responseGif.thumbnailData)
+        }).start()
+
       }
     }
     return cell

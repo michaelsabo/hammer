@@ -10,7 +10,7 @@ PODS:
   - Masonry (0.6.4)
   - MMPopupView (1.6):
     - Masonry
-  - Nimble (3.0.0)
+  - Nimble (3.1.0)
   - NVActivityIndicatorView (2.3)
   - Quick (0.8.0)
   - ReactiveCocoa (4.0.0-RC.1):
@@ -34,7 +34,7 @@ DEPENDENCIES:
   - Fabric
   - Font-Awesome-Swift
   - MMPopupView
-  - Nimble (= 3.0.0)
+  - Nimble
   - NVActivityIndicatorView
   - Quick (~> 0.8.0)
   - ReactiveCocoa (= 4.0.0-RC.1)
@@ -57,7 +57,7 @@ SPEC CHECKSUMS:
   Font-Awesome-Swift: 0af30357ab68dbcfa2d211254a5c11a158261112
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
   MMPopupView: 49c06ca9600256baf263ee5e67d97334735db262
-  Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
+  Nimble: 79d40f4d69d47314229bbabacaa02b8838c779b9
   NVActivityIndicatorView: c7ef25ef527ab5e51b00322cb1ddd58681bcf2a3
   Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
   ReactiveCocoa: 2b0f654beb7642b82cfd3fdb845205ae9889422c

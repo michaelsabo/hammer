@@ -74,6 +74,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     tagSearch = UITextField.init(frame: CGRectMake(0, 0, self.view.frame.size.width-20, 60))
     tagSearch.createSearchTextField(placeholder: "Whatya looking for?")
     self.searchView.addSubview(tagSearch)
+    addAutoLayoutConstraints()
     refreshControl.addTarget(self, action: "refreshImages", forControlEvents: UIControlEvents.ValueChanged)
     viewCollection.addSubview(refreshControl)
 	}
@@ -108,8 +109,24 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ImageCell", forIndexPath: indexPath) as! ImageCell
-		return self.homeViewModel.displayCellForGifs(indexPath: indexPath, cell: cell)
+		return self.homeViewModel.displayThumbnailForGif(indexPath: indexPath, cell: cell)
 	}
+  
+  func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+    let cell = cell as! ImageCell
+    guard cell.hasLoaded else {
+      return
+    }
+    if (self.homeViewModel.gifsForDisplay.value[indexPath.item].showAnimation) {
+      cell.imageView.transform = CGAffineTransformMakeScale(0.65, 0.65)
+      UIView.animateWithDuration(0.4, delay: 0.3,usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: [], animations: { [weak cell] in
+        cell?.imageView.transform = CGAffineTransformMakeScale(1.0, 1.0)
+      }, completion: { [weak self] (finished: Bool) in
+        self?.homeViewModel.gifsForDisplay.value[indexPath.item].showAnimation = false
+      })
+    }
+  }
+
 	
 	func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
     let displayViewController = DisplayViewController(nibName: "DisplayViewController", bundle: NSBundle.mainBundle())

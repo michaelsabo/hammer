@@ -50,13 +50,13 @@ class GifService {
 		}
 	}
 	
-	func retrieveThumbnailimageFor(gif gif: Gif) -> SignalProducer<Gif, NSError> {
+	func retrieveThumbnailImageFor(gif gif: Gif) -> SignalProducer<Gif, NSError> {
 		return SignalProducer { observer, disposable in
 			Alamofire.request(.GET, gif.thumbnailUrl)
 				.responseData { response in
 					if (response.result.isSuccess) {
 						if let data = response.result.value {
-              gif.thumbnailData = UIImageJPEGRepresentation(UIImage(data: data)!, 0.1)
+              gif.thumbnailData = data
 							observer.sendNext(gif)
 							observer.sendCompleted()
 						}
