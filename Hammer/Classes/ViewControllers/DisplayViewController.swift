@@ -46,11 +46,11 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
 		}
 	
 		func setupView() {
-			self.view.backgroundColor = UIColor.flatWhiteColorDark()
+			self.view.backgroundColor = ColorThemes.getBackgroundColor()
       self.view.clipsToBounds = true
 			self.configureNavigationBar()
 			let loadingFrame = CGRectMake(0, 0, 60.0, 60.0)
-			let loadingView = NVActivityIndicatorView(frame: loadingFrame, type: .LineScalePulseOut, color: UIColor.flatTealColor())
+			let loadingView = NVActivityIndicatorView(frame: loadingFrame, type: .LineScalePulseOut, color: ColorThemes.animationColor())
 			loadingView.tag = kLoadingAnimationTag
       loadingView.translatesAutoresizingMaskIntoConstraints = false
 			self.view.addSubview(loadingView)

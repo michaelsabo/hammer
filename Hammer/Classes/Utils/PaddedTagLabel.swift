@@ -21,8 +21,8 @@ class PaddedTagLabel : UILabel {
     self.font = App.font()
     self.text = text
     self.translatesAutoresizingMaskIntoConstraints = false
-    self.textColor = UIColor.flatWhiteColor()
-    self.backgroundColor = UIColor.flatTealColor()
+    self.textColor = ColorThemes.viewTextColor()
+    self.backgroundColor = ColorThemes.tagBackgroundColor()
     self.numberOfLines = 0
     self.layer.masksToBounds = true
     self.tag = 200

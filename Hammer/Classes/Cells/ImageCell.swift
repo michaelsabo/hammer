@@ -30,6 +30,8 @@ class ImageCell: UICollectionViewCell {
         self.imageView.image = UIImage(data: image)
         self.imageView.layer.masksToBounds = true
         self.imageView.layer.cornerRadius = 10.0
+        self.imageView.layer.borderWidth = 0.6
+        self.imageView.layer.borderColor = ColorThemes.getOutlineColor().CGColor
         hasLoaded = true
         self.userInteractionEnabled = true
       }

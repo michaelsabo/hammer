@@ -83,7 +83,7 @@
 		27CD49A91BEF039700586B4D /* RAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BAA1A81BCCC97900EAE554 /* RAC.swift */; };
 		27CD49AA1BEF039700586B4D /* LoadingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D16A431BDC1A55000B75B2 /* LoadingAnimation.swift */; };
 		27CD49AB1BEF039700586B4D /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274C1EA31BE5DCFA007B1D8A /* AppFont.swift */; };
-		27CD49AC1BEF039700586B4D /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F1D7411BE98E7A0014F2AF /* NavigationBar.swift */; };
+		27CD49AC1BEF039700586B4D /* ColorThemes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F1D7411BE98E7A0014F2AF /* ColorThemes.swift */; };
 		27CD49AD1BEF039700586B4D /* PaddedTagLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F3B3271BEE80BC00B94731 /* PaddedTagLabel.swift */; };
 		27CD49AE1BEF039700586B4D /* ScreenHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F3B32A1BEE89CE00B94731 /* ScreenHelpers.swift */; };
 		27CD49B01BEF0C5100586B4D /* DisplayViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CD49AF1BEF0C5100586B4D /* DisplayViewModelSpec.swift */; };
@@ -94,8 +94,8 @@
 		27F1D73C1BE98DC10014F2AF /* Licenses.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27F1D7391BE98DC10014F2AF /* Licenses.xib */; };
 		27F1D73E1BE98E0B0014F2AF /* LicensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F1D73D1BE98E0B0014F2AF /* LicensesViewController.swift */; };
 		27F1D7401BE98E0B0014F2AF /* LicensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F1D73D1BE98E0B0014F2AF /* LicensesViewController.swift */; };
-		27F1D7421BE98E7A0014F2AF /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F1D7411BE98E7A0014F2AF /* NavigationBar.swift */; };
-		27F1D7441BE98E7A0014F2AF /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F1D7411BE98E7A0014F2AF /* NavigationBar.swift */; };
+		27F1D7421BE98E7A0014F2AF /* ColorThemes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F1D7411BE98E7A0014F2AF /* ColorThemes.swift */; };
+		27F1D7441BE98E7A0014F2AF /* ColorThemes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F1D7411BE98E7A0014F2AF /* ColorThemes.swift */; };
 		27F3B3281BEE80BC00B94731 /* PaddedTagLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F3B3271BEE80BC00B94731 /* PaddedTagLabel.swift */; };
 		27F3B32B1BEE89CE00B94731 /* ScreenHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F3B32A1BEE89CE00B94731 /* ScreenHelpers.swift */; };
 		C8B8CBB3436E409112AB700A /* Pods_Hammer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F588B3F15172A45489803A8E /* Pods_Hammer.framework */; };
@@ -220,7 +220,7 @@
 		27D16A431BDC1A55000B75B2 /* LoadingAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingAnimation.swift; sourceTree = "<group>"; };
 		27F1D7391BE98DC10014F2AF /* Licenses.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Licenses.xib; sourceTree = "<group>"; };
 		27F1D73D1BE98E0B0014F2AF /* LicensesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicensesViewController.swift; sourceTree = "<group>"; };
-		27F1D7411BE98E7A0014F2AF /* NavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NavigationBar.swift; path = Utils/NavigationBar.swift; sourceTree = "<group>"; };
+		27F1D7411BE98E7A0014F2AF /* ColorThemes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorThemes.swift; path = Utils/ColorThemes.swift; sourceTree = "<group>"; };
 		27F3B3271BEE80BC00B94731 /* PaddedTagLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaddedTagLabel.swift; path = Utils/PaddedTagLabel.swift; sourceTree = "<group>"; };
 		27F3B32A1BEE89CE00B94731 /* ScreenHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenHelpers.swift; sourceTree = "<group>"; };
 		27F3B32E1BEE961B00B94731 /* GifServiceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifServiceSpec.swift; sourceTree = "<group>"; };
@@ -528,7 +528,7 @@
 		27C75CB11BC23303008AC322 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				27F1D7411BE98E7A0014F2AF /* NavigationBar.swift */,
+				27F1D7411BE98E7A0014F2AF /* ColorThemes.swift */,
 				27F3B3271BEE80BC00B94731 /* PaddedTagLabel.swift */,
 				27F3B32A1BEE89CE00B94731 /* ScreenHelpers.swift */,
 				274520151C11347A004B67F3 /* UIExtensions.swift */,
@@ -936,7 +936,7 @@
 				2711AE3D1BDB2AFB000C47B2 /* CollectionViewLayout.swift in Sources */,
 				276C7FF91BC2097A0028DC0D /* HomeViewController.swift in Sources */,
 				274C1EA41BE5DCFA007B1D8A /* AppFont.swift in Sources */,
-				27F1D7421BE98E7A0014F2AF /* NavigationBar.swift in Sources */,
+				27F1D7421BE98E7A0014F2AF /* ColorThemes.swift in Sources */,
 				2719DA301BCC848500BD02AD /* UIKitExtensions.swift in Sources */,
 				27C75CAE1BC21CC0008AC322 /* Gif.swift in Sources */,
 				27D16A441BDC1A55000B75B2 /* LoadingAnimation.swift in Sources */,
@@ -953,7 +953,7 @@
 				27CD49A91BEF039700586B4D /* RAC.swift in Sources */,
 				27CD49AA1BEF039700586B4D /* LoadingAnimation.swift in Sources */,
 				27CD49AB1BEF039700586B4D /* AppFont.swift in Sources */,
-				27CD49AC1BEF039700586B4D /* NavigationBar.swift in Sources */,
+				27CD49AC1BEF039700586B4D /* ColorThemes.swift in Sources */,
 				275212B61BEF89A300BE3FE9 /* SearchGifsTableView.swift in Sources */,
 				27CD49AD1BEF039700586B4D /* PaddedTagLabel.swift in Sources */,
 				27CD49AE1BEF039700586B4D /* ScreenHelpers.swift in Sources */,
@@ -984,7 +984,7 @@
 			files = (
 				27F1D7401BE98E0B0014F2AF /* LicensesViewController.swift in Sources */,
 				276C7FD61BC204EF0028DC0D /* HammerUITests.swift in Sources */,
-				27F1D7441BE98E7A0014F2AF /* NavigationBar.swift in Sources */,
+				27F1D7441BE98E7A0014F2AF /* ColorThemes.swift in Sources */,
 				279692381BE9AE5A00063A98 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -31,8 +31,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		self.title = self.homeViewModel.title
-		self.view.backgroundColor = UIColor.flatWhiteColorDark()
-		self.configureNavigationBar()
     let settingsIcon = UIBarButtonItem().setup(target: self, icon: .FAGear, action: "showSettings")
     let searchIcon = UIBarButtonItem().setup(target: self, icon: .FASearch, action: "updateSearchViews")
     navigationItem.leftBarButtonItem = settingsIcon
@@ -40,6 +38,13 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		setupViews()
 		setupBindings()
 	}
+  
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    self.view.backgroundColor = ColorThemes.getBackgroundColor()
+    self.configureNavigationBar()
+    self.viewCollection.backgroundColor = ColorThemes.getBackgroundColor()
+  }
 	
 	func setupBindings() {
 		tagSearch.delegate = self
@@ -67,7 +72,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		autocompleteTableView.dataSource = self
     view.addSubview(autocompleteTableView)
     self.viewCollection.setCollectionViewLayout()
-    self.viewCollection.backgroundColor = UIColor.flatWhiteColorDark()
     searchView = UIView.init(frame: CGRectMake(0, 67, Screen.screenWidth, 90))
     searchView.defaultProperties()
     self.view.addSubview(searchView)

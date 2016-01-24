@@ -73,8 +73,6 @@ class GifService {
 				.responseData { response in
 					if (response.result.isSuccess) {
 						if let data = response.result.value {
-//							gif.gifData = data
-//							gif.gifImage = UIImage.animatedImageWithAnimatedGIFData(data)
 							observer.sendNext(data)
 							observer.sendCompleted()
 						}
