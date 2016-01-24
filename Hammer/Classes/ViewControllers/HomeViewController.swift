@@ -122,9 +122,18 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
       return
     }
     if (self.homeViewModel.gifsForDisplay.value[indexPath.item].showAnimation) {
-      cell.imageView.transform = CGAffineTransformMakeScale(0.65, 0.65)
-      UIView.animateWithDuration(0.4, delay: 0.3,usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: [], animations: { [weak cell] in
-        cell?.imageView.transform = CGAffineTransformMakeScale(1.0, 1.0)
+      cell.imageView.transform = CGAffineTransformMakeScale(0.3, 0.3)
+
+      UIView.animateKeyframesWithDuration(0.5, delay: 0, options: [], animations: { [weak cell] in
+        UIView.addKeyframeWithRelativeStartTime(0.0, relativeDuration: 0.1, animations: { [weak cell] in
+          cell?.imageView.transform = CGAffineTransformMakeScale(0.5, 0.5)
+        })
+        UIView.addKeyframeWithRelativeStartTime(0.1, relativeDuration: 0.2, animations: { [weak cell] in
+          cell?.imageView.transform = CGAffineTransformMakeScale(0.7, 0.7)
+        })
+        UIView.addKeyframeWithRelativeStartTime(0.3, relativeDuration: 0.2, animations: { [weak cell] in
+          cell?.imageView.transform = CGAffineTransformMakeScale(1.0, 1.0)
+        })
       }, completion: { [weak self] (finished: Bool) in
         self?.homeViewModel.gifsForDisplay.value[indexPath.item].showAnimation = false
       })
@@ -142,7 +151,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func scrollViewDidScroll(scrollView: UIScrollView) {
-    if (!searchView.hidden) {
+    if (self.homeViewModel.foundTags.value.count < 1 && !searchView.hidden) {
       updateSearchViews()
     }
 	}
@@ -208,6 +217,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func textFieldShouldClear(textField: UITextField) -> Bool {
+    self.homeViewModel.searchText.value = ""
 		return true
 	}
   
@@ -235,7 +245,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
   }
   
   func addBlurEffect() {
-    let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+    let blurStyle = UserDefaults.darkThemeEnabled ? UIBlurEffectStyle.Dark : UIBlurEffectStyle.Light
+    let blurEffect = UIBlurEffect(style: blurStyle)
     let blurEffectView = UIVisualEffectView(effect: blurEffect)
     blurEffectView.frame = self.view.bounds
     blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]

@@ -62,7 +62,7 @@ class HomeViewModel : NSObject {
         response in
         if (response.gifs.count > 0) {
           self.gifCollection.value = response.gifs
-          self.gifsForDisplay.value = response.gifs
+          self.gifsForDisplay.value = self.gifCollection.value
         }
       })
       .start()

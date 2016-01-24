@@ -37,7 +37,7 @@ extension UITableViewCell {
   
   func defaultAutocompleteProperties() {
     self.textLabel?.font = App.fontLight()
-    self.textLabel?.textColor = UIColor.flatBlackColorDark()
+    self.textLabel?.textColor = ColorThemes.tableViewHeaderTextColor()
     self.backgroundColor = UIColor.clearColor()
     self.selectionStyle = .None
   }
