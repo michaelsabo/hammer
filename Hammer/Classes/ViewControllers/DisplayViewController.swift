@@ -49,10 +49,15 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
 			self.view.backgroundColor = UIColor.flatWhiteColorDark()
       self.view.clipsToBounds = true
 			self.configureNavigationBar()
-			let loadingFrame = CGRectMake((Screen.screenWidth/2.0)-30, (self.imageView.frame.origin.y)+(self.imageView.frame.size.height/2)-20, 60.0, 50.0)
+			let loadingFrame = CGRectMake(0, 0, 60.0, 60.0)
 			let loadingView = NVActivityIndicatorView(frame: loadingFrame, type: .LineScalePulseOut, color: UIColor.flatTealColor())
 			loadingView.tag = kLoadingAnimationTag
+      loadingView.translatesAutoresizingMaskIntoConstraints = false
 			self.view.addSubview(loadingView)
+      self.view.addConstraint(NSLayoutConstraint.init(item: loadingView, attribute: .CenterY, relatedBy: .Equal, toItem: self.imageView, attribute: .CenterY, multiplier: 1, constant: 0))
+      self.view.addConstraint(NSLayoutConstraint.init(item: loadingView, attribute: .CenterX, relatedBy: .Equal, toItem: self.imageView, attribute: .CenterX, multiplier: 1, constant: 0))
+      self.view.addConstraint(NSLayoutConstraint.init(item: loadingView, attribute: .Width, relatedBy: .GreaterThanOrEqual, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 60))
+      self.view.addConstraint(NSLayoutConstraint.init(item: loadingView, attribute: .Height, relatedBy: .GreaterThanOrEqual, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 60))
 			loadingView.startAnimation()
 		}
 	
@@ -110,14 +115,9 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
   
   func displayTagAlert() {
     let alertConfig = MMAlertViewConfig.globalConfig()
+    alertConfig.defaultConfig()
     alertConfig.defaultTextConfirm = "I WILL!"
     alertConfig.defaultTextCancel = "You Won't"
-    alertConfig.backgroundColor = UIColor.flatWhiteColor()
-    alertConfig.titleColor = UIColor.flatTealColor()
-    alertConfig.detailColor = UIColor.flatTealColor()
-    alertConfig.splitColor = UIColor.flatBlueColor()
-    alertConfig.itemNormalColor = UIColor.flatTealColor()
-    alertConfig.itemHighlightColor = UIColor.flatTealColor()
     
     let alertView = MMAlertView.init(inputTitle: "New Tag", detail: self.displayGifViewModel.alertDetail, placeholder: "lingo here..", handler: {  tagText in
       if (tagText.characters.count > 2) {

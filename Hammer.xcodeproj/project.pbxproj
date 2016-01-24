@@ -47,6 +47,7 @@
 		278757731C5474DA00633D65 /* TextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278757721C5474DA00633D65 /* TextFieldExtension.swift */; };
 		278757751C54765800633D65 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278757741C54765800633D65 /* UIViewExtension.swift */; };
 		278757771C547ED000633D65 /* BarButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278757761C547ED000633D65 /* BarButtonExtension.swift */; };
+		278757791C54857900633D65 /* AlertViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278757781C54857900633D65 /* AlertViewExtension.swift */; };
 		278983BF1BC6234C004C1FAA /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278983BE1BC6234C004C1FAA /* Tag.swift */; };
 		278CA0171BCDA9CE000904D7 /* GifService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278CA0161BCDA9CE000904D7 /* GifService.swift */; };
 		278CA01E1BCDB09E000904D7 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278CA01D1BCDB09E000904D7 /* Router.swift */; };
@@ -202,6 +203,7 @@
 		278757721C5474DA00633D65 /* TextFieldExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldExtension.swift; sourceTree = "<group>"; };
 		278757741C54765800633D65 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		278757761C547ED000633D65 /* BarButtonExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarButtonExtension.swift; sourceTree = "<group>"; };
+		278757781C54857900633D65 /* AlertViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewExtension.swift; sourceTree = "<group>"; };
 		278983BE1BC6234C004C1FAA /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		278CA0161BCDA9CE000904D7 /* GifService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifService.swift; sourceTree = "<group>"; };
 		278CA01D1BCDB09E000904D7 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 				278757721C5474DA00633D65 /* TextFieldExtension.swift */,
 				278757741C54765800633D65 /* UIViewExtension.swift */,
 				278757761C547ED000633D65 /* BarButtonExtension.swift */,
+				278757781C54857900633D65 /* AlertViewExtension.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -927,6 +930,7 @@
 				274520161C11347A004B67F3 /* UIExtensions.swift in Sources */,
 				276C7FB31BC204EE0028DC0D /* AppDelegate.swift in Sources */,
 				27F3B32B1BEE89CE00B94731 /* ScreenHelpers.swift in Sources */,
+				278757791C54857900633D65 /* AlertViewExtension.swift in Sources */,
 				278757751C54765800633D65 /* UIViewExtension.swift in Sources */,
 				2783332A1BDBE1FA00F4786E /* DisplayViewModel.swift in Sources */,
 				2711AE3D1BDB2AFB000C47B2 /* CollectionViewLayout.swift in Sources */,
