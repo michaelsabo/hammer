@@ -131,9 +131,15 @@ class HomeViewModel : NSObject {
     return cell
   }
   
+  func resetAnimationFlag() {
+    for g in self.gifCollection.value {
+      g.showAnimation = true
+    }
+  }
+  
   func mixupGifArray() {
+    resetAnimationFlag()
     let newArray = GKRandomSource.sharedRandom().arrayByShufflingObjectsInArray(self.gifsForDisplay.value) as! [Gif]
-    self.gifCollection.value = newArray
     self.gifsForDisplay.value = newArray
   }
 }

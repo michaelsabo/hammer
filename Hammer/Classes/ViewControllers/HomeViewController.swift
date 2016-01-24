@@ -121,15 +121,15 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     guard cell.hasLoaded else {
       return
     }
-    if (self.homeViewModel.gifsForDisplay.value[indexPath.item].showAnimation) {
-      cell.imageView.transform = CGAffineTransformMakeScale(0.3, 0.3)
+    if (self.homeViewModel.gifsForDisplay.value[indexPath.item].showAnimation && isScrollingDown) {
+      cell.imageView.transform = CGAffineTransformMakeScale(0.4, 0.4)
 
       UIView.animateKeyframesWithDuration(0.5, delay: 0, options: [], animations: { [weak cell] in
         UIView.addKeyframeWithRelativeStartTime(0.0, relativeDuration: 0.1, animations: { [weak cell] in
-          cell?.imageView.transform = CGAffineTransformMakeScale(0.5, 0.5)
+          cell?.imageView.transform = CGAffineTransformMakeScale(0.6, 0.6)
         })
         UIView.addKeyframeWithRelativeStartTime(0.1, relativeDuration: 0.2, animations: { [weak cell] in
-          cell?.imageView.transform = CGAffineTransformMakeScale(0.7, 0.7)
+          cell?.imageView.transform = CGAffineTransformMakeScale(0.8, 0.8)
         })
         UIView.addKeyframeWithRelativeStartTime(0.3, relativeDuration: 0.2, animations: { [weak cell] in
           cell?.imageView.transform = CGAffineTransformMakeScale(1.0, 1.0)
@@ -138,6 +138,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         self?.homeViewModel.gifsForDisplay.value[indexPath.item].showAnimation = false
       })
     }
+    self.homeViewModel.gifsForDisplay.value[indexPath.item].showAnimation = false
   }
 
 	
@@ -150,10 +151,18 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
 	}
 	
+  var lastContentOffset:CGFloat = 0.0
+  var isScrollingDown = true
 	func scrollViewDidScroll(scrollView: UIScrollView) {
     if (self.homeViewModel.foundTags.value.count < 1 && !searchView.hidden) {
       updateSearchViews()
     }
+    if (lastContentOffset > scrollView.contentOffset.y) {
+      isScrollingDown = false
+    } else {
+      isScrollingDown = true
+    }
+    lastContentOffset = scrollView.contentOffset.y;
 	}
   
   func scrollViewDidScrollToTop(scrollView: UIScrollView) {
