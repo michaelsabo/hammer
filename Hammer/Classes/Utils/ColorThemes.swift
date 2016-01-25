@@ -61,7 +61,7 @@ class ColorThemes {
     }
   }
   
-  class func animationColor() -> UIColor {
+  class func subviewsColor() -> UIColor {
     if (UserDefaults.darkThemeEnabled) {
       return  UIColor.flatWhiteColor()
     } else {

@@ -12,11 +12,12 @@ import MMPopupView
 extension MMAlertViewConfig {
   
   func defaultConfig() {
-    self.backgroundColor = UIColor.flatWhiteColor()
-    self.titleColor = UIColor.flatTealColor()
-    self.detailColor = UIColor.flatTealColor()
-    self.splitColor = UIColor.flatBlueColor()
-    self.itemNormalColor = UIColor.flatTealColor()
-    self.itemHighlightColor = UIColor.flatTealColor()
+    self.backgroundColor = ColorThemes.getBackgroundColor()
+    self.titleColor = ColorThemes.subviewsColor()
+    self.detailColor = ColorThemes.subviewsColor()
+    self.splitColor = ColorThemes.subviewsColor()
+    self.itemNormalColor = ColorThemes.subviewsColor()
+    self.itemHighlightColor = ColorThemes.subviewsColor()
+    self.textFieldColor = ColorThemes.subviewsColor()
   }
 }

@@ -8,7 +8,7 @@ PODS:
   - Fabric (1.6.4)
   - Font-Awesome-Swift (1.4.5)
   - Masonry (0.6.4)
-  - MMPopupView (1.6):
+  - MMPopupView (1.6.1):
     - Masonry
   - Nimble (3.1.0)
   - NVActivityIndicatorView (2.3)
@@ -33,7 +33,7 @@ DEPENDENCIES:
   - Crashlytics
   - Fabric
   - Font-Awesome-Swift
-  - MMPopupView
+  - MMPopupView (from `https://github.com/michaelsabo/MMPopupView`)
   - Nimble
   - NVActivityIndicatorView
   - Quick (~> 0.8.0)
@@ -41,10 +41,15 @@ DEPENDENCIES:
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
 
 EXTERNAL SOURCES:
+  MMPopupView:
+    :git: https://github.com/michaelsabo/MMPopupView
   SwiftyJSON:
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 CHECKOUT OPTIONS:
+  MMPopupView:
+    :commit: cc30667441156621f90cc5fd0415d523c99802f3
+    :git: https://github.com/michaelsabo/MMPopupView
   SwiftyJSON:
     :commit: 929539eb6a3304eaa9153ca44041a78b85bf2ee5
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
@@ -56,7 +61,7 @@ SPEC CHECKSUMS:
   Fabric: ed41fd62173c6bdea24ab02c9d7707161eabb750
   Font-Awesome-Swift: 0af30357ab68dbcfa2d211254a5c11a158261112
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
-  MMPopupView: 49c06ca9600256baf263ee5e67d97334735db262
+  MMPopupView: 42daf6d1a2956b23c1dd8d45f51131cfe5091be5
   Nimble: 79d40f4d69d47314229bbabacaa02b8838c779b9
   NVActivityIndicatorView: c7ef25ef527ab5e51b00322cb1ddd58681bcf2a3
   Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab

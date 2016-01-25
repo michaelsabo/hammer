@@ -16,7 +16,8 @@ extension UIButton {
     self.setTitleColor(ColorThemes.navigationBarIconColor(), forState: .Normal)
     self.titleLabel?.font = App.font()
     self.backgroundColor = ColorThemes.tagBackgroundColor()
-    self.contentEdgeInsets = UIEdgeInsets(top: 6.0, left: 6.0, bottom: 6.0, right: 6.0)
+    self.titleLabel?.clipsToBounds = false
+   
     self.translatesAutoresizingMaskIntoConstraints = false
     self.layer.cornerRadius = 5.0
     self.addTarget(target, action: selector, forControlEvents: event)

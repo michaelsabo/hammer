@@ -11,13 +11,14 @@ import Foundation
 
 class PaddedTagLabel : UILabel {
   
-  let topInset: CGFloat = 6.0
-  let bottomInset:CGFloat = 6.0
+  let topInset: CGFloat = 2.0
+  let bottomInset:CGFloat = 2.0
   let leftInset:CGFloat = 6.0
   let rightInset:CGFloat = 6.0
   
   convenience init(text: String) {
     self.init()
+    self.frame.size.height = 40.0
     self.font = App.font()
     self.text = text
     self.translatesAutoresizingMaskIntoConstraints = false
@@ -43,6 +44,19 @@ class PaddedTagLabel : UILabel {
     intrinsicSuperViewContentSize.width += leftInset + rightInset
     return intrinsicSuperViewContentSize
   }
-  
-  
 }
+
+class PaddedButton : UIButton {
+
+  override func layoutSubviews() {
+    if var titleFrame : CGRect = titleLabel?.frame {
+      titleFrame.size = self.bounds.size
+      titleFrame.origin = CGPointZero
+      self.titleLabel!.frame = titleFrame
+      self.titleLabel!.textAlignment = .Center
+    }
+  }
+}
+
+
+

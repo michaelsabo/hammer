@@ -23,7 +23,7 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
 		var displayGifViewModel: DisplayViewModel!
     var newTagButton : UIButton!
     var tagsAddedToView = false
-  
+    let tagHeight:CGFloat = 34
     var cocoaActionShare: CocoaAction?
 		var shareButton: UIBarButtonItem?
   
@@ -50,7 +50,7 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
       self.view.clipsToBounds = true
 			self.configureNavigationBar()
 			let loadingFrame = CGRectMake(0, 0, 60.0, 60.0)
-			let loadingView = NVActivityIndicatorView(frame: loadingFrame, type: .LineScalePulseOut, color: ColorThemes.animationColor())
+			let loadingView = NVActivityIndicatorView(frame: loadingFrame, type: .LineScalePulseOut, color: ColorThemes.subviewsColor())
 			loadingView.tag = kLoadingAnimationTag
       loadingView.translatesAutoresizingMaskIntoConstraints = false
 			self.view.addSubview(loadingView)
@@ -106,11 +106,12 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
   }
   
   func displayNewTagButton() {
-    newTagButton = UIButton().newButton(withTitle: "new tag", target: self, selector: "displayTagAlert", forControlEvent: .TouchUpInside)
+    newTagButton = PaddedButton(frame: CGRectMake(0,0,126,tagHeight)).newButton(withTitle: "new tag", target: self, selector: "displayTagAlert", forControlEvent: .TouchUpInside)
     newTagButton.setFAText(prefixText: "", icon: FAType.FATag, postfixText: " add new tag!", size: 16, forState: .Normal)
-    newTagButton.sizeToFit()
     newTagButton.tag = 10005
     self.view.addSubview(newTagButton)
+    self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: tagHeight))
+    self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Width, relatedBy: .GreaterThanOrEqual, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 126))
   }
   
   func displayTagAlert() {
@@ -118,7 +119,6 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
     alertConfig.defaultConfig()
     alertConfig.defaultTextConfirm = "I WILL!"
     alertConfig.defaultTextCancel = "You Won't"
-    
     let alertView = MMAlertView.init(inputTitle: "New Tag", detail: self.displayGifViewModel.alertDetail, placeholder: "lingo here..", handler: {  tagText in
       if (tagText.characters.count > 2) {
         self.displayGifViewModel.startCreateTagSignalRequest(tagText.lowercaseString)
@@ -126,6 +126,7 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
        
       }
     })
+
     alertView.attachedView = self.view
     alertView.show()
   }
@@ -136,6 +137,7 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
       let label = PaddedTagLabel.init(text: tag.name)
       label.setFAText(prefixText: "", icon: FAType.FATag, postfixText: " \(label.text!)", size: 16)
       self.view.addSubview(label)
+      self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: tagHeight))
       label.setNeedsDisplay()
       self.tagLabels?.append(label)
     }

@@ -16,7 +16,7 @@ target 'Hammer' do
   pod 'Font-Awesome-Swift'
   pod 'Fabric'
   pod 'Crashlytics'
-  pod 'MMPopupView'
+  pod 'MMPopupView', :git => 'https://github.com/michaelsabo/MMPopupView'
 end
 
 target 'HammerTests' do
