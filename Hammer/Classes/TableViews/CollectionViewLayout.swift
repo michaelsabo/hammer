@@ -38,7 +38,7 @@ class MediumCollectionViewLayout : UICollectionViewFlowLayout {
 		super.init()
 		self.itemSize = CGSizeMake(115, 125)
 		self.sectionInset = UIEdgeInsetsMake(5, 8, 5, 8)
-		self.minimumInteritemSpacing = 3.0
+		self.minimumInteritemSpacing = 2.0
 		self.minimumLineSpacing = 2.0
 		
 	}
@@ -78,4 +78,18 @@ class LargeCollectionViewLayout : UICollectionViewFlowLayout {
 	override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
 		return true
 	}
+}
+
+extension UICollectionView {
+  
+  func setCollectionViewLayout() {
+    if (Screen.screenWidth > 400) {
+      self.collectionViewLayout = LargeCollectionViewLayout.init()
+    } else if (Screen.screenWidth > 350) {
+      self.collectionViewLayout = MediumCollectionViewLayout.init()
+    } else {
+      self.collectionViewLayout = SmallCollectionViewLayout.init()
+    }
+  }
+  
 }

@@ -14,7 +14,7 @@ import ReactiveCocoa
 import Font_Awesome_Swift
 import MMPopupView
 
-class DisplayViewController: UIViewController {
+class DisplayViewController: UIViewController, UINavigationBarDelegate, UINavigationControllerDelegate {
 
 		@IBOutlet weak var imageView: UIImageView!
     var gif: Gif?
@@ -23,14 +23,22 @@ class DisplayViewController: UIViewController {
 		var displayGifViewModel: DisplayViewModel!
     var newTagButton : UIButton!
     var tagsAddedToView = false
-  
+    let tagHeight:CGFloat = 34
     var cocoaActionShare: CocoaAction?
 		var shareButton: UIBarButtonItem?
   
 		required init?(coder aDecoder: NSCoder) {
 			super.init(coder: aDecoder)
 		}
-
+  
+    convenience  init() {
+      self.init(nibName: "DisplayViewController", bundle: nil)
+    }
+  
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+      super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+  
     override func viewDidLoad() {
       super.viewDidLoad()
 			setupView()
@@ -38,13 +46,18 @@ class DisplayViewController: UIViewController {
 		}
 	
 		func setupView() {
-			self.view.backgroundColor = UIColor.flatWhiteColorDark()
+			self.view.backgroundColor = ColorThemes.getBackgroundColor()
       self.view.clipsToBounds = true
 			self.configureNavigationBar()
-			let loadingFrame = CGRectMake((Screen.screenWidth/2.0)-30, (self.imageView.frame.origin.y)+(self.imageView.frame.size.height/2)-20, 60.0, 50.0)
-			let loadingView = NVActivityIndicatorView(frame: loadingFrame, type: .LineScalePulseOut, color: UIColor.flatTealColor())
+			let loadingFrame = CGRectMake(0, 0, 60.0, 60.0)
+			let loadingView = NVActivityIndicatorView(frame: loadingFrame, type: .LineScalePulseOut, color: ColorThemes.subviewsColor())
 			loadingView.tag = kLoadingAnimationTag
+      loadingView.translatesAutoresizingMaskIntoConstraints = false
 			self.view.addSubview(loadingView)
+      self.view.addConstraint(NSLayoutConstraint.init(item: loadingView, attribute: .CenterY, relatedBy: .Equal, toItem: self.imageView, attribute: .CenterY, multiplier: 1, constant: 0))
+      self.view.addConstraint(NSLayoutConstraint.init(item: loadingView, attribute: .CenterX, relatedBy: .Equal, toItem: self.imageView, attribute: .CenterX, multiplier: 1, constant: 0))
+      self.view.addConstraint(NSLayoutConstraint.init(item: loadingView, attribute: .Width, relatedBy: .GreaterThanOrEqual, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 60))
+      self.view.addConstraint(NSLayoutConstraint.init(item: loadingView, attribute: .Height, relatedBy: .GreaterThanOrEqual, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 60))
 			loadingView.startAnimation()
 		}
 	
@@ -93,24 +106,19 @@ class DisplayViewController: UIViewController {
   }
   
   func displayNewTagButton() {
-    newTagButton = UIButton().newButton(withTitle: "new tag", target: self, selector: "displayTagAlert", forControlEvent: .TouchUpInside)
+    newTagButton = PaddedButton(frame: CGRectMake(0,0,126,tagHeight)).newButton(withTitle: "new tag", target: self, selector: "displayTagAlert", forControlEvent: .TouchUpInside)
     newTagButton.setFAText(prefixText: "", icon: FAType.FATag, postfixText: " add new tag!", size: 16, forState: .Normal)
-    newTagButton.sizeToFit()
     newTagButton.tag = 10005
     self.view.addSubview(newTagButton)
+    self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: tagHeight))
+    self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Width, relatedBy: .GreaterThanOrEqual, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 126))
   }
   
   func displayTagAlert() {
     let alertConfig = MMAlertViewConfig.globalConfig()
+    alertConfig.defaultConfig()
     alertConfig.defaultTextConfirm = "I WILL!"
     alertConfig.defaultTextCancel = "You Won't"
-    alertConfig.backgroundColor = UIColor.flatWhiteColor()
-    alertConfig.titleColor = UIColor.flatTealColor()
-    alertConfig.detailColor = UIColor.flatTealColor()
-    alertConfig.splitColor = UIColor.flatBlueColor()
-    alertConfig.itemNormalColor = UIColor.flatTealColor()
-    alertConfig.itemHighlightColor = UIColor.flatTealColor()
-    
     let alertView = MMAlertView.init(inputTitle: "New Tag", detail: self.displayGifViewModel.alertDetail, placeholder: "lingo here..", handler: {  tagText in
       if (tagText.characters.count > 2) {
         self.displayGifViewModel.startCreateTagSignalRequest(tagText.lowercaseString)
@@ -118,6 +126,7 @@ class DisplayViewController: UIViewController {
        
       }
     })
+
     alertView.attachedView = self.view
     alertView.show()
   }
@@ -128,6 +137,7 @@ class DisplayViewController: UIViewController {
       let label = PaddedTagLabel.init(text: tag.name)
       label.setFAText(prefixText: "", icon: FAType.FATag, postfixText: " \(label.text!)", size: 16)
       self.view.addSubview(label)
+      self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: tagHeight))
       label.setNeedsDisplay()
       self.tagLabels?.append(label)
     }

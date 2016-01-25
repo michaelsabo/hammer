@@ -13,7 +13,6 @@ class ImageCell: UICollectionViewCell {
 	
 	var hasLoaded = false
 	
-	
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     initialize()
@@ -25,15 +24,17 @@ class ImageCell: UICollectionViewCell {
     self.userInteractionEnabled = false
   }
   
-  func setImage(image: NSData?) {
-    if let data = image {
-      self.imageView.image = UIImage(data: data)
-      self.imageView.layer.masksToBounds = true
-      self.imageView.layer.cornerRadius = 10.0
-      hasLoaded = true
-      self.userInteractionEnabled = true
+  func setImage(data: NSData?) {
+    if let imageData = data {
+      if let image = UIImageJPEGRepresentation(UIImage(data: imageData)!, 0.1) {
+        self.imageView.image = UIImage(data: image)
+        self.imageView.layer.masksToBounds = true
+        self.imageView.layer.cornerRadius = 10.0
+        self.imageView.layer.borderWidth = 0.6
+        self.imageView.layer.borderColor = ColorThemes.getOutlineColor().CGColor
+        hasLoaded = true
+        self.userInteractionEnabled = true
+      }
     }
-
-  }
-	
+  }	
 }

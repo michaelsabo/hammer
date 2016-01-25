@@ -1,27 +1,27 @@
 PODS:
-  - Alamofire (3.1.4)
+  - Alamofire (3.1.5)
   - ChameleonFramework/Default (2.0.6)
   - ChameleonFramework/Swift (2.0.6):
     - ChameleonFramework/Default
-  - Crashlytics (3.4.1):
-    - Fabric (~> 1.6.0)
-  - Fabric (1.6.1)
+  - Crashlytics (3.6.0):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.4)
   - Font-Awesome-Swift (1.4.5)
-  - Masonry (0.6.3)
-  - MMPopupView (1.5.2):
+  - Masonry (0.6.4)
+  - MMPopupView (1.6.1):
     - Masonry
-  - Nimble (3.0.0)
-  - NVActivityIndicatorView (2.2)
+  - Nimble (3.1.0)
+  - NVActivityIndicatorView (2.3)
   - Quick (0.8.0)
-  - ReactiveCocoa (4.0.4-alpha-4):
-    - ReactiveCocoa/UI (= 4.0.4-alpha-4)
+  - ReactiveCocoa (4.0.0-RC.1):
+    - ReactiveCocoa/UI (= 4.0.0-RC.1)
     - Result (~> 1.0)
-  - ReactiveCocoa/Core (4.0.4-alpha-4):
+  - ReactiveCocoa/Core (4.0.0-RC.1):
     - ReactiveCocoa/no-arc
     - Result (~> 1.0)
-  - ReactiveCocoa/no-arc (4.0.4-alpha-4):
+  - ReactiveCocoa/no-arc (4.0.0-RC.1):
     - Result (~> 1.0)
-  - ReactiveCocoa/UI (4.0.4-alpha-4):
+  - ReactiveCocoa/UI (4.0.0-RC.1):
     - ReactiveCocoa/Core
     - Result (~> 1.0)
   - Result (1.0.1)
@@ -33,34 +33,39 @@ DEPENDENCIES:
   - Crashlytics
   - Fabric
   - Font-Awesome-Swift
-  - MMPopupView
-  - Nimble (= 3.0.0)
+  - MMPopupView (from `https://github.com/michaelsabo/MMPopupView`)
+  - Nimble
   - NVActivityIndicatorView
   - Quick (~> 0.8.0)
-  - ReactiveCocoa (= 4.0.4-alpha-4)
+  - ReactiveCocoa (= 4.0.0-RC.1)
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
 
 EXTERNAL SOURCES:
+  MMPopupView:
+    :git: https://github.com/michaelsabo/MMPopupView
   SwiftyJSON:
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 CHECKOUT OPTIONS:
+  MMPopupView:
+    :commit: cc30667441156621f90cc5fd0415d523c99802f3
+    :git: https://github.com/michaelsabo/MMPopupView
   SwiftyJSON:
-    :commit: 8e618c8baf6323a5079c6549bb38d48357b31630
+    :commit: 929539eb6a3304eaa9153ca44041a78b85bf2ee5
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 SPEC CHECKSUMS:
-  Alamofire: fbc829692f351fa1d8a31dd75fd7f7f56fea31fb
+  Alamofire: 5f730ba29fd113b7ddd71c1e65d0c630acf5d7b0
   ChameleonFramework: a6b466873ff9a4ce3a5196c20bccf1a97ad9f446
-  Crashlytics: 41574a245bc6ae10c55d57f385ebd2004e5bee05
-  Fabric: bf0ceb04e7c924090efc5f8c55e4fbcca189e0a0
+  Crashlytics: e4e8d02914f2608fbc7bf42b1a7af838b0db67a2
+  Fabric: ed41fd62173c6bdea24ab02c9d7707161eabb750
   Font-Awesome-Swift: 0af30357ab68dbcfa2d211254a5c11a158261112
-  Masonry: ff105a956abcd19a618b2028b121cb638d7a8e2f
-  MMPopupView: 75f59b4c6d256414bf3da4534cf5e14eef84d01f
-  Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
-  NVActivityIndicatorView: 328789acf506700c90b288dba3e9975447763a16
+  Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
+  MMPopupView: 42daf6d1a2956b23c1dd8d45f51131cfe5091be5
+  Nimble: 79d40f4d69d47314229bbabacaa02b8838c779b9
+  NVActivityIndicatorView: c7ef25ef527ab5e51b00322cb1ddd58681bcf2a3
   Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
-  ReactiveCocoa: e459ea92099447802df20c4735e31e8139b06094
+  ReactiveCocoa: 2b0f654beb7642b82cfd3fdb845205ae9889422c
   Result: caef80340451e1f07492fa1e89117f83613bce24
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 

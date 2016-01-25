@@ -11,6 +11,7 @@ import Foundation
 
 private let numberOfTagsAdded = "numberOfTagsAdded"
 private let numberOfShares = "numberOfShares"
+private let darkEnabled = "darkThemeEnabled"
 
 class UserDefaults {
   
@@ -35,5 +36,13 @@ class UserDefaults {
   class func incrementTotalShares() {
     let newTotal = totalShares + 1
     NSUserDefaults.standardUserDefaults().setInteger(newTotal, forKey: numberOfShares)
+  }
+  
+  class var darkThemeEnabled : Bool {
+    get {
+      return NSUserDefaults.standardUserDefaults().boolForKey(darkEnabled)
+    } set {
+      NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: darkEnabled)
+    }
   }
 }

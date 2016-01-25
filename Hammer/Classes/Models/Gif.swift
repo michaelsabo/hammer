@@ -40,6 +40,7 @@ class Gif: NSObject {
 	var index: Int!
 	var gifData: NSData?
 	var thumbnailData: NSData?
+  var showAnimation:Bool = true
 	
 	override init() {
 		id = 0
@@ -69,23 +70,6 @@ class Gif: NSObject {
       return self.id.hashValue
     }
   }
-
-	class func getThumbnailImageForGif(gif: Gif, completionHandler: (Gif?, Bool, NSError?) -> Void) {
-		Alamofire.request(.GET, gif.thumbnailUrl)
-			.responseData { response in
-				if (response.result.isSuccess) {
-					if let data = response.result.value {
-            let compressed = UIImageJPEGRepresentation(UIImage(data: data)!, 0.10)!
-						gif.thumbnailData = compressed
-						completionHandler(gif, response.result.isSuccess, nil)
-						return
-					}
-				} else {
-					completionHandler(nil, response.result.isSuccess, response.result.error)
-				}
-		}
-	}
-  
   
 }
 

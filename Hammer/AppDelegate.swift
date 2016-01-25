@@ -19,7 +19,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		// Override point for customization after application launch.
-    Fabric.with([Crashlytics.self])
+    window = UIWindow(frame: UIScreen.mainScreen().bounds)
+    
+    let controller = HomeViewController(nibName: "HomeViewController", bundle: nil)
+    let navController = UINavigationController.init(rootViewController: controller)
+    self.window?.rootViewController = navController
+    window?.makeKeyAndVisible()
+    UIApplication.sharedApplication().statusBarStyle = .LightContent
+//    Fabric.with([Crashlytics.self])
 		return true
 	}
 

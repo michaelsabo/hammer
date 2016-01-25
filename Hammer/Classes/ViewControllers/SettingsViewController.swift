@@ -12,7 +12,7 @@ class SettingsViewController : UIViewController, UINavigationBarDelegate, UINavi
 		
   let cellIdentifier = "tableCell"
   
-  @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var tableViewOutlet: UITableView!
   
   let settingsViewModel : SettingsViewModel = {
     return SettingsViewModel()
@@ -20,11 +20,20 @@ class SettingsViewController : UIViewController, UINavigationBarDelegate, UINavi
   
   override func viewDidLoad() {
     self.title = "Settings"
-    self.configureNavigationBar()
     let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "removeViewController")
 		navigationController?.navigationItem.leftBarButtonItems = [doneButton]
     self.navigationItem.leftBarButtonItem = doneButton
+    loadColorTheme()
     super.viewDidLoad()
+    self.settingsViewModel.changeThemeSignal.observeNext({ [weak self] darkTheme in
+      self?.loadColorTheme()
+    })
+  }
+  
+  func loadColorTheme() {
+    self.configureNavigationBar()
+    self.tableViewOutlet.backgroundColor = ColorThemes.getBackgroundColor()
+    self.tableViewOutlet.reloadData()
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -41,6 +50,11 @@ class SettingsViewController : UIViewController, UINavigationBarDelegate, UINavi
     return settingsViewModel.titleForSection(section)
   }
   
+  func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+    let headerView = view as! UITableViewHeaderFooterView
+    headerView.textLabel?.textColor = ColorThemes.tableViewHeaderTextColor()
+  }
+  
   
   func numberOfSectionsInTableView(tableView: UITableView) -> Int {
     return settingsViewModel.numberOfSections
@@ -51,16 +65,18 @@ class SettingsViewController : UIViewController, UINavigationBarDelegate, UINavi
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = UITableViewCell.init()
-    cell.textLabel?.text = settingsViewModel.titleForSectionAndRow(indexPath)
+    var cell = UITableViewCell.init()
+    cell = settingsViewModel.cellForSectionAndRow(indexPath, cell: cell)
     return cell
   }
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    let licVC = LicensesViewController()
+    if (indexPath.section == 1) {
+      let licVC = LicensesViewController()
+      tableView.deselectRowAtIndexPath(indexPath, animated: true)
+      self.navigationController?.pushViewController(licVC, animated: true)
+    }
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    self.navigationController?.pushViewController(licVC, animated: true)
   }
-  
   
 }

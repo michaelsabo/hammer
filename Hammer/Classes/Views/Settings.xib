@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SettingsViewController" customModule="Hammer" customModuleProvider="target">
             <connections>
-                <outlet property="tableView" destination="sek-Ki-US7" id="WdV-AJ-ETt"/>
+                <outlet property="tableViewOutlet" destination="sek-Ki-US7" id="Aaf-xF-ph0"/>
                 <outlet property="view" destination="iN0-l3-epB" id="cv1-6i-u5q"/>
             </connections>
         </placeholder>
@@ -17,7 +16,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="sek-Ki-US7">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="591"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="2pO-fY-KaX"/>
@@ -29,8 +28,8 @@
             <constraints>
                 <constraint firstItem="sek-Ki-US7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="HV1-rw-NUT"/>
                 <constraint firstItem="sek-Ki-US7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="OTd-g2-bIA"/>
-                <constraint firstAttribute="bottom" secondItem="sek-Ki-US7" secondAttribute="bottom" constant="9" id="RHd-Rd-Tyx"/>
                 <constraint firstAttribute="trailing" secondItem="sek-Ki-US7" secondAttribute="trailing" id="oRV-66-LqA"/>
+                <constraint firstAttribute="bottom" secondItem="sek-Ki-US7" secondAttribute="bottom" id="tlg-cM-Ivk"/>
             </constraints>
         </view>
     </objects>

@@ -12,7 +12,8 @@ import GameKit
 
 class HomeViewModel : NSObject {
 	
-  let title: String = "Gallery"
+  let title: String = "HAM"
+  let cellHeight:Int = 55
 	let searchText = MutableProperty<String>("")
 	let isSearching = MutableProperty<Bool>(false)
 	
@@ -35,7 +36,6 @@ class HomeViewModel : NSObject {
     self.isSearchingSignal = searchingSignal
     self.isSearchingObserver = searchingObserver
 		super.init()
-
     getGifs()
 		
 		tagService.getAllTags()
@@ -62,7 +62,7 @@ class HomeViewModel : NSObject {
         response in
         if (response.gifs.count > 0) {
           self.gifCollection.value = response.gifs
-          self.gifsForDisplay.value = response.gifs
+          self.gifsForDisplay.value = self.gifCollection.value
         }
       })
       .start()
@@ -91,7 +91,7 @@ class HomeViewModel : NSObject {
   }()
 	
 	func getGifsForTagSearch() -> Void {
-		gifService.getGifsForTagSearchResponse(self.searchText.value.replaceSpaces())
+		gifService.getGifsForTagSearchResponse(self.searchText.value.lowercaseString)
 			.on(next: {
 					response in
 					if (response.gifs.count > 0) {
@@ -105,15 +105,14 @@ class HomeViewModel : NSObject {
   func tagTableViewCellHeight() -> Int {
     var tableHeight: Int
     if (self.foundTags.value.count >= 7) {
-      tableHeight = 35 * 7
+      tableHeight = cellHeight * 7
     } else {
-      tableHeight = self.foundTags.value.count * 35
+      tableHeight = self.foundTags.value.count * cellHeight
     }
     return tableHeight;
   }
-
-  func displayCellForGifs(indexPath indexPath: NSIndexPath, cell: ImageCell) -> ImageCell {
-    //TODO refactor this
+  
+  func displayThumbnailForGif(indexPath indexPath: NSIndexPath, cell: ImageCell) -> ImageCell {
     if (indexPath.item < self.gifsForDisplay.value.count) {
       let gif = self.gifsForDisplay.value[indexPath.item]
       if let data = gif.thumbnailData {
@@ -122,35 +121,26 @@ class HomeViewModel : NSObject {
         return cell
       } else {
         cell.imageView.image = UIImage()
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
-          Gif.getThumbnailImageForGif(gif, completionHandler: { [unowned self] (responseGif, isSuccess, error) in
-            if (isSuccess && !self.isSearching.value) {
-              if let index = self.gifsForDisplay.value.indexOf(responseGif!) {
-                cell.setImage(self.gifsForDisplay.value[index].thumbnailData)
-              }
-            } else if (isSuccess && self.isSearching.value) {
-              if let index = self.gifsForDisplay.value.indexOf(responseGif!) {
-                cell.setImage(self.gifsForDisplay.value[index].thumbnailData)
-              }
-            } else {
-              cell.userInteractionEnabled = false
-            }
-            })
-        }
+        gifService.retrieveThumbnailImageFor(gif: gif)
+          .on(next: { [weak cell] responseGif in
+            cell?.setImage(responseGif.thumbnailData)
+        }).start()
+
       }
     }
     return cell
   }
   
-  func mixupGifArray() {
-    if #available(iOS 9.0, *) {
-      let newArray = GKRandomSource.sharedRandom().arrayByShufflingObjectsInArray(self.gifsForDisplay.value) as! [Gif]
-      self.gifCollection.value = newArray
-      self.gifsForDisplay.value = newArray
-    } else {
-        // Fallback on earlier versions
+  func resetAnimationFlag() {
+    for g in self.gifCollection.value {
+      g.showAnimation = true
     }
-    
+  }
+  
+  func mixupGifArray() {
+    resetAnimationFlag()
+    let newArray = GKRandomSource.sharedRandom().arrayByShufflingObjectsInArray(self.gifsForDisplay.value) as! [Gif]
+    self.gifsForDisplay.value = newArray
   }
 }
 
