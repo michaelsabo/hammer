@@ -26,7 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.window?.rootViewController = navController
     window?.makeKeyAndVisible()
     UIApplication.sharedApplication().statusBarStyle = .LightContent
-//    Fabric.with([Crashlytics.self])
+    UserDefaults.registerUserDefaults()
+    Fabric.with([Crashlytics.self])
 		return true
 	}
 

@@ -12,6 +12,7 @@ import ReactiveCocoa
 import ChameleonFramework
 import NVActivityIndicatorView
 import Font_Awesome_Swift
+import MMPopupView
 
 class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UICollectionViewDelegateFlowLayout {
 	
@@ -44,6 +45,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     self.view.backgroundColor = ColorThemes.getBackgroundColor()
     self.configureNavigationBar()
     self.viewCollection.backgroundColor = ColorThemes.getBackgroundColor()
+    showUpdateAlert()
   }
 	
 	func setupBindings() {
@@ -234,6 +236,20 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     let settingsController = SettingsViewController(nibName: "Settings", bundle: NSBundle.mainBundle())
     let navController = UINavigationController.init(rootViewController: settingsController)
     self.presentViewController(navController, animated: true, completion: nil)
+  }
+  
+  func showUpdateAlert() {
+    if (UserDefaults.showUpdateAlert) {
+      let alertConfig = MMAlertViewConfig.globalConfig()
+      alertConfig.defaultConfig()
+      alertConfig.defaultTextOK = "OK"
+      let detailText = " - New Dark Theme in Settings \n - Shake Device to Randomize Gifs \n - Favorites and Keyboard Coming Soon!"
+      let alertView = MMAlertView.init(confirmTitle: "Update", detail:detailText)
+      alertView.showCompletionBlock = { _, finished in
+        UserDefaults.showUpdateAlert = false
+      }
+      alertView.show()
+    }
   }
   
   func updateSearchViews() {

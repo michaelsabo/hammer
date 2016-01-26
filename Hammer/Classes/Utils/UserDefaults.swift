@@ -11,7 +11,8 @@ import Foundation
 
 private let numberOfTagsAdded = "numberOfTagsAdded"
 private let numberOfShares = "numberOfShares"
-private let darkEnabled = "darkThemeEnabled"
+private let kDarkEnabled = "darkThemeEnabled"
+private let kShowUpdateAlert = "showUpdateAlert"
 
 class UserDefaults {
   
@@ -40,9 +41,22 @@ class UserDefaults {
   
   class var darkThemeEnabled : Bool {
     get {
-      return NSUserDefaults.standardUserDefaults().boolForKey(darkEnabled)
+      return NSUserDefaults.standardUserDefaults().boolForKey(kDarkEnabled)
     } set {
-      NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: darkEnabled)
+      NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: kDarkEnabled)
     }
+  }
+  
+  class var showUpdateAlert : Bool {
+    get {
+      return NSUserDefaults.standardUserDefaults().boolForKey(kShowUpdateAlert)
+    } set {
+      NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: kShowUpdateAlert)
+    }
+  }
+  
+  class func registerUserDefaults() {
+    let dictionary = [kShowUpdateAlert: true]
+    NSUserDefaults.standardUserDefaults().registerDefaults(dictionary)
   }
 }
