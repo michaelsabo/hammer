@@ -57,7 +57,7 @@ class ColorThemes {
     if (UserDefaults.darkThemeEnabled) {
       return  UIColor.flatWhiteColorDark()
     } else {
-      return UIColor.clearColor()
+      return UIColor.flatTealColor()
     }
   }
   

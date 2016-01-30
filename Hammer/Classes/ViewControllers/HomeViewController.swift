@@ -123,23 +123,72 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     guard cell.hasLoaded else {
       return
     }
-    if (self.homeViewModel.gifsForDisplay.value[indexPath.item].showAnimation && isScrollingDown) {
-      cell.imageView.transform = CGAffineTransformMakeScale(0.4, 0.4)
-
-      UIView.animateKeyframesWithDuration(0.5, delay: 0, options: [], animations: { [weak cell] in
-        UIView.addKeyframeWithRelativeStartTime(0.0, relativeDuration: 0.1, animations: { [weak cell] in
-          cell?.imageView.transform = CGAffineTransformMakeScale(0.6, 0.6)
-        })
-        UIView.addKeyframeWithRelativeStartTime(0.1, relativeDuration: 0.2, animations: { [weak cell] in
-          cell?.imageView.transform = CGAffineTransformMakeScale(0.8, 0.8)
-        })
-        UIView.addKeyframeWithRelativeStartTime(0.3, relativeDuration: 0.2, animations: { [weak cell] in
-          cell?.imageView.transform = CGAffineTransformMakeScale(1.0, 1.0)
-        })
-      }, completion: { [weak self] (finished: Bool) in
-        self?.homeViewModel.gifsForDisplay.value[indexPath.item].showAnimation = false
-      })
-    }
+    let gif = self.homeViewModel.gifsForDisplay.value[indexPath.item]
+    if (gif.showAnimation && isScrollingDown) {
+      
+      switch indexPath.item % 3 {
+      case 0:
+        cell.imageView.transform = CGAffineTransformMakeTranslation(-20, 0)
+        UIView.animateKeyframesWithDuration(0.5, delay: 0, options: [], animations: { [weak cell] in
+          UIView.addKeyframeWithRelativeStartTime(0.0, relativeDuration: 0.2, animations: { [weak cell] in
+            cell?.imageView.transform = CGAffineTransformMakeTranslation(-15, 0)
+            })
+          UIView.addKeyframeWithRelativeStartTime(0.1, relativeDuration: 0.2, animations: { [weak cell] in
+            cell?.imageView.transform = CGAffineTransformMakeTranslation(-9, 0)
+            })
+          UIView.addKeyframeWithRelativeStartTime(0.2, relativeDuration: 0.2, animations: { [weak cell] in
+            cell?.imageView.transform = CGAffineTransformMakeTranslation(-6, 0)
+            })
+          UIView.addKeyframeWithRelativeStartTime(0.3, relativeDuration: 0.1, animations: { [weak cell] in
+            cell?.imageView.transform = CGAffineTransformMakeTranslation(0, 0)
+            })
+          }, completion: { [weak self] (finished: Bool) in
+            self?.homeViewModel.gifsForDisplay.value[indexPath.item].showAnimation = false
+          })
+        break
+      case 1:
+        cell.imageView.transform = CGAffineTransformMakeScale(0.5, 0.5)
+        
+        UIView.animateKeyframesWithDuration(0.5, delay: 0, options: [], animations: { [weak cell] in
+          UIView.addKeyframeWithRelativeStartTime(0.0, relativeDuration: 0.1, animations: { [weak cell] in
+            cell?.imageView.transform = CGAffineTransformMakeScale(0.7, 0.7)
+            })
+          UIView.addKeyframeWithRelativeStartTime(0.1, relativeDuration: 0.2, animations: { [weak cell] in
+            cell?.imageView.transform = CGAffineTransformMakeScale(0.8, 0.8)
+            })
+          UIView.addKeyframeWithRelativeStartTime(0.3, relativeDuration: 0.2, animations: { [weak cell] in
+            cell?.imageView.transform = CGAffineTransformMakeScale(1.0, 1.0)
+            })
+          }, completion: { [weak self] (finished: Bool) in
+            self?.homeViewModel.gifsForDisplay.value[indexPath.item].showAnimation = false
+          })
+        break
+      case 2:
+        cell.imageView.transform = CGAffineTransformMakeTranslation(20, 0)
+        
+        UIView.animateKeyframesWithDuration(0.5, delay: 0, options: [], animations: { [weak cell] in
+          UIView.addKeyframeWithRelativeStartTime(0.0, relativeDuration: 0.1, animations: { [weak cell] in
+            cell?.imageView.transform = CGAffineTransformMakeTranslation(15, 0)
+            })
+          UIView.addKeyframeWithRelativeStartTime(0.1, relativeDuration: 0.1, animations: { [weak cell] in
+            cell?.imageView.transform = CGAffineTransformMakeTranslation(9, 0)
+            })
+          UIView.addKeyframeWithRelativeStartTime(0.2, relativeDuration: 0.1, animations: { [weak cell] in
+            cell?.imageView.transform = CGAffineTransformMakeTranslation(6, 0)
+            })
+          UIView.addKeyframeWithRelativeStartTime(0.3, relativeDuration: 0.2, animations: { [weak cell] in
+            cell?.imageView.transform = CGAffineTransformMakeTranslation(0, 0)
+            })
+          }, completion: { [weak self] (finished: Bool) in
+            self?.homeViewModel.gifsForDisplay.value[indexPath.item].showAnimation = false
+          })
+        break
+      default:
+        break
+        
+      }
+      
+      }
     self.homeViewModel.gifsForDisplay.value[indexPath.item].showAnimation = false
   }
 
