@@ -9,6 +9,7 @@
 import UIKit
 import ReactiveCocoa
 import GameKit
+import Result
 
 class HomeViewModel : NSObject {
 	

@@ -10,6 +10,7 @@ import Quick
 import Nimble
 import ReactiveCocoa
 import SwiftyJSON
+import Result
 
 class DisplayViewModelSpec: QuickSpec {
   

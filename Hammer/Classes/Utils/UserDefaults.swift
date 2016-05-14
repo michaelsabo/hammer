@@ -56,7 +56,7 @@ class UserDefaults {
   }
   
   class func registerUserDefaults() {
-    let dictionary = [kShowUpdateAlert: true]
+    let dictionary = [kShowUpdateAlert: true, kDarkEnabled: true]
     NSUserDefaults.standardUserDefaults().registerDefaults(dictionary)
   }
 }

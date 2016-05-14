@@ -10,6 +10,7 @@ import Quick
 import Nimble
 import ReactiveCocoa
 import SwiftyJSON
+import Result
 
 class HomeViewModelSpec: QuickSpec {
   
@@ -20,7 +21,7 @@ class HomeViewModelSpec: QuickSpec {
 
         
         context("searching for gifs") {
-          let (producer, observer) = SignalProducer<String, NoError>.buffer()
+          let (producer, observer) = SignalProducer<String, NoError>.buffer(5)
           producer.start()
           homeViewModel.searchText <~ producer
           

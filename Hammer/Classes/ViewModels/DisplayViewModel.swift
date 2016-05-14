@@ -9,6 +9,7 @@
 import Foundation
 import ReactiveCocoa
 import MobileCoreServices
+import Result
 
 class DisplayViewModel : NSObject {
 	
@@ -52,7 +53,7 @@ class DisplayViewModel : NSObject {
     self.createTagRequestSignal = createTagSignal
     self.createTagRequestObserver = createTagObserver
 
-    let (stopSignal, stopObserver) = SignalProducer<(), NoError>.buffer()
+    let (stopSignal, stopObserver) = SignalProducer<(), NoError>.buffer(5)
     self.stopSignals = stopSignal
     self.stopSignalObserver = stopObserver
 

@@ -21,7 +21,6 @@
 		274C1EA41BE5DCFA007B1D8A /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274C1EA31BE5DCFA007B1D8A /* AppFont.swift */; };
 		275212B51BEF89A300BE3FE9 /* SearchGifsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275212B41BEF89A300BE3FE9 /* SearchGifsTableView.swift */; };
 		275212B61BEF89A300BE3FE9 /* SearchGifsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275212B41BEF89A300BE3FE9 /* SearchGifsTableView.swift */; };
-		275C39881BE702DC0028B4C6 /* jif_me.png in Resources */ = {isa = PBXBuildFile; fileRef = 275C39851BE702DC0028B4C6 /* jif_me.png */; };
 		275C39891BE702DC0028B4C6 /* jif_me.png in Resources */ = {isa = PBXBuildFile; fileRef = 275C39851BE702DC0028B4C6 /* jif_me.png */; };
 		275C398A1BE702DC0028B4C6 /* jif_me.png in Resources */ = {isa = PBXBuildFile; fileRef = 275C39851BE702DC0028B4C6 /* jif_me.png */; };
 		275C398B1BE702DC0028B4C6 /* Licenses.txt in Resources */ = {isa = PBXBuildFile; fileRef = 275C39871BE702DC0028B4C6 /* Licenses.txt */; };
@@ -30,7 +29,6 @@
 		276569B51C0014280053A19A /* tag.json in Resources */ = {isa = PBXBuildFile; fileRef = 276569B41C0014280053A19A /* tag.json */; };
 		276C7FB31BC204EE0028DC0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FB21BC204EE0028DC0D /* AppDelegate.swift */; };
 		276C7FBD1BC204EE0028DC0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 276C7FBC1BC204EE0028DC0D /* Assets.xcassets */; };
-		276C7FC01BC204EE0028DC0D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 276C7FBE1BC204EE0028DC0D /* LaunchScreen.storyboard */; };
 		276C7FD61BC204EF0028DC0D /* HammerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FD51BC204EF0028DC0D /* HammerUITests.swift */; };
 		276C7FF91BC2097A0028DC0D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FF81BC2097A0028DC0D /* HomeViewController.swift */; };
 		276C7FFE1BC2116F0028DC0D /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FFD1BC2116F0028DC0D /* ImageCell.swift */; };
@@ -181,7 +179,6 @@
 		276C7FAF1BC204EE0028DC0D /* Hammer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hammer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		276C7FB21BC204EE0028DC0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		276C7FBC1BC204EE0028DC0D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		276C7FBF1BC204EE0028DC0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		276C7FC11BC204EE0028DC0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		276C7FC61BC204EE0028DC0D /* HammerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HammerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		276C7FCC1BC204EE0028DC0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -410,7 +407,6 @@
 				276C7FF11BC2092E0028DC0D /* Classes */,
 				2719DA371BCC9D3200BD02AD /* Frameworks */,
 				276C7FC11BC204EE0028DC0D /* Info.plist */,
-				276C7FBE1BC204EE0028DC0D /* LaunchScreen.storyboard */,
 			);
 			path = Hammer;
 			sourceTree = "<group>";
@@ -726,10 +722,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				276C7FC01BC204EE0028DC0D /* LaunchScreen.storyboard in Resources */,
 				279D22DF1C535BA900EDFA11 /* DisplayViewController.xib in Resources */,
 				27F1D73A1BE98DC10014F2AF /* Licenses.xib in Resources */,
-				275C39881BE702DC0028B4C6 /* jif_me.png in Resources */,
 				276C7FBD1BC204EE0028DC0D /* Assets.xcassets in Resources */,
 				27B6CFF11C533973008B66C4 /* ImageCell.xib in Resources */,
 				275C398B1BE702DC0028B4C6 /* Licenses.txt in Resources */,
@@ -1019,14 +1013,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		276C7FBE1BC204EE0028DC0D /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				276C7FBF1BC204EE0028DC0D /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 		2780FE4F1C25C74000653D49 /* MainInterface.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1059,6 +1045,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1105,6 +1092,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1128,16 +1116,16 @@
 			baseConfigurationReference = 57E0D0BB6577F1CE7A1D237C /* Pods-Hammer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_MODULE_DEBUGGING = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/Hammer",
 				);
 				INFOPLIST_FILE = Hammer/Info.plist;
@@ -1161,6 +1149,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Hammer/Classes/Objective-C/Hammer-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1169,15 +1158,15 @@
 			baseConfigurationReference = 59DC8D6AF48616A7006723F2 /* Pods-Hammer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_MODULE_DEBUGGING = NO;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEFINES_MODULE = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/Hammer",
 				);
 				INFOPLIST_FILE = Hammer/Info.plist;
@@ -1200,6 +1189,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Hammer/Classes/Objective-C/Hammer-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
