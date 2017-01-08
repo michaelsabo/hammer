@@ -113,7 +113,7 @@ class HomeViewModel : NSObject {
     return tableHeight;
   }
   
-  func displayThumbnailForGif(indexPath: IndexPath, cell: ImageCell) -> ImageCell {
+  func displayThumbnailForGif(_ indexPath: IndexPath, cell: ImageCell) -> ImageCell {
     if (indexPath.item < self.gifsForDisplay.value.count) {
       let gif = self.gifsForDisplay.value[indexPath.item]
       if let data = gif.thumbnailData {

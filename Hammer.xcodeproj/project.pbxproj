@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A3E3C9790D96858F752B5A7 /* Pods_Hammer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34793544C138749C45AFAAE0 /* Pods_Hammer.framework */; };
+		070A1C5C5ED62B37C1C98242 /* Pods_Hammer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 063C164C0BD35BBB7BC9DC3F /* Pods_Hammer.framework */; };
 		27040E8D1C55D9F400C7E1EF /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2733CB541C13595F00217645 /* UserDefaults.swift */; };
 		2711AE3D1BDB2AFB000C47B2 /* CollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711AE3C1BDB2AFB000C47B2 /* CollectionViewLayout.swift */; };
 		27197E181BC239DC00525F33 /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 27197E171BC239DC00525F33 /* UIImage+animatedGIF.m */; };
@@ -92,7 +92,7 @@
 		27F1D7441BE98E7A0014F2AF /* ColorThemes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F1D7411BE98E7A0014F2AF /* ColorThemes.swift */; };
 		27F3B3281BEE80BC00B94731 /* PaddedTagLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F3B3271BEE80BC00B94731 /* PaddedTagLabel.swift */; };
 		27F3B32B1BEE89CE00B94731 /* ScreenHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F3B32A1BEE89CE00B94731 /* ScreenHelpers.swift */; };
-		C2BC6701AC67B01269DCC88D /* Pods_HammerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72C5E4EEEC3A2DB3348C3332 /* Pods_HammerTests.framework */; };
+		66E16851DC47E0C97A37BD32 /* Pods_HammerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7527BC2B273AAD0BB17C3E27 /* Pods_HammerTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,6 +143,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		063C164C0BD35BBB7BC9DC3F /* Pods_Hammer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hammer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C04D6A1223740F96EDD2716 /* Pods-HammerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HammerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HammerTests/Pods-HammerTests.release.xcconfig"; sourceTree = "<group>"; };
 		27084BCF1BEEE21D009F77FE /* MockGifService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockGifService.swift; sourceTree = "<group>"; };
 		27084BD11BEEE2E8009F77FE /* MockTagService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockTagService.swift; sourceTree = "<group>"; };
 		2711AE3C1BDB2AFB000C47B2 /* CollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewLayout.swift; sourceTree = "<group>"; };
@@ -209,12 +211,10 @@
 		27F3B32A1BEE89CE00B94731 /* ScreenHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenHelpers.swift; sourceTree = "<group>"; };
 		27F3B32E1BEE961B00B94731 /* GifServiceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifServiceSpec.swift; sourceTree = "<group>"; };
 		27F3B3301BEEA7BC00B94731 /* TagServiceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagServiceSpec.swift; sourceTree = "<group>"; };
-		34793544C138749C45AFAAE0 /* Pods_Hammer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hammer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5558FB7B5B9E8DCD73121CB8 /* Pods-Hammer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hammer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hammer/Pods-Hammer.release.xcconfig"; sourceTree = "<group>"; };
-		5C22B63E799742AD43C6D328 /* Pods-HammerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HammerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HammerTests/Pods-HammerTests.debug.xcconfig"; sourceTree = "<group>"; };
-		72C5E4EEEC3A2DB3348C3332 /* Pods_HammerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HammerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		72FFB40F0627477AC5647A5B /* Pods-Hammer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hammer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hammer/Pods-Hammer.debug.xcconfig"; sourceTree = "<group>"; };
-		A2D979C89976193232D4B4F2 /* Pods-HammerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HammerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HammerTests/Pods-HammerTests.release.xcconfig"; sourceTree = "<group>"; };
+		5B0A751A63BA4A18F689650D /* Pods-Hammer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hammer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hammer/Pods-Hammer.debug.xcconfig"; sourceTree = "<group>"; };
+		7527BC2B273AAD0BB17C3E27 /* Pods_HammerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HammerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		791011BBBA5CD2FB46D81D73 /* Pods-HammerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HammerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HammerTests/Pods-HammerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E2C0C7D9BCDDBDA8FC5280BE /* Pods-Hammer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hammer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hammer/Pods-Hammer.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,7 +224,7 @@
 			files = (
 				27CD49B21BEF1FEE00586B4D /* UIKit.framework in Frameworks */,
 				27CD49B11BEF1FE800586B4D /* Foundation.framework in Frameworks */,
-				0A3E3C9790D96858F752B5A7 /* Pods_Hammer.framework in Frameworks */,
+				070A1C5C5ED62B37C1C98242 /* Pods_Hammer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,7 +232,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2BC6701AC67B01269DCC88D /* Pods_HammerTests.framework in Frameworks */,
+				66E16851DC47E0C97A37BD32 /* Pods_HammerTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,7 +361,7 @@
 				2780FE4C1C25C74000653D49 /* Ham-it */,
 				276C7FB01BC204EE0028DC0D /* Products */,
 				71F7D88780EDD987612499BA /* Frameworks */,
-				60EE2DAD99F04EF8434CA578 /* Pods */,
+				77C38361C4F82E71E48AA5D1 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -526,26 +526,26 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		60EE2DAD99F04EF8434CA578 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				72FFB40F0627477AC5647A5B /* Pods-Hammer.debug.xcconfig */,
-				5558FB7B5B9E8DCD73121CB8 /* Pods-Hammer.release.xcconfig */,
-				5C22B63E799742AD43C6D328 /* Pods-HammerTests.debug.xcconfig */,
-				A2D979C89976193232D4B4F2 /* Pods-HammerTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		71F7D88780EDD987612499BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				273994271BE5560900E4399C /* Foundation.framework */,
 				273994251BE555C600E4399C /* UIKit.framework */,
-				34793544C138749C45AFAAE0 /* Pods_Hammer.framework */,
-				72C5E4EEEC3A2DB3348C3332 /* Pods_HammerTests.framework */,
+				063C164C0BD35BBB7BC9DC3F /* Pods_Hammer.framework */,
+				7527BC2B273AAD0BB17C3E27 /* Pods_HammerTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		77C38361C4F82E71E48AA5D1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5B0A751A63BA4A18F689650D /* Pods-Hammer.debug.xcconfig */,
+				E2C0C7D9BCDDBDA8FC5280BE /* Pods-Hammer.release.xcconfig */,
+				791011BBBA5CD2FB46D81D73 /* Pods-HammerTests.debug.xcconfig */,
+				0C04D6A1223740F96EDD2716 /* Pods-HammerTests.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -555,7 +555,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 276C7FDA1BC204EF0028DC0D /* Build configuration list for PBXNativeTarget "Hammer" */;
 			buildPhases = (
-				19F1855FC078F36836A9D8D9 /* [CP] Check Pods Manifest.lock */,
+				2E0A0163D4F33C632057CF2A /* [CP] Check Pods Manifest.lock */,
 				276C7FAB1BC204EE0028DC0D /* Sources */,
 				276C7FAC1BC204EE0028DC0D /* Frameworks */,
 				276C7FAD1BC204EE0028DC0D /* Resources */,
@@ -564,8 +564,8 @@
 				27CE4A851BE6892700B62D64 /* ShellScript */,
 				2780FE591C25C74000653D49 /* Embed App Extensions */,
 				276DBAE31C298A02004539C8 /* ShellScript */,
-				EC9E637A32DDB3F162078DC0 /* [CP] Embed Pods Frameworks */,
-				B5EFFAEC62919902D853EED1 /* [CP] Copy Pods Resources */,
+				644673BAF23CF701F78D8E11 /* [CP] Embed Pods Frameworks */,
+				DF5707DE5A2C1D1078573ED2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -581,12 +581,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 276C7FDD1BC204EF0028DC0D /* Build configuration list for PBXNativeTarget "HammerTests" */;
 			buildPhases = (
-				36236E65C3168663318868D6 /* [CP] Check Pods Manifest.lock */,
+				0ECB8BE95875349EB2A83B29 /* [CP] Check Pods Manifest.lock */,
 				276C7FC21BC204EE0028DC0D /* Sources */,
 				276C7FC31BC204EE0028DC0D /* Frameworks */,
 				276C7FC41BC204EE0028DC0D /* Resources */,
-				F614F49BEC4D9E988ED7DB15 /* [CP] Embed Pods Frameworks */,
-				AD88ED34BB450A52E10F76E0 /* [CP] Copy Pods Resources */,
+				E272D57A75F8DF12760B2EDE /* [CP] Embed Pods Frameworks */,
+				0BD7CFA9FF7F0C96420874F3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -650,6 +650,7 @@
 					};
 					276C7FC51BC204EE0028DC0D = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0820;
 						TestTargetID = 276C7FAE1BC204EE0028DC0D;
 					};
 					276C7FD01BC204EF0028DC0D = {
@@ -659,6 +660,7 @@
 					2780FE4A1C25C74000653D49 = {
 						CreatedOnToolsVersion = 7.1.1;
 						DevelopmentTeam = N9TVD38558;
+						LastSwiftMigration = 0820;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -735,7 +737,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		19F1855FC078F36836A9D8D9 /* [CP] Check Pods Manifest.lock */ = {
+		0BD7CFA9FF7F0C96420874F3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HammerTests/Pods-HammerTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0ECB8BE95875349EB2A83B29 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -789,7 +806,7 @@
 			shellPath = /bin/sh;
 			shellScript = "./Pods/Fabric.framework/run b0a759f1abeb8628534dc5eb8f88bf5abd8bf30f 5f3711b839efb38bdede354c06b7a2dd09e080cb878ee43422f36ce3a7fae6db";
 		};
-		36236E65C3168663318868D6 /* [CP] Check Pods Manifest.lock */ = {
+		2E0A0163D4F33C632057CF2A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -804,37 +821,7 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		AD88ED34BB450A52E10F76E0 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HammerTests/Pods-HammerTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B5EFFAEC62919902D853EED1 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hammer/Pods-Hammer-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EC9E637A32DDB3F162078DC0 /* [CP] Embed Pods Frameworks */ = {
+		644673BAF23CF701F78D8E11 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -849,7 +836,22 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hammer/Pods-Hammer-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F614F49BEC4D9E988ED7DB15 /* [CP] Embed Pods Frameworks */ = {
+		DF5707DE5A2C1D1078573ED2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hammer/Pods-Hammer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E272D57A75F8DF12760B2EDE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1082,7 +1084,7 @@
 		};
 		276C7FDB1BC204EF0028DC0D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 72FFB40F0627477AC5647A5B /* Pods-Hammer.debug.xcconfig */;
+			baseConfigurationReference = 5B0A751A63BA4A18F689650D /* Pods-Hammer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1125,7 +1127,7 @@
 		};
 		276C7FDC1BC204EF0028DC0D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5558FB7B5B9E8DCD73121CB8 /* Pods-Hammer.release.xcconfig */;
+			baseConfigurationReference = E2C0C7D9BCDDBDA8FC5280BE /* Pods-Hammer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1166,7 +1168,7 @@
 		};
 		276C7FDE1BC204EF0028DC0D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5C22B63E799742AD43C6D328 /* Pods-HammerTests.debug.xcconfig */;
+			baseConfigurationReference = 791011BBBA5CD2FB46D81D73 /* Pods-HammerTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1179,13 +1181,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.flyingdinos.HammerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Hammer/Classes/Objective-C/Hammer-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hammer.app/Hammer";
 			};
 			name = Debug;
 		};
 		276C7FDF1BC204EF0028DC0D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A2D979C89976193232D4B4F2 /* Pods-HammerTests.release.xcconfig */;
+			baseConfigurationReference = 0C04D6A1223740F96EDD2716 /* Pods-HammerTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1198,6 +1201,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.flyingdinos.HammerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Hammer/Classes/Objective-C/Hammer-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hammer.app/Hammer";
 			};
 			name = Release;
@@ -1245,6 +1249,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1267,6 +1272,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

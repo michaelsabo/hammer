@@ -50,7 +50,7 @@ class GifService {
 		}
 	}
 	
-	func retrieveThumbnailImageFor(gif: Gif) -> SignalProducer<Gif, NSError> {
+	func retrieveThumbnailImageFor(_ gif: Gif) -> SignalProducer<Gif, NSError> {
 		return SignalProducer { observer, disposable in
 			Alamofire.request(.GET, gif.thumbnailUrl)
 				.responseData { response in
@@ -67,7 +67,7 @@ class GifService {
 		}
 	}
 	
-	func retrieveImageDataFor(gif: Gif) -> SignalProducer<NSData?, NSError> {
+	func retrieveImageDataFor(_ gif: Gif) -> SignalProducer<NSData?, NSError> {
 		return SignalProducer { observer, disposable in
 			Alamofire.request(.GET, gif.url)
 				.responseData { response in
@@ -83,7 +83,7 @@ class GifService {
 		}
 	}
   
-  func addGif(id : String) -> SignalProducer<Bool, NSError> {
+  func addGif(_ id : String) -> SignalProducer<Bool, NSError> {
     return SignalProducer { 	observer, disposable in
       Alamofire.request(Router.AddGif(id))
         .responseJSON { response in

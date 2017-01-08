@@ -23,7 +23,7 @@ class MockGifService : GifService {
     }
   }
   
-  override func getGifsForTagSearchResponse(query: String) -> SignalProducer<Gifs, NSError> {
+  override func getGifsForTagSearchResponse(_ query: String) -> SignalProducer<Gifs, NSError> {
     return SignalProducer { observer, disposable in
     	let singleGif = Gifs()
       singleGif.gifs = [self.gifResponse.gifs[0]]
@@ -32,7 +32,7 @@ class MockGifService : GifService {
     }
   }
   
-  override func retrieveImageDataFor(gif gif: Gif) -> SignalProducer<NSData?, NSError> {
+  override func retrieveImageDataFor(gif: Gif) -> SignalProducer<NSData?, NSError> {
     return SignalProducer { observer, disposable in
       print("in here")
       let singleGif = self.gifResponse.gifs[0]
@@ -41,7 +41,7 @@ class MockGifService : GifService {
     }
   }
   
-  override func retrieveThumbnailImageFor(gif gif: Gif) -> SignalProducer<Gif, NSError> {
+  override func retrieveThumbnailImageFor(gif: Gif) -> SignalProducer<Gif, NSError> {
     return SignalProducer { observer, disposable in
       let singleGif = self.gifResponse.gifs[0]
       observer.sendNext(singleGif)

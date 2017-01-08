@@ -18,17 +18,17 @@ class ActionViewController: UIViewController {
   override func viewDidLoad() {
       super.viewDidLoad()
   
-    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "done")
+    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(ActionViewController.done))
     
     if let inputItem = extensionContext!.inputItems.first as? NSExtensionItem {
       if let itemProvider = inputItem.attachments?.first as? NSItemProvider {
-        itemProvider.loadItemForTypeIdentifier(kUTTypePropertyList as String, options: nil) { [unowned self] (dict, error) in
+        itemProvider.loadItem(forTypeIdentifier: kUTTypePropertyList as String, options: nil) { [unowned self] (dict, error) in
           let itemDictionary = dict as! NSDictionary
           let javaScriptValues = itemDictionary[NSExtensionJavaScriptPreprocessingResultsKey] as! NSDictionary
           
           self.url = javaScriptValues["URL"] as! String
           
-          dispatch_async(dispatch_get_main_queue()) {
+          DispatchQueue.main.async {
             self.title = "Ham-it"
           }
         }
@@ -37,11 +37,11 @@ class ActionViewController: UIViewController {
   }
   
   @IBOutlet weak var messageLabel: UILabel!
-  @IBAction func addGif(sender: UIButton) {
+  @IBAction func addGif(_ sender: UIButton) {
     var imgurId = ""
-    if (self.url.rangeOfString("imgur", options: .RegularExpressionSearch) != nil) {
-      if let match = self.url.rangeOfString("(\\w*)$", options: .RegularExpressionSearch) {
-        imgurId = self.url.substringWithRange(match)
+    if (self.url.range(of: "imgur", options: .regularExpression) != nil) {
+      if let match = self.url.range(of: "(\\w*)$", options: .regularExpression) {
+        imgurId = self.url.substring(with: match)
       }
     }
     
@@ -62,7 +62,7 @@ class ActionViewController: UIViewController {
   @IBAction func done() {
       // Return any edited content to the host app.
       // This template doesn't do anything, so we just echo the passed in items.
-      self.extensionContext!.completeRequestReturningItems(self.extensionContext!.inputItems, completionHandler: nil)
+      self.extensionContext!.completeRequest(returningItems: self.extensionContext!.inputItems, completionHandler: nil)
   }
 
 }

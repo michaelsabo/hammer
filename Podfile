@@ -1,4 +1,3 @@
-platform :ios, '9.2'
 use_frameworks!
 
 def testing_pods
@@ -28,4 +27,12 @@ end
 target 'HammerTests' do
   base
   testing_pods
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['SWIFT_VERSION'] = '3.0'
+    end
+  end
 end

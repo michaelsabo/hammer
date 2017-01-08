@@ -11,12 +11,12 @@ import Hammer
 
 class TestingHelper {
     
-    class func jsonFromFile(filename: String) -> NSData {
-        if let filePath = NSBundle(forClass: self).pathForResource(filename, ofType:"json") {
-            if let data = try? NSData(contentsOfFile:filePath, options:NSDataReadingOptions.DataReadingUncached) {
+    class func jsonFromFile(_ filename: String) -> Data {
+        if let filePath = Bundle(for: self).path(forResource: filename, ofType:"json") {
+            if let data = try? Data(contentsOf: URL(fileURLWithPath: filePath), options:NSData.ReadingOptions.uncached) {
                 return data
             }
         }
-        return NSData.init()
+        return Data.init()
     }
 }
