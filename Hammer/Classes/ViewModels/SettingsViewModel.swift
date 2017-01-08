@@ -27,14 +27,14 @@ class SettingsViewModel : NSObject {
     super.init()
   }
   
-  func cellForSectionAndRow(indexPath: NSIndexPath, cell: UITableViewCell) -> UITableViewCell {
+  func cellForSectionAndRow(_ indexPath: IndexPath, cell: UITableViewCell) -> UITableViewCell {
     switch indexPath.section {
     case 0:
       cell.textLabel?.text = customizeList[indexPath.row]
       cell.tag = 678
       let darkTheme = UISwitch()
-      darkTheme.on = UserDefaults.darkThemeEnabled ?? false
-      darkTheme.addTarget(self, action: "darkThemeTouched:", forControlEvents: .ValueChanged)
+      darkTheme.isOn = UserDefaults.darkThemeEnabled ?? false
+      darkTheme.addTarget(self, action: #selector(SettingsViewModel.darkThemeTouched(_:)), for: .valueChanged)
       cell.accessoryView = darkTheme
     case 1:
       cell.textLabel?.text = legaleseList[indexPath.row]
@@ -45,11 +45,11 @@ class SettingsViewModel : NSObject {
     return cell
   }
   
-  func titleForSection(section: Int) -> String {
+  func titleForSection(_ section: Int) -> String {
     return sections[section]
   }
   
-  func numberOfRowsForSection(section: Int) -> Int {
+  func numberOfRowsForSection(_ section: Int) -> Int {
     switch section {
     case 0:
       return customizeList.count
@@ -60,7 +60,7 @@ class SettingsViewModel : NSObject {
     }
   }
   
-  func selectItemAtIndexPath(indexPath: NSIndexPath) -> String {
+  func selectItemAtIndexPath(_ indexPath: IndexPath) -> String {
     switch indexPath.section {
     case 0:
       return customizeList[indexPath.row]
@@ -71,8 +71,8 @@ class SettingsViewModel : NSObject {
     }
   }
   
-  func darkThemeTouched(sender: UISwitch) {
-    UserDefaults.darkThemeEnabled = sender.on
+  func darkThemeTouched(_ sender: UISwitch) {
+    UserDefaults.darkThemeEnabled = sender.isOn
     self.changeThemeObserver.sendNext(sender.on)
   }
   

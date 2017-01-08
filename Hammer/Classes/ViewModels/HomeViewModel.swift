@@ -25,10 +25,10 @@ class HomeViewModel : NSObject {
 	var gifsForDisplay = MutableProperty<[Gif]>([Gif]())
 	
   let isSearchingSignal: Signal<Bool, NoError>
-  private let isSearchingObserver: Observer<Bool, NoError>
+  fileprivate let isSearchingObserver: Observer<Bool, NoError>
   
-	private let tagService: TagService
-	private let gifService: GifService
+	fileprivate let tagService: TagService
+	fileprivate let gifService: GifService
 	
 	init(searchTagService: TagService, gifRetrieveService: GifService) {
 		self.tagService = searchTagService
@@ -113,7 +113,7 @@ class HomeViewModel : NSObject {
     return tableHeight;
   }
   
-  func displayThumbnailForGif(indexPath indexPath: NSIndexPath, cell: ImageCell) -> ImageCell {
+  func displayThumbnailForGif(indexPath: IndexPath, cell: ImageCell) -> ImageCell {
     if (indexPath.item < self.gifsForDisplay.value.count) {
       let gif = self.gifsForDisplay.value[indexPath.item]
       if let data = gif.thumbnailData {

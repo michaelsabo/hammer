@@ -10,11 +10,11 @@ import UIKit
 import Alamofire
 
 enum ServiceError: Int {
-	case AccessDenied = 0,
-	InvalidRequest,
-	BadRequest,
-	NotFound,
-	NoError
+	case accessDenied = 0,
+	invalidRequest,
+	badRequest,
+	notFound,
+	noError
 	
 	func toError() -> NSError {
 		return NSError(domain:"Ham", code: self.rawValue, userInfo: nil)
@@ -22,45 +22,45 @@ enum ServiceError: Int {
 }
 
 enum ServiceResponse: Int {
-	case Success = 0,
-	Failure
+	case success = 0,
+	failure
 }
 
 enum Router: URLRequestConvertible {
-  static let Test = NSURL(string: "http://ham-flyingdinos.rhcloud.com/api")!
-  static let Production = NSURL(string: "http://52.2.139.235/api")!
-  static let Local = NSURL(string: "http://localhost:9292/api/")!
+  static let Test = Foundation.URL(string: "http://ham-flyingdinos.rhcloud.com/api")!
+  static let Production = Foundation.URL(string: "http://52.2.139.235/api")!
+  static let Local = Foundation.URL(string: "http://localhost:9292/api/")!
 	
-  case Gifs
-  case GifsForTag(String)
-  case AddGif(String)
-  case Tags
-  case TagsForGif(Int)
-  case TagGifWithId(Int, String)
+  case gifs
+  case gifsForTag(String)
+  case addGif(String)
+  case tags
+  case tagsForGif(Int)
+  case tagGifWithId(Int, String)
   
-  var URL: NSURL { return Router.Production.URLByAppendingPathComponent(route.path) }
+  var URL: Foundation.URL { return Router.Production.appendingPathComponent(route.path) }
   
   var route: (path: String, parameters: [String : AnyObject]?) {
     switch self {
-    case .Gifs: return ("/gifs", nil)
-    case .GifsForTag (let tag): return ("/gifs", ["q": tag])
-    case .AddGif(let imgurId) : return ("/gifs", ["gif": imgurId])
-    case .Tags : return ("/tags", nil)
-    case .TagsForGif (let gifId) : return ("/gifs/\(gifId)/tags", nil)
-    case .TagGifWithId (let gifId, let tagName) : return ("/gifs/\(gifId)/tags", ["tag": tagName])
+    case .gifs: return ("/gifs", nil)
+    case .gifsForTag (let tag): return ("/gifs", ["q": tag as AnyObject])
+    case .addGif(let imgurId) : return ("/gifs", ["gif": imgurId as AnyObject])
+    case .tags : return ("/tags", nil)
+    case .tagsForGif (let gifId) : return ("/gifs/\(gifId)/tags", nil)
+    case .tagGifWithId (let gifId, let tagName) : return ("/gifs/\(gifId)/tags", ["tag": tagName as AnyObject])
     }
   }
   
   var method : Alamofire.Method  {
     switch self {
-    case .TagGifWithId(_,_)  : return .POST
-    case .AddGif(_)  : return .POST
+    case .tagGifWithId(_,_)  : return .POST
+    case .addGif(_)  : return .POST
     default : return .GET
     }
   }
   
   var URLRequest: NSMutableURLRequest {
-    let mutableURLRequest = NSMutableURLRequest(URL: URL)
+    let mutableURLRequest = NSMutableURLRequest(url: URL)
     mutableURLRequest.HTTPMethod = method.rawValue
     return Alamofire
       .ParameterEncoding

@@ -10,17 +10,17 @@ import Foundation
 
 extension UITextField {
   
-  func createSearchTextField(placeholder placeholder:String) {
+  func createSearchTextField(placeholder:String) {
     self.placeholder = placeholder
-    self.hidden = true
-    self.textAlignment = .Center
+    self.isHidden = true
+    self.textAlignment = .center
     self.backgroundColor = UIColor.flatWhiteColor()
     self.layer.cornerRadius = 15.0
-    self.autocorrectionType = .No
-    self.clearButtonMode = .Always
+    self.autocorrectionType = .no
+    self.clearButtonMode = .always
     self.translatesAutoresizingMaskIntoConstraints = false
     self.font = App.fontLight(20.0)
-    self.autocapitalizationType = .AllCharacters
+    self.autocapitalizationType = .allCharacters
   }
   
 }

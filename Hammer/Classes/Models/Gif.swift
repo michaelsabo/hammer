@@ -27,7 +27,7 @@ class Gifs  {
 	}
   
   init() {
-    self.response = ServiceResponse.Success
+    self.response = ServiceResponse.success
   }
   
 }
@@ -38,8 +38,8 @@ class Gif: NSObject {
 	var url: String
 	var thumbnailUrl: String
 	var index: Int!
-	var gifData: NSData?
-	var thumbnailData: NSData?
+	var gifData: Data?
+	var thumbnailData: Data?
   var showAnimation:Bool = true
 	
 	override init() {
@@ -79,7 +79,7 @@ func ==(lhs: Gif, rhs: Gif) -> Bool {
 
 extension Gifs {
   
-  func removeDuplicates(collection: [Gif]) -> [Gif] {
+  func removeDuplicates(_ collection: [Gif]) -> [Gif] {
     
     var keys = [Int]()
     var array = [Gif]()

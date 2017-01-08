@@ -17,11 +17,11 @@ class LicensesViewController : UIViewController, UINavigationBarDelegate {
     scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
     self.view.addSubview(scrollView)
     scrollView.backgroundColor = UIColor.flatWhiteColor()
-    self.view.addConstraint(NSLayoutConstraint.init(item: scrollView, attribute: .Top, relatedBy: .Equal, toItem: self.topLayoutGuide, attribute: .Bottom, multiplier: 1, constant: 0))
+    self.view.addConstraint(NSLayoutConstraint.init(item: scrollView, attribute: .top, relatedBy: .equal, toItem: self.topLayoutGuide, attribute: .bottom, multiplier: 1, constant: 0))
 
     let textView = UITextView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
-    if let path = NSBundle.mainBundle().pathForResource("Licenses", ofType: "txt") {
-      let licenses = try? NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding) as String
+    if let path = Bundle.main.path(forResource: "Licenses", ofType: "txt") {
+      let licenses = try? NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue) as String
       textView.text = licenses
       textView.backgroundColor = UIColor.flatWhiteColor()
       self.view.addSubview(textView)

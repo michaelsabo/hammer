@@ -24,12 +24,12 @@ class DisplayViewModel : NSObject {
   let createTagRequestSignal: Signal<Bool, NoError>
   let stopSignals : SignalProducer<(), NoError>
   
-  private let gifRequestObserver: Observer<Bool, NoError>
-  private let tagRequestObserver: Observer<Bool, NoError>
-  private let createTagRequestObserver: Observer<Bool, NoError>
-  private let stopSignalObserver: Observer<(), NoError>
+  fileprivate let gifRequestObserver: Observer<Bool, NoError>
+  fileprivate let tagRequestObserver: Observer<Bool, NoError>
+  fileprivate let createTagRequestObserver: Observer<Bool, NoError>
+  fileprivate let stopSignalObserver: Observer<(), NoError>
   
-  var gifData : NSData!
+  var gifData : Data!
   var gifImage = MutableProperty<UIImage?>(UIImage())
   
 	var gifService: GifService
@@ -93,7 +93,7 @@ class DisplayViewModel : NSObject {
     return randomDetail[randomNumber]
   }
   
-  func startCreateTagSignalRequest(tagText: String ) {
+  func startCreateTagSignalRequest(_ tagText: String ) {
     self.tagService.tagGifWith(id: self.gif.value.id, tag: tagText)
       .on(next: {
         response in

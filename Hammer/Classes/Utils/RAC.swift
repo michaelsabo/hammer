@@ -22,7 +22,7 @@ extension RACSignal {
 	
 	/// Creates a SignalProducer which will subscribe to the receiver once for
 	/// each invocation of start().
-	public func asSignalProducer(file: String = __FILE__, line: Int = __LINE__) -> SignalProducer<AnyObject?, NoError> {
+	public func asSignalProducer(_ file: String = #file, line: Int = #line) -> SignalProducer<AnyObject?, NoError> {
 		return SignalProducer { observer, disposable in
 			let next = { (obj: AnyObject?) -> () in
 				observer.sendNext(obj)
@@ -43,21 +43,21 @@ extension RACSignal {
 
 extension RACSignal {
 	
-	func subscribeNextAs<T>(nextClosure:(T) -> ()) ->() {
+	func subscribeNextAs<T>(_ nextClosure:@escaping (T) -> ()) ->() {
 		self.subscribeNext { (next: AnyObject!) -> () in
 			let nextAsT = next as! T
 			nextClosure(nextAsT)
 		}
 	}
 	
-	func subscribeNextAs<T>(nextClosure:(T) -> (), completed: () -> ()) ->() {
+	func subscribeNextAs<T>(_ nextClosure:@escaping (T) -> (), completed: () -> ()) ->() {
 		self.subscribeNext({ (next: AnyObject!) -> () in
 			let nextAsT = next as! T
 			nextClosure(nextAsT)
 			}, completed: completed)
 	}
 	
-	func subscribeNextAs<T>(nextClosure:(T) -> (), error:(NSError) -> (), completed: () -> ()) ->() {
+	func subscribeNextAs<T>(_ nextClosure:@escaping (T) -> (), error:@escaping (NSError) -> (), completed: () -> ()) ->() {
 		self.subscribeNext({ (next: AnyObject!) -> () in
 			let nextAsT = next as! T
 			nextClosure(nextAsT)
@@ -66,7 +66,7 @@ extension RACSignal {
 			}, completed: completed)
 	}
 	
-	func subscribeNextAs<T>(nextClosure:(T) -> (), error:(NSError) -> ()) ->() {
+	func subscribeNextAs<T>(_ nextClosure:@escaping (T) -> (), error:@escaping (NSError) -> ()) ->() {
 		self.subscribeNext({ (next: AnyObject!) -> () in
 			let nextAsT = next as! T
 			nextClosure(nextAsT)
@@ -75,28 +75,28 @@ extension RACSignal {
 		})
 	}
 	
-	func flattenMapAs<T: AnyObject>(flattenMapClosure:(T) -> RACSignal) -> RACSignal {
+	func flattenMapAs<T: AnyObject>(_ flattenMapClosure:(T) -> RACSignal) -> RACSignal {
 		return self.flattenMap { (next: AnyObject!) -> RACStream! in
 			let nextAsT = next as! T
 			return flattenMapClosure(nextAsT)
 		}
 	}
 	
-	func mapAs<T: AnyObject, U: AnyObject>(mapClosure:(T) -> U) -> RACSignal {
+	func mapAs<T: AnyObject, U: AnyObject>(_ mapClosure:@escaping (T) -> U) -> RACSignal {
 		return self.map { (next: AnyObject!) -> AnyObject! in
 			let nextAsT = next as! T
 			return mapClosure(nextAsT)
 		}
 	}
 	
-	func filterAs<T: AnyObject>(filterClosure:(T) -> Bool) -> RACSignal {
+	func filterAs<T: AnyObject>(_ filterClosure:@escaping (T) -> Bool) -> RACSignal {
 		return self.filter { (next: AnyObject!) -> Bool in
 			let nextAsT = next as! T
 			return filterClosure(nextAsT)
 		}
 	}
 	
-	func doNextAs<T: AnyObject>(nextClosure:(T) -> ()) -> RACSignal {
+	func doNextAs<T: AnyObject>(_ nextClosure:@escaping (T) -> ()) -> RACSignal {
 		return self.doNext { (next: AnyObject!) -> () in
 			let nextAsT = next as! T
 			nextClosure(nextAsT)
@@ -120,7 +120,7 @@ public struct RAC {
 		self.nilValue = nilValue
 	}
 	
-	func assignSignal(signal : RACSignal) -> RACDisposable {
+	func assignSignal(_ signal : RACSignal) -> RACDisposable {
 		return signal.setKeyPath(self.keyPath, onObject: self.target, nilValue: self.nilValue)
 	}
 }
@@ -153,7 +153,7 @@ public func ~> (signal: RACSignal, rac: RAC) -> RACDisposable {
 	return rac.assignSignal(signal)
 }
 
-func RACObserve(target: NSObject!, keyPath: String) -> RACSignal  {
+func RACObserve(_ target: NSObject!, keyPath: String) -> RACSignal  {
 	return target.rac_valuesForKeyPath(keyPath, observer: target)
 }
 

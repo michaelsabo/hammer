@@ -12,7 +12,7 @@ class SmallCollectionViewLayout : UICollectionViewFlowLayout {
 	
 	override init() {
 		super.init()
-		self.itemSize = CGSizeMake(100, 110)
+		self.itemSize = CGSize(width: 100, height: 110)
 		self.sectionInset = UIEdgeInsetsMake(5, 5, 5, 5)
 		self.minimumInteritemSpacing = 5.0
 		self.minimumLineSpacing = 2.0
@@ -23,11 +23,11 @@ class SmallCollectionViewLayout : UICollectionViewFlowLayout {
     super.init(coder: aDecoder)
 	}
 	
-	override func prepareLayout() {
-		super.prepareLayout()
+	override func prepare() {
+		super.prepare()
 	}
 	
-	override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
+	override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
 		return true
 	}
 }
@@ -36,7 +36,7 @@ class MediumCollectionViewLayout : UICollectionViewFlowLayout {
 	
 	override init() {
 		super.init()
-		self.itemSize = CGSizeMake(115, 125)
+		self.itemSize = CGSize(width: 115, height: 125)
 		self.sectionInset = UIEdgeInsetsMake(5, 8, 5, 8)
 		self.minimumInteritemSpacing = 2.0
 		self.minimumLineSpacing = 2.0
@@ -47,11 +47,11 @@ class MediumCollectionViewLayout : UICollectionViewFlowLayout {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	override func prepareLayout() {
-		super.prepareLayout()
+	override func prepare() {
+		super.prepare()
 	}
 	
-	override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
+	override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
 		return true
 	}
 }
@@ -60,7 +60,7 @@ class LargeCollectionViewLayout : UICollectionViewFlowLayout {
 	
 	override init() {
 		super.init()
-		self.itemSize = CGSizeMake(130, 140)
+		self.itemSize = CGSize(width: 130, height: 140)
 		self.sectionInset = UIEdgeInsetsMake(5, 8, 5, 8)
 		self.minimumInteritemSpacing = 3.0
 		self.minimumLineSpacing = 2.0
@@ -71,11 +71,11 @@ class LargeCollectionViewLayout : UICollectionViewFlowLayout {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	override func prepareLayout() {
-		super.prepareLayout()
+	override func prepare() {
+		super.prepare()
 	}
 	
-	override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
+	override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
 		return true
 	}
 }

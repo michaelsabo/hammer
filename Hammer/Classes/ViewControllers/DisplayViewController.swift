@@ -13,6 +13,30 @@ import NVActivityIndicatorView
 import ReactiveCocoa
 import Font_Awesome_Swift
 import MMPopupView
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class DisplayViewController: UIViewController, UINavigationBarDelegate, UINavigationControllerDelegate {
 
@@ -35,7 +59,7 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
       self.init(nibName: "DisplayViewController", bundle: nil)
     }
   
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
       super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
   
@@ -49,7 +73,7 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
 			self.view.backgroundColor = ColorThemes.getBackgroundColor()
       self.view.clipsToBounds = true
 			self.configureNavigationBar()
-			let loadingFrame = CGRectMake(0, 0, 60.0, 60.0)
+			let loadingFrame = CGRect(x: 0, y: 0, width: 60.0, height: 60.0)
 			let loadingView = NVActivityIndicatorView(frame: loadingFrame, type: .LineScalePulseOut, color: ColorThemes.subviewsColor())
 			loadingView.tag = kLoadingAnimationTag
       loadingView.translatesAutoresizingMaskIntoConstraints = false
@@ -106,29 +130,29 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
   }
   
   func displayNewTagButton() {
-    newTagButton = PaddedButton(frame: CGRectMake(0,0,126,tagHeight)).newButton(withTitle: "new tag", target: self, selector: "displayTagAlert", forControlEvent: .TouchUpInside)
+    newTagButton = PaddedButton(frame: CGRect(x: 0,y: 0,width: 126,height: tagHeight)).newButton(withTitle: "new tag", target: self, selector: #selector(DisplayViewController.displayTagAlert), forControlEvent: .touchUpInside)
     newTagButton.setFAText(prefixText: "", icon: FAType.FATag, postfixText: " add new tag!", size: 16, forState: .Normal)
     newTagButton.tag = 10005
     self.view.addSubview(newTagButton)
-    self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: tagHeight))
-    self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Width, relatedBy: .GreaterThanOrEqual, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 126))
+    self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: tagHeight))
+    self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 126))
   }
   
   func displayTagAlert() {
-    let alertConfig = MMAlertViewConfig.globalConfig()
-    alertConfig.defaultConfig()
-    alertConfig.defaultTextConfirm = "I WILL!"
-    alertConfig.defaultTextCancel = "You Won't"
+    let alertConfig = MMAlertViewConfig.global()
+    alertConfig?.defaultConfig()
+    alertConfig?.defaultTextConfirm = "I WILL!"
+    alertConfig?.defaultTextCancel = "You Won't"
     let alertView = MMAlertView.init(inputTitle: "New Tag", detail: self.displayGifViewModel.alertDetail, placeholder: "lingo here..", handler: {  tagText in
-      if (tagText.characters.count > 2) {
-        self.displayGifViewModel.startCreateTagSignalRequest(tagText.lowercaseString)
+      if (tagText?.characters.count > 2) {
+        self.displayGifViewModel.startCreateTagSignalRequest(tagText.lowercased())
       } else {
        
       }
     })
 
-    alertView.attachedView = self.view
-    alertView.show()
+    alertView?.attachedView = self.view
+    alertView?.show()
   }
 
   func horizonalTagLayout() {
@@ -159,19 +183,19 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
     let zeroPadding : CGFloat = 0.0
     var rowTupleArray = [(row: 0, firstItemIndex: 0, lastItemIndex: 0, currentWidth: CGFloat(0.0))]
     
-    for (index, label) in (self.tagLabels?.enumerate())! {
+    for (index, label) in (self.tagLabels?.enumerated())! {
       let objWidth = label.frame.size.width
       
       if (index == 0) {
-        self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Bottom, multiplier: 1, constant: yPadding))
-        self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Left, relatedBy: .Equal, toItem: self.view, attribute: .Left, multiplier: 1, constant: xPadding))
+        self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .top, relatedBy: .equal, toItem: self.imageView, attribute: .bottom, multiplier: 1, constant: yPadding))
+        self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .left, relatedBy: .equal, toItem: self.view, attribute: .left, multiplier: 1, constant: xPadding))
         rowTupleArray[rowTupleArray.count-1].currentWidth = objWidth + xPadding
       } else {
-        for (i, row) in rowTupleArray.enumerate() {
+        for (i, row) in rowTupleArray.enumerated() {
           if ((row.currentWidth + objWidth) < maxWidth) {
             let previousView = (self.tagLabels?[rowTupleArray[i].lastItemIndex])! as PaddedTagLabel
-            self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Top, relatedBy: .Equal, toItem: previousView, attribute: .Top, multiplier: 1, constant: zeroPadding))
-            self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Left, relatedBy: .Equal, toItem: previousView, attribute: .Right, multiplier: 1, constant: xPadding))
+            self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .top, relatedBy: .equal, toItem: previousView, attribute: .top, multiplier: 1, constant: zeroPadding))
+            self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .left, relatedBy: .equal, toItem: previousView, attribute: .right, multiplier: 1, constant: xPadding))
             rowTupleArray[i].currentWidth += objWidth + xPadding
             rowTupleArray[i].lastItemIndex = index
             break
@@ -179,8 +203,8 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
             continue
           } else {
             let viewAbove = (self.tagLabels?[rowTupleArray[i].firstItemIndex])! as PaddedTagLabel
-            self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Top, relatedBy: .Equal, toItem: viewAbove, attribute: .Bottom, multiplier: 1, constant: yPadding))
-            self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Left, relatedBy: .Equal, toItem: self.view, attribute: .Left, multiplier: 1, constant: xPadding))
+            self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .top, relatedBy: .equal, toItem: viewAbove, attribute: .bottom, multiplier: 1, constant: yPadding))
+            self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .left, relatedBy: .equal, toItem: self.view, attribute: .left, multiplier: 1, constant: xPadding))
             rowTupleArray.append((rowTupleArray.count, index, index, (objWidth + xPadding)))
             break
           }
@@ -189,9 +213,9 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
     }
     
     guard self.tagLabels?.count > 0 else {
-      self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Top, relatedBy: .Equal, toItem: self.imageView, attribute: .Bottom, multiplier: 1, constant: yPadding))
-      self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Left, relatedBy: .Equal, toItem: self.view, attribute: .Left, multiplier: 1, constant: xPadding))
-      self.view.addConstraint(NSLayoutConstraint.init(item: self.view, attribute: .Right, relatedBy: .GreaterThanOrEqual, toItem: newTagButton, attribute: .RightMargin, multiplier: 1, constant: xPadding))
+      self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .top, relatedBy: .equal, toItem: self.imageView, attribute: .bottom, multiplier: 1, constant: yPadding))
+      self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .left, relatedBy: .equal, toItem: self.view, attribute: .left, multiplier: 1, constant: xPadding))
+      self.view.addConstraint(NSLayoutConstraint.init(item: self.view, attribute: .right, relatedBy: .greaterThanOrEqual, toItem: newTagButton, attribute: .rightMargin, multiplier: 1, constant: xPadding))
       return
     }
     
@@ -199,15 +223,15 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
     
     if ((rowTupleArray[rowTupleArray.count-1].currentWidth + buttonWidth) > maxWidth) {
       let labelAbove = (self.tagLabels?[rowTupleArray[rowTupleArray.count-1].firstItemIndex])! as PaddedTagLabel
-      self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Top, relatedBy: .Equal, toItem: labelAbove, attribute: .Bottom, multiplier: 1, constant: yPadding))
-      self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Left, relatedBy: .Equal, toItem: self.view, attribute: .Left, multiplier: 1, constant: xPadding))
-      self.view.addConstraint(NSLayoutConstraint.init(item: self.view, attribute: .Right, relatedBy: .GreaterThanOrEqual, toItem: newTagButton, attribute: .RightMargin, multiplier: 1, constant: xPadding))
+      self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .top, relatedBy: .equal, toItem: labelAbove, attribute: .bottom, multiplier: 1, constant: yPadding))
+      self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .left, relatedBy: .equal, toItem: self.view, attribute: .left, multiplier: 1, constant: xPadding))
+      self.view.addConstraint(NSLayoutConstraint.init(item: self.view, attribute: .right, relatedBy: .greaterThanOrEqual, toItem: newTagButton, attribute: .rightMargin, multiplier: 1, constant: xPadding))
       
     } else {
       let lastLabel = (self.tagLabels?[rowTupleArray[rowTupleArray.count-1].lastItemIndex])! as PaddedTagLabel
-      self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Top, relatedBy: .Equal, toItem: lastLabel, attribute: .Top, multiplier: 1, constant: zeroPadding))
-      self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .Left, relatedBy: .Equal, toItem: lastLabel, attribute: .Right, multiplier: 1, constant: xPadding))
-      self.view.addConstraint(NSLayoutConstraint.init(item: self.view, attribute: .Right, relatedBy: .GreaterThanOrEqual, toItem: newTagButton, attribute: .RightMargin, multiplier: 1, constant: xPadding))
+      self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .top, relatedBy: .equal, toItem: lastLabel, attribute: .top, multiplier: 1, constant: zeroPadding))
+      self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .left, relatedBy: .equal, toItem: lastLabel, attribute: .right, multiplier: 1, constant: xPadding))
+      self.view.addConstraint(NSLayoutConstraint.init(item: self.view, attribute: .right, relatedBy: .greaterThanOrEqual, toItem: newTagButton, attribute: .rightMargin, multiplier: 1, constant: xPadding))
     }
     tagsAddedToView = false
   }
@@ -215,7 +239,7 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
   func shareButtonClicked() {
     if let copiedGif =  self.displayGifViewModel.gifData {
       let vc = UIActivityViewController(activityItems: [copiedGif], applicationActivities: [])
-      if (vc.respondsToSelector(Selector("popoverPresentationController"))) {
+      if (vc.responds(to: #selector(getter: UIViewController.popoverPresentationController))) {
         vc.popoverPresentationController?.sourceView = self.view
         vc.popoverPresentationController?.barButtonItem = self.shareButton
       }
@@ -227,12 +251,12 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
           UserDefaults.incrementTotalShares()
         }
       }
-      presentViewController(vc, animated: true, completion: nil)
+      present(vc, animated: true, completion: nil)
     } else {
-      let ac = UIAlertController(title: "Woahhhh", message: "Something went wrong when processing. Let's do this again", preferredStyle: UIAlertControllerStyle.Alert)
-      let okAction = UIAlertAction.init(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+      let ac = UIAlertController(title: "Woahhhh", message: "Something went wrong when processing. Let's do this again", preferredStyle: UIAlertControllerStyle.alert)
+      let okAction = UIAlertAction.init(title: "OK", style: UIAlertActionStyle.default, handler: nil)
       ac.addAction(okAction)
-      presentViewController(ac, animated: true, completion: nil)
+      present(ac, animated: true, completion: nil)
     }
   }
 

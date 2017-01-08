@@ -13,7 +13,7 @@ struct App {
   	return UIFont(name: "HelveticaNeue", size: 16.0)!
   }
   
-  static func font(size: CGFloat) -> UIFont {
+  static func font(_ size: CGFloat) -> UIFont {
     return UIFont(name: "HelveticaNeue", size: size)!
   }
   
@@ -21,7 +21,7 @@ struct App {
     return UIFont(name: "HelveticaNeue-Bold", size: 16.0)!
   }
   
-  static func fontBold(size: CGFloat) -> UIFont {
+  static func fontBold(_ size: CGFloat) -> UIFont {
     return UIFont(name: "HelveticaNeue-Bold", size: size)!
   }
   
@@ -29,7 +29,7 @@ struct App {
     return UIFont(name: "HelveticaNeue-Light", size: 16.0)!
   }
   
-  static func fontLight(size: CGFloat) -> UIFont {
+  static func fontLight(_ size: CGFloat) -> UIFont {
     return UIFont(name: "HelveticaNeue-Light", size: size)!
   }
 }

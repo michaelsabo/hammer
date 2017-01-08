@@ -45,6 +45,6 @@ class TagsResponse {
 	}
   init () {
     self.tags = [Tag]()
-    self.response = ServiceResponse.Success
+    self.response = ServiceResponse.success
   }
 }

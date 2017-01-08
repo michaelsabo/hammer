@@ -11,9 +11,9 @@ import Foundation
 extension UIView {
   
   func defaultProperties() {
-    self.hidden = true
-    self.backgroundColor = UIColor.clearColor()
-    self.opaque = true
+    self.isHidden = true
+    self.backgroundColor = UIColor.clear
+    self.isOpaque = true
     self.translatesAutoresizingMaskIntoConstraints = false
   }
   

@@ -12,12 +12,12 @@ struct Screen {
   
   static var screenWidth:CGFloat {
     get {
-      return UIScreen.mainScreen().bounds.width
+      return UIScreen.main.bounds.width
     }
   }
   static var screenHeight:CGFloat {
     get {
-      return UIScreen.mainScreen().bounds.height
+      return UIScreen.main.bounds.height
     }
   }
 }

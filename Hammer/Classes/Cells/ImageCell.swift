@@ -20,20 +20,20 @@ class ImageCell: UICollectionViewCell {
 	
   func initialize() {
     self.contentView.layer.masksToBounds = true
-    self.contentView.backgroundColor = UIColor.clearColor()
-    self.userInteractionEnabled = false
+    self.contentView.backgroundColor = UIColor.clear
+    self.isUserInteractionEnabled = false
   }
   
-  func setImage(data: NSData?) {
+  func setImage(_ data: Data?) {
     if let imageData = data {
       if let image = UIImageJPEGRepresentation(UIImage(data: imageData)!, 0.1) {
         self.imageView.image = UIImage(data: image)
         self.imageView.layer.masksToBounds = true
         self.imageView.layer.cornerRadius = 10.0
         self.imageView.layer.borderWidth = 0.6
-        self.imageView.layer.borderColor = ColorThemes.getOutlineColor().CGColor
+        self.imageView.layer.borderColor = ColorThemes.getOutlineColor().cgColor
         hasLoaded = true
-        self.userInteractionEnabled = true
+        self.isUserInteractionEnabled = true
       }
     }
   }	

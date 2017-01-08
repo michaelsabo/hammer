@@ -12,7 +12,7 @@ extension UIViewController
 {
   func configureNavigationBar (){
     navigationController?.navigationBar.barTintColor = ColorThemes.navigationBarBackgroundColor()
-    navigationController?.navigationBar.translucent = true
+    navigationController?.navigationBar.isTranslucent = true
     navigationController?.navigationBar.tintColor = ColorThemes.navigationBarIconColor()
     let textAttributes:[String:AnyObject] = [NSForegroundColorAttributeName:ColorThemes.navigationBarIconColor()]
     navigationController?.navigationBar.titleTextAttributes = textAttributes

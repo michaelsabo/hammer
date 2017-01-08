@@ -23,11 +23,11 @@ class SearchGifsTableView : UITableView {
   
   func initialize() {
     self.translatesAutoresizingMaskIntoConstraints = false
-    self.registerClass(UITableViewCell.self, forCellReuseIdentifier: "AutocompleteResultCell")
-    self.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+    self.register(UITableViewCell.self, forCellReuseIdentifier: "AutocompleteResultCell")
+    self.separatorStyle = UITableViewCellSeparatorStyle.singleLine
     self.separatorColor = UIColor.flatBlackColorDark()
-    self.separatorStyle = .None
-    self.backgroundColor = UIColor.clearColor()
+    self.separatorStyle = .none
+    self.backgroundColor = UIColor.clear
     self.bounces = false
   }
   
@@ -38,7 +38,7 @@ extension UITableViewCell {
   func defaultAutocompleteProperties() {
     self.textLabel?.font = App.fontLight()
     self.textLabel?.textColor = ColorThemes.tableViewHeaderTextColor()
-    self.backgroundColor = UIColor.clearColor()
-    self.selectionStyle = .None
+    self.backgroundColor = UIColor.clear
+    self.selectionStyle = .none
   }
 }

@@ -18,45 +18,45 @@ class UserDefaults {
   
   class var totalTagsAdded : Int {
     get {
-      return NSUserDefaults.standardUserDefaults().integerForKey(numberOfTagsAdded)
+      return Foundation.UserDefaults.standard.integer(forKey: numberOfTagsAdded)
     }
   }
   
   class func incrementTagsAdded() {
       let newTotal = totalTagsAdded + 1
-      NSUserDefaults.standardUserDefaults().setInteger(newTotal, forKey: numberOfTagsAdded)
+      Foundation.UserDefaults.standard.set(newTotal, forKey: numberOfTagsAdded)
     
   }
   
   class var totalShares : Int {
     get {
-      return NSUserDefaults.standardUserDefaults().integerForKey(numberOfShares)
+      return Foundation.UserDefaults.standard.integer(forKey: numberOfShares)
     }
   }
   
   class func incrementTotalShares() {
     let newTotal = totalShares + 1
-    NSUserDefaults.standardUserDefaults().setInteger(newTotal, forKey: numberOfShares)
+    Foundation.UserDefaults.standard.set(newTotal, forKey: numberOfShares)
   }
   
   class var darkThemeEnabled : Bool {
     get {
-      return NSUserDefaults.standardUserDefaults().boolForKey(kDarkEnabled)
+      return Foundation.UserDefaults.standard.bool(forKey: kDarkEnabled)
     } set {
-      NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: kDarkEnabled)
+      Foundation.UserDefaults.standard.set(newValue, forKey: kDarkEnabled)
     }
   }
   
   class var showUpdateAlert : Bool {
     get {
-      return NSUserDefaults.standardUserDefaults().boolForKey(kShowUpdateAlert)
+      return Foundation.UserDefaults.standard.bool(forKey: kShowUpdateAlert)
     } set {
-      NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: kShowUpdateAlert)
+      Foundation.UserDefaults.standard.set(newValue, forKey: kShowUpdateAlert)
     }
   }
   
   class func registerUserDefaults() {
     let dictionary = [kShowUpdateAlert: true, kDarkEnabled: true]
-    NSUserDefaults.standardUserDefaults().registerDefaults(dictionary)
+    Foundation.UserDefaults.standard.register(defaults: dictionary)
   }
 }

@@ -1,72 +1,75 @@
 PODS:
-  - Alamofire (3.1.5)
-  - ChameleonFramework/Default (2.0.6)
-  - ChameleonFramework/Swift (2.0.6):
+  - Alamofire (4.2.0)
+  - ChameleonFramework/Default (2.1.0)
+  - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
   - Crashlytics (3.6.0):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.4)
-  - Font-Awesome-Swift (1.4.5)
+  - Font-Awesome-Swift (1.5.3)
   - Masonry (0.6.4)
   - MMPopupView (1.6.1):
     - Masonry
-  - Nimble (3.1.0)
-  - NVActivityIndicatorView (2.3)
-  - Quick (0.8.0)
-  - ReactiveCocoa (4.0.1):
-    - ReactiveCocoa/UI (= 4.0.1)
-    - Result (~> 1.0.2)
-  - ReactiveCocoa/Core (4.0.1):
-    - ReactiveCocoa/no-arc
-    - Result (~> 1.0.2)
-  - ReactiveCocoa/no-arc (4.0.1):
-    - Result (~> 1.0.2)
-  - ReactiveCocoa/UI (4.0.1):
-    - ReactiveCocoa/Core
-    - Result (~> 1.0.2)
-  - Result (1.0.2)
-  - SwiftyJSON (2.3.2)
+  - Nimble (5.1.0)
+  - NVActivityIndicatorView (3.0)
+  - Quick (1.0.0)
+  - RxBlocking (3.0.1):
+    - RxSwift (~> 3.0)
+  - RxCocoa (3.0.1):
+    - RxSwift (~> 3.0)
+  - RxSwift (3.0.1)
+  - RxTest (3.0.1):
+    - RxSwift (~> 3.0)
+  - SwiftyJSON (3.1.3)
 
 DEPENDENCIES:
-  - Alamofire (~> 3.1.0)
-  - ChameleonFramework/Swift
+  - Alamofire (= 4.2.0)
+  - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`, branch `master`)
   - Crashlytics
   - Fabric
-  - Font-Awesome-Swift
+  - Font-Awesome-Swift (= 1.5.3)
   - MMPopupView (from `https://github.com/michaelsabo/MMPopupView`)
-  - Nimble
-  - NVActivityIndicatorView
-  - Quick (~> 0.8.0)
-  - ReactiveCocoa (= 4.0.1)
-  - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
+  - Nimble (= 5.1.0)
+  - NVActivityIndicatorView (= 3.0.0)
+  - Quick (= 1.0.0)
+  - RxBlocking (= 3.0.1)
+  - RxCocoa (= 3.0.1)
+  - RxSwift (= 3.0.1)
+  - RxTest (= 3.0.1)
+  - SwiftyJSON (= 3.1.3)
 
 EXTERNAL SOURCES:
+  ChameleonFramework:
+    :branch: master
+    :git: https://github.com/ViccAlexander/Chameleon.git
   MMPopupView:
     :git: https://github.com/michaelsabo/MMPopupView
-  SwiftyJSON:
-    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 CHECKOUT OPTIONS:
+  ChameleonFramework:
+    :commit: dcf98f9bf3a632a7f40679b7da46f09681e48526
+    :git: https://github.com/ViccAlexander/Chameleon.git
   MMPopupView:
     :commit: cc30667441156621f90cc5fd0415d523c99802f3
     :git: https://github.com/michaelsabo/MMPopupView
-  SwiftyJSON:
-    :commit: 929539eb6a3304eaa9153ca44041a78b85bf2ee5
-    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 SPEC CHECKSUMS:
-  Alamofire: 5f730ba29fd113b7ddd71c1e65d0c630acf5d7b0
-  ChameleonFramework: a6b466873ff9a4ce3a5196c20bccf1a97ad9f446
+  Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
+  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Crashlytics: e4e8d02914f2608fbc7bf42b1a7af838b0db67a2
   Fabric: ed41fd62173c6bdea24ab02c9d7707161eabb750
-  Font-Awesome-Swift: 0af30357ab68dbcfa2d211254a5c11a158261112
+  Font-Awesome-Swift: 6615ee6b875d148f767ea60b5b4ff54e2ea3122e
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
   MMPopupView: 42daf6d1a2956b23c1dd8d45f51131cfe5091be5
-  Nimble: 79d40f4d69d47314229bbabacaa02b8838c779b9
-  NVActivityIndicatorView: c7ef25ef527ab5e51b00322cb1ddd58681bcf2a3
-  Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
-  ReactiveCocoa: f7011630aee4deeb16352fcb1b50d6bde9db4f90
-  Result: dd3dd71af3fa2e262f1a999e14fba2c25ec14f16
-  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+  Nimble: 5ea121a2eda60440287054cde077fc0ad22227b3
+  NVActivityIndicatorView: 81953b5e65093ba79edf4fe7268e002039ca5268
+  Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
+  RxBlocking: 5de082d09d1ab45b49173f309f1a97d6b50f34c4
+  RxCocoa: 15a52fc590dcc700cb4a690a633b5c5184ce3a78
+  RxSwift: af5680055c4ad04480189c52d28385b1029493a6
+  RxTest: 9867e6f3c435af30fbdb44b6d8ec30b78c40b515
+  SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: eba7865845aafc79e21530410e3235b67fb0f426
+
+COCOAPODS: 1.1.1

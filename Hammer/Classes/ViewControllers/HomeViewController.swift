@@ -40,7 +40,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 		setupBindings()
 	}
   
-  override func viewWillAppear(animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     self.view.backgroundColor = ColorThemes.getBackgroundColor()
     self.configureNavigationBar()
@@ -67,40 +67,40 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	func setupViews() {
-    self.viewCollection.registerNib(UINib.init(nibName: "ImageCell", bundle: nil), forCellWithReuseIdentifier: "ImageCell")
-		let tableViewframe = CGRectMake(0, 110, Screen.screenWidth-20, 300)
-		autocompleteTableView = SearchGifsTableView(frame: tableViewframe, style: UITableViewStyle.Plain)
+    self.viewCollection.register(UINib.init(nibName: "ImageCell", bundle: nil), forCellWithReuseIdentifier: "ImageCell")
+		let tableViewframe = CGRect(x: 0, y: 110, width: Screen.screenWidth-20, height: 300)
+		autocompleteTableView = SearchGifsTableView(frame: tableViewframe, style: UITableViewStyle.plain)
 		autocompleteTableView.delegate = self
 		autocompleteTableView.dataSource = self
     view.addSubview(autocompleteTableView)
     self.viewCollection.setCollectionViewLayout()
-    searchView = UIView.init(frame: CGRectMake(0, 67, Screen.screenWidth, 90))
+    searchView = UIView.init(frame: CGRect(x: 0, y: 67, width: Screen.screenWidth, height: 90))
     searchView.defaultProperties()
     self.view.addSubview(searchView)
-    tagSearch = UITextField.init(frame: CGRectMake(0, 0, self.view.frame.size.width-20, 60))
+    tagSearch = UITextField.init(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width-20, height: 60))
     tagSearch.createSearchTextField(placeholder: "Whatya looking for?")
     self.searchView.addSubview(tagSearch)
     addAutoLayoutConstraints()
-    refreshControl.addTarget(self, action: "refreshImages", forControlEvents: UIControlEvents.ValueChanged)
+    refreshControl.addTarget(self, action: #selector(HomeViewController.refreshImages), for: UIControlEvents.valueChanged)
     viewCollection.addSubview(refreshControl)
 	}
   
   func addAutoLayoutConstraints() {
-    self.view.addConstraint(NSLayoutConstraint(item: searchView, attribute: .Left, relatedBy: .Equal, toItem: self.view, attribute: .Left, multiplier: 1, constant: 0))
-    self.view.addConstraint(NSLayoutConstraint(item: searchView, attribute: .Right, relatedBy: .Equal, toItem: self.view, attribute: .Right, multiplier: 1, constant: 0))
-    self.view.addConstraint(NSLayoutConstraint(item: searchView, attribute: .Top, relatedBy: .Equal, toItem: self.topLayoutGuide, attribute: .Bottom, multiplier: 1, constant: 0))
+    self.view.addConstraint(NSLayoutConstraint(item: searchView, attribute: .left, relatedBy: .equal, toItem: self.view, attribute: .left, multiplier: 1, constant: 0))
+    self.view.addConstraint(NSLayoutConstraint(item: searchView, attribute: .right, relatedBy: .equal, toItem: self.view, attribute: .right, multiplier: 1, constant: 0))
+    self.view.addConstraint(NSLayoutConstraint(item: searchView, attribute: .top, relatedBy: .equal, toItem: self.topLayoutGuide, attribute: .bottom, multiplier: 1, constant: 0))
     
-    self.view.addConstraint(NSLayoutConstraint(item: searchView, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 90))
-    self.view.addConstraint(NSLayoutConstraint(item: searchView, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: Screen.screenWidth))
+    self.view.addConstraint(NSLayoutConstraint(item: searchView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 90))
+    self.view.addConstraint(NSLayoutConstraint(item: searchView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: Screen.screenWidth))
     
-    self.searchView.addConstraint(NSLayoutConstraint(item: tagSearch, attribute: .Left, relatedBy: .Equal, toItem: searchView, attribute: .Left, multiplier: 1, constant: 10))
-    self.searchView.addConstraint(NSLayoutConstraint(item: searchView, attribute: .Right, relatedBy: .Equal, toItem: tagSearch, attribute: .Right, multiplier: 1, constant: 10))
-    self.searchView.addConstraint(NSLayoutConstraint(item: tagSearch, attribute: .Top, relatedBy: .Equal, toItem: searchView, attribute: .Top, multiplier: 1, constant: 10))
-    self.searchView.addConstraint(NSLayoutConstraint(item: tagSearch, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 60))
+    self.searchView.addConstraint(NSLayoutConstraint(item: tagSearch, attribute: .left, relatedBy: .equal, toItem: searchView, attribute: .left, multiplier: 1, constant: 10))
+    self.searchView.addConstraint(NSLayoutConstraint(item: searchView, attribute: .right, relatedBy: .equal, toItem: tagSearch, attribute: .right, multiplier: 1, constant: 10))
+    self.searchView.addConstraint(NSLayoutConstraint(item: tagSearch, attribute: .top, relatedBy: .equal, toItem: searchView, attribute: .top, multiplier: 1, constant: 10))
+    self.searchView.addConstraint(NSLayoutConstraint(item: tagSearch, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60))
     
-    self.view.addConstraint(NSLayoutConstraint(item: autocompleteTableView, attribute: .Left, relatedBy: .Equal, toItem: self.view, attribute: .Left, multiplier: 1, constant: 10))
-    self.view.addConstraint(NSLayoutConstraint(item: self.view, attribute: .Right, relatedBy: .Equal, toItem: autocompleteTableView, attribute: .Right, multiplier: 1, constant: 10))
-    self.view.addConstraint(NSLayoutConstraint(item: autocompleteTableView, attribute: .Top, relatedBy: .Equal, toItem: tagSearch, attribute: .Bottom, multiplier: 1, constant: 0))
+    self.view.addConstraint(NSLayoutConstraint(item: autocompleteTableView, attribute: .left, relatedBy: .equal, toItem: self.view, attribute: .left, multiplier: 1, constant: 10))
+    self.view.addConstraint(NSLayoutConstraint(item: self.view, attribute: .right, relatedBy: .equal, toItem: autocompleteTableView, attribute: .right, multiplier: 1, constant: 10))
+    self.view.addConstraint(NSLayoutConstraint(item: autocompleteTableView, attribute: .top, relatedBy: .equal, toItem: tagSearch, attribute: .bottom, multiplier: 1, constant: 0))
   }
   
   func refreshImages() {
@@ -109,16 +109,16 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	// MARK: UICollectionView Data Methods
 	
-	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 			return self.homeViewModel.gifsForDisplay.value.count
 	}
 	
-	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ImageCell", forIndexPath: indexPath) as! ImageCell
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCell
 		return self.homeViewModel.displayThumbnailForGif(indexPath: indexPath, cell: cell)
 	}
   
-  func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+  func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
     let cell = cell as! ImageCell
     guard cell.hasLoaded else {
       return
@@ -128,7 +128,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
       
       switch indexPath.item % 3 {
       case 0:
-        cell.imageView.transform = CGAffineTransformMakeTranslation(-20, 0)
+        cell.imageView.transform = CGAffineTransform(translationX: -20, y: 0)
         UIView.animateKeyframesWithDuration(0.5, delay: 0, options: [], animations: { [weak cell] in
           UIView.addKeyframeWithRelativeStartTime(0.0, relativeDuration: 0.2, animations: { [weak cell] in
             cell?.imageView.transform = CGAffineTransformMakeTranslation(-15, 0)
@@ -147,7 +147,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
           })
         break
       case 1:
-        cell.imageView.transform = CGAffineTransformMakeScale(0.5, 0.5)
+        cell.imageView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
         
         UIView.animateKeyframesWithDuration(0.5, delay: 0, options: [], animations: { [weak cell] in
           UIView.addKeyframeWithRelativeStartTime(0.0, relativeDuration: 0.1, animations: { [weak cell] in
@@ -164,7 +164,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
           })
         break
       case 2:
-        cell.imageView.transform = CGAffineTransformMakeTranslation(20, 0)
+        cell.imageView.transform = CGAffineTransform(translationX: 20, y: 0)
         
         UIView.animateKeyframesWithDuration(0.5, delay: 0, options: [], animations: { [weak cell] in
           UIView.addKeyframeWithRelativeStartTime(0.0, relativeDuration: 0.1, animations: { [weak cell] in
@@ -193,8 +193,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
   }
 
 	
-	func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    let displayViewController = DisplayViewController(nibName: "DisplayViewController", bundle: NSBundle.mainBundle())
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let displayViewController = DisplayViewController(nibName: "DisplayViewController", bundle: Bundle.main)
     let gif = self.homeViewModel.gifsForDisplay.value[indexPath.item]
     if (gif.thumbnailData != nil) {
       displayViewController.displayGifViewModel = DisplayViewModel(gif: gif)
@@ -204,7 +204,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
   var lastContentOffset:CGFloat = 0.0
   var isScrollingDown = true
-	func scrollViewDidScroll(scrollView: UIScrollView) {
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
     if (self.homeViewModel.foundTags.value.count < 1 && !searchView.hidden) {
       updateSearchViews()
     }
@@ -216,114 +216,114 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     lastContentOffset = scrollView.contentOffset.y;
 	}
   
-  func scrollViewDidScrollToTop(scrollView: UIScrollView) {
-    viewCollection.reloadItemsAtIndexPaths(viewCollection.indexPathsForVisibleItems())
+  func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+    viewCollection.reloadItems(at: viewCollection.indexPathsForVisibleItems)
   }
   
-  func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-    viewCollection.reloadItemsAtIndexPaths(viewCollection.indexPathsForVisibleItems())
+  func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    viewCollection.reloadItems(at: viewCollection.indexPathsForVisibleItems)
   }
 	
 	// MARK: UITableView Data Methods
 	
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return self.homeViewModel.foundTags.value.count
 	}
 	
-	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
 	}
 	
 	func adjustHeightOfTableView() {
-		autocompleteTableView.frame = CGRectMake(autocompleteTableView.frame.origin.x, autocompleteTableView.frame.origin.y, CGFloat(autocompleteTableView.frame.size.width), CGFloat(self.homeViewModel.tagTableViewCellHeight()));
+		autocompleteTableView.frame = CGRect(x: autocompleteTableView.frame.origin.x, y: autocompleteTableView.frame.origin.y, width: CGFloat(autocompleteTableView.frame.size.width), height: CGFloat(self.homeViewModel.tagTableViewCellHeight()));
 	}
 	
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cellIdentifier = "AutocompleteResultCell"
-		var cell = autocompleteTableView.dequeueReusableCellWithIdentifier(cellIdentifier) as UITableViewCell!
+		var cell = autocompleteTableView.dequeueReusableCell(withIdentifier: cellIdentifier) as UITableViewCell!
 		if (cell == nil) {
-			cell = UITableViewCell.init(style: UITableViewCellStyle.Default, reuseIdentifier: cellIdentifier)
+			cell = UITableViewCell.init(style: UITableViewCellStyle.default, reuseIdentifier: cellIdentifier)
 		}
 		if (self.homeViewModel.foundTags.value.count-1 >= indexPath.row) {
-			cell.textLabel?.text = self.homeViewModel.foundTags.value[indexPath.row].name.uppercaseString
+			cell?.textLabel?.text = self.homeViewModel.foundTags.value[indexPath.row].name.uppercaseString
 		}
-    cell.defaultAutocompleteProperties()
-		return cell
+    cell?.defaultAutocompleteProperties()
+		return cell!
 	}
 	
-	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		self.tagSearch.text = self.homeViewModel.foundTags.value[indexPath.row].name
     self.homeViewModel.searchText.value = self.homeViewModel.foundTags.value[indexPath.row].name
-		autocompleteTableView.deselectRowAtIndexPath(indexPath, animated: true)
+		autocompleteTableView.deselectRow(at: indexPath, animated: true)
 		textFieldShouldReturn(self.tagSearch)
 	}
 	
-	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return CGFloat(self.homeViewModel.cellHeight)
 	}
 	
-	override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     updateSearchViews()
-    self.viewCollection.superview?.bringSubviewToFront(viewCollection)
+    self.viewCollection.superview?.bringSubview(toFront: viewCollection)
 	}
 	
 	// MARK: UI Text Field Delegates
 	
-	func textFieldShouldReturn(textField: UITextField) -> Bool {
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     updateSearchViews()
-    self.viewCollection.superview?.bringSubviewToFront(viewCollection)
+    self.viewCollection.superview?.bringSubview(toFront: viewCollection)
     self.homeViewModel.getGifsForTagSearch()
 		return true
 	}
 	
-	func textFieldShouldClear(textField: UITextField) -> Bool {
+	func textFieldShouldClear(_ textField: UITextField) -> Bool {
     self.homeViewModel.searchText.value = ""
 		return true
 	}
   
   func showSettings() {
-    let settingsController = SettingsViewController(nibName: "Settings", bundle: NSBundle.mainBundle())
+    let settingsController = SettingsViewController(nibName: "Settings", bundle: Bundle.main)
     let navController = UINavigationController.init(rootViewController: settingsController)
-    self.presentViewController(navController, animated: true, completion: nil)
+    self.present(navController, animated: true, completion: nil)
   }
   
   func showUpdateAlert() {
     if (UserDefaults.showUpdateAlert) {
-      let alertConfig = MMAlertViewConfig.globalConfig()
-      alertConfig.defaultConfig()
-      alertConfig.defaultTextOK = "OK"
+      let alertConfig = MMAlertViewConfig.global()
+      alertConfig?.defaultConfig()
+      alertConfig?.defaultTextOK = "OK"
       let detailText = " - New Dark Theme in Settings \n - Shake Device to Randomize Gifs \n - Favorites and Keyboard Coming Soon!"
       let alertView = MMAlertView.init(confirmTitle: "Update", detail:detailText)
-      alertView.showCompletionBlock = { _, finished in
+      alertView?.showCompletionBlock = { _, finished in
         UserDefaults.showUpdateAlert = false
       }
-      alertView.show()
+      alertView?.show()
     }
   }
   
   func updateSearchViews() {
     var shouldHide:Bool = true
-    if (searchView.hidden) {
+    if (searchView.isHidden) {
       shouldHide = false
       addBlurEffect()
-      searchView.superview?.bringSubviewToFront(searchView)
-      autocompleteTableView.superview?.bringSubviewToFront(autocompleteTableView)
+      searchView.superview?.bringSubview(toFront: searchView)
+      autocompleteTableView.superview?.bringSubview(toFront: autocompleteTableView)
       tagSearch.becomeFirstResponder()
     } else {
       removeBlurView()
       view.endEditing(true)
       self.homeViewModel.endSeaching()
     }
-    tagSearch.hidden = shouldHide
-    searchView.hidden = shouldHide
+    tagSearch.isHidden = shouldHide
+    searchView.isHidden = shouldHide
   }
   
   func addBlurEffect() {
-    let blurStyle = UserDefaults.darkThemeEnabled ? UIBlurEffectStyle.Dark : UIBlurEffectStyle.Light
+    let blurStyle = UserDefaults.darkThemeEnabled ? UIBlurEffectStyle.dark : UIBlurEffectStyle.light
     let blurEffect = UIBlurEffect(style: blurStyle)
     let blurEffectView = UIVisualEffectView(effect: blurEffect)
     blurEffectView.frame = self.view.bounds
-    blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+    blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     blurEffectView.tag = 8888
     view.addSubview(blurEffectView)
   }
@@ -338,12 +338,12 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
   
   // MARK: shake delegates
   
-  override func canBecomeFirstResponder() -> Bool {
+  override var canBecomeFirstResponder : Bool {
     return true
   }
   
-  override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
-    if motion == .MotionShake {
+  override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+    if motion == .motionShake {
       self.homeViewModel.mixupGifArray()
     }
   }

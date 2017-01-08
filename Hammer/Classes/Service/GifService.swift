@@ -31,7 +31,7 @@ class GifService {
 		}
 	}
 	
-	func getGifsForTagSearchResponse(query: String) -> SignalProducer<Gifs, NSError> {
+	func getGifsForTagSearchResponse(_ query: String) -> SignalProducer<Gifs, NSError> {
 		return SignalProducer{  observer, disposable in
       print(Router.GifsForTag(query).URL)
 			Alamofire.request(Router.GifsForTag(query))
@@ -50,7 +50,7 @@ class GifService {
 		}
 	}
 	
-	func retrieveThumbnailImageFor(gif gif: Gif) -> SignalProducer<Gif, NSError> {
+	func retrieveThumbnailImageFor(gif: Gif) -> SignalProducer<Gif, NSError> {
 		return SignalProducer { observer, disposable in
 			Alamofire.request(.GET, gif.thumbnailUrl)
 				.responseData { response in
@@ -67,7 +67,7 @@ class GifService {
 		}
 	}
 	
-	func retrieveImageDataFor(gif gif: Gif) -> SignalProducer<NSData?, NSError> {
+	func retrieveImageDataFor(gif: Gif) -> SignalProducer<NSData?, NSError> {
 		return SignalProducer { observer, disposable in
 			Alamofire.request(.GET, gif.url)
 				.responseData { response in
@@ -83,7 +83,7 @@ class GifService {
 		}
 	}
   
-  func addGif(id id : String) -> SignalProducer<Bool, NSError> {
+  func addGif(id : String) -> SignalProducer<Bool, NSError> {
     return SignalProducer { 	observer, disposable in
       Alamofire.request(Router.AddGif(id))
         .responseJSON { response in
@@ -105,7 +105,7 @@ class GifService {
 extension String {
 	
 	mutating func replaceSpaces() -> String {
-		return self.stringByReplacingOccurrencesOfString(" ", withString: "-")
+		return self.replacingOccurrences(of: " ", with: "-")
 	}
 	
 }
