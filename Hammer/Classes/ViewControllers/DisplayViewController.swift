@@ -12,6 +12,7 @@ import ChameleonFramework
 import NVActivityIndicatorView
 import RxSwift
 import RxCocoa
+import NSGIF2
 
 import Font_Awesome_Swift
 import MMPopupView
@@ -43,7 +44,7 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 class DisplayViewController: UIViewController, UINavigationBarDelegate, UINavigationControllerDelegate {
 
 		@IBOutlet weak var imageView: UIImageView!
-    var gif: Gif?
+  
 		var tags: [Tag]?
 		var tagLabels: [PaddedTagLabel]? =  [PaddedTagLabel]()
 		var displayGifViewModel: DisplayViewModel!
@@ -58,11 +59,12 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
 			super.init(coder: aDecoder)
 		}
   
-    convenience  init() {
+    convenience init() {
       self.init(nibName: "DisplayViewController", bundle: nil)
     }
   
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+      
       super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
   
@@ -87,6 +89,10 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
       self.view.addConstraint(NSLayoutConstraint.init(item: loadingView, attribute: .height, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60))
 			loadingView.startAnimating()
 		}
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+  }
   
 		func bindViewModel() {
 
@@ -272,3 +278,23 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
 	}
 }
 
+//    let video = displayGifViewModel.gif.videoUrl
+//    let request = NSGIFRequest.init(sourceVideo: URL(string: video))
+//    request.framesPerSecond = 2
+//    request.scalePreset = NSGIFScale.original
+//
+//    NSGIF.create(request, completion: { [weak self] gifURL in
+//      guard let selfie = self else { return }
+//      print("GIF URL")
+//
+//      if let url = gifURL {
+//        let gifData = try! Data(contentsOf: url)
+//        let animation = selfie.view.viewWithTag(kLoadingAnimationTag) as? NVActivityIndicatorView
+//        animation?.stopAnimating()
+//        animation?.removeFromSuperview()
+//        selfie.displayGifViewModel.gifImage.value = UIImage.animatedImage(withAnimatedGIFData: gifData)
+//        selfie.imageView.image = selfie.displayGifViewModel.gifImage.value
+//        selfie.navigationItem.rightBarButtonItem = selfie.shareButton
+//      }
+//
+//    })

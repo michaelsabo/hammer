@@ -13,7 +13,7 @@ import RxSwift
 
 class DisplayViewModel : NSObject {
 	
-	let gif = Variable<Gif>(Gif())
+  let gif :Gif!
 	let tags = Variable<[Tag]>([])
   
 	let searchComplete = Variable(false)
@@ -34,10 +34,10 @@ class DisplayViewModel : NSObject {
   var tagService: TagService
 	
 	init(gif: Gif) {
-		
+		self.gif = gif
     self.gifService = GifService()
     self.tagService = TagService()
-    self.gif.value = gif
+    
     
     super.init()
     startGifImageSingal()
@@ -45,7 +45,7 @@ class DisplayViewModel : NSObject {
 	}
   
   func startGifImageSingal() {
-    self.gifService.retrieveImageDataFor(self.gif.value, completion: { [weak self] success,response in
+    self.gifService.retrieveImageDataFor(self.gif, completion: { [weak self] success,response in
       guard let data = response, let selfie = self else { return }
       selfie.gifData = data
       selfie.gifRequestSignal.value = true
@@ -53,7 +53,7 @@ class DisplayViewModel : NSObject {
   }
   
   func startTagSignal() {
-    self.tagService.getTagsForGifId(self.gif.value.id, completion: { [weak self] success, response in
+    self.tagService.getTagsForGifId(self.gif.id, completion: { [weak self] success, response in
       guard let selfie = self, let tags = response?.tags else { return }
       if (tags.count > 0) {
         selfie.tags.value = tags
@@ -69,7 +69,7 @@ class DisplayViewModel : NSObject {
   }
   
   func startCreateTagSignalRequest(_ tagText: String ) {
-    self.tagService.tagGifWith(self.gif.value.id, tag: tagText, completion: { [weak self] success, tag in
+    self.tagService.tagGifWith(self.gif.id, tag: tagText, completion: { [weak self] success, tag in
       guard let selfie = self else { return }
       selfie.createTagRequestSignal.value = true
     })

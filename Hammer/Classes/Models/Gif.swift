@@ -9,6 +9,7 @@
 import UIKit
 import SwiftyJSON
 import Alamofire
+import SwiftString3
 
 enum GifFields: String {
 	case Id = "id"
@@ -41,6 +42,7 @@ class Gif: NSObject {
 	var id: Int
 	var url: String
 	var thumbnailUrl: String
+  var videoUrl: String
 	var index: Int!
 	var gifData: Data?
 	var thumbnailData: Data?
@@ -51,12 +53,15 @@ class Gif: NSObject {
 		url = ""
 		thumbnailUrl = ""
 		index = 0
+    videoUrl = ""
 	}
 	
 	convenience init(json: JSON, index: Int) {
 		self.init()
 		self.id =  json[GifFields.Id.rawValue].intValue
 		self.url = json[GifFields.ImgurUrl.rawValue].stringValue
+    let chompedURL = self.url.chompLeft(".gif")
+    self.videoUrl = "\(chompedURL).mp4"
 		self.thumbnailUrl = json[GifFields.ImgurThumbnailUrl.rawValue].stringValue
 		self.index = index
 	}
@@ -67,6 +72,8 @@ class Gif: NSObject {
     self.url = url
     self.thumbnailUrl = thumbnailUrl
     self.index = index
+    let chompedURL = self.url.chompLeft(".gif")
+    self.videoUrl = "\(chompedURL).mp4"
   }
   
   override var hashValue : Int {

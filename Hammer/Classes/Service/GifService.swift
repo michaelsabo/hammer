@@ -64,6 +64,18 @@ class GifService {
 		}
 	}
   
+  func retrieveVideoDataFor(_ gif: Gif, completion: @escaping (_ success: Bool, _ data:Data?) -> Void) {
+    Alamofire.request(gif.videoUrl, method: .get)
+      .responseData { response in
+        if (response.result.isSuccess) {
+          if let data = response.result.value {
+            completion(true, data)
+          }
+        }
+        completion(false, nil)
+    }
+  }
+  
   func addGif(_ id : String, completion: @escaping (_ success: Bool) -> Void) {
       Alamofire.request(Router.addGif(id))
         .responseJSON { response in
