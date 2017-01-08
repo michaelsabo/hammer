@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class SettingsViewController : UIViewController, UINavigationBarDelegate, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource   {
 		
@@ -18,6 +19,8 @@ class SettingsViewController : UIViewController, UINavigationBarDelegate, UINavi
     return SettingsViewModel()
   }()
   
+  var disposeBag:DisposeBag! = DisposeBag()
+  
   override func viewDidLoad() {
     self.title = "Settings"
     let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(SettingsViewController.removeViewController))
@@ -25,9 +28,12 @@ class SettingsViewController : UIViewController, UINavigationBarDelegate, UINavi
     self.navigationItem.leftBarButtonItem = doneButton
     loadColorTheme()
     super.viewDidLoad()
-    self.settingsViewModel.changeThemeSignal.observeNext({ [weak self] darkTheme in
-      self?.loadColorTheme()
-    })
+    
+    self.settingsViewModel.darkThemeObserver
+      .asObservable()
+      .subscribe(onNext: { [weak self] val in
+        self?.loadColorTheme()
+      }).addDisposableTo(disposeBag)
   }
   
   func loadColorTheme() {
@@ -79,4 +85,7 @@ class SettingsViewController : UIViewController, UINavigationBarDelegate, UINavi
     tableView.deselectRow(at: indexPath, animated: true)
   }
   
+  deinit {
+    disposeBag = nil
+  }
 }

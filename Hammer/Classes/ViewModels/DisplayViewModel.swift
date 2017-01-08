@@ -7,30 +7,28 @@
 //
 
 import Foundation
-import ReactiveCocoa
+
 import MobileCoreServices
-import Result
+import RxSwift
 
 class DisplayViewModel : NSObject {
 	
-	let gif = MutableProperty<Gif>(Gif())
-	let tags = MutableProperty<[Tag]>([Tag]())
-	let searchComplete = MutableProperty(false)
-	let tagComplete = MutableProperty(false)
+	let gif = Variable<Gif>(Gif())
+	let tags = Variable<[Tag]>([])
   
+	let searchComplete = Variable(false)
+	let tagComplete = Variable(false)
+  
+  let createTagRequestSignal = Variable(false)
+
 	
-  let gifRequestSignal: Signal<Bool, NoError>
-  let tagRequestSignal: Signal<Bool, NoError>
-  let createTagRequestSignal: Signal<Bool, NoError>
-  let stopSignals : SignalProducer<(), NoError>
+  let gifRequestSignal = Variable(false)
+  let tagRequestSignal = Variable(false)
   
-  fileprivate let gifRequestObserver: Observer<Bool, NoError>
-  fileprivate let tagRequestObserver: Observer<Bool, NoError>
-  fileprivate let createTagRequestObserver: Observer<Bool, NoError>
-  fileprivate let stopSignalObserver: Observer<(), NoError>
-  
+  let stopSignals = Variable(false)
+
   var gifData : Data!
-  var gifImage = MutableProperty<UIImage?>(UIImage())
+  var gifImage = Variable<UIImage?>(UIImage())
   
 	var gifService: GifService
   var tagService: TagService
@@ -41,50 +39,27 @@ class DisplayViewModel : NSObject {
     self.tagService = TagService()
     self.gif.value = gif
     
-    let (gifSignal, gifObserver) = Signal<Bool, NoError>.pipe()
-    self.gifRequestSignal = gifSignal
-    self.gifRequestObserver = gifObserver
-    
-    let (tagSignal, tagObserver) = Signal<Bool, NoError>.pipe()
-    self.tagRequestSignal = tagSignal
-    self.tagRequestObserver = tagObserver
-    
-    let (createTagSignal, createTagObserver) = Signal<Bool, NoError>.pipe()
-    self.createTagRequestSignal = createTagSignal
-    self.createTagRequestObserver = createTagObserver
-
-    let (stopSignal, stopObserver) = SignalProducer<(), NoError>.buffer(5)
-    self.stopSignals = stopSignal
-    self.stopSignalObserver = stopObserver
-
     super.init()
     startGifImageSingal()
     startTagSignal()
 	}
   
   func startGifImageSingal() {
-    self.gifService.retrieveImageDataFor(gif: self.gif.value)
-      .on(next: { [weak self]
-        response in
-        guard (response != nil) else {
-          return
-        }
-          self?.gifData = NSData(data: response!)
-        }, completed: { [weak self] _ in
-          self?.gifRequestObserver.sendNext(true)
-      }).takeUntil(self.stopSignals).start()
+    self.gifService.retrieveImageDataFor(self.gif.value, completion: { [weak self] success,response in
+      guard let data = response, let selfie = self else { return }
+      selfie.gifData = data
+      selfie.gifRequestSignal.value = true
+    })
   }
   
   func startTagSignal() {
-    self.tagService.getTagsForGifId(self.gif.value.id)
-      .on(next: { [weak self]
-        response in
-        if (response.tags.count > 0) {
-          self?.tags.value = response.tags
-        }
-        }, completed: { [weak self] _ in
-          self?.tagRequestObserver.sendNext(true)
-      }).takeUntil(self.stopSignals).start()
+    self.tagService.getTagsForGifId(self.gif.value.id, completion: { [weak self] success, response in
+      guard let selfie = self, let tags = response?.tags else { return }
+      if (tags.count > 0) {
+        selfie.tags.value = tags
+        selfie.tagRequestSignal.value = true
+      }
+    })
   }
   
   var alertDetail : String  {
@@ -94,18 +69,15 @@ class DisplayViewModel : NSObject {
   }
   
   func startCreateTagSignalRequest(_ tagText: String ) {
-    self.tagService.tagGifWith(id: self.gif.value.id, tag: tagText)
-      .on(next: {
-        response in
-        
-        }, completed: { [weak self] in
-          self?.createTagRequestObserver.sendNext(true)
-      }).takeUntil(self.stopSignals).start()
+    self.tagService.tagGifWith(self.gif.value.id, tag: tagText, completion: { [weak self] success, tag in
+      guard let selfie = self else { return }
+      selfie.createTagRequestSignal.value = true
+    })
   }
   
   
   func stopServiceSignals() {
-    self.stopSignalObserver.sendNext()
+    stopSignals.value = true
   }
 
   

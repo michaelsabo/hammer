@@ -23,17 +23,17 @@ class ColorThemes {
   
   class func getBackgroundColor() -> UIColor {
     if (UserDefaults.darkThemeEnabled) {
-      return UIColor.flatBlackColor()
+      return UIColor.flatBlack
     } else {
-      return UIColor.flatWhiteColorDark()
+      return UIColor.flatWhiteDark
     }
   }
   
   class func navigationBarIconColor() -> UIColor {
     if (UserDefaults.darkThemeEnabled) {
-      return UIColor.flatWhiteColor()
+      return UIColor.flatWhite
     } else {
-      return UIColor.flatWhiteColor()
+      return UIColor.flatWhite
     }
   }
   
@@ -41,31 +41,31 @@ class ColorThemes {
     if (UserDefaults.darkThemeEnabled) {
       return  UIColor(red: CGFloat(37/255), green: CGFloat(37/255), blue: CGFloat(37/255), alpha: 1.0)
     } else {
-      return UIColor.flatTealColor()
+      return UIColor.flatTeal
     }
   }
   
   class func viewTextColor() -> UIColor {
     if (UserDefaults.darkThemeEnabled) {
-      return  UIColor.flatWhiteColor()
+      return  UIColor.flatWhite
     } else {
-      return UIColor.flatWhiteColor()
+      return UIColor.flatWhite
     }
   }
   
   class func getOutlineColor() -> UIColor {
     if (UserDefaults.darkThemeEnabled) {
-      return  UIColor.flatWhiteColorDark()
+      return  UIColor.flatWhiteDark
     } else {
-      return UIColor.flatTealColor()
+      return UIColor.flatTeal
     }
   }
   
   class func subviewsColor() -> UIColor {
     if (UserDefaults.darkThemeEnabled) {
-      return  UIColor.flatWhiteColor()
+      return  UIColor.flatWhite
     } else {
-      return UIColor.flatTealColor()
+      return UIColor.flatTeal
     }
   }
   
@@ -73,15 +73,15 @@ class ColorThemes {
     if (UserDefaults.darkThemeEnabled) {
       return UIColor(red: CGFloat(21/255), green: CGFloat(21/255), blue: CGFloat(21/255), alpha: 1.0)
     } else {
-      return UIColor.flatTealColor()
+      return UIColor.flatTeal
     }
   }
   
   class func tableViewHeaderTextColor() -> UIColor {
     if (UserDefaults.darkThemeEnabled) {
-      return  UIColor.flatWhiteColor()
+      return  UIColor.flatWhite
     } else {
-      return UIColor.flatBlackColor()
+      return UIColor.flatBlack
     }
   }
 }

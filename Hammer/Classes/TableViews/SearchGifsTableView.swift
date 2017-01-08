@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import ReactiveCocoa
+
 
 class SearchGifsTableView : UITableView {
   
@@ -25,7 +25,7 @@ class SearchGifsTableView : UITableView {
     self.translatesAutoresizingMaskIntoConstraints = false
     self.register(UITableViewCell.self, forCellReuseIdentifier: "AutocompleteResultCell")
     self.separatorStyle = UITableViewCellSeparatorStyle.singleLine
-    self.separatorColor = UIColor.flatBlackColorDark()
+    self.separatorColor = UIColor.flatBlackDark
     self.separatorStyle = .none
     self.backgroundColor = UIColor.clear
     self.bounces = false

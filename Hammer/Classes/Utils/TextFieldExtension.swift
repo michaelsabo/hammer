@@ -14,7 +14,7 @@ extension UITextField {
     self.placeholder = placeholder
     self.isHidden = true
     self.textAlignment = .center
-    self.backgroundColor = UIColor.flatWhiteColor()
+    self.backgroundColor = UIColor.flatWhite
     self.layer.cornerRadius = 15.0
     self.autocorrectionType = .no
     self.clearButtonMode = .always

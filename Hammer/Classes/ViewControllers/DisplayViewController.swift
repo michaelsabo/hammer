@@ -10,7 +10,7 @@ import UIKit
 import MobileCoreServices
 import ChameleonFramework
 import NVActivityIndicatorView
-import ReactiveCocoa
+
 import Font_Awesome_Swift
 import MMPopupView
 // FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
@@ -48,7 +48,7 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
     var newTagButton : UIButton!
     var tagsAddedToView = false
     let tagHeight:CGFloat = 34
-    var cocoaActionShare: CocoaAction?
+//    var cocoaActionShare: CocoaAction?
 		var shareButton: UIBarButtonItem?
   
 		required init?(coder aDecoder: NSCoder) {
@@ -74,51 +74,51 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
       self.view.clipsToBounds = true
 			self.configureNavigationBar()
 			let loadingFrame = CGRect(x: 0, y: 0, width: 60.0, height: 60.0)
-			let loadingView = NVActivityIndicatorView(frame: loadingFrame, type: .LineScalePulseOut, color: ColorThemes.subviewsColor())
+			let loadingView = NVActivityIndicatorView(frame: loadingFrame, type: .lineScalePulseOut, color: ColorThemes.subviewsColor())
 			loadingView.tag = kLoadingAnimationTag
       loadingView.translatesAutoresizingMaskIntoConstraints = false
 			self.view.addSubview(loadingView)
-      self.view.addConstraint(NSLayoutConstraint.init(item: loadingView, attribute: .CenterY, relatedBy: .Equal, toItem: self.imageView, attribute: .CenterY, multiplier: 1, constant: 0))
-      self.view.addConstraint(NSLayoutConstraint.init(item: loadingView, attribute: .CenterX, relatedBy: .Equal, toItem: self.imageView, attribute: .CenterX, multiplier: 1, constant: 0))
-      self.view.addConstraint(NSLayoutConstraint.init(item: loadingView, attribute: .Width, relatedBy: .GreaterThanOrEqual, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 60))
-      self.view.addConstraint(NSLayoutConstraint.init(item: loadingView, attribute: .Height, relatedBy: .GreaterThanOrEqual, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 60))
-			loadingView.startAnimation()
+      self.view.addConstraint(NSLayoutConstraint.init(item: loadingView, attribute: .centerY, relatedBy: .equal, toItem: self.imageView, attribute: .centerY, multiplier: 1, constant: 0))
+      self.view.addConstraint(NSLayoutConstraint.init(item: loadingView, attribute: .centerX, relatedBy: .equal, toItem: self.imageView, attribute: .centerX, multiplier: 1, constant: 0))
+      self.view.addConstraint(NSLayoutConstraint.init(item: loadingView, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60))
+      self.view.addConstraint(NSLayoutConstraint.init(item: loadingView, attribute: .height, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60))
+			loadingView.startAnimating()
 		}
 	
 		func bindViewModel() {
-      let shareAction = Action<Void, Void, NSError> { [weak self] in
-        self?.shareButtonClicked()
-        return SignalProducer.empty
-      }
-      cocoaActionShare = CocoaAction(shareAction, input: ())
-      shareButton = UIBarButtonItem(barButtonSystemItem: .Action, target: cocoaActionShare, action: CocoaAction.selector)
+//      let shareAction = Action<Void, Void, NSError> { [weak self] in
+//        self?.shareButtonClicked()
+//        return SignalProducer.empty
+//      }
+//      cocoaActionShare = CocoaAction(shareAction, input: ())
+//      shareButton = UIBarButtonItem(barButtonSystemItem: .Action, target: cocoaActionShare, action: CocoaAction.selector)
+//      
+//      self.displayGifViewModel.gifRequestSignal
+//        .observeNext({[weak self] observer in
+//          let animation = self?.view.viewWithTag(kLoadingAnimationTag) as? NVActivityIndicatorView
+//          animation?.stopAnimation()
+//          animation?.removeFromSuperview()
+//          self?.displayGifViewModel.gifImage.value = UIImage.animatedImageWithAnimatedGIFData(self?.displayGifViewModel.gifData)
+//          self?.imageView.image = self?.displayGifViewModel.gifImage.value
+//          self?.navigationItem.rightBarButtonItem = self?.shareButton
+//      })
       
-      self.displayGifViewModel.gifRequestSignal
-        .observeNext({[weak self] observer in
-          let animation = self?.view.viewWithTag(kLoadingAnimationTag) as? NVActivityIndicatorView
-          animation?.stopAnimation()
-          animation?.removeFromSuperview()
-          self?.displayGifViewModel.gifImage.value = UIImage.animatedImageWithAnimatedGIFData(self?.displayGifViewModel.gifData)
-          self?.imageView.image = self?.displayGifViewModel.gifImage.value
-          self?.navigationItem.rightBarButtonItem = self?.shareButton
-      })
-      
-      self.displayGifViewModel.tagRequestSignal
-        .observeOn(UIScheduler())
-        .observeNext({[weak self] observer in
-          self?.removeTagsAndButton()
-          self?.displayNewTagButton()
-          self?.horizonalTagLayout()
-      })
-      
-      self.displayGifViewModel.createTagRequestSignal
-        .observeOn(UIScheduler())
-        .observeNext({ [weak self] observer in
-          if (observer.boolValue == true) {
-            UserDefaults.incrementTagsAdded()
-            self?.displayGifViewModel.startTagSignal()
-          }
-      })
+//      self.displayGifViewModel.tagRequestSignal
+//        .observeOn(UIScheduler())
+//        .observeNext({[weak self] observer in
+//          self?.removeTagsAndButton()
+//          self?.displayNewTagButton()
+//          self?.horizonalTagLayout()
+//      })
+//      
+//      self.displayGifViewModel.createTagRequestSignal
+//        .observeOn(UIScheduler())
+//        .observeNext({ [weak self] observer in
+//          if (observer.boolValue == true) {
+//            UserDefaults.incrementTagsAdded()
+//            self?.displayGifViewModel.startTagSignal()
+//          }
+//      })
   }
   
   func removeTagsAndButton() {
@@ -131,7 +131,7 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
   
   func displayNewTagButton() {
     newTagButton = PaddedButton(frame: CGRect(x: 0,y: 0,width: 126,height: tagHeight)).newButton(withTitle: "new tag", target: self, selector: #selector(DisplayViewController.displayTagAlert), forControlEvent: .touchUpInside)
-    newTagButton.setFAText(prefixText: "", icon: FAType.FATag, postfixText: " add new tag!", size: 16, forState: .Normal)
+    newTagButton.setFAText(prefixText: "", icon: FAType.FATag, postfixText: " add new tag!", size: 16, forState: .normal)
     newTagButton.tag = 10005
     self.view.addSubview(newTagButton)
     self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: tagHeight))
@@ -145,7 +145,7 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
     alertConfig?.defaultTextCancel = "You Won't"
     let alertView = MMAlertView.init(inputTitle: "New Tag", detail: self.displayGifViewModel.alertDetail, placeholder: "lingo here..", handler: {  tagText in
       if (tagText?.characters.count > 2) {
-        self.displayGifViewModel.startCreateTagSignalRequest(tagText.lowercased())
+        self.displayGifViewModel.startCreateTagSignalRequest((tagText?.lowercased())!)
       } else {
        
       }
@@ -161,7 +161,7 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
       let label = PaddedTagLabel.init(text: tag.name)
       label.setFAText(prefixText: "", icon: FAType.FATag, postfixText: " \(label.text!)", size: 16)
       self.view.addSubview(label)
-      self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: tagHeight))
+      self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: tagHeight))
       label.setNeedsDisplay()
       self.tagLabels?.append(label)
     }
@@ -243,8 +243,8 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
         vc.popoverPresentationController?.sourceView = self.view
         vc.popoverPresentationController?.barButtonItem = self.shareButton
       }
-      vc.completionWithItemsHandler = {
-        (activityType: String?, completed: Bool, items: [AnyObject]?, err:NSError?) -> Void in
+      vc.completionWithItemsHandler = { activityType, completed, items, error in
+//        (activityType: String?, completed: Bool, items: [AnyObject]?, err:NSError?) -> Void in
         if !completed {
           return
         } else {

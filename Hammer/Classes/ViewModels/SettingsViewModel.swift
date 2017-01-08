@@ -7,8 +7,7 @@
 //
 
 import Foundation
-import ReactiveCocoa
-import Result
+import RxSwift
 
 class SettingsViewModel : NSObject {
   
@@ -17,13 +16,9 @@ class SettingsViewModel : NSObject {
   let sections = ["Customize", "Legalese"]
   let numberOfSections = 2
   
-  let changeThemeSignal: Signal<Bool, NoError>
-  let changeThemeObserver: Observer<Bool, NoError>
+  let darkThemeObserver = Variable(UserDefaults.darkThemeEnabled)
 
   override init() {
-    let (changeThemeSignal, changeThemeObserver) = Signal<Bool, NoError>.pipe()
-    self.changeThemeSignal = changeThemeSignal
-    self.changeThemeObserver = changeThemeObserver
     super.init()
   }
   
@@ -33,7 +28,7 @@ class SettingsViewModel : NSObject {
       cell.textLabel?.text = customizeList[indexPath.row]
       cell.tag = 678
       let darkTheme = UISwitch()
-      darkTheme.isOn = UserDefaults.darkThemeEnabled ?? false
+      darkTheme.isOn = UserDefaults.darkThemeEnabled 
       darkTheme.addTarget(self, action: #selector(SettingsViewModel.darkThemeTouched(_:)), for: .valueChanged)
       cell.accessoryView = darkTheme
     case 1:
@@ -41,7 +36,7 @@ class SettingsViewModel : NSObject {
     default:
       break
     }
-    cell.backgroundColor = UIColor.flatWhiteColor()
+    cell.backgroundColor = UIColor.flatWhite
     return cell
   }
   
@@ -73,7 +68,7 @@ class SettingsViewModel : NSObject {
   
   func darkThemeTouched(_ sender: UISwitch) {
     UserDefaults.darkThemeEnabled = sender.isOn
-    self.changeThemeObserver.sendNext(sender.on)
+    darkThemeObserver.value = sender.isOn
   }
   
 }

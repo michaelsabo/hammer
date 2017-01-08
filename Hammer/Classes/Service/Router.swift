@@ -27,9 +27,21 @@ enum ServiceResponse: Int {
 }
 
 enum Router: URLRequestConvertible {
-  static let Test = Foundation.URL(string: "http://ham-flyingdinos.rhcloud.com/api")!
-  static let Production = Foundation.URL(string: "http://52.2.139.235/api")!
-  static let Local = Foundation.URL(string: "http://localhost:9292/api/")!
+  /// Returns a URL request or throws if an `Error` was encountered.
+  ///
+  /// - throws: An `Error` if the underlying `URLRequest` is `nil`.
+  ///
+  /// - returns: A URL request.
+  public func asURLRequest() throws -> URLRequest {
+    var urlRequest = URLRequest(url: Router.Production.appendingPathComponent(route.path))
+    urlRequest.httpMethod = method.rawValue
+    return try Alamofire.JSONEncoding.default.encode(urlRequest, with: route.parameters)
+
+  }
+
+  static let Test = URL(string: "http://ham-flyingdinos.rhcloud.com/api")!
+  static let Production = URL(string: "http://52.2.139.235/api")!
+  static let Local = URL(string: "http://localhost:9292/api/")!
 	
   case gifs
   case gifsForTag(String)
@@ -38,7 +50,7 @@ enum Router: URLRequestConvertible {
   case tagsForGif(Int)
   case tagGifWithId(Int, String)
   
-  var URL: Foundation.URL { return Router.Production.appendingPathComponent(route.path) }
+  var buildURL: URL { return Router.Production.appendingPathComponent(route.path) }
   
   var route: (path: String, parameters: [String : AnyObject]?) {
     switch self {
@@ -51,21 +63,12 @@ enum Router: URLRequestConvertible {
     }
   }
   
-  var method : Alamofire.Method  {
+  var method : Alamofire.HTTPMethod  {
     switch self {
-    case .tagGifWithId(_,_)  : return .POST
-    case .addGif(_)  : return .POST
-    default : return .GET
+    case .tagGifWithId(_,_)  : return .post
+    case .addGif(_)  : return .post
+    default : return .get
     }
-  }
-  
-  var URLRequest: NSMutableURLRequest {
-    let mutableURLRequest = NSMutableURLRequest(url: URL)
-    mutableURLRequest.HTTPMethod = method.rawValue
-    return Alamofire
-      .ParameterEncoding
-      .URL
-      .encode(mutableURLRequest, parameters: (route.parameters ?? [ : ])).0
   }
 
 }

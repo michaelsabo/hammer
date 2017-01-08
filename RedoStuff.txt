@@ -1,0 +1,1 @@
+Re-add Ham-it.appex to the build phase for Embed App Extensions in Hammer target

@@ -7,100 +7,104 @@
 //
 
 import UIKit
-import ReactiveCocoa
+import RxSwift
 import GameKit
-import Result
+
 
 class HomeViewModel : NSObject {
 	
   let title: String = "HAM"
   let cellHeight:Int = 55
-	let searchText = MutableProperty<String>("")
-	let isSearching = MutableProperty<Bool>(false)
+	let searchText = Variable<String>("")
+	let isSearching = Variable<Bool>(false)
 	
-	let foundTags = MutableProperty<[Tag]>([Tag]())
-	var allTags =  MutableProperty<[Tag]>([Tag]())
+	let foundTags = Variable<[Tag]>([Tag]())
+	var allTags =  Variable<[Tag]>([Tag]())
 	
-	var gifCollection = MutableProperty<[Gif]>([Gif]())
-	var gifsForDisplay = MutableProperty<[Gif]>([Gif]())
+	var gifCollection = Variable<[Gif]>([Gif]())
+	var gifsForDisplay = Variable<[Gif]>([Gif]())
 	
-  let isSearchingSignal: Signal<Bool, NoError>
-  fileprivate let isSearchingObserver: Observer<Bool, NoError>
+  let isSearchingSignal = Variable(false)
   
 	fileprivate let tagService: TagService
 	fileprivate let gifService: GifService
 	
+  var disposeBag:DisposeBag! = DisposeBag()
+  
 	init(searchTagService: TagService, gifRetrieveService: GifService) {
 		self.tagService = searchTagService
 		self.gifService = gifRetrieveService
-    let (searchingSignal, searchingObserver) = Signal<Bool, NoError>.pipe()
-    self.isSearchingSignal = searchingSignal
-    self.isSearchingObserver = searchingObserver
+    
 		super.init()
     getGifs()
 		
-		tagService.getAllTags()
-			.on(next: {
-				response in
-					if (response.tags.count > 0) {
-						self.allTags.value = response.tags
-					}
-			})
-			.start()
+    tagService.getAllTags(completion: { success,response in
+      if success {
+        if let tags = response?.tags {
+          self.allTags.value = tags
+        }
+      }
+    })
+			
 		
-    isSearchingSignal
-      .observeNext({ (searching:Bool) in
+    isSearchingSignal.asObservable()
+      .subscribe(onNext: { searching in
         if (!searching) {
           self.gifsForDisplay.value = self.gifCollection.value
         }
-      })
+      }).addDisposableTo(disposeBag)
 
 	}
   
   func getGifs() {
-    gifService.getGifsResponse()
-      .on(next: {
-        response in
-        if (response.gifs.count > 0) {
-          self.gifCollection.value = response.gifs
+    gifService.getGifsResponse(completion: { success,response in
+      if let gifs = response?.gifs {
+        if gifs.count > 0 {
+          self.gifCollection.value = gifs
           self.gifsForDisplay.value = self.gifCollection.value
         }
-      })
-      .start()
+      }
+    })
   }
   
   func endSeaching() {
-    self.isSearchingObserver.sendNext(false)
+    isSearchingSignal.value = false
   }
 	
-	lazy var searchingTagsSignal: SignalProducer<[Tag]?, NoError> = {
-		return self.searchText.producer
-      .on(next: { _ in self.isSearchingObserver.sendNext(false) })
+	func searchingTagsSignal() -> Observable<[Tag]?> {
+//    return Observable.create { o in
+//      return Disposables.create {
+//        print("Disposed")
+//      }
+//    }
+//    return Observable.create { observer -> Disposable in
+      return self.searchText.asObservable()
+//      .flatMap { val in self.isSearchingSignal.value = false; return val }
 			.filter { $0.characters.count > 1 }
-			.map { [weak self] (value: String) -> [Tag]? in
+			.map({ [weak self] (value: String) -> [Tag]? in
 				self?.foundTags.value = [Tag]()
-				self?.isSearchingObserver.sendNext(true)
+				self?.isSearchingSignal.value = true
         if let tags = self?.allTags.value as [Tag]? {
           for tag in tags {
-            if ((tag.name.lowercaseString.rangeOfString(value.lowercaseString)) != nil) {
+            if ((tag.name.lowercased().range(of: value.lowercased())) != nil) {
               self?.foundTags.value.append(tag)
             }
           }
         }
-				return self?.foundTags.value
-		}
-  }()
+        return self?.foundTags.value
+      })
+  }
 	
-	func getGifsForTagSearch() -> Void {
-		gifService.getGifsForTagSearchResponse(self.searchText.value.lowercaseString)
-			.on(next: {
-					response in
-					if (response.gifs.count > 0) {
-						self.gifsForDisplay.value = response.gifs
-					} else {
-						self.gifsForDisplay.value = [Gif]()
-					}
-			}).start()
+	func getGifsForTagSearch() {
+    gifService.getGifsForTagSearchResponse(self.searchText.value.lowercased(), completion: { success,response in
+      if let gifs = response?.gifs {
+        if gifs.count > 0 {
+          self.gifsForDisplay.value = gifs
+        } else {
+          self.gifsForDisplay.value = []
+        }
+      }
+    })
 	}
   
   func tagTableViewCellHeight() -> Int {
@@ -122,11 +126,13 @@ class HomeViewModel : NSObject {
         return cell
       } else {
         cell.imageView.image = UIImage()
-        gifService.retrieveThumbnailImageFor(gif: gif)
-          .on(next: { [weak cell] responseGif in
-            cell?.setImage(responseGif.thumbnailData)
-        }).start()
-
+        gifService.retrieveThumbnailImageFor(gif, completion: { [weak cell] success,responseGif in
+          if success {
+            if let gif = responseGif {
+              cell?.setImage(gif.thumbnailData)
+            }
+          }
+        })
       }
     }
     return cell
@@ -140,7 +146,7 @@ class HomeViewModel : NSObject {
   
   func mixupGifArray() {
     resetAnimationFlag()
-    let newArray = GKRandomSource.sharedRandom().arrayByShufflingObjectsInArray(self.gifsForDisplay.value) as! [Gif]
+    let newArray = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: self.gifsForDisplay.value) as! [Gif]
     self.gifsForDisplay.value = newArray
   }
 }

@@ -7,100 +7,79 @@
 //
 
 import UIKit
-import ReactiveCocoa
+
 import Alamofire
 import SwiftyJSON
 
 class GifService {
 	
-	func getGifsResponse() -> SignalProducer<Gifs, NSError> {
-		return SignalProducer{ observer, disposable in
-				Alamofire.request(Router.Gifs)
-					.responseJSON { response in
-						if let json = response.result.value {
-							let gifs = Gifs(gifsJSON: JSON(json))
-							if (response.result.isSuccess) {
-								observer.sendNext(gifs)
-								observer.sendCompleted()
-							}
-						} else {
-
-						}
-						
-				}
+	func getGifsResponse(completion: @escaping (_ success: Bool, _ gifs:Gifs?) -> Void) {
+      Alamofire.request(Router.gifs)
+        .responseJSON { response in
+          if let json = response.result.value {
+            let gifs = Gifs(gifsJSON: JSON(json))
+            if (response.result.isSuccess) {
+              completion(true, gifs)
+            }
+          }
+          completion(false, nil)
 		}
 	}
 	
-	func getGifsForTagSearchResponse(_ query: String) -> SignalProducer<Gifs, NSError> {
-		return SignalProducer{  observer, disposable in
-      print(Router.GifsForTag(query).URL)
-			Alamofire.request(Router.GifsForTag(query))
+	func getGifsForTagSearchResponse(_ query: String, completion: @escaping (_ success: Bool, _ gifs:Gifs?) -> Void) {
+			Alamofire.request(Router.gifsForTag(query))
 				.responseJSON { response in
 					if let json = response.result.value {
 						let gifs = Gifs(gifsJSON: JSON(json))
 						if (response.result.isSuccess) {
-							observer.sendNext(gifs)
-							observer.sendCompleted()
-						}
-					} else {
-						
-					}
-					
+              completion(true, gifs)
+            }
+          }
+          completion(false, nil)
 			}
-		}
 	}
 	
-	func retrieveThumbnailImageFor(_ gif: Gif) -> SignalProducer<Gif, NSError> {
-		return SignalProducer { observer, disposable in
-			Alamofire.request(.GET, gif.thumbnailUrl)
+	func retrieveThumbnailImageFor(_ gif: Gif, completion: @escaping (_ success: Bool, _ gif:Gif?) -> Void) {
+			Alamofire.request(gif.thumbnailUrl, method: .get)
 				.responseData { response in
 					if (response.result.isSuccess) {
 						if let data = response.result.value {
               gif.thumbnailData = data
-							observer.sendNext(gif)
-							observer.sendCompleted()
-						}
-					} else {
-						
-					}
+              completion(true, gif)
+            }
+          }
+          completion(false, nil)
 			}
 		}
-	}
 	
-	func retrieveImageDataFor(_ gif: Gif) -> SignalProducer<NSData?, NSError> {
-		return SignalProducer { observer, disposable in
-			Alamofire.request(.GET, gif.url)
+	func retrieveImageDataFor(_ gif: Gif, completion: @escaping (_ success: Bool, _ data:Data?) -> Void) {
+    Alamofire.request(gif.url, method: .get)
 				.responseData { response in
 					if (response.result.isSuccess) {
 						if let data = response.result.value {
-							observer.sendNext(data)
-							observer.sendCompleted()
-						}
-					} else {
-						
-					}
-			}
+              completion(true, data)
+            }
+          }
+          completion(false, nil)
 		}
 	}
   
-  func addGif(_ id : String) -> SignalProducer<Bool, NSError> {
-    return SignalProducer { 	observer, disposable in
-      Alamofire.request(Router.AddGif(id))
+  func addGif(_ id : String, completion: @escaping (_ success: Bool) -> Void) {
+      Alamofire.request(Router.addGif(id))
         .responseJSON { response in
           if (response.result.isSuccess) {
 //            let json = JSON(response.result.value!)
 //            let gif = Gif(json: json["gif"], index: 0)
-            observer.sendNext(true)
-            observer.sendCompleted()
-          } else {
-            
+            completion(true)
           }
+          completion(false)
       }
-    }
   }
-	
-	
 }
+
+
+	
+
 
 extension String {
 	

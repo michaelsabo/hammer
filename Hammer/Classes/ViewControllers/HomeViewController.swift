@@ -8,11 +8,12 @@
 
 import UIKit
 import SwiftyJSON
-import ReactiveCocoa
 import ChameleonFramework
 import NVActivityIndicatorView
 import Font_Awesome_Swift
 import MMPopupView
+import RxSwift
+import RxCocoa
 
 class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UICollectionViewDelegateFlowLayout {
 	
@@ -32,8 +33,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		self.title = self.homeViewModel.title
-    let settingsIcon = UIBarButtonItem().setup(target: self, icon: .FAGear, action: "showSettings")
-    let searchIcon = UIBarButtonItem().setup(target: self, icon: .FASearch, action: "updateSearchViews")
+    let settingsIcon = UIBarButtonItem().setup(target: self, icon: .FAGear, action: #selector(HomeViewController.showSettings))
+    let searchIcon = UIBarButtonItem().setup(target: self, icon: .FASearch, action: #selector(HomeViewController.updateSearchViews))
     navigationItem.leftBarButtonItem = settingsIcon
     navigationItem.rightBarButtonItem = searchIcon
 		setupViews()
@@ -47,23 +48,26 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     self.viewCollection.backgroundColor = ColorThemes.getBackgroundColor()
     showUpdateAlert()
   }
-	
+  var disposeBag:DisposeBag! = DisposeBag()
 	func setupBindings() {
 		tagSearch.delegate = self
-		self.homeViewModel.searchText <~ tagSearch.rac_textSignalProducer()
-    RAC(self.autocompleteTableView, "hidden") <~ SignalProducer(signal: self.homeViewModel.isSearchingSignal.map({!$0}))
-
-		self.homeViewModel.gifsForDisplay.producer.startWithSignal( { signal, disposable in
-			signal.observe({ _ in
-				self.viewCollection.reloadData()
-        self.refreshControl.endRefreshing()
-			})
-		})
+		_ = tagSearch.rx.textInput <-> self.homeViewModel.searchText
     
-		self.homeViewModel.searchingTagsSignal.producer.start({ s in
-			self.adjustHeightOfTableView()
-			self.autocompleteTableView.reloadData()
-		})
+    
+//    RAC(self.autocompleteTableView, "hidden") <~ SignalProducer(signal: self.homeViewModel.isSearchingSignal.map({!$0}))
+
+		self.homeViewModel.gifsForDisplay.asObservable()
+      .subscribe(onNext: { _ in
+        self.viewCollection.reloadData()
+        self.refreshControl.endRefreshing()
+      }).addDisposableTo(disposeBag)
+    
+		_ = self.homeViewModel.searchingTagsSignal().asObservable()
+      .subscribe(onNext: { _ in
+        self.adjustHeightOfTableView()
+        self.autocompleteTableView.reloadData()
+      })
+
 	}
 	
 	func setupViews() {
@@ -115,7 +119,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCell
-		return self.homeViewModel.displayThumbnailForGif(indexPath: indexPath, cell: cell)
+		return self.homeViewModel.displayThumbnailForGif(indexPath, cell: cell)
 	}
   
   func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -129,18 +133,18 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
       switch indexPath.item % 3 {
       case 0:
         cell.imageView.transform = CGAffineTransform(translationX: -20, y: 0)
-        UIView.animateKeyframesWithDuration(0.5, delay: 0, options: [], animations: { [weak cell] in
-          UIView.addKeyframeWithRelativeStartTime(0.0, relativeDuration: 0.2, animations: { [weak cell] in
-            cell?.imageView.transform = CGAffineTransformMakeTranslation(-15, 0)
+        UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [], animations: { [weak cell] in
+          UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.2, animations: { [weak cell] in
+            cell?.imageView.transform = CGAffineTransform(translationX: -15, y: 0)
             })
-          UIView.addKeyframeWithRelativeStartTime(0.1, relativeDuration: 0.2, animations: { [weak cell] in
-            cell?.imageView.transform = CGAffineTransformMakeTranslation(-9, 0)
+          UIView.addKeyframe(withRelativeStartTime: 0.1, relativeDuration: 0.2, animations: { [weak cell] in
+            cell?.imageView.transform = CGAffineTransform(translationX: -9, y: 0)
             })
-          UIView.addKeyframeWithRelativeStartTime(0.2, relativeDuration: 0.2, animations: { [weak cell] in
-            cell?.imageView.transform = CGAffineTransformMakeTranslation(-6, 0)
+          UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.2, animations: { [weak cell] in
+            cell?.imageView.transform = CGAffineTransform(translationX: -6, y: 0)
             })
-          UIView.addKeyframeWithRelativeStartTime(0.3, relativeDuration: 0.1, animations: { [weak cell] in
-            cell?.imageView.transform = CGAffineTransformMakeTranslation(0, 0)
+          UIView.addKeyframe(withRelativeStartTime: 0.3, relativeDuration: 0.1, animations: { [weak cell] in
+            cell?.imageView.transform = CGAffineTransform(translationX: 0, y: 0)
             })
           }, completion: { [weak self] (finished: Bool) in
             self?.homeViewModel.gifsForDisplay.value[indexPath.item].showAnimation = false
@@ -149,15 +153,15 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
       case 1:
         cell.imageView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
         
-        UIView.animateKeyframesWithDuration(0.5, delay: 0, options: [], animations: { [weak cell] in
-          UIView.addKeyframeWithRelativeStartTime(0.0, relativeDuration: 0.1, animations: { [weak cell] in
-            cell?.imageView.transform = CGAffineTransformMakeScale(0.7, 0.7)
+        UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [], animations: { [weak cell] in
+          UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.1, animations: { [weak cell] in
+            cell?.imageView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
             })
-          UIView.addKeyframeWithRelativeStartTime(0.1, relativeDuration: 0.2, animations: { [weak cell] in
-            cell?.imageView.transform = CGAffineTransformMakeScale(0.8, 0.8)
+          UIView.addKeyframe(withRelativeStartTime: 0.1, relativeDuration: 0.2, animations: { [weak cell] in
+            cell?.imageView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
             })
-          UIView.addKeyframeWithRelativeStartTime(0.3, relativeDuration: 0.2, animations: { [weak cell] in
-            cell?.imageView.transform = CGAffineTransformMakeScale(1.0, 1.0)
+          UIView.addKeyframe(withRelativeStartTime: 0.3, relativeDuration: 0.2, animations: { [weak cell] in
+            cell?.imageView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
             })
           }, completion: { [weak self] (finished: Bool) in
             self?.homeViewModel.gifsForDisplay.value[indexPath.item].showAnimation = false
@@ -166,18 +170,18 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
       case 2:
         cell.imageView.transform = CGAffineTransform(translationX: 20, y: 0)
         
-        UIView.animateKeyframesWithDuration(0.5, delay: 0, options: [], animations: { [weak cell] in
-          UIView.addKeyframeWithRelativeStartTime(0.0, relativeDuration: 0.1, animations: { [weak cell] in
-            cell?.imageView.transform = CGAffineTransformMakeTranslation(15, 0)
+        UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [], animations: { [weak cell] in
+          UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.1, animations: { [weak cell] in
+            cell?.imageView.transform = CGAffineTransform(translationX: 15, y: 0)
             })
-          UIView.addKeyframeWithRelativeStartTime(0.1, relativeDuration: 0.1, animations: { [weak cell] in
-            cell?.imageView.transform = CGAffineTransformMakeTranslation(9, 0)
+          UIView.addKeyframe(withRelativeStartTime: 0.1, relativeDuration: 0.1, animations: { [weak cell] in
+            cell?.imageView.transform = CGAffineTransform(translationX: 9, y: 0)
             })
-          UIView.addKeyframeWithRelativeStartTime(0.2, relativeDuration: 0.1, animations: { [weak cell] in
-            cell?.imageView.transform = CGAffineTransformMakeTranslation(6, 0)
+          UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.1, animations: { [weak cell] in
+            cell?.imageView.transform = CGAffineTransform(translationX: 6, y: 0)
             })
-          UIView.addKeyframeWithRelativeStartTime(0.3, relativeDuration: 0.2, animations: { [weak cell] in
-            cell?.imageView.transform = CGAffineTransformMakeTranslation(0, 0)
+          UIView.addKeyframe(withRelativeStartTime: 0.3, relativeDuration: 0.2, animations: { [weak cell] in
+            cell?.imageView.transform = CGAffineTransform(translationX: 0, y: 0)
             })
           }, completion: { [weak self] (finished: Bool) in
             self?.homeViewModel.gifsForDisplay.value[indexPath.item].showAnimation = false
@@ -205,7 +209,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
   var lastContentOffset:CGFloat = 0.0
   var isScrollingDown = true
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    if (self.homeViewModel.foundTags.value.count < 1 && !searchView.hidden) {
+    if (self.homeViewModel.foundTags.value.count < 1 && !searchView.isHidden) {
       updateSearchViews()
     }
     if (lastContentOffset > scrollView.contentOffset.y) {
@@ -245,7 +249,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 			cell = UITableViewCell.init(style: UITableViewCellStyle.default, reuseIdentifier: cellIdentifier)
 		}
 		if (self.homeViewModel.foundTags.value.count-1 >= indexPath.row) {
-			cell?.textLabel?.text = self.homeViewModel.foundTags.value[indexPath.row].name.uppercaseString
+			cell?.textLabel?.text = self.homeViewModel.foundTags.value[indexPath.row].name.uppercased()
 		}
     cell?.defaultAutocompleteProperties()
 		return cell!

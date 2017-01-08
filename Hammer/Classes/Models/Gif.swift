@@ -22,8 +22,12 @@ class Gifs  {
 
 	init(gifsJSON: JSON) {
 		var count = 0
-		response = ServiceResponse.Success
-		gifs = removeDuplicates(gifsJSON["gifs"].arrayValue.map { Gif(json: $0, index: count++) })
+		response = ServiceResponse.success
+		gifs = removeDuplicates(gifsJSON["gifs"].arrayValue.map {
+      let g = Gif(json: $0, index: count)
+      count += 1
+      return g
+    })
 	}
   
   init() {
