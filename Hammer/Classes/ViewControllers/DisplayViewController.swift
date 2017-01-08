@@ -10,6 +10,8 @@ import UIKit
 import MobileCoreServices
 import ChameleonFramework
 import NVActivityIndicatorView
+import RxSwift
+import RxCocoa
 
 import Font_Awesome_Swift
 import MMPopupView
@@ -48,8 +50,9 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
     var newTagButton : UIButton!
     var tagsAddedToView = false
     let tagHeight:CGFloat = 34
-//    var cocoaActionShare: CocoaAction?
+
 		var shareButton: UIBarButtonItem?
+    var disposeBag:DisposeBag! = DisposeBag()
   
 		required init?(coder aDecoder: NSCoder) {
 			super.init(coder: aDecoder)
@@ -84,41 +87,45 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
       self.view.addConstraint(NSLayoutConstraint.init(item: loadingView, attribute: .height, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60))
 			loadingView.startAnimating()
 		}
-	
+  
 		func bindViewModel() {
-//      let shareAction = Action<Void, Void, NSError> { [weak self] in
-//        self?.shareButtonClicked()
-//        return SignalProducer.empty
-//      }
-//      cocoaActionShare = CocoaAction(shareAction, input: ())
-//      shareButton = UIBarButtonItem(barButtonSystemItem: .Action, target: cocoaActionShare, action: CocoaAction.selector)
-//      
-//      self.displayGifViewModel.gifRequestSignal
-//        .observeNext({[weak self] observer in
-//          let animation = self?.view.viewWithTag(kLoadingAnimationTag) as? NVActivityIndicatorView
-//          animation?.stopAnimation()
-//          animation?.removeFromSuperview()
-//          self?.displayGifViewModel.gifImage.value = UIImage.animatedImageWithAnimatedGIFData(self?.displayGifViewModel.gifData)
-//          self?.imageView.image = self?.displayGifViewModel.gifImage.value
-//          self?.navigationItem.rightBarButtonItem = self?.shareButton
-//      })
+
+      shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(DisplayViewController.shareButtonClicked))
+
+      self.displayGifViewModel.gifRequestSignal
+        .asObservable()
+        .distinctUntilChanged()
+        .subscribeOn(MainScheduler.instance)
+        .subscribe({  [weak self] _ in
+          guard let selfie = self else { return }
+          let animation = selfie.view.viewWithTag(kLoadingAnimationTag) as? NVActivityIndicatorView
+          animation?.stopAnimating()
+          animation?.removeFromSuperview()
+          selfie.displayGifViewModel.gifImage.value = UIImage.animatedImage(withAnimatedGIFData: selfie.displayGifViewModel.gifData)
+          selfie.imageView.image = selfie.displayGifViewModel.gifImage.value
+          selfie.navigationItem.rightBarButtonItem = selfie.shareButton
+        }).addDisposableTo(disposeBag)
       
-//      self.displayGifViewModel.tagRequestSignal
-//        .observeOn(UIScheduler())
-//        .observeNext({[weak self] observer in
-//          self?.removeTagsAndButton()
-//          self?.displayNewTagButton()
-//          self?.horizonalTagLayout()
-//      })
-//      
-//      self.displayGifViewModel.createTagRequestSignal
-//        .observeOn(UIScheduler())
-//        .observeNext({ [weak self] observer in
-//          if (observer.boolValue == true) {
-//            UserDefaults.incrementTagsAdded()
-//            self?.displayGifViewModel.startTagSignal()
-//          }
-//      })
+      
+      self.displayGifViewModel.tagRequestSignal
+        .asObservable()
+        .subscribeOn(MainScheduler.instance)
+        .subscribe(onNext: { [weak self] _ in
+          guard let selfie = self else { return }
+          selfie.removeTagsAndButton()
+          selfie.displayNewTagButton()
+          selfie.horizonalTagLayout()
+        }).addDisposableTo(disposeBag)
+      
+      self.displayGifViewModel.createTagRequestSignal
+        .asObservable()
+        .subscribeOn(MainScheduler.instance)
+        .subscribe(onNext: { [weak self] success in
+          if (success) {
+            UserDefaults.incrementTagsAdded()
+            self?.displayGifViewModel.startTagSignal()
+          }
+      }).addDisposableTo(disposeBag)
   }
   
   func removeTagsAndButton() {
@@ -244,7 +251,6 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
         vc.popoverPresentationController?.barButtonItem = self.shareButton
       }
       vc.completionWithItemsHandler = { activityType, completed, items, error in
-//        (activityType: String?, completed: Bool, items: [AnyObject]?, err:NSError?) -> Void in
         if !completed {
           return
         } else {

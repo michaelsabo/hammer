@@ -72,14 +72,7 @@ class HomeViewModel : NSObject {
   }
 	
 	func searchingTagsSignal() -> Observable<[Tag]?> {
-//    return Observable.create { o in
-//      return Disposables.create {
-//        print("Disposed")
-//      }
-//    }
-//    return Observable.create { observer -> Disposable in
-      return self.searchText.asObservable()
-//      .flatMap { val in self.isSearchingSignal.value = false; return val }
+    return self.searchText.asObservable()
 			.filter { $0.characters.count > 1 }
 			.map({ [weak self] (value: String) -> [Tag]? in
 				self?.foundTags.value = [Tag]()
