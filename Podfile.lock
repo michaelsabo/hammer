@@ -14,6 +14,7 @@ PODS:
   - NSGIF2 (1.5.2)
   - NVActivityIndicatorView (3.0)
   - Quick (1.0.0)
+  - Regift (1.3.0)
   - RxBlocking (3.0.1):
     - RxSwift (~> 3.0)
   - RxCocoa (3.0.1):
@@ -35,6 +36,7 @@ DEPENDENCIES:
   - NSGIF2 (from `https://github.com/metasmile/NSGIF2`)
   - NVActivityIndicatorView (= 3.0.0)
   - Quick (= 1.0.0)
+  - Regift (from `../Regift`)
   - RxBlocking (= 3.0.1)
   - RxCocoa (= 3.0.1)
   - RxSwift (= 3.0.1)
@@ -50,6 +52,8 @@ EXTERNAL SOURCES:
     :git: https://github.com/michaelsabo/MMPopupView
   NSGIF2:
     :git: https://github.com/metasmile/NSGIF2
+  Regift:
+    :path: ../Regift
 
 CHECKOUT OPTIONS:
   ChameleonFramework:
@@ -74,6 +78,7 @@ SPEC CHECKSUMS:
   NSGIF2: 89d6d6a48bb86a2f846e85519a0509bcd567037e
   NVActivityIndicatorView: 81953b5e65093ba79edf4fe7268e002039ca5268
   Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
+  Regift: 43c5e057949a9e2b16de0bcf0a221a5dbd033211
   RxBlocking: 5de082d09d1ab45b49173f309f1a97d6b50f34c4
   RxCocoa: 15a52fc590dcc700cb4a690a633b5c5184ce3a78
   RxSwift: af5680055c4ad04480189c52d28385b1029493a6
@@ -81,6 +86,6 @@ SPEC CHECKSUMS:
   SwiftString3: 1de59016efce9b4a9adb491995f74ef50d0aa920
   SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
 
-PODFILE CHECKSUM: c7f1eafea353ac792882eb0fb119163363d4fd21
+PODFILE CHECKSUM: fafc26fa64acc2d95a5436a5eb7cdb1627a87c01
 
 COCOAPODS: 1.1.1

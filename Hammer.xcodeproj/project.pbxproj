@@ -52,6 +52,7 @@
 		27B6CFF11C533973008B66C4 /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27B6CFF01C533973008B66C4 /* ImageCell.xib */; };
 		27C75CAE1BC21CC0008AC322 /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C75CAD1BC21CC0008AC322 /* Gif.swift */; };
 		27C75CB01BC22E1B008AC322 /* DisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C75CAF1BC22E1B008AC322 /* DisplayViewController.swift */; };
+		27CC529B1E25BB420014296E /* UIImage+Jif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CC529A1E25BB420014296E /* UIImage+Jif.swift */; };
 		27CD49961BEEFFF800586B4D /* CollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711AE3C1BDB2AFB000C47B2 /* CollectionViewLayout.swift */; };
 		27CD49971BEF01AF00586B4D /* GifServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F3B32E1BEE961B00B94731 /* GifServiceSpec.swift */; };
 		27CD49981BEF01AF00586B4D /* TagServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F3B3301BEEA7BC00B94731 /* TagServiceSpec.swift */; };
@@ -188,6 +189,7 @@
 		27B6CFF01C533973008B66C4 /* ImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCell.xib; sourceTree = "<group>"; };
 		27C75CAD1BC21CC0008AC322 /* Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
 		27C75CAF1BC22E1B008AC322 /* DisplayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayViewController.swift; sourceTree = "<group>"; };
+		27CC529A1E25BB420014296E /* UIImage+Jif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Jif.swift"; sourceTree = "<group>"; };
 		27CD49AF1BEF0C5100586B4D /* DisplayViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayViewModelSpec.swift; sourceTree = "<group>"; };
 		27D16A431BDC1A55000B75B2 /* LoadingAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingAnimation.swift; sourceTree = "<group>"; };
 		27D8CFC21E2221950088B67E /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				278757761C547ED000633D65 /* BarButtonExtension.swift */,
 				278757781C54857900633D65 /* AlertViewExtension.swift */,
 				27D8CFC21E2221950088B67E /* Operators.swift */,
+				27CC529A1E25BB420014296E /* UIImage+Jif.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -871,6 +874,7 @@
 				27197E181BC239DC00525F33 /* UIImage+animatedGIF.m in Sources */,
 				275212B51BEF89A300BE3FE9 /* SearchGifsTableView.swift in Sources */,
 				278CA0171BCDA9CE000904D7 /* GifService.swift in Sources */,
+				27CC529B1E25BB420014296E /* UIImage+Jif.swift in Sources */,
 				27C75CB01BC22E1B008AC322 /* DisplayViewController.swift in Sources */,
 				2719DA291BCC7B6A00BD02AD /* HomeViewModel.swift in Sources */,
 				276C7FFE1BC2116F0028DC0D /* ImageCell.swift in Sources */,

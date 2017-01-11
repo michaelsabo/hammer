@@ -12,7 +12,7 @@ import ChameleonFramework
 import NVActivityIndicatorView
 import RxSwift
 import RxCocoa
-import NSGIF2
+import Regift
 
 import Font_Awesome_Swift
 import MMPopupView
@@ -97,20 +97,34 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
 		func bindViewModel() {
 
       shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(DisplayViewController.shareButtonClicked))
-
-      self.displayGifViewModel.gifRequestSignal
-        .asObservable()
-        .distinctUntilChanged()
-        .subscribeOn(MainScheduler.instance)
-        .subscribe({  [weak self] _ in
-          guard let selfie = self else { return }
-          let animation = selfie.view.viewWithTag(kLoadingAnimationTag) as? NVActivityIndicatorView
-          animation?.stopAnimating()
-          animation?.removeFromSuperview()
-          selfie.displayGifViewModel.gifImage.value = UIImage.animatedImage(withAnimatedGIFData: selfie.displayGifViewModel.gifData)
-          selfie.imageView.image = selfie.displayGifViewModel.gifImage.value
-          selfie.navigationItem.rightBarButtonItem = selfie.shareButton
-        }).addDisposableTo(disposeBag)
+      DispatchQueue.global().async {
+        Regift.createGIFFromSource(URL(safeString: self.displayGifViewModel.gif.videoUrl)) { [weak self] (result) in
+          if let selfie = self, let filePath = result {
+              DispatchQueue.main.async {
+                let animation = selfie.view.viewWithTag(kLoadingAnimationTag) as? NVActivityIndicatorView
+                animation?.stopAnimating()
+                animation?.removeFromSuperview()
+//                selfie.displayGifViewModel.gifImage.value = UIImage.animatedImage(withAnimatedGIFData: data)
+                selfie.imageView.image = UIImage.animatedImage(withAnimatedGIFURL: filePath)//selfie.displayGifViewModel.gifImage.value
+                selfie.navigationItem.rightBarButtonItem = selfie.shareButton
+              }
+          }
+        }
+      }
+      
+//      self.displayGifViewModel.gifRequestSignal
+//        .asObservable()
+//        .distinctUntilChanged()
+//        .subscribeOn(MainScheduler.instance)
+//        .subscribe({  [weak self] _ in
+//          guard let selfie = self else { return }
+//          let animation = selfie.view.viewWithTag(kLoadingAnimationTag) as? NVActivityIndicatorView
+//          animation?.stopAnimating()
+//          animation?.removeFromSuperview()
+//          selfie.displayGifViewModel.gifImage.value = UIImage.animatedImage(withAnimatedGIFData: selfie.displayGifViewModel.gifData)
+//          selfie.imageView.image = selfie.displayGifViewModel.gifImage.value
+//          selfie.navigationItem.rightBarButtonItem = selfie.shareButton
+//        }).addDisposableTo(disposeBag)
       
       
       self.displayGifViewModel.tagRequestSignal

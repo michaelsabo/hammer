@@ -20,6 +20,7 @@ def base
   pod 'RxBlocking', '3.0.1'
   pod 'NSGIF2', :git => 'https://github.com/metasmile/NSGIF2'
   pod 'SwiftString3', '1.0.11'
+  pod 'Regift', :path => '../Regift'
 end
 
 target 'Hammer' do
