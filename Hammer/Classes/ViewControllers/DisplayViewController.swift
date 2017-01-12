@@ -94,35 +94,41 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
     super.viewDidAppear(animated)
   }
   
+  func displayGif() {
+    let animation = self.view.viewWithTag(kLoadingAnimationTag) as? NVActivityIndicatorView
+    animation?.stopAnimating()
+    animation?.removeFromSuperview()
+    self.imageView.image = UIImage.animatedImage(withAnimatedGIFData: displayGifViewModel.gifData)
+    self.navigationItem.rightBarButtonItem = self.shareButton
+  }
+  
 		func bindViewModel() {
 
       shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(DisplayViewController.shareButtonClicked))
       DispatchQueue.global().async {
         Regift.createGIFFromSource(URL(safeString: self.displayGifViewModel.gif.videoUrl)) { [weak self] (result) in
-          if let selfie = self, let filePath = result {
-              DispatchQueue.main.async {
-                let animation = selfie.view.viewWithTag(kLoadingAnimationTag) as? NVActivityIndicatorView
-                animation?.stopAnimating()
-                animation?.removeFromSuperview()
-//                selfie.displayGifViewModel.gifImage.value = UIImage.animatedImage(withAnimatedGIFData: data)
-                selfie.imageView.image = UIImage.animatedImage(withAnimatedGIFURL: filePath)//selfie.displayGifViewModel.gifImage.value
-                selfie.navigationItem.rightBarButtonItem = selfie.shareButton
+            if let selfie = self, let filePath = result {
+              if let data = try? Data(contentsOf: filePath) {
+                selfie.displayGifViewModel.gifData = data
+                DispatchQueue.main.async {
+                  selfie.displayGif()
+                }
               }
-          }
+            }
         }
       }
       
 //      self.displayGifViewModel.gifRequestSignal
 //        .asObservable()
-//        .distinctUntilChanged()
+//        .filter({$0})
 //        .subscribeOn(MainScheduler.instance)
 //        .subscribe({  [weak self] _ in
 //          guard let selfie = self else { return }
 //          let animation = selfie.view.viewWithTag(kLoadingAnimationTag) as? NVActivityIndicatorView
 //          animation?.stopAnimating()
 //          animation?.removeFromSuperview()
-//          selfie.displayGifViewModel.gifImage.value = UIImage.animatedImage(withAnimatedGIFData: selfie.displayGifViewModel.gifData)
-//          selfie.imageView.image = selfie.displayGifViewModel.gifImage.value
+////          selfie.displayGifViewModel.gifImage.value = displayGifViewModel.gifData)
+//          selfie.imageView.image = UIImage.animatedImage(withAnimatedGIFData: selfie.displayGifViewModel.gifData)
 //          selfie.navigationItem.rightBarButtonItem = selfie.shareButton
 //        }).addDisposableTo(disposeBag)
       

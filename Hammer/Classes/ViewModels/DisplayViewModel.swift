@@ -47,9 +47,10 @@ class DisplayViewModel : NSObject {
   
   func startGifImageSingal() {
 //    DispatchQueue.global().async {
-//      Regift.createGIFFromSource(URL(safeString: self.gif.videoUrl), frameCount: 20, delayTime: 0) { [weak self] (result) in
+//      Regift.createGIFFromSource(URL(safeString: self.gif.videoUrl)) { [weak self] (result) in
 //        if let selfie = self, let filePath = result {
 //          if let data = try? Data(contentsOf: filePath) {
+//            print("FINISHED GIF DATA RETRIEVEAL")
 //            selfie.gifData = data
 //            selfie.gifRequestSignal.value = true
 //          }
