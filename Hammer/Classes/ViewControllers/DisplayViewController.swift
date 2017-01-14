@@ -13,9 +13,11 @@ import NVActivityIndicatorView
 import RxSwift
 import RxCocoa
 import Regift
-
+import Gifu
 import Font_Awesome_Swift
 import MMPopupView
+import BonMot
+
 // FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
 // Consider refactoring the code to use the non-optional operators.
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
@@ -43,115 +45,116 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 class DisplayViewController: UIViewController, UINavigationBarDelegate, UINavigationControllerDelegate {
 
-		@IBOutlet weak var imageView: UIImageView!
+  @IBOutlet weak var imageView: GIFImageView!
   
-		var tags: [Tag]?
-		var tagLabels: [PaddedTagLabel]? =  [PaddedTagLabel]()
-		var displayGifViewModel: DisplayViewModel!
-    var newTagButton : UIButton!
-    var tagsAddedToView = false
-    let tagHeight:CGFloat = 34
+  @IBOutlet weak var videoSizeLabel: UILabel! {
+    didSet {
+      videoSizeLabel.isHidden = true
+    }
+  }
+  @IBOutlet weak var gifSizeLabel: UILabel! {
+    didSet {
+      gifSizeLabel.isHidden = true
+    }
+  }
+  
+  var tags: [Tag]?
+  var tagLabels: [PaddedTagLabel]? =  [PaddedTagLabel]()
+  var displayGifViewModel: DisplayViewModel!
+  var newTagButton : UIButton!
+  var tagsAddedToView = false
+  let tagHeight:CGFloat = 34
 
-		var shareButton: UIBarButtonItem?
-    var disposeBag:DisposeBag! = DisposeBag()
+  var shareButton: UIBarButtonItem?
+  var disposeBag:DisposeBag! = DisposeBag()
+
+  var videoSize:Int = 0
+  var gifVideoSize:Int = 0
   
-		required init?(coder aDecoder: NSCoder) {
-			super.init(coder: aDecoder)
-		}
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+  }
+
+  convenience init() {
+    self.init(nibName: "DisplayViewController", bundle: nil)
+  }
+
+  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    
+    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+  }
   
-    convenience init() {
-      self.init(nibName: "DisplayViewController", bundle: nil)
-    }
-  
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-      
-      super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-  
-    override func viewDidLoad() {
-      super.viewDidLoad()
-			setupView()
-			bindViewModel()
-		}
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setupView()
+    bindViewModel()
+  }
 	
-		func setupView() {
-			self.view.backgroundColor = ColorThemes.getBackgroundColor()
-      self.view.clipsToBounds = true
-			self.configureNavigationBar()
-			let loadingFrame = CGRect(x: 0, y: 0, width: 60.0, height: 60.0)
-			let loadingView = NVActivityIndicatorView(frame: loadingFrame, type: .lineScalePulseOut, color: ColorThemes.subviewsColor())
-			loadingView.tag = kLoadingAnimationTag
-      loadingView.translatesAutoresizingMaskIntoConstraints = false
-			self.view.addSubview(loadingView)
-      self.view.addConstraint(NSLayoutConstraint.init(item: loadingView, attribute: .centerY, relatedBy: .equal, toItem: self.imageView, attribute: .centerY, multiplier: 1, constant: 0))
-      self.view.addConstraint(NSLayoutConstraint.init(item: loadingView, attribute: .centerX, relatedBy: .equal, toItem: self.imageView, attribute: .centerX, multiplier: 1, constant: 0))
-      self.view.addConstraint(NSLayoutConstraint.init(item: loadingView, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60))
-      self.view.addConstraint(NSLayoutConstraint.init(item: loadingView, attribute: .height, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60))
-			loadingView.startAnimating()
-		}
-  
+  func setupView() {
+    self.view.backgroundColor = ColorThemes.getBackgroundColor()
+    self.view.clipsToBounds = true
+    self.configureNavigationBar()
+    let loadingFrame = CGRect(x: 0, y: 0, width: 60.0, height: 60.0)
+    let loadingView = NVActivityIndicatorView(frame: loadingFrame, type: .lineScalePulseOut, color: ColorThemes.subviewsColor())
+    loadingView.tag = kLoadingAnimationTag
+    loadingView.translatesAutoresizingMaskIntoConstraints = false
+    self.view.addSubview(loadingView)
+    self.view.addConstraint(NSLayoutConstraint.init(item: loadingView, attribute: .centerY, relatedBy: .equal, toItem: self.imageView, attribute: .centerY, multiplier: 1, constant: 0))
+    self.view.addConstraint(NSLayoutConstraint.init(item: loadingView, attribute: .centerX, relatedBy: .equal, toItem: self.imageView, attribute: .centerX, multiplier: 1, constant: 0))
+    self.view.addConstraint(NSLayoutConstraint.init(item: loadingView, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60))
+    self.view.addConstraint(NSLayoutConstraint.init(item: loadingView, attribute: .height, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60))
+    loadingView.startAnimating()
+  }
+
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
   }
   
-  func displayGif() {
-    let animation = self.view.viewWithTag(kLoadingAnimationTag) as? NVActivityIndicatorView
-    animation?.stopAnimating()
-    animation?.removeFromSuperview()
-    self.imageView.image = UIImage.animatedImage(withAnimatedGIFData: displayGifViewModel.gifData)
-    self.navigationItem.rightBarButtonItem = self.shareButton
-  }
-  
-		func bindViewModel() {
+  func bindViewModel() {
 
-      shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(DisplayViewController.shareButtonClicked))
-      DispatchQueue.global().async {
-        Regift.createGIFFromSource(URL(safeString: self.displayGifViewModel.gif.videoUrl)) { [weak self] (result) in
-            if let selfie = self, let filePath = result {
-              if let data = try? Data(contentsOf: filePath) {
-                selfie.displayGifViewModel.gifData = data
-                DispatchQueue.main.async {
-                  selfie.displayGif()
-                }
-              }
-            }
-        }
-      }
-      
-//      self.displayGifViewModel.gifRequestSignal
-//        .asObservable()
-//        .filter({$0})
-//        .subscribeOn(MainScheduler.instance)
-//        .subscribe({  [weak self] _ in
-//          guard let selfie = self else { return }
-//          let animation = selfie.view.viewWithTag(kLoadingAnimationTag) as? NVActivityIndicatorView
-//          animation?.stopAnimating()
-//          animation?.removeFromSuperview()
-////          selfie.displayGifViewModel.gifImage.value = displayGifViewModel.gifData)
-//          selfie.imageView.image = UIImage.animatedImage(withAnimatedGIFData: selfie.displayGifViewModel.gifData)
-//          selfie.navigationItem.rightBarButtonItem = selfie.shareButton
-//        }).addDisposableTo(disposeBag)
-      
-      
-      self.displayGifViewModel.tagRequestSignal
-        .asObservable()
-        .subscribeOn(MainScheduler.instance)
-        .subscribe(onNext: { [weak self] _ in
-          guard let selfie = self else { return }
-          selfie.removeTagsAndButton()
-          selfie.displayNewTagButton()
-          selfie.horizonalTagLayout()
-        }).addDisposableTo(disposeBag)
-      
-      self.displayGifViewModel.createTagRequestSignal
-        .asObservable()
-        .subscribeOn(MainScheduler.instance)
-        .subscribe(onNext: { [weak self] success in
-          if (success) {
-            UserDefaults.incrementTagsAdded()
-            self?.displayGifViewModel.startTagSignal()
-          }
+    shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(DisplayViewController.shareButtonClicked))
+
+    self.displayGifViewModel.gifRequestSignal
+      .asObservable()
+      .filter({$0})
+      .observeOn(MainScheduler.instance)
+      .subscribe({  [weak self] _ in
+        guard let selfie = self else { return }
+        let animation = selfie.view.viewWithTag(kLoadingAnimationTag) as? NVActivityIndicatorView
+        animation?.stopAnimating()
+        animation?.removeFromSuperview()
+        selfie.imageView.prepareForAnimation(withGIFData: selfie.displayGifViewModel.gifData)
+        selfie.imageView.startAnimatingGIF()
+        selfie.imageView.gifData = selfie.displayGifViewModel.gifData
+        selfie.imageView.isUserInteractionEnabled = true
+        selfie.navigationItem.rightBarButtonItem = selfie.shareButton
+        selfie.videoSizeLabel.isHidden = false
+        selfie.videoSizeLabel.attributedText = "download size: \(selfie.displayGifViewModel.videoSize.fileSize)".styled(with:ColorThemes.fileInfoStyle())
+        selfie.gifSizeLabel.isHidden = false
+        selfie.gifSizeLabel.attributedText = "gif size: \(selfie.displayGifViewModel.gifData.count.fileSize)".styled(with:ColorThemes.fileInfoStyle())
+        selfie.imageView.enableLongPress()
       }).addDisposableTo(disposeBag)
+      
+      
+    self.displayGifViewModel.tagRequestSignal
+      .asObservable()
+      .subscribeOn(MainScheduler.instance)
+      .subscribe(onNext: { [weak self] _ in
+        guard let selfie = self else { return }
+        selfie.removeTagsAndButton()
+        selfie.displayNewTagButton()
+        selfie.horizonalTagLayout()
+      }).addDisposableTo(disposeBag)
+    
+    self.displayGifViewModel.createTagRequestSignal
+      .asObservable()
+      .subscribeOn(MainScheduler.instance)
+      .subscribe(onNext: { [weak self] success in
+        if (success) {
+          UserDefaults.incrementTagsAdded()
+          self?.displayGifViewModel.startTagSignal()
+        }
+    }).addDisposableTo(disposeBag)
   }
   
   func removeTagsAndButton() {
@@ -220,7 +223,7 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
       let objWidth = label.frame.size.width
       
       if (index == 0) {
-        self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .top, relatedBy: .equal, toItem: self.imageView, attribute: .bottom, multiplier: 1, constant: yPadding))
+        self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .top, relatedBy: .equal, toItem: self.videoSizeLabel, attribute: .bottom, multiplier: 1, constant: yPadding))
         self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .left, relatedBy: .equal, toItem: self.view, attribute: .left, multiplier: 1, constant: xPadding))
         rowTupleArray[rowTupleArray.count-1].currentWidth = objWidth + xPadding
       } else {
@@ -246,7 +249,7 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
     }
     
     guard self.tagLabels?.count > 0 else {
-      self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .top, relatedBy: .equal, toItem: self.imageView, attribute: .bottom, multiplier: 1, constant: yPadding))
+      self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .top, relatedBy: .equal, toItem: self.videoSizeLabel, attribute: .bottom, multiplier: 1, constant: yPadding))
       self.view.addConstraint(NSLayoutConstraint.init(item: newTagButton, attribute: .left, relatedBy: .equal, toItem: self.view, attribute: .left, multiplier: 1, constant: xPadding))
       self.view.addConstraint(NSLayoutConstraint.init(item: self.view, attribute: .right, relatedBy: .greaterThanOrEqual, toItem: newTagButton, attribute: .rightMargin, multiplier: 1, constant: xPadding))
       return
@@ -297,24 +300,3 @@ class DisplayViewController: UIViewController, UINavigationBarDelegate, UINaviga
 		print("deiniting")
 	}
 }
-
-//    let video = displayGifViewModel.gif.videoUrl
-//    let request = NSGIFRequest.init(sourceVideo: URL(string: video))
-//    request.framesPerSecond = 2
-//    request.scalePreset = NSGIFScale.original
-//
-//    NSGIF.create(request, completion: { [weak self] gifURL in
-//      guard let selfie = self else { return }
-//      print("GIF URL")
-//
-//      if let url = gifURL {
-//        let gifData = try! Data(contentsOf: url)
-//        let animation = selfie.view.viewWithTag(kLoadingAnimationTag) as? NVActivityIndicatorView
-//        animation?.stopAnimating()
-//        animation?.removeFromSuperview()
-//        selfie.displayGifViewModel.gifImage.value = UIImage.animatedImage(withAnimatedGIFData: gifData)
-//        selfie.imageView.image = selfie.displayGifViewModel.gifImage.value
-//        selfie.navigationItem.rightBarButtonItem = selfie.shareButton
-//      }
-//
-//    })

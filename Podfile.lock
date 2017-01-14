@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.2.0)
+  - BonMot (4.0.1)
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
@@ -7,11 +8,11 @@ PODS:
     - Fabric (~> 1.6.3)
   - Fabric (1.6.4)
   - Font-Awesome-Swift (1.5.3)
+  - Gifu (2.0.0)
   - Masonry (0.6.4)
   - MMPopupView (1.6.1):
     - Masonry
   - Nimble (5.1.0)
-  - NSGIF2 (1.5.2)
   - NVActivityIndicatorView (3.0)
   - Quick (1.0.0)
   - Regift (1.3.0)
@@ -27,13 +28,14 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (= 4.2.0)
+  - BonMot
   - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`, branch `master`)
   - Crashlytics
   - Fabric
   - Font-Awesome-Swift (= 1.5.3)
+  - Gifu
   - MMPopupView (from `https://github.com/michaelsabo/MMPopupView`)
   - Nimble (= 5.1.0)
-  - NSGIF2 (from `https://github.com/metasmile/NSGIF2`)
   - NVActivityIndicatorView (= 3.0.0)
   - Quick (= 1.0.0)
   - Regift (from `../Regift`)
@@ -50,8 +52,6 @@ EXTERNAL SOURCES:
     :git: https://github.com/ViccAlexander/Chameleon.git
   MMPopupView:
     :git: https://github.com/michaelsabo/MMPopupView
-  NSGIF2:
-    :git: https://github.com/metasmile/NSGIF2
   Regift:
     :path: ../Regift
 
@@ -62,20 +62,18 @@ CHECKOUT OPTIONS:
   MMPopupView:
     :commit: cc30667441156621f90cc5fd0415d523c99802f3
     :git: https://github.com/michaelsabo/MMPopupView
-  NSGIF2:
-    :commit: 453ee97754d967c2874fd16714fd63140bd20f19
-    :git: https://github.com/metasmile/NSGIF2
 
 SPEC CHECKSUMS:
   Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
+  BonMot: d8c3548412fcbb3b5f877f2097a5ca23f9adf5b4
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Crashlytics: e4e8d02914f2608fbc7bf42b1a7af838b0db67a2
   Fabric: ed41fd62173c6bdea24ab02c9d7707161eabb750
   Font-Awesome-Swift: 6615ee6b875d148f767ea60b5b4ff54e2ea3122e
+  Gifu: 56a4d8f1092399159fa32662aa2232158b48d8ac
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
   MMPopupView: 42daf6d1a2956b23c1dd8d45f51131cfe5091be5
   Nimble: 5ea121a2eda60440287054cde077fc0ad22227b3
-  NSGIF2: 89d6d6a48bb86a2f846e85519a0509bcd567037e
   NVActivityIndicatorView: 81953b5e65093ba79edf4fe7268e002039ca5268
   Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
   Regift: 43c5e057949a9e2b16de0bcf0a221a5dbd033211
@@ -86,6 +84,6 @@ SPEC CHECKSUMS:
   SwiftString3: 1de59016efce9b4a9adb491995f74ef50d0aa920
   SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
 
-PODFILE CHECKSUM: fafc26fa64acc2d95a5436a5eb7cdb1627a87c01
+PODFILE CHECKSUM: d15dd7d25d49e32a828ae6813d53a4b914fd8820
 
 COCOAPODS: 1.1.1

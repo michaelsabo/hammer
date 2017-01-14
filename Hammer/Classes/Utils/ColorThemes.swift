@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import BonMot
 
 extension UIViewController
 {
@@ -84,4 +85,22 @@ class ColorThemes {
       return UIColor.flatBlack
     }
   }
+  
+  class func fileInfoStyle() -> StringStyle {
+    if UserDefaults.darkThemeEnabled {
+      return darkInfoStyle
+    } else {
+      return lightInfoStyle
+    }
+  }
+  
+  static let darkInfoStyle = StringStyle(
+    .font(UIFont(name: "HelveticaNeue", size: 12)!),
+    .color(.white)
+  )
+  
+  static let lightInfoStyle = StringStyle(
+    .font(UIFont(name: "HelveticaNeue", size: 12)!),
+    .color(UIColor.flatTeal)
+  )
 }

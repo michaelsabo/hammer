@@ -35,7 +35,12 @@ enum Router: URLRequestConvertible {
   public func asURLRequest() throws -> URLRequest {
     var urlRequest = URLRequest(url: Router.Production.appendingPathComponent(route.path))
     urlRequest.httpMethod = method.rawValue
-    return try Alamofire.JSONEncoding.default.encode(urlRequest, with: route.parameters)
+    let params = route.parameters
+    print(params)
+    let encoding = try! Alamofire.URLEncoding.queryString.encode(urlRequest, with: params)
+    
+    print(encoding)
+    return encoding
 
   }
 
@@ -52,11 +57,11 @@ enum Router: URLRequestConvertible {
   
   var buildURL: URL { return Router.Production.appendingPathComponent(route.path) }
   
-  var route: (path: String, parameters: [String : AnyObject]?) {
+  var route: (path: String, parameters: Parameters?) {
     switch self {
     case .gifs: return ("/gifs", nil)
-    case .gifsForTag (let tag): return ("/gifs", ["q": tag as AnyObject])
-    case .addGif(let imgurId) : return ("/gifs", ["gif": imgurId as AnyObject])
+    case .gifsForTag (let tag): return ("/gifs", ["q": tag])
+    case .addGif(let imgurId) : return ("/gifs", ["gif": imgurId])
     case .tags : return ("/tags", nil)
     case .tagsForGif (let gifId) : return ("/gifs/\(gifId)/tags", nil)
     case .tagGifWithId (let gifId, let tagName) : return ("/gifs/\(gifId)/tags", ["tag": tagName as AnyObject])

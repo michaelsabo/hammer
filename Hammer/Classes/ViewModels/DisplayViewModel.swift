@@ -28,6 +28,7 @@ class DisplayViewModel : NSObject {
   
   let stopSignals = Variable(false)
 
+  var videoSize:Int = 0
   var gifData : Data!
   var gifImage = Variable<UIImage?>(UIImage())
   
@@ -46,18 +47,13 @@ class DisplayViewModel : NSObject {
 	}
   
   func startGifImageSingal() {
-//    DispatchQueue.global().async {
-//      Regift.createGIFFromSource(URL(safeString: self.gif.videoUrl)) { [weak self] (result) in
-//        if let selfie = self, let filePath = result {
-//          if let data = try? Data(contentsOf: filePath) {
-//            print("FINISHED GIF DATA RETRIEVEAL")
-//            selfie.gifData = data
-//            selfie.gifRequestSignal.value = true
-//          }
-//        }
-//      }
-//    }
-
+    gifService.retrieveGifForVideo(gif, completion: { [weak self] success, data, videoSize in
+      if let selfie = self, let gifData = data {
+        selfie.gifData = gifData
+        selfie.videoSize = videoSize
+        selfie.gifRequestSignal.value = true
+      }
+    })
   }
 
   

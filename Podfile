@@ -18,9 +18,10 @@ def base
   pod 'RxSwift',    '3.0.1'
   pod 'RxCocoa',    '3.0.1'
   pod 'RxBlocking', '3.0.1'
-  pod 'NSGIF2', :git => 'https://github.com/metasmile/NSGIF2'
   pod 'SwiftString3', '1.0.11'
   pod 'Regift', :path => '../Regift'
+  pod 'Gifu'
+  pod 'BonMot'
 end
 
 target 'Hammer' do
@@ -35,7 +36,7 @@ end
 
 post_install do |installer|
   installer.pods_project.targets.each do |target|
-    if target.name.include?("MMPopupView") && target.name.include?("NSGIF")
+    if target.name.include?("MMPopupView")
       next
     end
     target.build_configurations.each do |config|

@@ -78,6 +78,8 @@
 		27CD49B01BEF0C5100586B4D /* DisplayViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CD49AF1BEF0C5100586B4D /* DisplayViewModelSpec.swift */; };
 		27CD49B11BEF1FE800586B4D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273994271BE5560900E4399C /* Foundation.framework */; };
 		27CD49B21BEF1FEE00586B4D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273994251BE555C600E4399C /* UIKit.framework */; };
+		27CEC96E1E2AA66B00F9BB22 /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CEC96D1E2AA66B00F9BB22 /* Int+Extensions.swift */; };
+		27CEC9701E2AE1D000F9BB22 /* GIFImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CEC96F1E2AE1D000F9BB22 /* GIFImageView+Extensions.swift */; };
 		27D16A441BDC1A55000B75B2 /* LoadingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D16A431BDC1A55000B75B2 /* LoadingAnimation.swift */; };
 		27D8CFC31E2221950088B67E /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D8CFC21E2221950088B67E /* Operators.swift */; };
 		27F1D73A1BE98DC10014F2AF /* Licenses.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27F1D7391BE98DC10014F2AF /* Licenses.xib */; };
@@ -189,6 +191,8 @@
 		27C75CAD1BC21CC0008AC322 /* Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
 		27C75CAF1BC22E1B008AC322 /* DisplayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayViewController.swift; sourceTree = "<group>"; };
 		27CD49AF1BEF0C5100586B4D /* DisplayViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayViewModelSpec.swift; sourceTree = "<group>"; };
+		27CEC96D1E2AA66B00F9BB22 /* Int+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
+		27CEC96F1E2AE1D000F9BB22 /* GIFImageView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GIFImageView+Extensions.swift"; sourceTree = "<group>"; };
 		27D16A431BDC1A55000B75B2 /* LoadingAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingAnimation.swift; sourceTree = "<group>"; };
 		27D8CFC21E2221950088B67E /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		27F1D7391BE98DC10014F2AF /* Licenses.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Licenses.xib; sourceTree = "<group>"; };
@@ -261,6 +265,8 @@
 				278757761C547ED000633D65 /* BarButtonExtension.swift */,
 				278757781C54857900633D65 /* AlertViewExtension.swift */,
 				27D8CFC21E2221950088B67E /* Operators.swift */,
+				27CEC96D1E2AA66B00F9BB22 /* Int+Extensions.swift */,
+				27CEC96F1E2AE1D000F9BB22 /* GIFImageView+Extensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -867,8 +873,10 @@
 				27D8CFC31E2221950088B67E /* Operators.swift in Sources */,
 				278CA01E1BCDB09E000904D7 /* Router.swift in Sources */,
 				27F3B3281BEE80BC00B94731 /* PaddedTagLabel.swift in Sources */,
+				27CEC9701E2AE1D000F9BB22 /* GIFImageView+Extensions.swift in Sources */,
 				279692361BE9AE5A00063A98 /* SettingsViewController.swift in Sources */,
 				27197E181BC239DC00525F33 /* UIImage+animatedGIF.m in Sources */,
+				27CEC96E1E2AA66B00F9BB22 /* Int+Extensions.swift in Sources */,
 				275212B51BEF89A300BE3FE9 /* SearchGifsTableView.swift in Sources */,
 				278CA0171BCDA9CE000904D7 /* GifService.swift in Sources */,
 				27C75CB01BC22E1B008AC322 /* DisplayViewController.swift in Sources */,

@@ -36,5 +36,68 @@ class ImageCell: UICollectionViewCell {
         self.isUserInteractionEnabled = true
       }
     }
-  }	
+  }
+}
+
+extension ImageCell {
+  
+  func animateFromLeft(completion: @escaping () -> Void) {
+    self.imageView.transform = CGAffineTransform(translationX: -20, y: 0)
+    UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [], animations: { [weak self] in
+      UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.2, animations: { [weak self] in
+        self?.imageView.transform = CGAffineTransform(translationX: -15, y: 0)
+      })
+      UIView.addKeyframe(withRelativeStartTime: 0.1, relativeDuration: 0.2, animations: { [weak self] in
+        self?.imageView.transform = CGAffineTransform(translationX: -9, y: 0)
+      })
+      UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.2, animations: { [weak self] in
+        self?.imageView.transform = CGAffineTransform(translationX: -6, y: 0)
+      })
+      UIView.addKeyframe(withRelativeStartTime: 0.3, relativeDuration: 0.1, animations: { [weak self] in
+        self?.imageView.transform = CGAffineTransform(translationX: 0, y: 0)
+      })
+      }, completion: { (finished: Bool) in
+        completion()
+    })
+  }
+  
+  func scaleToFullSize(completion: @escaping () -> Void) {
+    self.imageView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+    
+    UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [], animations: { [weak self] in
+      UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.1, animations: { [weak self] in
+        self?.imageView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+      })
+      UIView.addKeyframe(withRelativeStartTime: 0.1, relativeDuration: 0.2, animations: { [weak self] in
+        self?.imageView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+      })
+      UIView.addKeyframe(withRelativeStartTime: 0.3, relativeDuration: 0.2, animations: { [weak self] in
+        self?.imageView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+      })
+      }, completion: { (finished: Bool) in
+        completion()
+    })
+  }
+  
+  func animateFromRight(completion: @escaping () -> Void) {
+    self.imageView.transform = CGAffineTransform(translationX: 20, y: 0)
+    UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [], animations: { [weak self] in
+      UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.1, animations: { [weak self] in
+        self?.imageView.transform = CGAffineTransform(translationX: 15, y: 0)
+      })
+      UIView.addKeyframe(withRelativeStartTime: 0.1, relativeDuration: 0.1, animations: { [weak self] in
+        self?.imageView.transform = CGAffineTransform(translationX: 9, y: 0)
+      })
+      UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.1, animations: { [weak self] in
+        self?.imageView.transform = CGAffineTransform(translationX: 6, y: 0)
+      })
+      UIView.addKeyframe(withRelativeStartTime: 0.3, relativeDuration: 0.2, animations: { [weak self] in
+        self?.imageView.transform = CGAffineTransform(translationX: 0, y: 0)
+      })
+      }, completion: { (finished: Bool) in
+        completion()
+    })
+
+  }
+  
 }

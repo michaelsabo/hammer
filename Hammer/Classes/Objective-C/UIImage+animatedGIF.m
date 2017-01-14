@@ -41,8 +41,10 @@ static int delayCentisecondsForImageAtIndex(CGImageSourceRef const source, size_
 
 static void createImagesAndDelays(CGImageSourceRef source, size_t count, CGImageRef imagesOut[count], int delayCentisecondsOut[count]) {
 	for (size_t i = 0; i < count; ++i) {
-		imagesOut[i] = CGImageSourceCreateImageAtIndex(source, i, NULL);
-		delayCentisecondsOut[i] = delayCentisecondsForImageAtIndex(source, i);
+    @autoreleasepool {
+      imagesOut[i] = CGImageSourceCreateImageAtIndex(source, i, NULL);
+      delayCentisecondsOut[i] = delayCentisecondsForImageAtIndex(source, i);
+    }
 	}
 }
 
@@ -80,10 +82,12 @@ static NSArray *frameArray(size_t const count, CGImageRef const images[count], i
 	size_t const frameCount = totalDurationCentiseconds / gcd;
 	UIImage *frames[frameCount];
 	for (size_t i = 0, f = 0; i < count; ++i) {
-		UIImage *const frame = [UIImage imageWithCGImage:images[i]];
-		for (size_t j = delayCentiseconds[i] / gcd; j > 0; --j) {
-			frames[f++] = frame;
-		}
+    @autoreleasepool {
+      UIImage *const frame = [UIImage imageWithCGImage:images[i]];
+      for (size_t j = delayCentiseconds[i] / gcd; j > 0; --j) {
+        frames[f++] = frame;
+      }
+    }
 	}
 	return [NSArray arrayWithObjects:frames count:frameCount];
 }
