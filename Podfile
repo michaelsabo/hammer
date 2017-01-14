@@ -19,7 +19,7 @@ def base
   pod 'RxCocoa',    '3.0.1'
   pod 'RxBlocking', '3.0.1'
   pod 'SwiftString3', '1.0.11'
-  pod 'Regift', :path => '../Regift'
+  pod 'Regift', :git => 'https://github.com/michaelsabo/Regift.git', branch: 'feature/calculate-frame-count'
   pod 'Gifu'
   pod 'BonMot'
 end

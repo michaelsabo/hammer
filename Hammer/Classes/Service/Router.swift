@@ -35,13 +35,7 @@ enum Router: URLRequestConvertible {
   public func asURLRequest() throws -> URLRequest {
     var urlRequest = URLRequest(url: Router.Production.appendingPathComponent(route.path))
     urlRequest.httpMethod = method.rawValue
-    let params = route.parameters
-    print(params)
-    let encoding = try! Alamofire.URLEncoding.queryString.encode(urlRequest, with: params)
-    
-    print(encoding)
-    return encoding
-
+    return try Alamofire.URLEncoding.queryString.encode(urlRequest, with: route.parameters)
   }
 
   static let Test = URL(string: "http://ham-flyingdinos.rhcloud.com/api")!

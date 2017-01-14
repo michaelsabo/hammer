@@ -38,7 +38,7 @@ DEPENDENCIES:
   - Nimble (= 5.1.0)
   - NVActivityIndicatorView (= 3.0.0)
   - Quick (= 1.0.0)
-  - Regift (from `../Regift`)
+  - Regift (from `https://github.com/michaelsabo/Regift.git`, branch `feature/calculate-frame-count`)
   - RxBlocking (= 3.0.1)
   - RxCocoa (= 3.0.1)
   - RxSwift (= 3.0.1)
@@ -53,7 +53,8 @@ EXTERNAL SOURCES:
   MMPopupView:
     :git: https://github.com/michaelsabo/MMPopupView
   Regift:
-    :path: ../Regift
+    :branch: feature/calculate-frame-count
+    :git: https://github.com/michaelsabo/Regift.git
 
 CHECKOUT OPTIONS:
   ChameleonFramework:
@@ -62,6 +63,9 @@ CHECKOUT OPTIONS:
   MMPopupView:
     :commit: cc30667441156621f90cc5fd0415d523c99802f3
     :git: https://github.com/michaelsabo/MMPopupView
+  Regift:
+    :commit: 88b06edd7678342c6a491fa3c6897f73f82697b4
+    :git: https://github.com/michaelsabo/Regift.git
 
 SPEC CHECKSUMS:
   Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
@@ -84,6 +88,6 @@ SPEC CHECKSUMS:
   SwiftString3: 1de59016efce9b4a9adb491995f74ef50d0aa920
   SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
 
-PODFILE CHECKSUM: d15dd7d25d49e32a828ae6813d53a4b914fd8820
+PODFILE CHECKSUM: 0362120ba3021b098608df572cf41f61bcc823a8
 
 COCOAPODS: 1.1.1
