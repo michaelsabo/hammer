@@ -10,6 +10,7 @@ import UIKit
 
 import Alamofire
 import SwiftyJSON
+import Regift
 
 class GifService {
 	
@@ -64,15 +65,16 @@ class GifService {
 		}
 	}
   
-  func retrieveVideoDataFor(_ gif: Gif, completion: @escaping (_ success: Bool, _ data:Data?) -> Void) {
-    Alamofire.request(gif.videoUrl, method: .get)
-      .responseData { response in
-        if (response.result.isSuccess) {
-          if let data = response.result.value {
-            completion(true, data)
+  func retrieveGifForVideo(_ gif: Gif, completion: @escaping (_ success: Bool, _ data:Data?, _ byteSize:Int) -> Void) {
+    DispatchQueue.global().async {
+      Regift.createGIFFromSource(URL(safeString: gif.videoUrl)) { result,size in
+        if let filePath = result {
+          if let data = try? Data(contentsOf: filePath) {
+            completion(true, data, size)
           }
         }
-        completion(false, nil)
+       completion(false, nil, 0)
+      }
     }
   }
   

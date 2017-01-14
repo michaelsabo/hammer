@@ -10,6 +10,7 @@ import Foundation
 
 import MobileCoreServices
 import RxSwift
+import Regift
 
 class DisplayViewModel : NSObject {
 	
@@ -27,6 +28,7 @@ class DisplayViewModel : NSObject {
   
   let stopSignals = Variable(false)
 
+  var videoSize:Int = 0
   var gifData : Data!
   var gifImage = Variable<UIImage?>(UIImage())
   
@@ -45,12 +47,15 @@ class DisplayViewModel : NSObject {
 	}
   
   func startGifImageSingal() {
-    self.gifService.retrieveImageDataFor(self.gif, completion: { [weak self] success,response in
-      guard let data = response, let selfie = self else { return }
-      selfie.gifData = data
-      selfie.gifRequestSignal.value = true
+    gifService.retrieveGifForVideo(gif, completion: { [weak self] success, data, videoSize in
+      if let selfie = self, let gifData = data {
+        selfie.gifData = gifData
+        selfie.videoSize = videoSize
+        selfie.gifRequestSignal.value = true
+      }
     })
   }
+
   
   func startTagSignal() {
     self.tagService.getTagsForGifId(self.gif.id, completion: { [weak self] success, response in
@@ -87,6 +92,15 @@ class DisplayViewModel : NSObject {
 		print("deiniting view model")
 	}
 }
-	
-	
-	
+
+extension URL {
+  
+  public init(safeString string: String) {
+    guard let instance = URL(string: string) else {
+      fatalError("Unconstructable URL: \(string)")
+    }
+    self = instance
+  }
+}
+
+

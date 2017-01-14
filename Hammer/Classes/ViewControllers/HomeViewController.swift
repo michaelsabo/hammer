@@ -58,6 +58,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 
 		self.homeViewModel.gifsForDisplay.asObservable()
       .subscribe(onNext: { _ in
+        self.isScrollingDown = false
         self.viewCollection.reloadData()
         self.refreshControl.endRefreshing()
       }).addDisposableTo(disposeBag)
@@ -132,67 +133,26 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
       
       switch indexPath.item % 3 {
       case 0:
-        cell.imageView.transform = CGAffineTransform(translationX: -20, y: 0)
-        UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [], animations: { [weak cell] in
-          UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.2, animations: { [weak cell] in
-            cell?.imageView.transform = CGAffineTransform(translationX: -15, y: 0)
-            })
-          UIView.addKeyframe(withRelativeStartTime: 0.1, relativeDuration: 0.2, animations: { [weak cell] in
-            cell?.imageView.transform = CGAffineTransform(translationX: -9, y: 0)
-            })
-          UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.2, animations: { [weak cell] in
-            cell?.imageView.transform = CGAffineTransform(translationX: -6, y: 0)
-            })
-          UIView.addKeyframe(withRelativeStartTime: 0.3, relativeDuration: 0.1, animations: { [weak cell] in
-            cell?.imageView.transform = CGAffineTransform(translationX: 0, y: 0)
-            })
-          }, completion: { [weak self] (finished: Bool) in
-            self?.homeViewModel.gifsForDisplay.value[indexPath.item].showAnimation = false
-          })
+        cell.animateFromLeft {
+          self.homeViewModel.gifsForDisplay.value[indexPath.item].showAnimation = false
+        }
         break
       case 1:
-        cell.imageView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
-        
-        UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [], animations: { [weak cell] in
-          UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.1, animations: { [weak cell] in
-            cell?.imageView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-            })
-          UIView.addKeyframe(withRelativeStartTime: 0.1, relativeDuration: 0.2, animations: { [weak cell] in
-            cell?.imageView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-            })
-          UIView.addKeyframe(withRelativeStartTime: 0.3, relativeDuration: 0.2, animations: { [weak cell] in
-            cell?.imageView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-            })
-          }, completion: { [weak self] (finished: Bool) in
-            self?.homeViewModel.gifsForDisplay.value[indexPath.item].showAnimation = false
-          })
+        cell.scaleToFullSize {
+          self.homeViewModel.gifsForDisplay.value[indexPath.item].showAnimation = false
+        }
         break
       case 2:
-        cell.imageView.transform = CGAffineTransform(translationX: 20, y: 0)
-        
-        UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [], animations: { [weak cell] in
-          UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.1, animations: { [weak cell] in
-            cell?.imageView.transform = CGAffineTransform(translationX: 15, y: 0)
-            })
-          UIView.addKeyframe(withRelativeStartTime: 0.1, relativeDuration: 0.1, animations: { [weak cell] in
-            cell?.imageView.transform = CGAffineTransform(translationX: 9, y: 0)
-            })
-          UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.1, animations: { [weak cell] in
-            cell?.imageView.transform = CGAffineTransform(translationX: 6, y: 0)
-            })
-          UIView.addKeyframe(withRelativeStartTime: 0.3, relativeDuration: 0.2, animations: { [weak cell] in
-            cell?.imageView.transform = CGAffineTransform(translationX: 0, y: 0)
-            })
-          }, completion: { [weak self] (finished: Bool) in
-            self?.homeViewModel.gifsForDisplay.value[indexPath.item].showAnimation = false
-          })
+        cell.animateFromRight {
+          self.homeViewModel.gifsForDisplay.value[indexPath.item].showAnimation = false
+        }
         break
       default:
         break
         
       }
       
-      }
+    }
     self.homeViewModel.gifsForDisplay.value[indexPath.item].showAnimation = false
   }
 

@@ -11,7 +11,6 @@
 #import "MMPopupView/MMAlertView.h"
 #import "MMPopupView/MMSheetView.h"
 #import "MMPopupView/MMPopupWindow.h"
-#import "NSGIF2/NSGIF.h"
 
 #endif
 
