@@ -6,8 +6,6 @@
 //  Copyright © 2015 FlyingDinosaurs. All rights reserved.
 //
 
-import UIKit
-
 import Alamofire
 import SwiftyJSON
 import Regift
@@ -90,6 +88,18 @@ class GifService {
       }
   }
 }
+
+
+extension URL {
+  
+  public init(safeString string: String) {
+    guard let instance = URL(string: string) else {
+      fatalError("Unconstructable URL: \(string)")
+    }
+    self = instance
+  }
+}
+
 
 
 	

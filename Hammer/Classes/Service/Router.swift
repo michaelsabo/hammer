@@ -6,7 +6,6 @@
 //  Copyright © 2015 FlyingDinosaurs. All rights reserved.
 //
 
-import UIKit
 import Alamofire
 
 enum ServiceError: Int {

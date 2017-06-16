@@ -28,6 +28,13 @@ target 'Hammer' do
   base
 end
 
+target 'Ham-it' do
+  pod 'Alamofire', '4.2.0'
+  pod 'SwiftyJSON', '3.1.3'
+  pod 'SwiftString3', '1.0.11'
+  pod 'Regift', :git => 'https://github.com/michaelsabo/Regift.git', branch: 'feature/calculate-frame-count'
+end
+
 target 'HammerTests' do
   base
   testing_pods
@@ -44,3 +51,4 @@ post_install do |installer|
     end
   end
 end
+

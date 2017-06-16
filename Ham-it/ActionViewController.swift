@@ -8,7 +8,6 @@
 
 import UIKit
 import MobileCoreServices
-import ReactiveCocoa
 
 class ActionViewController: UIViewController {
 
@@ -51,12 +50,12 @@ class ActionViewController: UIViewController {
     }
     
     let gifService = GifService()
-    gifService.addGif(id: imgurId)
-      .on(next: { [weak self] response in
-        if response {
-          self?.messageLabel.text = "Success"
-        }
-    }).start()
+    gifService.addGif(imgurId, completion: { [weak self] success in
+      if success {
+        self?.messageLabel.text = "Success"
+      }
+    })
+    
   }
 
   @IBAction func done() {

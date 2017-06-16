@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		070A1C5C5ED62B37C1C98242 /* Pods_Hammer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 063C164C0BD35BBB7BC9DC3F /* Pods_Hammer.framework */; };
+		084F7357E50F6825A89A32F7 /* Pods_Ham_it.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88415D109EE28D7F75C79B69 /* Pods_Ham_it.framework */; };
 		27040E8D1C55D9F400C7E1EF /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2733CB541C13595F00217645 /* UserDefaults.swift */; };
 		2711AE3D1BDB2AFB000C47B2 /* CollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711AE3C1BDB2AFB000C47B2 /* CollectionViewLayout.swift */; };
 		27197E181BC239DC00525F33 /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 27197E171BC239DC00525F33 /* UIImage+animatedGIF.m */; };
@@ -23,6 +24,7 @@
 		275C398B1BE702DC0028B4C6 /* Licenses.txt in Resources */ = {isa = PBXBuildFile; fileRef = 275C39871BE702DC0028B4C6 /* Licenses.txt */; };
 		275C398C1BE702DC0028B4C6 /* Licenses.txt in Resources */ = {isa = PBXBuildFile; fileRef = 275C39871BE702DC0028B4C6 /* Licenses.txt */; };
 		275C398D1BE702DC0028B4C6 /* Licenses.txt in Resources */ = {isa = PBXBuildFile; fileRef = 275C39871BE702DC0028B4C6 /* Licenses.txt */; };
+		275F681E1EF34BA600BA0D58 /* Ham-it.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2780FE4B1C25C74000653D49 /* Ham-it.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		276569B51C0014280053A19A /* tag.json in Resources */ = {isa = PBXBuildFile; fileRef = 276569B41C0014280053A19A /* tag.json */; };
 		276C7FB31BC204EE0028DC0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FB21BC204EE0028DC0D /* AppDelegate.swift */; };
 		276C7FBD1BC204EE0028DC0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 276C7FBC1BC204EE0028DC0D /* Assets.xcassets */; };
@@ -94,6 +96,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		275F68231EF3500C00BA0D58 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 276C7FA71BC204EE0028DC0D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2780FE4A1C25C74000653D49;
+			remoteInfo = "Ham-it";
+		};
 		276C7FC71BC204EE0028DC0D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 276C7FA71BC204EE0028DC0D /* Project object */;
@@ -126,6 +135,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				275F681E1EF34BA600BA0D58 /* Ham-it.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -202,6 +212,8 @@
 		27F3B32A1BEE89CE00B94731 /* ScreenHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenHelpers.swift; sourceTree = "<group>"; };
 		27F3B32E1BEE961B00B94731 /* GifServiceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifServiceSpec.swift; sourceTree = "<group>"; };
 		27F3B3301BEEA7BC00B94731 /* TagServiceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagServiceSpec.swift; sourceTree = "<group>"; };
+		30EFA6205F86D12A13530593 /* Pods-Ham-it.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ham-it.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ham-it/Pods-Ham-it.debug.xcconfig"; sourceTree = "<group>"; };
+		39C2D2710B9A02C892CF1DC5 /* Pods-Ham-it.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ham-it.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ham-it/Pods-Ham-it.release.xcconfig"; sourceTree = "<group>"; };
 		5B0A751A63BA4A18F689650D /* Pods-Hammer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hammer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hammer/Pods-Hammer.debug.xcconfig"; sourceTree = "<group>"; };
 		7527BC2B273AAD0BB17C3E27 /* Pods_HammerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HammerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		791011BBBA5CD2FB46D81D73 /* Pods-HammerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HammerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HammerTests/Pods-HammerTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -239,6 +251,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				084F7357E50F6825A89A32F7 /* Pods_Ham_it.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -538,6 +551,8 @@
 				E2C0C7D9BCDDBDA8FC5280BE /* Pods-Hammer.release.xcconfig */,
 				791011BBBA5CD2FB46D81D73 /* Pods-HammerTests.debug.xcconfig */,
 				0C04D6A1223740F96EDD2716 /* Pods-HammerTests.release.xcconfig */,
+				30EFA6205F86D12A13530593 /* Pods-Ham-it.debug.xcconfig */,
+				39C2D2710B9A02C892CF1DC5 /* Pods-Ham-it.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -554,7 +569,6 @@
 				276C7FAC1BC204EE0028DC0D /* Frameworks */,
 				276C7FAD1BC204EE0028DC0D /* Resources */,
 				2719DA321BCC9CF100BD02AD /* CopyFiles */,
-				27322B331BED2DBB008B4455 /* ShellScript */,
 				27CE4A851BE6892700B62D64 /* ShellScript */,
 				2780FE591C25C74000653D49 /* Embed App Extensions */,
 				276DBAE31C298A02004539C8 /* ShellScript */,
@@ -564,6 +578,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				275F68241EF3500C00BA0D58 /* PBXTargetDependency */,
 			);
 			name = Hammer;
 			productName = Hammer;
@@ -613,9 +628,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2780FE561C25C74000653D49 /* Build configuration list for PBXNativeTarget "Ham-it" */;
 			buildPhases = (
+				FEEB4FDCB0B01ADB5050B921 /* [CP] Check Pods Manifest.lock */,
 				2780FE471C25C74000653D49 /* Sources */,
 				2780FE481C25C74000653D49 /* Frameworks */,
 				2780FE491C25C74000653D49 /* Resources */,
+				3F85C5343AB438DA68C7ED74 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -758,21 +775,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
-		};
-		27322B331BED2DBB008B4455 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
 		};
 		276DBAE31C298A02004539C8 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -812,7 +816,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3F85C5343AB438DA68C7ED74 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ham-it/Pods-Ham-it-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		644673BAF23CF701F78D8E11 /* [CP] Embed Pods Frameworks */ = {
@@ -858,6 +877,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HammerTests/Pods-HammerTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FEEB4FDCB0B01ADB5050B921 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -959,6 +993,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		275F68241EF3500C00BA0D58 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2780FE4A1C25C74000653D49 /* Ham-it */;
+			targetProxy = 275F68231EF3500C00BA0D58 /* PBXContainerItemProxy */;
+		};
 		276C7FC81BC204EE0028DC0D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 276C7FAE1BC204EE0028DC0D /* Hammer */;
@@ -1079,7 +1118,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5B0A751A63BA4A18F689650D /* Pods-Hammer.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -1123,7 +1162,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E2C0C7D9BCDDBDA8FC5280BE /* Pods-Hammer.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -1229,12 +1268,14 @@
 		};
 		2780FE571C25C74000653D49 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 30EFA6205F86D12A13530593 /* Pods-Ham-it.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "Ham-it/Ham-it.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = N9TVD38558;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
@@ -1252,12 +1293,14 @@
 		};
 		2780FE581C25C74000653D49 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 39C2D2710B9A02C892CF1DC5 /* Pods-Ham-it.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "Ham-it/Ham-it.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = N9TVD38558;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",

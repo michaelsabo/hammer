@@ -92,15 +92,3 @@ class DisplayViewModel : NSObject {
 		print("deiniting view model")
 	}
 }
-
-extension URL {
-  
-  public init(safeString string: String) {
-    guard let instance = URL(string: string) else {
-      fatalError("Unconstructable URL: \(string)")
-    }
-    self = instance
-  }
-}
-
-
