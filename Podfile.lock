@@ -1,93 +1,101 @@
 PODS:
-  - Alamofire (4.2.0)
-  - BonMot (4.0.1)
+  - Alamofire (4.7.0)
+  - BonMot (5.2)
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
-  - Crashlytics (3.6.0):
-    - Fabric (~> 1.6.3)
-  - Fabric (1.6.4)
-  - Font-Awesome-Swift (1.5.3)
-  - Gifu (2.0.0)
-  - Masonry (0.6.4)
+  - Crashlytics (3.10.1):
+    - Fabric (~> 1.7.5)
+  - Fabric (1.7.6)
+  - Font-Awesome-Swift (1.7.2)
+  - Gifu (3.0.0)
+  - Masonry (1.1.0)
   - MMPopupView (1.6.1):
     - Masonry
-  - Nimble (5.1.0)
-  - NVActivityIndicatorView (3.0)
-  - Quick (1.0.0)
-  - Regift (1.3.0)
-  - RxBlocking (3.0.1):
-    - RxSwift (~> 3.0)
-  - RxCocoa (3.0.1):
-    - RxSwift (~> 3.0)
-  - RxSwift (3.0.1)
-  - RxTest (3.0.1):
-    - RxSwift (~> 3.0)
-  - SwiftString3 (1.0.11)
-  - SwiftyJSON (3.1.3)
+  - Nimble (7.0.3)
+  - NVActivityIndicatorView (4.1.1):
+    - NVActivityIndicatorView/Presenter (= 4.1.1)
+  - NVActivityIndicatorView/Presenter (4.1.1)
+  - Quick (1.2.0)
+  - Regift (1.5.0)
+  - RxBlocking (4.1.2):
+    - RxSwift (~> 4.0)
+  - RxCocoa (4.1.2):
+    - RxSwift (~> 4.0)
+  - RxSwift (4.1.2)
+  - RxTest (4.1.2):
+    - RxSwift (~> 4.0)
+  - String+Extensions (1.1.0)
+  - SwiftyJSON (4.0.0)
 
 DEPENDENCIES:
-  - Alamofire (= 4.2.0)
+  - Alamofire
   - BonMot
-  - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`, branch `master`)
+  - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
   - Crashlytics
   - Fabric
-  - Font-Awesome-Swift (= 1.5.3)
+  - Font-Awesome-Swift (from `https://github.com/Vaberer/Font-Awesome-Swift`)
   - Gifu
   - MMPopupView (from `https://github.com/michaelsabo/MMPopupView`)
-  - Nimble (= 5.1.0)
-  - NVActivityIndicatorView (= 3.0.0)
-  - Quick (= 1.0.0)
-  - Regift (from `https://github.com/michaelsabo/Regift.git`, branch `feature/calculate-frame-count`)
-  - RxBlocking (= 3.0.1)
-  - RxCocoa (= 3.0.1)
-  - RxSwift (= 3.0.1)
-  - RxTest (= 3.0.1)
-  - SwiftString3 (= 1.0.11)
-  - SwiftyJSON (= 3.1.3)
+  - Nimble
+  - NVActivityIndicatorView
+  - Quick
+  - Regift (from `./../Regift`)
+  - RxBlocking (~> 4.0)
+  - RxCocoa (~> 4.0)
+  - RxSwift (~> 4.0)
+  - RxTest (~> 4.0)
+  - String+Extensions (from `https://github.com/BergQuester/SwiftString.git`, branch `master`)
+  - SwiftyJSON
 
 EXTERNAL SOURCES:
   ChameleonFramework:
-    :branch: master
     :git: https://github.com/ViccAlexander/Chameleon.git
+  Font-Awesome-Swift:
+    :git: https://github.com/Vaberer/Font-Awesome-Swift
   MMPopupView:
     :git: https://github.com/michaelsabo/MMPopupView
   Regift:
-    :branch: feature/calculate-frame-count
-    :git: https://github.com/michaelsabo/Regift.git
+    :path: ./../Regift
+  String+Extensions:
+    :branch: master
+    :git: https://github.com/BergQuester/SwiftString.git
 
 CHECKOUT OPTIONS:
   ChameleonFramework:
-    :commit: dcf98f9bf3a632a7f40679b7da46f09681e48526
+    :commit: 6dd284bde21ea2e7f9fd89bc36f40df16e16369d
     :git: https://github.com/ViccAlexander/Chameleon.git
+  Font-Awesome-Swift:
+    :commit: 9c4c87af00c3648531234ac7017e97ecc7cb0f57
+    :git: https://github.com/Vaberer/Font-Awesome-Swift
   MMPopupView:
     :commit: cc30667441156621f90cc5fd0415d523c99802f3
     :git: https://github.com/michaelsabo/MMPopupView
-  Regift:
-    :commit: 88b06edd7678342c6a491fa3c6897f73f82697b4
-    :git: https://github.com/michaelsabo/Regift.git
+  String+Extensions:
+    :commit: 1a9e59262373b1d728f8780565c47369272803bc
+    :git: https://github.com/BergQuester/SwiftString.git
 
 SPEC CHECKSUMS:
-  Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
-  BonMot: d8c3548412fcbb3b5f877f2097a5ca23f9adf5b4
+  Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
+  BonMot: 68da0bd7c2f602aca85511bedabd211eb0fae666
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
-  Crashlytics: e4e8d02914f2608fbc7bf42b1a7af838b0db67a2
-  Fabric: ed41fd62173c6bdea24ab02c9d7707161eabb750
-  Font-Awesome-Swift: 6615ee6b875d148f767ea60b5b4ff54e2ea3122e
-  Gifu: 56a4d8f1092399159fa32662aa2232158b48d8ac
-  Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
+  Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
+  Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
+  Font-Awesome-Swift: 8b7cc7a3ea86960d751fc3f17b89f24c222ed846
+  Gifu: 6543ca2056a3d697097c09fe543ef49348ccc892
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MMPopupView: 42daf6d1a2956b23c1dd8d45f51131cfe5091be5
-  Nimble: 5ea121a2eda60440287054cde077fc0ad22227b3
-  NVActivityIndicatorView: 81953b5e65093ba79edf4fe7268e002039ca5268
-  Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
-  Regift: 43c5e057949a9e2b16de0bcf0a221a5dbd033211
-  RxBlocking: 5de082d09d1ab45b49173f309f1a97d6b50f34c4
-  RxCocoa: 15a52fc590dcc700cb4a690a633b5c5184ce3a78
-  RxSwift: af5680055c4ad04480189c52d28385b1029493a6
-  RxTest: 9867e6f3c435af30fbdb44b6d8ec30b78c40b515
-  SwiftString3: 1de59016efce9b4a9adb491995f74ef50d0aa920
-  SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
+  Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
+  NVActivityIndicatorView: 60109b9bf46efc2e71ab81453196ccdfdfeea870
+  Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
+  Regift: ed2f74289c7856585c6cde8615da0740f8be1881
+  RxBlocking: f6054985901412fc8c02daa84e92d4ba68c61389
+  RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
+  RxSwift: e49536837d9901277638493ea537394d4b55f570
+  RxTest: e634f15fd2c2cd0e0120132ef7a4f7be69ad0393
+  String+Extensions: 7b46fbe926adb2d62e4718d2caf3037666dac179
+  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
-PODFILE CHECKSUM: b771dacffeb250227e043f4650813b477917c10c
+PODFILE CHECKSUM: f07434ab136b89609b278c79d8c00dd2cef8d422
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.4.0

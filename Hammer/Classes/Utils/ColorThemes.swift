@@ -15,7 +15,7 @@ extension UIViewController
     navigationController?.navigationBar.barTintColor = ColorThemes.navigationBarBackgroundColor()
     navigationController?.navigationBar.isTranslucent = true
     navigationController?.navigationBar.tintColor = ColorThemes.navigationBarIconColor()
-    let textAttributes:[String:AnyObject] = [NSForegroundColorAttributeName:ColorThemes.navigationBarIconColor()]
+    let textAttributes:[NSAttributedStringKey: AnyObject] = [NSAttributedStringKey.foregroundColor: ColorThemes.navigationBarIconColor()]
     navigationController?.navigationBar.titleTextAttributes = textAttributes
   }
 }

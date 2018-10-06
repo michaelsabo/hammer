@@ -1,0 +1,37 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "C507DBF8B7B14B90FB405E3693DCB329633A3065",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "B4B3977E5CC1F3B351F85BC44D3557C12FF1BFF4" : 0,
+    "C507DBF8B7B14B90FB405E3693DCB329633A3065" : 0,
+    "BDC277C35B0A368727733300E8D1ABC32FF43D8B" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "1E36E8B9-306D-4718-AD75-1F5C1E3D9797",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "B4B3977E5CC1F3B351F85BC44D3557C12FF1BFF4" : "MMPopupView\/",
+    "C507DBF8B7B14B90FB405E3693DCB329633A3065" : "Hammer\/",
+    "BDC277C35B0A368727733300E8D1ABC32FF43D8B" : "Regift\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Hammer",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Hammer.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/michaelsabo\/MMPopupView.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B4B3977E5CC1F3B351F85BC44D3557C12FF1BFF4"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/michaelsabo\/Regift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "BDC277C35B0A368727733300E8D1ABC32FF43D8B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/obas\/hammer.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C507DBF8B7B14B90FB405E3693DCB329633A3065"
+    }
+  ]
+}
