@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="ObA-dk-sSI">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="ObA-dk-sSI">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Image-->
@@ -17,14 +21,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="528"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NOA-Dm-cuz">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                                <color key="tintColor" red="0.11764705882352941" green="0.54509803921568623" blue="0.76470588235294112" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="barTintColor" red="0.11764705882352941" green="0.54509803921568623" blue="0.76470588235294112" alpha="0.0" colorSpace="calibratedRGB"/>
+                            <navigationBar contentMode="scaleToFill" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="NOA-Dm-cuz">
+                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="2or-5t-0Vu"/>
+                                </constraints>
+                                <color key="tintColor" red="0.11764705882352941" green="0.54509803921568623" blue="0.76470588235294112" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="barTintColor" red="0.11764705882352941" green="0.54509803921568623" blue="0.76470588235294112" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
                                     <navigationItem id="3HJ-uW-3hn">
                                         <barButtonItem key="leftBarButtonItem" title="Done" style="done" id="WYi-yp-eM6">
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
                                                 <action selector="done" destination="ObA-dk-sSI" id="Qdu-qn-U6V"/>
                                             </connections>
@@ -32,42 +39,50 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9ga-4F-77Z">
-                                <rect key="frame" x="0.0" y="64" width="320" height="464"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9ga-4F-77Z">
+                                <rect key="frame" x="0.0" y="108" width="320" height="420"/>
                             </imageView>
-                            <button contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HLz-uS-b8s">
-                                <rect key="frame" x="37" y="156" width="247" height="79"/>
-                                <color key="backgroundColor" red="0.11764705882352941" green="0.54509803921568623" blue="0.76470588235294112" alpha="1" colorSpace="calibratedRGB"/>
+                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HLz-uS-b8s">
+                                <rect key="frame" x="33" y="156" width="255" height="79"/>
+                                <color key="backgroundColor" red="0.11764705882352941" green="0.54509803921568623" blue="0.76470588235294112" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="255" id="co3-7j-ddG"/>
+                                    <constraint firstAttribute="height" constant="79" id="pfF-xl-Ivz"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="65"/>
                                 <state key="normal" title="Hamit">
-                                    <color key="titleColor" red="0.90588235294117647" green="0.29803921568627451" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" red="0.90588235294117647" green="0.29803921568627451" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="addGif:" destination="ObA-dk-sSI" eventType="touchUpInside" id="brC-0B-g6K"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ga-Wm-js9">
-                                <rect key="frame" x="48" y="278" width="224" height="70"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ga-Wm-js9">
+                                <rect key="frame" x="44" y="278" width="232" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="3e0-FV-DiR"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="70" id="Bp1-ip-G9m"/>
+                                    <constraint firstAttribute="width" constant="232" id="soz-OR-kqZ"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.11764705882352941" green="0.54509803921568623" blue="0.76470588235294112" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.26349914965986393" green="0.54509803921568623" blue="0.76470588235294112" alpha="0.45225985738255031" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="HLz-uS-b8s" firstAttribute="leading" secondItem="zMn-AG-sqS" secondAttribute="leadingMargin" constant="17" id="228-SL-pxN"/>
-                            <constraint firstItem="9ga-Wm-js9" firstAttribute="leading" secondItem="zMn-AG-sqS" secondAttribute="leadingMargin" constant="28" id="6J9-nN-qAL"/>
-                            <constraint firstAttribute="trailing" secondItem="NOA-Dm-cuz" secondAttribute="trailing" id="A05-Pj-hrr"/>
-                            <constraint firstItem="9ga-4F-77Z" firstAttribute="top" secondItem="NOA-Dm-cuz" secondAttribute="bottom" id="Fps-3D-QQW"/>
-                            <constraint firstItem="NOA-Dm-cuz" firstAttribute="leading" secondItem="zMn-AG-sqS" secondAttribute="leading" id="HxO-8t-aoh"/>
-                            <constraint firstAttribute="trailing" secondItem="9ga-4F-77Z" secondAttribute="trailing" id="Ozw-Hg-0yh"/>
-                            <constraint firstItem="9ga-4F-77Z" firstAttribute="leading" secondItem="zMn-AG-sqS" secondAttribute="leading" id="XH5-ld-ONA"/>
-                            <constraint firstItem="n38-gi-rB5" firstAttribute="top" secondItem="9ga-4F-77Z" secondAttribute="bottom" id="eQg-nn-Zy4"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="HLz-uS-b8s" secondAttribute="trailing" constant="16" id="f0l-v5-kcC"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="9ga-Wm-js9" secondAttribute="trailing" constant="28" id="ik7-qm-KAt"/>
-                            <constraint firstItem="9ga-Wm-js9" firstAttribute="top" secondItem="HLz-uS-b8s" secondAttribute="bottom" constant="43" id="v1O-wI-ZaL"/>
-                            <constraint firstItem="NOA-Dm-cuz" firstAttribute="top" secondItem="qkL-Od-lgU" secondAttribute="bottom" id="we0-1t-bgp"/>
+                            <constraint firstAttribute="trailing" secondItem="9ga-4F-77Z" secondAttribute="trailing" id="2sp-5V-dW4"/>
+                            <constraint firstItem="NOA-Dm-cuz" firstAttribute="leading" secondItem="zMn-AG-sqS" secondAttribute="leadingMargin" constant="-16" id="HM9-VK-aAL"/>
+                            <constraint firstItem="HLz-uS-b8s" firstAttribute="top" secondItem="NOA-Dm-cuz" secondAttribute="bottom" constant="48" id="Ia7-hg-Lf6"/>
+                            <constraint firstItem="HLz-uS-b8s" firstAttribute="centerX" secondItem="zMn-AG-sqS" secondAttribute="centerX" id="LLx-nV-mXh"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="NOA-Dm-cuz" secondAttribute="trailing" constant="-16" id="Oa9-DE-jUO"/>
+                            <constraint firstItem="9ga-4F-77Z" firstAttribute="top" secondItem="NOA-Dm-cuz" secondAttribute="bottom" id="W5g-in-Hre"/>
+                            <constraint firstItem="9ga-Wm-js9" firstAttribute="top" secondItem="HLz-uS-b8s" secondAttribute="bottom" constant="43" id="fYZ-Gu-n7t"/>
+                            <constraint firstItem="NOA-Dm-cuz" firstAttribute="top" secondItem="qkL-Od-lgU" secondAttribute="bottom" id="oTH-T5-CSa"/>
+                            <constraint firstItem="n38-gi-rB5" firstAttribute="top" secondItem="9ga-4F-77Z" secondAttribute="bottom" id="riB-Cl-Wf7"/>
+                            <constraint firstItem="9ga-4F-77Z" firstAttribute="leading" secondItem="zMn-AG-sqS" secondAttribute="leading" id="tYe-Bh-OMB"/>
+                            <constraint firstItem="9ga-Wm-js9" firstAttribute="centerX" secondItem="zMn-AG-sqS" secondAttribute="centerX" id="vgn-Uj-Ixr"/>
                         </constraints>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
@@ -85,4 +100,9 @@
             <point key="canvasLocation" x="252" y="-124"/>
         </scene>
     </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
+    </simulatedMetricsContainer>
 </document>

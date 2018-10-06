@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 import Alamofire
-import SwiftString3
+import String_Extensions
 
 enum GifFields: String {
 	case Id = "id"
