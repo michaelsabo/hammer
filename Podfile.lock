@@ -25,7 +25,7 @@ PODS:
   - RxSwift (4.1.2)
   - RxTest (4.1.2):
     - RxSwift (~> 4.0)
-  - String+Extensions (1.1.0)
+  - "String+Extensions (1.1.0)"
   - SwiftyJSON (4.0.0)
 
 DEPENDENCIES:
@@ -40,13 +40,30 @@ DEPENDENCIES:
   - Nimble
   - NVActivityIndicatorView
   - Quick
-  - Regift (from `./../Regift`)
+  - Regift (from `https://gitlab.com/michaelsabo/Regift`, branch `master`)
   - RxBlocking (~> 4.0)
   - RxCocoa (~> 4.0)
   - RxSwift (~> 4.0)
   - RxTest (~> 4.0)
-  - String+Extensions (from `https://github.com/BergQuester/SwiftString.git`, branch `master`)
+  - "String+Extensions (from `https://github.com/BergQuester/SwiftString.git`, branch `master`)"
   - SwiftyJSON
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - BonMot
+    - Crashlytics
+    - Fabric
+    - Gifu
+    - Masonry
+    - Nimble
+    - NVActivityIndicatorView
+    - Quick
+    - RxBlocking
+    - RxCocoa
+    - RxSwift
+    - RxTest
+    - SwiftyJSON
 
 EXTERNAL SOURCES:
   ChameleonFramework:
@@ -56,8 +73,9 @@ EXTERNAL SOURCES:
   MMPopupView:
     :git: https://github.com/michaelsabo/MMPopupView
   Regift:
-    :path: ./../Regift
-  String+Extensions:
+    :branch: master
+    :git: https://gitlab.com/michaelsabo/Regift
+  "String+Extensions":
     :branch: master
     :git: https://github.com/BergQuester/SwiftString.git
 
@@ -71,7 +89,10 @@ CHECKOUT OPTIONS:
   MMPopupView:
     :commit: cc30667441156621f90cc5fd0415d523c99802f3
     :git: https://github.com/michaelsabo/MMPopupView
-  String+Extensions:
+  Regift:
+    :commit: ab7aa79d2978821b006556c15fc6342806142b11
+    :git: https://gitlab.com/michaelsabo/Regift
+  "String+Extensions":
     :commit: 1a9e59262373b1d728f8780565c47369272803bc
     :git: https://github.com/BergQuester/SwiftString.git
 
@@ -88,14 +109,14 @@ SPEC CHECKSUMS:
   Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
   NVActivityIndicatorView: 60109b9bf46efc2e71ab81453196ccdfdfeea870
   Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
-  Regift: ed2f74289c7856585c6cde8615da0740f8be1881
+  Regift: d097afd401021f4f42b102ee125ceeb125a38caf
   RxBlocking: f6054985901412fc8c02daa84e92d4ba68c61389
   RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
   RxSwift: e49536837d9901277638493ea537394d4b55f570
   RxTest: e634f15fd2c2cd0e0120132ef7a4f7be69ad0393
-  String+Extensions: 7b46fbe926adb2d62e4718d2caf3037666dac179
+  "String+Extensions": 7b46fbe926adb2d62e4718d2caf3037666dac179
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
-PODFILE CHECKSUM: f07434ab136b89609b278c79d8c00dd2cef8d422
+PODFILE CHECKSUM: 2eba8beb71b2ed1238a481b144097b8702fdd09a
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.7.0.rc.2

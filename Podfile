@@ -13,12 +13,11 @@ def base
   pod 'SwiftyJSON'
   pod 'Gifu'
   pod "String+Extensions",  :git => 'https://github.com/BergQuester/SwiftString.git', :branch => "master"
-  # pod 'Regift', :git => 'https://github.com/michaelsabo/Regift.git', branch: 'master'
-  pod 'Regift', :path => './../Regift'
+   pod 'Regift', :git => 'https://gitlab.com/michaelsabo/Regift', branch: 'master'
+#  pod 'Regift', :path => './../Regift'
 end
 
 def base_application
-  base
   pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
   pod 'NVActivityIndicatorView'
   pod 'Font-Awesome-Swift', :git => 'https://github.com/Vaberer/Font-Awesome-Swift'
@@ -31,23 +30,27 @@ def base_application
   pod 'RxBlocking', '~> 4.0'
 end
 
-def ios_app
-  base
+
+abstract!
+  
+  target 'Hammer' do
+    base
+    target 'HammerTests' do
+      inherit! :search_paths
+      testing_pods
+    end
+  
+  
+  
+  
   base_application
 end
 
-target 'Hammer' do
-  ios_app
-end
 
-target 'Ham-it' do
+target 'Hammer-Ham-it' do
   base
 end
 
-target 'HammerTests' do
-  ios_app
-  testing_pods
-end
 
 
  post_install do |installer|

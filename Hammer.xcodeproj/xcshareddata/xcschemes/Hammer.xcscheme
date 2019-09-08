@@ -20,6 +20,20 @@
                ReferencedContainer = "container:Hammer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2780FE4A1C25C74000653D49"
+               BuildableName = "Hammer-Ham-it.appex"
+               BlueprintName = "Hammer-Ham-it"
+               ReferencedContainer = "container:Hammer.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

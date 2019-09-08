@@ -38,7 +38,7 @@ enum Router: URLRequestConvertible {
   }
 
   static let Test = URL(string: "http://ham-flyingdinos.rhcloud.com/api")!
-  static let Production = URL(string: "http://52.2.139.235/api")!
+  static let Production = URL(string: "http://ham.life/api")!
   static let Local = URL(string: "http://localhost:9292/api/")!
 	
   case gifs
