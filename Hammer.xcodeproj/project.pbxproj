@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		15090FC6C1046B67E202100E /* Pods_Ham_it.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A03688E7557E251726E7D76 /* Pods_Ham_it.framework */; };
 		27040E8D1C55D9F400C7E1EF /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2733CB541C13595F00217645 /* UserDefaults.swift */; };
 		2711AE3D1BDB2AFB000C47B2 /* CollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711AE3C1BDB2AFB000C47B2 /* CollectionViewLayout.swift */; };
 		27197E181BC239DC00525F33 /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 27197E171BC239DC00525F33 /* UIImage+animatedGIF.m */; };
@@ -29,12 +28,6 @@
 		276C7FD61BC204EF0028DC0D /* HammerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FD51BC204EF0028DC0D /* HammerUITests.swift */; };
 		276C7FF91BC2097A0028DC0D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FF81BC2097A0028DC0D /* HomeViewController.swift */; };
 		276C7FFE1BC2116F0028DC0D /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276C7FFD1BC2116F0028DC0D /* ImageCell.swift */; };
-		2780FE4E1C25C74000653D49 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2780FE4D1C25C74000653D49 /* ActionViewController.swift */; };
-		2780FE511C25C74000653D49 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2780FE4F1C25C74000653D49 /* MainInterface.storyboard */; };
-		2780FE5B1C25CDCD00653D49 /* Action.js in Resources */ = {isa = PBXBuildFile; fileRef = 2780FE5A1C25CDCD00653D49 /* Action.js */; };
-		2780FE5E1C25D17A00653D49 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278CA01D1BCDB09E000904D7 /* Router.swift */; };
-		2780FE5F1C25D18600653D49 /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C75CAD1BC21CC0008AC322 /* Gif.swift */; };
-		2780FE601C25D19000653D49 /* GifService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278CA0161BCDA9CE000904D7 /* GifService.swift */; };
 		2783332A1BDBE1FA00F4786E /* DisplayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278333291BDBE1FA00F4786E /* DisplayViewModel.swift */; };
 		278757731C5474DA00633D65 /* TextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278757721C5474DA00633D65 /* TextFieldExtension.swift */; };
 		278757751C54765800633D65 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278757741C54765800633D65 /* UIViewExtension.swift */; };
@@ -89,7 +82,7 @@
 		27F3B3281BEE80BC00B94731 /* PaddedTagLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F3B3271BEE80BC00B94731 /* PaddedTagLabel.swift */; };
 		27F3B32B1BEE89CE00B94731 /* ScreenHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F3B32A1BEE89CE00B94731 /* ScreenHelpers.swift */; };
 		28B7BFFED5DAC63B70FAC688 /* Pods_HammerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 400C6D857E48BDCF69AF1301 /* Pods_HammerTests.framework */; };
-		926BCEB99C90E21D4250339F /* Pods_Hammer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6967B1310269332B4FE2F2B /* Pods_Hammer.framework */; };
+		891DA5A9F280A967A1A431F6 /* Pods_Hammer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C125720E9BF34F78C61D8697 /* Pods_Hammer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +110,16 @@
 			dstSubfolderSpec = 16;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27C1C1F3228F80700022B748 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -156,7 +159,6 @@
 		276C7FD71BC204EF0028DC0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		276C7FF81BC2097A0028DC0D /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		276C7FFD1BC2116F0028DC0D /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
-		2780FE4B1C25C74000653D49 /* Ham-it.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Ham-it.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2780FE4D1C25C74000653D49 /* ActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
 		2780FE501C25C74000653D49 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		2780FE521C25C74000653D49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -176,6 +178,10 @@
 		279D22DE1C535BA900EDFA11 /* DisplayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DisplayViewController.xib; sourceTree = "<group>"; };
 		27B6CFEE1C53388B008B66C4 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		27B6CFF01C533973008B66C4 /* ImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCell.xib; sourceTree = "<group>"; };
+		27C1C1E7228F80700022B748 /* ActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
+		27C1C1EA228F80700022B748 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		27C1C1EC228F80700022B748 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		27C1C202228F81F60022B748 /* Ham-it copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Ham-it copy-Info.plist"; path = "/Users/Mike/Development/GitHub/Hammer/Ham-it copy-Info.plist"; sourceTree = "<absolute>"; };
 		27C75CAD1BC21CC0008AC322 /* Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
 		27C75CAF1BC22E1B008AC322 /* DisplayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayViewController.swift; sourceTree = "<group>"; };
 		27CD49AF1BEF0C5100586B4D /* DisplayViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayViewModelSpec.swift; sourceTree = "<group>"; };
@@ -190,14 +196,13 @@
 		27F3B32A1BEE89CE00B94731 /* ScreenHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenHelpers.swift; sourceTree = "<group>"; };
 		27F3B32E1BEE961B00B94731 /* GifServiceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifServiceSpec.swift; sourceTree = "<group>"; };
 		27F3B3301BEEA7BC00B94731 /* TagServiceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagServiceSpec.swift; sourceTree = "<group>"; };
-		30EFA6205F86D12A13530593 /* Pods-Ham-it.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ham-it.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ham-it/Pods-Ham-it.debug.xcconfig"; sourceTree = "<group>"; };
-		39C2D2710B9A02C892CF1DC5 /* Pods-Ham-it.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ham-it.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ham-it/Pods-Ham-it.release.xcconfig"; sourceTree = "<group>"; };
 		400C6D857E48BDCF69AF1301 /* Pods_HammerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HammerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4919DBC55858F877F28D637D /* Pods-App-Hammer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App-Hammer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-App-Hammer/Pods-App-Hammer.debug.xcconfig"; sourceTree = "<group>"; };
 		5B0A751A63BA4A18F689650D /* Pods-Hammer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hammer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hammer/Pods-Hammer.debug.xcconfig"; sourceTree = "<group>"; };
 		791011BBBA5CD2FB46D81D73 /* Pods-HammerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HammerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HammerTests/Pods-HammerTests.debug.xcconfig"; sourceTree = "<group>"; };
-		8A03688E7557E251726E7D76 /* Pods_Ham_it.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ham_it.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C125720E9BF34F78C61D8697 /* Pods_Hammer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hammer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2C0C7D9BCDDBDA8FC5280BE /* Pods-Hammer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hammer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hammer/Pods-Hammer.release.xcconfig"; sourceTree = "<group>"; };
-		E6967B1310269332B4FE2F2B /* Pods_Hammer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hammer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF4743FE3BEF864DB1F69DA6 /* Pods-App-Hammer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App-Hammer.release.xcconfig"; path = "Pods/Target Support Files/Pods-App-Hammer/Pods-App-Hammer.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,7 +212,7 @@
 			files = (
 				27CD49B21BEF1FEE00586B4D /* UIKit.framework in Frameworks */,
 				27CD49B11BEF1FE800586B4D /* Foundation.framework in Frameworks */,
-				926BCEB99C90E21D4250339F /* Pods_Hammer.framework in Frameworks */,
+				891DA5A9F280A967A1A431F6 /* Pods_Hammer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,14 +228,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2780FE481C25C74000653D49 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				15090FC6C1046B67E202100E /* Pods_Ham_it.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,9 +341,11 @@
 				276C7FC91BC204EE0028DC0D /* HammerTests */,
 				276C7FD41BC204EF0028DC0D /* HammerUITests */,
 				2780FE4C1C25C74000653D49 /* Ham-it */,
+				27C1C1E6228F80700022B748 /* It */,
 				276C7FB01BC204EE0028DC0D /* Products */,
 				71F7D88780EDD987612499BA /* Frameworks */,
 				77C38361C4F82E71E48AA5D1 /* Pods */,
+				27C1C202228F81F60022B748 /* Ham-it copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -356,7 +355,6 @@
 				276C7FAF1BC204EE0028DC0D /* Hammer.app */,
 				276C7FC61BC204EE0028DC0D /* HammerTests.xctest */,
 				276C7FD11BC204EF0028DC0D /* HammerUITests.xctest */,
-				2780FE4B1C25C74000653D49 /* Ham-it.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -481,6 +479,16 @@
 			path = TableViews;
 			sourceTree = "<group>";
 		};
+		27C1C1E6228F80700022B748 /* It */ = {
+			isa = PBXGroup;
+			children = (
+				27C1C1E7228F80700022B748 /* ActionViewController.swift */,
+				27C1C1E9228F80700022B748 /* MainInterface.storyboard */,
+				27C1C1EC228F80700022B748 /* Info.plist */,
+			);
+			path = It;
+			sourceTree = "<group>";
+		};
 		27C75CB11BC23303008AC322 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -516,9 +524,8 @@
 			children = (
 				273994271BE5560900E4399C /* Foundation.framework */,
 				273994251BE555C600E4399C /* UIKit.framework */,
-				8A03688E7557E251726E7D76 /* Pods_Ham_it.framework */,
-				E6967B1310269332B4FE2F2B /* Pods_Hammer.framework */,
 				400C6D857E48BDCF69AF1301 /* Pods_HammerTests.framework */,
+				C125720E9BF34F78C61D8697 /* Pods_Hammer.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -530,8 +537,8 @@
 				E2C0C7D9BCDDBDA8FC5280BE /* Pods-Hammer.release.xcconfig */,
 				791011BBBA5CD2FB46D81D73 /* Pods-HammerTests.debug.xcconfig */,
 				0C04D6A1223740F96EDD2716 /* Pods-HammerTests.release.xcconfig */,
-				30EFA6205F86D12A13530593 /* Pods-Ham-it.debug.xcconfig */,
-				39C2D2710B9A02C892CF1DC5 /* Pods-Ham-it.release.xcconfig */,
+				4919DBC55858F877F28D637D /* Pods-App-Hammer.debug.xcconfig */,
+				FF4743FE3BEF864DB1F69DA6 /* Pods-App-Hammer.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -550,8 +557,8 @@
 				2719DA321BCC9CF100BD02AD /* CopyFiles */,
 				27CE4A851BE6892700B62D64 /* ShellScript */,
 				276DBAE31C298A02004539C8 /* ShellScript */,
-				DF5707DE5A2C1D1078573ED2 /* [CP] Copy Pods Resources */,
 				A665D31921644B6450961C0D /* [CP] Embed Pods Frameworks */,
+				27C1C1F3228F80700022B748 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
@@ -570,7 +577,6 @@
 				276C7FC21BC204EE0028DC0D /* Sources */,
 				276C7FC31BC204EE0028DC0D /* Frameworks */,
 				276C7FC41BC204EE0028DC0D /* Resources */,
-				0BD7CFA9FF7F0C96420874F3 /* [CP] Copy Pods Resources */,
 				94E65FD541BAF2EFF57819EB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
@@ -601,32 +607,14 @@
 			productReference = 276C7FD11BC204EF0028DC0D /* HammerUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		2780FE4A1C25C74000653D49 /* Ham-it */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2780FE561C25C74000653D49 /* Build configuration list for PBXNativeTarget "Ham-it" */;
-			buildPhases = (
-				FEEB4FDCB0B01ADB5050B921 /* [CP] Check Pods Manifest.lock */,
-				2780FE471C25C74000653D49 /* Sources */,
-				2780FE481C25C74000653D49 /* Frameworks */,
-				2780FE491C25C74000653D49 /* Resources */,
-				7CC2084E821D592910C0F251 /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Ham-it";
-			productName = "Ham-it";
-			productReference = 2780FE4B1C25C74000653D49 /* Ham-it.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		276C7FA71BC204EE0028DC0D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0710;
+				DefaultBuildSystemTypeForWorkspace = Latest;
+				LastSwiftUpdateCheck = 1000;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = FlyingDinosaurs;
 				TargetAttributes = {
@@ -638,23 +626,14 @@
 					};
 					276C7FC51BC204EE0028DC0D = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = N9TVD38558;
 						LastSwiftMigration = 0920;
 						TestTargetID = 276C7FAE1BC204EE0028DC0D;
 					};
 					276C7FD01BC204EF0028DC0D = {
 						CreatedOnToolsVersion = 7.0.1;
-						TestTargetID = 276C7FAE1BC204EE0028DC0D;
-					};
-					2780FE4A1C25C74000653D49 = {
-						CreatedOnToolsVersion = 7.1.1;
 						DevelopmentTeam = N9TVD38558;
-						LastSwiftMigration = 0920;
-						ProvisioningStyle = Automatic;
-						SystemCapabilities = {
-							com.apple.ApplicationGroups.iOS = {
-								enabled = 0;
-							};
-						};
+						TestTargetID = 276C7FAE1BC204EE0028DC0D;
 					};
 				};
 			};
@@ -674,7 +653,6 @@
 				276C7FAE1BC204EE0028DC0D /* Hammer */,
 				276C7FC51BC204EE0028DC0D /* HammerTests */,
 				276C7FD01BC204EF0028DC0D /* HammerUITests */,
-				2780FE4A1C25C74000653D49 /* Ham-it */,
 			);
 		};
 /* End PBXProject section */
@@ -714,36 +692,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2780FE491C25C74000653D49 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2780FE5B1C25CDCD00653D49 /* Action.js in Resources */,
-				2780FE511C25C74000653D49 /* MainInterface.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0BD7CFA9FF7F0C96420874F3 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-HammerTests/Pods-HammerTests-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/Font-Awesome-Swift/Font-Awesome-Swift.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Font-Awesome-Swift.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HammerTests/Pods-HammerTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		0ECB8BE95875349EB2A83B29 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -773,7 +724,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n#swiftlint\necho \"hellos\"\nelse\n    echo \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n#swiftlint\necho \"hellos\"\nelse\n    echo \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		27CE4A851BE6892700B62D64 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -786,7 +737,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" b0a759f1abeb8628534dc5eb8f88bf5abd8bf30f 5f3711b839efb38bdede354c06b7a2dd09e080cb878ee43422f36ce3a7fae6db";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" b0a759f1abeb8628534dc5eb8f88bf5abd8bf30f 5f3711b839efb38bdede354c06b7a2dd09e080cb878ee43422f36ce3a7fae6db\n";
 		};
 		2E0A0163D4F33C632057CF2A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -806,69 +757,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7CC2084E821D592910C0F251 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ham-it/Pods-Ham-it-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		94E65FD541BAF2EFF57819EB /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-HammerTests/Pods-HammerTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/BonMot/BonMot.framework",
-				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
-				"${BUILT_PRODUCTS_DIR}/Font-Awesome-Swift/Font_Awesome_Swift.framework",
-				"${BUILT_PRODUCTS_DIR}/Gifu/Gifu.framework",
-				"${BUILT_PRODUCTS_DIR}/MMPopupView/MMPopupView.framework",
-				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
-				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
-				"${BUILT_PRODUCTS_DIR}/Regift/Regift.framework",
-				"${BUILT_PRODUCTS_DIR}/RxBlocking/RxBlocking.framework",
-				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-HammerTests/Pods-HammerTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/String+Extensions/String_Extensions.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
 				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
 				"${BUILT_PRODUCTS_DIR}/RxTest/RxTest.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BonMot.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Font_Awesome_Swift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gifu.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMPopupView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxBlocking.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/String_Extensions.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxTest.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HammerTests/Pods-HammerTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HammerTests/Pods-HammerTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A665D31921644B6450961C0D /* [CP] Embed Pods Frameworks */ = {
@@ -877,7 +787,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Hammer/Pods-Hammer-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Hammer/Pods-Hammer-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/BonMot/BonMot.framework",
 				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
@@ -912,43 +822,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hammer/Pods-Hammer-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DF5707DE5A2C1D1078573ED2 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Hammer/Pods-Hammer-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/Font-Awesome-Swift/Font-Awesome-Swift.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Font-Awesome-Swift.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hammer/Pods-Hammer-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FEEB4FDCB0B01ADB5050B921 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Ham-it-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Hammer/Pods-Hammer-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1034,17 +908,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2780FE471C25C74000653D49 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2780FE601C25D19000653D49 /* GifService.swift in Sources */,
-				2780FE5F1C25D18600653D49 /* Gif.swift in Sources */,
-				2780FE5E1C25D17A00653D49 /* Router.swift in Sources */,
-				2780FE4E1C25C74000653D49 /* ActionViewController.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1065,6 +928,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				2780FE501C25C74000653D49 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		27C1C1E9228F80700022B748 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27C1C1EA228F80700022B748 /* Base */,
 			);
 			name = MainInterface.storyboard;
 			sourceTree = "<group>";
@@ -1104,6 +975,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = N9TVD38558;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1120,7 +992,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1163,6 +1035,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = N9TVD38558;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1173,7 +1046,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -1188,6 +1061,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5B0A751A63BA4A18F689650D /* Pods-Hammer.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -1203,7 +1077,7 @@
 					"$(PROJECT_DIR)/Hammer",
 				);
 				INFOPLIST_FILE = Hammer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1234,6 +1108,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E2C0C7D9BCDDBDA8FC5280BE /* Pods-Hammer.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -1248,7 +1123,7 @@
 					"$(PROJECT_DIR)/Hammer",
 				);
 				INFOPLIST_FILE = Hammer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1342,60 +1217,6 @@
 			};
 			name = Release;
 		};
-		2780FE571C25C74000653D49 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 30EFA6205F86D12A13530593 /* Pods-Ham-it.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = "Ham-it/Ham-it.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N9TVD38558;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/build/Debug-iphoneos",
-				);
-				INFOPLIST_FILE = "Ham-it/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.flyingdinos.Hammer.Ham-it";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SKIP_INSTALL = YES;
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
-			};
-			name = Debug;
-		};
-		2780FE581C25C74000653D49 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 39C2D2710B9A02C892CF1DC5 /* Pods-Ham-it.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = "Ham-it/Ham-it.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N9TVD38558;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/build/Debug-iphoneos",
-				);
-				INFOPLIST_FILE = "Ham-it/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.flyingdinos.Hammer.Ham-it";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SKIP_INSTALL = YES;
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1431,15 +1252,6 @@
 			buildConfigurations = (
 				276C7FE11BC204EF0028DC0D /* Debug */,
 				276C7FE21BC204EF0028DC0D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2780FE561C25C74000653D49 /* Build configuration list for PBXNativeTarget "Ham-it" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2780FE571C25C74000653D49 /* Debug */,
-				2780FE581C25C74000653D49 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
